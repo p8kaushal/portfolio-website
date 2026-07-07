@@ -10,7 +10,7 @@ import { BrotherhoodNetwork } from './BrotherhoodNetwork';
 
 // Custom camera controller to animate camera position/target based on active section
 const CameraController: React.FC = () => {
-  const { currentSection, timelineZoom, skillsZoom } = useAnimus();
+  const { currentSection, timelineZoom, skillsZoom, selectedProfilePart } = useAnimus();
   const { camera } = useThree();
 
   const targetPos = useRef(new THREE.Vector3(0, 0, 10));
@@ -23,9 +23,19 @@ const CameraController: React.FC = () => {
         targetLook.current.set(0, 0, 0);
         break;
       case 'character':
-        // Centered around character, slightly offset for menu on left
-        targetPos.current.set(2.5, 0.5, 6.5);
-        targetLook.current.set(0, 0, 0);
+        if (!selectedProfilePart) {
+          // Model on the right of the screen
+          targetPos.current.set(-1.2, 0.4, 4.8);
+          targetLook.current.set(-1.2, 0.4, 0);
+        } else if (selectedProfilePart === 'head') {
+          // Zoom in on head, model shifted to the left
+          targetPos.current.set(1.2, 1.3, 1.9);
+          targetLook.current.set(1.2, 1.3, 0);
+        } else {
+          // Heart or Hands: model shifted to the left without zooming in
+          targetPos.current.set(1.2, 0.4, 4.8);
+          targetLook.current.set(1.2, 0.4, 0);
+        }
         break;
       case 'timeline':
         // Top-down/isometric view looking at the holographic path, scaled by timelineZoom
@@ -43,9 +53,9 @@ const CameraController: React.FC = () => {
         targetLook.current.set(0, 10, -5);
         break;
       case 'artifacts':
-        // Focused on the grid of low-poly gems
-        targetPos.current.set(-1.2, 0, 8.5);
-        targetLook.current.set(0, 0, 0);
+        // Move camera left to push stacked gems to the right side of the screen
+        targetPos.current.set(-0.8, 0, 5.2);
+        targetLook.current.set(-0.8, 0, 0);
         break;
       case 'contact':
         // Tilting down to see hex network, no rotation on network mesh itself
@@ -55,7 +65,7 @@ const CameraController: React.FC = () => {
       default:
         break;
     }
-  }, [currentSection, timelineZoom, skillsZoom]);
+  }, [currentSection, timelineZoom, skillsZoom, selectedProfilePart]);
 
   useFrame(() => {
     // Smoothly lerp camera position

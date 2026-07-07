@@ -26,7 +26,7 @@ export const LoadingScreen: React.FC = () => {
       }}
       onClick={synchronize}
     >
-      {/* Top Header/Telemetry metadata (LOC removed) */}
+      {/* Top Header/Telemetry metadata */}
       <div 
         className="hud-font" 
         style={{ 
@@ -41,8 +41,8 @@ export const LoadingScreen: React.FC = () => {
           gap: '4px',
         }}
       >
-        <div>SYS_STATUS: SYNCHRONIZING...</div>
-        <div style={{ color: 'rgba(255,255,255,0.2)' }}>GENETIC SEED_ID: 0x4E9A28B1</div>
+        <div>SYSTEM: INITIALIZING...</div>
+        <div style={{ color: 'rgba(255,255,255,0.2)' }}>SESSION_ID: 0x4E9A28B1</div>
       </div>
 
       {/* Tagline above Name */}
@@ -112,7 +112,7 @@ export const LoadingScreen: React.FC = () => {
             transition: 'all 0.3s ease',
           }}
         >
-          [ENTER] SYNCHRONIZE ANIMUS
+          [ENTER] INITIALIZE PROFILE
         </div>
         <div style={{ width: '220px', height: '1px', background: 'rgba(61, 231, 255, 0.2)' }} />
       </div>

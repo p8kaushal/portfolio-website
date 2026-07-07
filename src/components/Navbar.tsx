@@ -1,10 +1,10 @@
 import React from 'react';
 import { useAnimus, type SectionType } from '../context/AnimusContext';
+import { playClick } from '../utils/audio';
 
 export const Navbar: React.FC = () => {
   const { currentSection, navigateTo, resetSync, isSynchronized } = useAnimus();
 
-  // Show navbar only when synchronized or on sections
   if (!isSynchronized) return null;
 
   const navItems: { label: string; keyLabel: string; type: SectionType }[] = [
@@ -26,7 +26,10 @@ export const Navbar: React.FC = () => {
           letterSpacing: '0.22em',
           cursor: 'pointer',
         }}
-        onClick={resetSync}
+        onClick={() => {
+          playClick();
+          resetSync();
+        }}
       >
         PARTH KAUSHAL
       </div>
@@ -43,7 +46,10 @@ export const Navbar: React.FC = () => {
                 border: 'none',
                 cursor: 'pointer',
               }}
-              onClick={() => navigateTo(item.type)}
+              onClick={() => {
+                playClick();
+                navigateTo(item.type);
+              }}
             >
               <span className="shortcut">[{item.keyLabel}]</span>
               {item.label}
@@ -52,28 +58,7 @@ export const Navbar: React.FC = () => {
         })}
       </div>
 
-      <div 
-        className="hud-font"
-        style={{
-          fontSize: '0.8rem',
-          color: 'rgba(226, 244, 247, 0.4)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '1rem',
-        }}
-      >
-        <span 
-          style={{
-            display: 'inline-block',
-            width: '6px',
-            height: '6px',
-            backgroundColor: 'var(--animus-cyan)',
-            borderRadius: '50%',
-            boxShadow: '0 0 8px var(--animus-cyan)',
-          }}
-        />
-        SYNC STATUS: 100%
-      </div>
+
     </nav>
   );
 };

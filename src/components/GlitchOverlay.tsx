@@ -10,14 +10,13 @@ export const GlitchOverlay: React.FC = () => {
 
     const interval = setInterval(() => {
       setGlitchPhase((prev) => (prev + 1) % 4);
-    }, 60);
+    }, 40);
 
     return () => clearInterval(interval);
   }, [glitchActive]);
 
   if (!glitchActive) return null;
 
-  // Let's create some glitch slices using CSS clip-path or overlay divs
   return (
     <div 
       style={{
@@ -31,35 +30,36 @@ export const GlitchOverlay: React.FC = () => {
         overflow: 'hidden',
       }}
     >
-      {/* Glitch block 1: RGB Split offset */}
+      {/* Toned down RGB Split overlay */}
       <div
         className="glitch-active"
         style={{
           position: 'absolute',
           top: 0,
-          left: glitchPhase === 1 ? '-10px' : '0px',
+          left: glitchPhase === 1 ? '-4px' : '0px',
           width: '100%',
           height: '100%',
-          background: 'rgba(61, 231, 255, 0.1)',
+          background: 'rgba(61, 231, 255, 0.05)',
           mixBlendMode: 'screen',
+          opacity: 0.4,
         }}
       />
       
-      {/* Glitch block 2: Horizontal split */}
+      {/* Subtle single horizontal sweep line */}
       <div
         style={{
           position: 'absolute',
           top: `${glitchPhase * 25}%`,
           left: 0,
           width: '100%',
-          height: '10px',
+          height: '2px',
           backgroundColor: 'var(--animus-cyan)',
-          boxShadow: '0 0 20px var(--animus-cyan)',
-          opacity: 0.8,
+          boxShadow: '0 0 8px var(--animus-cyan)',
+          opacity: 0.35,
         }}
       />
 
-      {/* Glitch block 3: Screen overlay with skew */}
+      {/* Toned down scan filters */}
       <div
         style={{
           position: 'absolute',
@@ -67,28 +67,10 @@ export const GlitchOverlay: React.FC = () => {
           left: 0,
           width: '100%',
           height: '100%',
-          borderLeft: glitchPhase === 2 ? '4px solid var(--animus-red)' : 'none',
-          borderRight: glitchPhase === 3 ? '4px solid var(--animus-cyan)' : 'none',
-          transform: glitchPhase === 2 ? 'scale(1.02) skew(1deg)' : 'none',
-          background: 'rgba(0, 0, 0, 0.2)',
-          backdropFilter: 'brightness(1.5) contrast(1.2)',
+          background: 'rgba(7, 13, 20, 0.08)',
+          backdropFilter: 'brightness(1.15) contrast(1.05)',
         }}
       />
-
-      {/* Digital HUD scan text flickers */}
-      <div
-        className="hud-font"
-        style={{
-          position: 'absolute',
-          bottom: '20px',
-          right: '30px',
-          color: 'var(--animus-cyan)',
-          fontSize: '0.8rem',
-          opacity: 0.7,
-        }}
-      >
-        [ANIMUS_SIMULATION_STABILITY_ERROR_0x{glitchPhase}F]
-      </div>
     </div>
   );
 };

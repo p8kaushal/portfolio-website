@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useAnimus } from '../context/AnimusContext';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { playClick, playHover } from '../utils/audio';
 
 interface Project {
   id: string;
@@ -52,37 +53,37 @@ export const ProjectsWeaponWheel: React.FC = () => {
     {
       id: 'skillswap',
       name: 'SKILLSWAP',
-      category: 'DYNAMIC EXCHANGE UTILITY',
-      stack: 'React // TailwindCSS // Firebase Auth // Cloud Firestore',
-      desc: 'Web App framework mapping user capability matrices. Enables users to trade professional competencies in real time, featuring interactive skills catalogs and secure direct routing communications.',
+      category: 'DYNAMIC SKILLS EXCHANGE PLATFORM',
+      stack: 'React // Tailwind // Firebase Auth // Cloud Firestore',
+      desc: 'An interactive web platform enabling peers to trade professional developer skills in real time. Features live skills directories, user matrices, and instant messaging.',
       link: 'https://github.com',
       codeLink: 'https://github.com',
     },
     {
       id: 'rentwheels',
       name: 'RENTWHEELS',
-      category: 'LOGISTICS & TRANSPORT ASSET',
+      category: 'P2P TRANSPORT LOGISTICS HUB',
       stack: 'React // Node.js // Express // PostgreSQL // JWT',
-      desc: 'Streamlined transactional vehicle platform facilitating modern peer-to-peer fleet leasing. Provides real-time rental availability matrices and clean, encrypted reservation logs.',
+      desc: 'A full-stack peer-to-peer vehicle sharing portal. Features real-time rental booking calendars, secure reservation histories, and automated payment receipts.',
       link: 'https://github.com',
       codeLink: 'https://github.com',
     },
     {
       id: 'locked_1',
-      name: '[LOCKED SLOT]',
-      category: 'INDEXING MEMORY...',
-      stack: 'SYSTEM DISK CORRIDOR // ERROR 404',
-      desc: 'This project slot is currently unindexed in the Animus core archive. Synchronize additional memory nodes to reveal details.',
+      name: 'STANDBY',
+      category: 'COMMISSION INDEX...',
+      stack: 'SYSTEM CORE // UNALLOCATED',
+      desc: 'Additional development archives will be indexed in future sequences.',
       link: '#',
       codeLink: '#',
       isEmpty: true,
     },
     {
       id: 'locked_2',
-      name: '[LOCKED SLOT]',
-      category: 'INDEXING MEMORY...',
-      stack: 'SYSTEM DISK CORRIDOR // ERROR 404',
-      desc: 'This project slot is currently unindexed in the Animus core archive. Synchronize additional memory nodes to reveal details.',
+      name: 'STANDBY',
+      category: 'COMMISSION INDEX...',
+      stack: 'SYSTEM CORE // UNALLOCATED',
+      desc: 'Additional development archives will be indexed in future sequences.',
       link: '#',
       codeLink: '#',
       isEmpty: true,
@@ -90,176 +91,262 @@ export const ProjectsWeaponWheel: React.FC = () => {
   ];
 
   const activeProject = projects[lockedIndex !== null ? lockedIndex : activeIndex];
+  const isLocked = lockedIndex !== null;
+
+  const handleSegmentClick = (index: number, p: Project) => {
+    if (p.isEmpty) return;
+    playClick();
+    setLockedIndex(lockedIndex === index ? null : index);
+  };
+
+  const handleMouseEnter = (index: number) => {
+    playHover();
+    if (lockedIndex === null) {
+      setActiveIndex(index);
+    }
+  };
 
   return (
     <div
       style={{
         position: 'absolute',
-        top: 0,
+        top: '12%',
         left: 0,
         width: '100%',
-        height: '100%',
+        height: '80%',
         zIndex: 4,
         pointerEvents: 'none',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
+        padding: '0 8%',
+        transition: 'all 0.5s ease',
       }}
     >
-      {/* Central Interactive Weapon Wheel */}
-      <div
-        className="interactive"
-        style={{
-          width: '380px',
-          height: '380px',
-          position: 'relative',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {/* 3D Canvas in center */}
-        <div
-          style={{
-            position: 'absolute',
-            width: '200px',
-            height: '200px',
-            borderRadius: '50%',
-            overflow: 'hidden',
-            zIndex: 5,
-          }}
-        >
-          <Canvas camera={{ position: [0, 0, 3] }}>
-            <ambientLight intensity={0.5} />
-            <Central3DIcon activeIndex={lockedIndex !== null ? lockedIndex : activeIndex} />
-          </Canvas>
-        </div>
-
-        {/* Radial Wheel Segments (SVG) */}
-        <svg
-          width="380"
-          height="380"
-          viewBox="0 0 100 100"
-          style={{
-            transform: 'rotate(-45deg)',
-            filter: 'drop-shadow(0 0 12px var(--animus-cyan-glow))',
-          }}
-        >
-          {projects.map((p, index) => {
-            const startAngle = index * 90;
-            const endAngle = (index + 1) * 90;
-            const radStart = (startAngle * Math.PI) / 180;
-            const radEnd = (endAngle * Math.PI) / 180;
-
-            const x1 = 50 + 44 * Math.cos(radStart);
-            const y1 = 50 + 44 * Math.sin(radStart);
-            const x2 = 50 + 44 * Math.cos(radEnd);
-            const y2 = 50 + 44 * Math.sin(radEnd);
-
-            const ix1 = 50 + 28 * Math.cos(radStart);
-            const iy1 = 50 + 28 * Math.sin(radStart);
-            const ix2 = 50 + 28 * Math.cos(radEnd);
-            const iy2 = 50 + 28 * Math.sin(radEnd);
-
-            const isHovered = activeIndex === index && lockedIndex === null;
-            const isLocked = lockedIndex === index;
-            const isCurrent = isHovered || isLocked;
-
-            return (
-              <path
-                key={p.id}
-                d={`M ${ix1} ${iy1} L ${x1} ${y1} A 44 44 0 0 1 ${x2} ${y2} L ${ix2} ${iy2} A 28 28 0 0 0 ${ix1} ${iy1} Z`}
-                fill={p.isEmpty ? 'rgba(7, 13, 20, 0.3)' : isCurrent ? 'rgba(61, 231, 255, 0.28)' : 'rgba(7, 13, 20, 0.7)'}
-                stroke={p.isEmpty ? 'rgba(61, 231, 255, 0.08)' : isCurrent ? 'var(--animus-cyan)' : 'rgba(61, 231, 255, 0.22)'}
-                strokeWidth="0.8"
-                style={{ cursor: p.isEmpty ? 'not-allowed' : 'pointer', transition: 'all 0.2s ease' }}
-                onMouseEnter={() => {
-                  if (lockedIndex === null) {
-                    setActiveIndex(index);
-                  }
-                }}
-                onClick={() => {
-                  if (!p.isEmpty) {
-                    setLockedIndex(lockedIndex === index ? null : index);
-                  }
-                }}
-              />
-            );
-          })}
-          <circle cx="50" cy="50" r="27.5" fill="none" stroke="var(--animus-cyan)" strokeWidth="0.5" opacity="0.3" />
-          <circle cx="50" cy="50" r="44.5" fill="none" stroke="var(--animus-cyan)" strokeWidth="0.5" opacity="0.3" />
-        </svg>
-      </div>
-
-      {/* Screen Corners: Project Stats (Top-Left and Bottom-Right HUD displays) */}
-      <div
-        className="transparent-text-block interactive"
-        style={{
-          position: 'absolute',
-          top: '12%',
+      {/* Top Left Header */}
+      <div 
+        className="transparent-text-block interactive" 
+        style={{ 
+          position: 'absolute', 
+          top: 0, 
           left: '8%',
-          width: '360px',
+          zIndex: 10
         }}
       >
         <span className="hud-font" style={{ color: 'var(--animus-cyan)', fontSize: '1rem', letterSpacing: '0.25em' }}>
-          // ARSENAL ARCHIVE
+          // INDEXED BUILDS
         </span>
-        <h2 className="serif-font" style={{ fontSize: '2.4rem', color: '#fff', marginTop: '6px', letterSpacing: '0.05rem', lineHeight: '1.2' }}>
-          {activeProject.name}
+        <h2 className="serif-font" style={{ fontSize: '2.8rem', color: '#fff', marginTop: '6px' }}>
+          PROJECTS
         </h2>
-        <div className="hud-font" style={{ color: 'var(--animus-gold)', fontSize: '0.9rem', marginTop: '6px', letterSpacing: '0.1em' }}>
-          CLASSIFICATION: {activeProject.category}
-        </div>
-        <div style={{ marginTop: '1.5rem', fontSize: '1.05rem', lineHeight: '1.5', color: '#e2f4f7' }}>
-          {activeProject.desc}
-        </div>
       </div>
 
+      {/* LEFT COLUMN: Project Details */}
       <div
         className="transparent-text-block interactive"
         style={{
-          position: 'absolute',
-          bottom: '12%',
-          right: '8%',
-          width: '380px',
-          textAlign: 'right',
+          width: isLocked ? '45%' : '0px',
+          opacity: isLocked ? 1 : 0,
+          transform: isLocked ? 'translateY(0px)' : 'translateY(25px)',
+          overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'flex-end',
+          justifyContent: 'center',
+          gap: '1.2rem',
+          transition: 'all 0.5s ease',
+          pointerEvents: isLocked ? 'auto' : 'none',
+          height: '100%',
         }}
       >
-        <span className="hud-font" style={{ color: 'var(--animus-cyan)', fontSize: '1rem', letterSpacing: '0.2em' }}>
-          // INTEGRATION BLUEPRINT
-        </span>
-        <div 
-          className="hud-font"
-          style={{ 
-            fontSize: '1.1rem', 
-            color: '#fff', 
-            marginTop: '8px',
-            letterSpacing: '0.08em',
+        {isLocked && (
+          <>
+            <div>
+              <h3 className="serif-font" style={{ fontSize: '2.2rem', color: '#fff', lineHeight: '1.2' }}>
+                {activeProject.name}
+              </h3>
+              <div className="hud-font" style={{ color: 'var(--animus-gold)', fontSize: '0.85rem', marginTop: '6px', letterSpacing: '0.1em' }}>
+                CATEGORY: {activeProject.category}
+              </div>
+            </div>
+
+            <p style={{ fontSize: '1.05rem', lineHeight: '1.6', color: '#e2f4f7' }}>
+              {activeProject.desc}
+            </p>
+
+            <div style={{ borderTop: '1px solid rgba(61,231,255,0.2)', paddingTop: '12px', marginTop: '8px' }}>
+              <span className="hud-font" style={{ color: 'var(--animus-cyan)', fontSize: '0.85rem', display: 'block', marginBottom: '4px' }}>
+                DEVELOPMENT STACK:
+              </span>
+              <span style={{ color: '#fff', fontSize: '0.95rem', fontWeight: 600 }}>
+                {activeProject.stack}
+              </span>
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* RIGHT COLUMN: Interactive Selector */}
+      <div
+        className="interactive"
+        style={{
+          width: isLocked ? '45%' : '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          transition: 'all 0.5s ease',
+          pointerEvents: 'auto',
+          marginTop: '40px',
+        }}
+      >
+        {/* Selector Wheel Container */}
+        <div
+          style={{
+            width: '380px',
+            height: '380px',
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
-          {activeProject.stack}
+          {/* Absolute Center Locked 3D Canvas (Remains unscaled to prevent aspect ratio WebGL center distortion) */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '200px',
+              height: '200px',
+              borderRadius: '50%',
+              overflow: 'hidden',
+              zIndex: 5,
+            }}
+          >
+            <Canvas camera={{ position: [0, 0, 3] }}>
+              <ambientLight intensity={0.5} />
+              <Central3DIcon activeIndex={isLocked ? lockedIndex! : activeIndex} />
+            </Canvas>
+          </div>
+
+          {/* Absolute Center Locked Radial Wheel Segments (Scales natively via CSS scale transform) */}
+          <svg
+            width="380"
+            height="380"
+            viewBox="0 0 100 100"
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: isLocked
+                ? 'translate(-50%, -50%) rotate(-45deg) scale(1.0)'
+                : 'translate(-50%, -50%) rotate(-45deg) scale(1.22)',
+              filter: 'drop-shadow(0 0 12px var(--animus-cyan-glow))',
+              pointerEvents: 'auto',
+              transition: 'transform 0.4s ease',
+            }}
+          >
+            <defs>
+              {projects.map((_, index) => {
+                const startAngle = index * 90 + 18;
+                const endAngle = (index + 1) * 90 - 18;
+                const radStart = (startAngle * Math.PI) / 180;
+                const radEnd = (endAngle * Math.PI) / 180;
+                
+                const ax1 = 50 + 34 * Math.cos(radStart);
+                const ay1 = 50 + 34 * Math.sin(radStart);
+                const ax2 = 50 + 34 * Math.cos(radEnd);
+                const ay2 = 50 + 34 * Math.sin(radEnd);
+
+                return (
+                  <path
+                    key={`text-path-${index}`}
+                    id={`arc-text-${index}`}
+                    d={`M ${ax1} ${ay1} A 34 34 0 0 1 ${ax2} ${ay2}`}
+                  />
+                );
+              })}
+            </defs>
+
+            {projects.map((p, index) => {
+              const startAngle = index * 90;
+              const endAngle = (index + 1) * 90;
+
+              const radStart = (startAngle * Math.PI) / 180;
+              const radEnd = (endAngle * Math.PI) / 180;
+
+              const x1 = 50 + 44 * Math.cos(radStart);
+              const y1 = 50 + 44 * Math.sin(radStart);
+              const x2 = 50 + 44 * Math.cos(radEnd);
+              const y2 = 50 + 44 * Math.sin(radEnd);
+
+              const ix1 = 50 + 26 * Math.cos(radStart);
+              const iy1 = 50 + 26 * Math.sin(radStart);
+              const ix2 = 50 + 26 * Math.cos(radEnd);
+              const iy2 = 50 + 26 * Math.sin(radEnd);
+
+              const isHovered = activeIndex === index && lockedIndex === null;
+              const isSegmentLocked = lockedIndex === index;
+              const isCurrent = isHovered || isSegmentLocked;
+
+              return (
+                <g key={p.id}>
+                  {/* Quadrant Slice */}
+                  <path
+                    d={`M ${ix1} ${iy1} L ${x1} ${y1} A 44 44 0 0 1 ${x2} ${y2} L ${ix2} ${iy2} A 26 26 0 0 0 ${ix1} ${iy1} Z`}
+                    fill={p.isEmpty ? 'rgba(7, 13, 20, 0.3)' : isCurrent ? 'rgba(61, 231, 255, 0.28)' : 'rgba(7, 13, 20, 0.75)'}
+                    stroke={p.isEmpty ? 'rgba(61, 231, 255, 0.08)' : isCurrent ? 'var(--animus-cyan)' : 'rgba(61, 231, 255, 0.22)'}
+                    strokeWidth="0.8"
+                    style={{ cursor: p.isEmpty ? 'not-allowed' : 'pointer', transition: 'all 0.2s ease' }}
+                    onMouseEnter={() => handleMouseEnter(index)}
+                    onClick={() => handleSegmentClick(index, p)}
+                  />
+                  {/* Curved Text aligned inside sector */}
+                  <text
+                    fontSize="3.8"
+                    fontFamily="var(--font-hud)"
+                    fill={isCurrent ? 'var(--animus-gold)' : 'rgba(255,255,255,0.7)'}
+                    style={{ pointerEvents: 'none' }}
+                  >
+                    <textPath href={`#arc-text-${index}`} startOffset="50%" textAnchor="middle">
+                      {p.name}
+                    </textPath>
+                  </text>
+                </g>
+              );
+            })}
+            <circle cx="50" cy="50" r="25.5" fill="none" stroke="var(--animus-cyan)" strokeWidth="0.5" opacity="0.3" />
+            <circle cx="50" cy="50" r="44.5" fill="none" stroke="var(--animus-cyan)" strokeWidth="0.5" opacity="0.3" />
+          </svg>
         </div>
-        
-        {/* Action prompts layout */}
-        {!activeProject.isEmpty && (
-          <div style={{ display: 'flex', gap: '12px', marginTop: '1.8rem' }}>
+
+        {/* GitHub & Live Links directly below the wheel */}
+        {isLocked && !activeProject.isEmpty && (
+          <div 
+            style={{ 
+              display: 'flex', 
+              gap: '12px', 
+              marginTop: '1.5rem',
+              animation: 'fadeInUp 0.4s ease'
+            }}
+          >
             <button
               className="hud-font"
               style={{
                 background: 'none',
                 border: '1px solid var(--animus-white)',
                 color: '#fff',
-                padding: '10px 24px',
-                fontSize: '0.9rem',
+                padding: '8px 20px',
+                fontSize: '0.85rem',
                 cursor: 'pointer',
-                transition: 'all 0.3s ease',
               }}
-              onClick={() => window.open(activeProject.codeLink, '_blank')}
+              onClick={() => {
+                playClick();
+                window.open(activeProject.codeLink, '_blank');
+              }}
             >
-              [E] INSPECT BLUEPRINT
+              [ GITHUB REPO ]
             </button>
             <button
               className="hud-font"
@@ -267,27 +354,27 @@ export const ProjectsWeaponWheel: React.FC = () => {
                 background: 'none',
                 border: '1px solid var(--animus-cyan)',
                 color: 'var(--animus-cyan)',
-                padding: '10px 24px',
-                fontSize: '0.9rem',
+                padding: '8px 20px',
+                fontSize: '0.85rem',
                 cursor: 'pointer',
                 boxShadow: '0 0 10px rgba(61,231,255,0.1)',
-                transition: 'all 0.3s ease',
               }}
-              onClick={() => window.open(activeProject.link, '_blank')}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(61, 231, 255, 0.1)';
-                e.currentTarget.style.boxShadow = '0 0 15px var(--animus-cyan-glow)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-                e.currentTarget.style.boxShadow = '0 0 10px rgba(61,231,255,0.1)';
+              onClick={() => {
+                playClick();
+                window.open(activeProject.link, '_blank');
               }}
             >
-              [LEFT CLICK] DEPLOY LIVE
+              [ LAUNCH LIVE ]
             </button>
           </div>
         )}
       </div>
+      <style>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(15px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { playGlitchSynth } from '../utils/audio';
 
 export type SectionType = 
   | 'loading'
@@ -21,8 +22,8 @@ interface AnimusContextProps {
   setSkillsZoom: React.Dispatch<React.SetStateAction<number>>;
   selectedProfilePart: ProfilePartType;
   setSelectedProfilePart: React.Dispatch<React.SetStateAction<ProfilePartType>>;
-  relicShattered: boolean;
-  setRelicShattered: React.Dispatch<React.SetStateAction<boolean>>;
+  relicShattered: string | null;
+  setRelicShattered: React.Dispatch<React.SetStateAction<string | null>>;
   synchronize: () => void;
   navigateTo: (section: SectionType) => void;
   resetSync: () => void;
@@ -39,26 +40,28 @@ export const AnimusProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [timelineZoom, setTimelineZoom] = useState<number>(0.75);
   const [skillsZoom, setSkillsZoom] = useState<number>(0.75);
 
-  // Active clicked part for Character stats page
-  const [selectedProfilePart, setSelectedProfilePart] = useState<ProfilePartType>('heart');
+  // Active clicked part for Character stats page (default null to not show details on entry)
+  const [selectedProfilePart, setSelectedProfilePart] = useState<ProfilePartType>(null);
 
-  // Relic/Artifact state for Awards page
-  const [relicShattered, setRelicShattered] = useState<boolean>(false);
+  // Relic/Artifact state for Awards page (default null)
+  const [relicShattered, setRelicShattered] = useState<string | null>(null);
 
   const triggerGlitch = (callback: () => void) => {
     setGlitchActive(true);
+    playGlitchSynth(); // Play synthesized glitch transition audio
     setTimeout(() => {
       callback();
       setTimeout(() => {
         setGlitchActive(false);
-      }, 300); // end glitch after some time
-    }, 250); // change content midway
+      }, 100); // End glitch after 100ms
+    }, 80); // Change content after 80ms
   };
 
   const synchronize = () => {
     triggerGlitch(() => {
       setIsSynchronized(true);
       setCurrentSection('character');
+      setSelectedProfilePart(null); // Ensure details closed on entry
     });
   };
 
@@ -66,6 +69,10 @@ export const AnimusProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     if (!isSynchronized && section !== 'loading') return;
     triggerGlitch(() => {
       setCurrentSection(section);
+      
+      // Reset details panel states upon section changes
+      setSelectedProfilePart(null); 
+      setRelicShattered(null);
     });
   };
 

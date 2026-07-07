@@ -36,6 +36,24 @@ const AppContent: React.FC = () => {
         <SkillsTree />
         <ArtifactsEden />
         <BrotherhoodContact />
+
+        {/* High-tech HUD copyright footer */}
+        <div
+          className="hud-font"
+          style={{
+            position: 'absolute',
+            bottom: '15px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            color: 'rgba(255, 255, 255, 0.3)',
+            fontSize: '0.72rem',
+            letterSpacing: '0.15em',
+            zIndex: 10,
+            pointerEvents: 'none',
+          }}
+        >
+          &copy; 2026 PARTH KAUSHAL. ALL RIGHTS SECURED.
+        </div>
       </div>
     </>
   );
