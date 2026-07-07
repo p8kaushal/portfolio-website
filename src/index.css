@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap');
+
+:root {
+  --animus-bg: #070d14;
+  --animus-bg-gradient: radial-gradient(circle at center, #0f1c2c 0%, #050a10 100%);
+  --animus-cyan: #3de7ff;
+  --animus-cyan-glow: rgba(61, 231, 255, 0.4);
+  --animus-cyan-dim: rgba(61, 231, 255, 0.15);
+  --animus-gold: #ffc83b;
+  --animus-gold-glow: rgba(255, 200, 59, 0.4);
+  --animus-white: #e2f4f7;
+  --animus-red: #ff3e3e;
+  
+  --font-hud: 'Rajdhani', sans-serif;
+  --font-serif: 'Cinzel', serif;
+  --font-sans: 'Outfit', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  background-color: var(--animus-bg);
+  background-image: var(--animus-bg-gradient);
+  color: var(--animus-white);
+  font-family: var(--font-sans);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+/* Background grid overlay */
+.animus-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* scanlines */
+.scanlines {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.15) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 10;
+}
+
+/* vignette */
+.vignette {
+  background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.8) 100%);
+  z-index: 9;
+}
+
+/* Typography styles */
+h1, h2, h3, .serif-font {
+  font-family: var(--font-serif);
+  letter-spacing: 0.15em;
+}
+
+.hud-font {
+  font-family: var(--font-hud);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* HUD elements container */
+.hud-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.interactive {
+  pointer-events: auto;
+}
+
+/* Glowing text and objects */
+.cyan-glow-text {
+  text-shadow: 0 0 10px var(--animus-cyan-glow), 0 0 20px rgba(61, 231, 255, 0.2);
+}
+
+.gold-glow-text {
+  text-shadow: 0 0 10px var(--animus-gold-glow), 0 0 20px rgba(255, 200, 59, 0.2);
+}
+
+/* Frosted glass/HUD nav */
+.hud-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  background: linear-gradient(to bottom, rgba(7, 13, 20, 0.8) 0%, rgba(7, 13, 20, 0) 100%);
+  border-bottom: 1px solid rgba(61, 231, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.hud-nav-links {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.hud-nav-item {
+  color: rgba(226, 244, 247, 0.6);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hud-nav-item span.shortcut {
+  font-size: 0.75rem;
+  color: var(--animus-cyan);
+  border: 1px solid var(--animus-cyan-dim);
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  background: rgba(61, 231, 255, 0.05);
+}
+
+.hud-nav-item:hover, .hud-nav-item.active {
+  color: var(--animus-cyan);
+  text-shadow: 0 0 8px var(--animus-cyan-glow);
+}
+
+.hud-nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--animus-cyan);
+  box-shadow: 0 0 8px var(--animus-cyan);
+  transition: width 0.3s ease;
+}
+
+.hud-nav-item:hover::after, .hud-nav-item.active::after {
+  width: 100%;
+}
+
+/* Glitch animation keys */
+@keyframes glitch {
+  0% {
+    clip-path: inset(40% 0 61% 0);
+    transform: skew(0.3deg);
+  }
+  20% {
+    clip-path: inset(92% 0 1% 0);
+    transform: skew(-0.5deg);
+  }
+  40% {
+    clip-path: inset(15% 0 80% 0);
+    transform: skew(0.5deg);
+  }
+  60% {
+    clip-path: inset(80% 0 5% 0);
+    transform: skew(-0.3deg);
+  }
+  80% {
+    clip-path: inset(3% 0 92% 0);
+    transform: skew(0.8deg);
+  }
+  100% {
+    clip-path: inset(40% 0 61% 0);
+    transform: skew(0deg);
+  }
+}
+
+.glitch-active {
+  animation: glitch 0.2s linear infinite;
+  filter: hue-rotate(90deg) saturate(1.5);
+  opacity: 0.95;
+}
+
+/* Animus grid backgrounds */
+.hud-grid-deco {
+  position: absolute;
+  border: 1px solid var(--animus-cyan-dim);
+  background: rgba(61, 231, 255, 0.02);
+}
+
+/* Utility to ensure text has no boxes */
+.transparent-text-block {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--animus-white);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8), 0 0 10px rgba(226, 244, 247, 0.1);
+}
