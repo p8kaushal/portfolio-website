@@ -29,26 +29,6 @@ export const ArtifactsEden: React.FC = () => {
       description: 'Awarded for exceptional academic performance and scoring 90.8% in CBSE Board Examination.',
       detail: 'Ranked 3rd school-wide out of graduating seniors.',
     },
-    {
-      id: 'award_2',
-      name: 'VIT Academic Scholarship',
-      sub: 'Merit Scholarship Recipient',
-      classification: 'SCHOLARSHIP MATRIX',
-      period: '2025',
-      color: '#3de7ff',
-      description: 'Awarded VIT Pune Merit Scholarship for ranking among the top academic tier of computer engineering matriculates.',
-      detail: 'Maintained 9.07 SGPA in subsequent semesters.',
-    },
-    {
-      id: 'award_3',
-      name: 'Smart India Hackathon',
-      sub: 'National Finalist',
-      classification: 'PROJECT DEPLOYMENT',
-      period: '2023',
-      color: '#00ff88',
-      description: 'Staged software project prototypes to resolve real-world government problems. Selected as a national finalist.',
-      detail: 'Collaborated on distributed web API architectures under the Ministry of Education.',
-    },
   ];
 
   const activeAward = awards.find((a) => a.id === relicShattered);

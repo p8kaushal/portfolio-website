@@ -15,9 +15,7 @@ export const PieceOfEden: React.FC<PieceOfEdenProps> = ({ active }) => {
   if (!active) return null;
 
   const awards = [
-    { id: 'award_1', y: 1.0, label: 'CLASS XII', color: '#ffc83b', secondary: '#ffa500' },
-    { id: 'award_2', y: 0.0, label: 'VIT SCHOLAR', color: '#3de7ff', secondary: '#00aeff' },
-    { id: 'award_3', y: -1.0, label: 'HACKATHON', color: '#00ff88', secondary: '#00cc66' },
+    { id: 'award_1', y: 0.0, label: 'CLASS XII', color: '#ffc83b', secondary: '#ffa500' },
   ];
 
   const handleSelect = (id: string) => {
