@@ -32,11 +32,11 @@ const Central3DIcon: React.FC<{ activeIndex: number }> = ({ activeIndex }) => {
       {activeIndex === 0 && <torusGeometry args={[0.8, 0.26, 12, 32]} />}
       {activeIndex === 1 && <icosahedronGeometry args={[0.9, 0]} />}
       {activeIndex >= 2 && <octahedronGeometry args={[0.7, 0]} />}
-      <meshBasicMaterial 
-        color={activeIndex >= 2 ? 'rgba(61, 231, 255, 0.2)' : 'var(--animus-cyan)'} 
-        wireframe 
-        transparent 
-        opacity={activeIndex >= 2 ? 0.3 : 0.85} 
+      <meshBasicMaterial
+        color={activeIndex >= 2 ? 'rgba(61, 231, 255, 0.2)' : 'var(--animus-cyan)'}
+        wireframe
+        transparent
+        opacity={activeIndex >= 2 ? 0.3 : 0.85}
       />
     </mesh>
   );
@@ -54,10 +54,10 @@ export const ProjectsWeaponWheel: React.FC = () => {
       id: 'skillswap',
       name: 'SKILLSWAP',
       category: 'DYNAMIC SKILLS EXCHANGE PLATFORM',
-      stack: 'React // Tailwind // Firebase Auth // Cloud Firestore',
+      stack: 'React // Postgres // Nuxt // Prisma',
       desc: 'An interactive web platform enabling peers to trade professional developer skills in real time. Features live skills directories, user matrices, and instant messaging.',
-      link: 'https://github.com',
-      codeLink: 'https://github.com',
+      link: 'https://skillswap-wheat-kappa.vercel.app',
+      codeLink: 'https://github.com/p8kaushal/skillswap',
     },
     {
       id: 'rentwheels',
@@ -65,8 +65,8 @@ export const ProjectsWeaponWheel: React.FC = () => {
       category: 'P2P TRANSPORT LOGISTICS HUB',
       stack: 'React // Node.js // Express // PostgreSQL // JWT',
       desc: 'A full-stack peer-to-peer vehicle sharing portal. Features real-time rental booking calendars, secure reservation histories, and automated payment receipts.',
-      link: 'https://github.com',
-      codeLink: 'https://github.com',
+      link: 'https://rentwheels-pied.vercel.app',
+      codeLink: 'https://github.com/p8kaushal/rentwheels',
     },
     {
       id: 'locked_1',
@@ -124,11 +124,11 @@ export const ProjectsWeaponWheel: React.FC = () => {
       }}
     >
       {/* Top Left Header */}
-      <div 
-        className="transparent-text-block interactive" 
-        style={{ 
-          position: 'absolute', 
-          top: 0, 
+      <div
+        className="transparent-text-block interactive"
+        style={{
+          position: 'absolute',
+          top: 0,
           left: '8%',
           zIndex: 10
         }}
@@ -253,7 +253,7 @@ export const ProjectsWeaponWheel: React.FC = () => {
                 const endAngle = (index + 1) * 90 - 18;
                 const radStart = (startAngle * Math.PI) / 180;
                 const radEnd = (endAngle * Math.PI) / 180;
-                
+
                 const ax1 = 50 + 34 * Math.cos(radStart);
                 const ay1 = 50 + 34 * Math.sin(radStart);
                 const ax2 = 50 + 34 * Math.cos(radEnd);
@@ -323,10 +323,10 @@ export const ProjectsWeaponWheel: React.FC = () => {
 
         {/* GitHub & Live Links directly below the wheel */}
         {isLocked && !activeProject.isEmpty && (
-          <div 
-            style={{ 
-              display: 'flex', 
-              gap: '12px', 
+          <div
+            style={{
+              display: 'flex',
+              gap: '12px',
               marginTop: '1.5rem',
               animation: 'fadeInUp 0.4s ease'
             }}
