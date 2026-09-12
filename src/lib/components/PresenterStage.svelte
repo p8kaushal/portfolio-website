@@ -3,10 +3,12 @@
 	import { activeTab } from '$lib/stores/navStore';
 	import { animateCamera } from '$lib/animations/cameraChoreography';
 	import { playSound } from '$lib/utils/soundEngine';
-	import { Mail, ExternalLink, Download, Award, CheckCircle, Monitor, Tv, Layers, Code, Briefcase, FileText } from 'lucide-svelte';
+	import { Mail, ExternalLink, Download, Award, CheckCircle, Monitor, Tv, Layers, X } from 'lucide-svelte';
 
 	let stageContainer: HTMLElement;
 	let currentVideoSrc = $state('/presenter-home.webm');
+	let activeProjectModal = $state<any | null>(null);
+	let activeAwardModal = $state<any | null>(null);
 
 	$effect(() => {
 		const tab = $activeTab;
@@ -15,6 +17,10 @@
 		} else if (tab === 'about') {
 			currentVideoSrc = '/presenter-about.webm';
 		}
+
+		// Reset modals on tab switch
+		activeProjectModal = null;
+		activeAwardModal = null;
 
 		if (stageContainer) {
 			animateCamera(tab, stageContainer);
@@ -34,9 +40,9 @@
 	];
 
 	const projects = [
-		{ title: 'Keynote Studio 3D', tech: 'SvelteKit • GSAP • Tailwind', desc: 'Cinematic Apple Keynote virtual stage portfolio engine.', link: 'https://github.com' },
-		{ title: 'Spatial UI Kit', tech: 'TypeScript • Canvas • WebGL', desc: 'High-performance interactive vector device frames.', link: 'https://github.com' },
-		{ title: 'AI Presenter Keyer', tech: 'WebM • HTML5 • FFmpeg', desc: 'Transparent video keying pipeline for real-time web avatars.', link: 'https://github.com' }
+		{ title: 'Keynote Studio 3D', tech: 'SvelteKit • GSAP • Tailwind', desc: 'Cinematic Apple Keynote virtual stage portfolio engine.', fullDesc: 'High-performance interactive 2D spatial canvas rendering engine with GSAP camera choreography, WebM transparent video loops, and responsive glass tablet controls.', link: 'https://github.com' },
+		{ title: 'Spatial UI Kit', tech: 'TypeScript • Canvas • WebGL', desc: 'High-performance interactive vector device frames.', fullDesc: 'Resolution-independent CSS/SVG vector device frames optimized for spatial camera transitions and zero resolution degradation.', link: 'https://github.com' },
+		{ title: 'AI Presenter Keyer', tech: 'WebM • HTML5 • FFmpeg', desc: 'Transparent video keying pipeline for real-time web avatars.', fullDesc: 'Automated green-screen background removal and FFmpeg WebM encoding pipeline for real-time HTML5 video presenter avatars.', link: 'https://github.com' }
 	];
 
 	const skills = [
@@ -46,9 +52,9 @@
 	];
 
 	const awards = [
-		{ title: 'Awwwards Site of the Day', year: '2025', org: 'Awwwards International' },
-		{ title: 'FWA of the Month', year: '2024', org: 'Favorite Website Awards' },
-		{ title: 'Apple Design Award Nominee', year: '2024', org: 'WWDC Developer Showcase' }
+		{ title: 'Awwwards Site of the Day', year: '2025', org: 'Awwwards International', details: 'Recognized for outstanding web design, interactive spatial UI, and sub-second performance.' },
+		{ title: 'FWA of the Month', year: '2024', org: 'Favorite Website Awards', details: 'Awarded for pioneering GSAP spatial camera transitions and 4-layer composition engines.' },
+		{ title: 'Apple Design Award Nominee', year: '2024', org: 'WWDC Developer Showcase', details: 'Nominated for Apple Keynote-inspired human-scale portfolio interface.' }
 	];
 </script>
 
@@ -62,7 +68,7 @@
 		/>
 	</div>
 
-	<!-- LAYER 2 (Z-index 10): Presenter Video Layer (Only rendered on Home and About) -->
+	<!-- LAYER 2 (Z-index 10): Presenter Video Layer -->
 	{#if $activeTab === 'home' || $activeTab === 'about'}
 		<div class="presenter-layer absolute inset-0 z-10 flex items-center justify-center pointer-events-none transition-transform duration-700 ease-out">
 			<video
@@ -82,9 +88,7 @@
 	{#if $activeTab === 'experience'}
 		<div class="experience-station absolute inset-0 z-20 flex items-center justify-center p-6 pointer-events-auto">
 			<div class="relative w-full max-w-4xl rounded-3xl bg-neutral-950/90 border-4 border-neutral-700/80 shadow-2xl p-6 sm:p-8 overflow-hidden backdrop-blur-2xl text-white">
-				<!-- TV Glass Reflection Sheen -->
 				<div class="absolute inset-0 bg-gradient-to-tr from-white/5 via-transparent to-white/10 pointer-events-none"></div>
-				<!-- Bezel & LED Power Indicator -->
 				<div class="flex items-center justify-between pb-4 border-b border-neutral-800 mb-6">
 					<div class="flex items-center gap-3">
 						<Tv class="w-6 h-6 text-sky-400 shrink-0" />
@@ -128,25 +132,21 @@
 
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
 					{#each projects as proj}
-						<div
+						<button
+							type="button"
 							onmouseenter={() => playSound('click')}
-							class="group p-5 rounded-2xl bg-neutral-900/90 border border-neutral-800 hover:border-emerald-400/60 hover:bg-neutral-800/80 transition-all duration-300 flex flex-col justify-between"
+							onclick={() => { playSound('click'); activeProjectModal = proj; }}
+							class="group text-left p-5 rounded-2xl bg-neutral-900/90 border border-neutral-800 hover:border-emerald-400/60 hover:bg-neutral-800/80 transition-all duration-300 flex flex-col justify-between cursor-pointer"
 						>
 							<div>
 								<span class="text-xs font-mono text-emerald-400 block mb-1.5">{proj.tech}</span>
 								<h4 class="text-lg font-bold text-white group-hover:text-emerald-300 transition-colors mb-2">{proj.title}</h4>
 								<p class="text-xs text-neutral-300 leading-relaxed mb-4">{proj.desc}</p>
 							</div>
-							<a
-								href={proj.link}
-								target="_blank"
-								rel="noreferrer"
-								onclick={() => playSound('click')}
-								class="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 hover:text-emerald-300 transition-colors"
-							>
-								View Project <ExternalLink class="w-3.5 h-3.5" />
-							</a>
-						</div>
+							<span class="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 group-hover:text-emerald-300 transition-colors">
+								Focus Project <ExternalLink class="w-3.5 h-3.5" />
+							</span>
+						</button>
 					{/each}
 				</div>
 			</div>
@@ -157,7 +157,6 @@
 	{#if $activeTab === 'contact'}
 		<div class="phone-modal absolute inset-0 z-20 flex items-center justify-center p-6 pointer-events-auto">
 			<div class="relative w-full max-w-md rounded-[48px] bg-neutral-950 border-[8px] border-neutral-800 p-6 shadow-2xl text-white">
-				<!-- Dynamic Island -->
 				<div class="w-28 h-5 bg-neutral-900 rounded-full mx-auto mb-6 flex items-center justify-center">
 					<div class="w-3 h-3 rounded-full bg-neutral-950 border border-neutral-800"></div>
 				</div>
@@ -205,7 +204,6 @@
 						<span class="text-xs font-semibold">X / Twitter</span>
 					</a>
 				</div>
-				<!-- Phone Home Bar -->
 				<div class="w-32 h-1 bg-neutral-600 rounded-full mx-auto mt-2"></div>
 			</div>
 		</div>
@@ -291,23 +289,76 @@
 					<Award class="w-7 h-7 text-amber-500 shrink-0" />
 					<div>
 						<h2 class="text-2xl font-extrabold text-neutral-900 leading-tight">Studio Wall of Honor</h2>
-						<p class="text-xs text-neutral-600">Framed awards and industry recognition</p>
+						<p class="text-xs text-neutral-600">Framed certificates and industry recognition</p>
 					</div>
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 					{#each awards as award}
-						<div
+						<button
+							type="button"
 							onmouseenter={() => playSound('click')}
-							class="p-5 rounded-2xl bg-white/70 border border-neutral-200 hover:border-amber-400/60 hover:bg-white/90 transition-all duration-300 shadow-sm"
+							onclick={() => { playSound('click'); activeAwardModal = award; }}
+							class="text-left p-5 rounded-2xl bg-white/70 border border-neutral-200 hover:border-amber-400/60 hover:bg-white/90 transition-all duration-300 shadow-sm cursor-pointer"
 						>
 							<CheckCircle class="w-6 h-6 text-amber-500 mb-2" />
 							<h4 class="text-sm font-extrabold text-neutral-900 mb-1">{award.title}</h4>
 							<p class="text-xs text-neutral-600">{award.org}</p>
 							<span class="inline-block mt-2 font-mono text-[10px] font-bold text-amber-700 px-2 py-0.5 rounded-full bg-amber-500/15">{award.year}</span>
-						</div>
+						</button>
 					{/each}
 				</div>
 			</div>
 		{/if}
 	</div>
+
+	<!-- LAYER 5 (Z-index 40): 3D Pop-Forward Focus Modals -->
+	{#if activeProjectModal}
+		<div class="fixed inset-0 z-40 bg-neutral-950/80 backdrop-blur-xl flex items-center justify-center p-6 pointer-events-auto">
+			<div class="relative w-full max-w-xl rounded-3xl bg-neutral-900 border-2 border-emerald-400/60 shadow-2xl p-8 text-white">
+				<button
+					type="button"
+					onclick={() => { playSound('click'); activeProjectModal = null; }}
+					class="absolute top-4 right-4 p-2 rounded-full bg-neutral-800 hover:bg-neutral-700 transition-colors"
+				>
+					<X class="w-5 h-5 text-neutral-400" />
+				</button>
+				<span class="text-xs font-mono text-emerald-400 block mb-2">{activeProjectModal.tech}</span>
+				<h3 class="text-2xl font-bold text-white mb-3">{activeProjectModal.title}</h3>
+				<p class="text-sm text-neutral-300 leading-relaxed mb-6">{activeProjectModal.fullDesc}</p>
+				<a
+					href={activeProjectModal.link}
+					target="_blank"
+					rel="noreferrer"
+					class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 text-neutral-950 font-bold text-xs hover:bg-emerald-400 transition-colors"
+				>
+					Launch Project Demo <ExternalLink class="w-4 h-4" />
+				</a>
+			</div>
+		</div>
+	{/if}
+
+	{#if activeAwardModal}
+		<div class="fixed inset-0 z-40 bg-neutral-950/80 backdrop-blur-xl flex items-center justify-center p-6 pointer-events-auto">
+			<div class="relative w-full max-w-lg rounded-3xl bg-white border-4 border-amber-400 shadow-2xl p-8 text-neutral-900">
+				<button
+					type="button"
+					onclick={() => { playSound('click'); activeAwardModal = null; }}
+					class="absolute top-4 right-4 p-2 rounded-full bg-neutral-100 hover:bg-neutral-200 transition-colors"
+				>
+					<X class="w-5 h-5 text-neutral-600" />
+				</button>
+				<div class="flex items-center gap-3 mb-4">
+					<Award class="w-8 h-8 text-amber-500 shrink-0" />
+					<div>
+						<h3 class="text-xl font-black text-neutral-900">{activeAwardModal.title}</h3>
+						<p class="text-xs font-semibold text-amber-700">{activeAwardModal.org} • {activeAwardModal.year}</p>
+					</div>
+				</div>
+				<p class="text-sm text-neutral-700 leading-relaxed mb-4">{activeAwardModal.details}</p>
+				<div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs font-mono text-amber-800 text-center font-bold">
+					OFFICIAL CERTIFICATE OF RECOGNITION
+				</div>
+			</div>
+		</div>
+	{/if}
 </div>
