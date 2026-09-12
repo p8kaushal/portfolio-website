@@ -50,7 +50,7 @@
 						: 'bg-neutral-100/70 text-neutral-600 hover:bg-neutral-200/50'}"
 				>
 					<span class="w-4 h-4 mb-1 flex items-center justify-center">
-						<svelte:component this={tab.icon} class="w-4 h-4" />
+						<tab.icon class="w-4 h-4" />
 					</span>
 					<span class="text-[10px] font-medium leading-none">{tab.label}</span>
 				</button>
