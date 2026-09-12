@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { activeTab, isMuted, setTab, toggleMute, type TabType } from '$lib/stores/navStore';
-	import { playSound } from '$lib/utils/soundEngine';
 	import { Volume2, VolumeX } from 'lucide-svelte';
 
 	const tabs: { id: TabType; label: string }[] = [
@@ -16,12 +15,11 @@
 
 	function handleTabClick(tabId: TabType) {
 		setTab(tabId);
-		playSound('click');
+		// Note: Click audio removed from top navbar per Step 5 directive
 	}
 
 	function handleMuteToggle() {
 		toggleMute();
-		playSound('click');
 	}
 </script>
 
