@@ -25,6 +25,24 @@ export function playSpatialTransition(
 	gsap.killTweensOf([activeStage, incomingStage]);
 	gsap.set([activeStage, incomingStage], { clearProps: 'transform,x,y' });
 
+	// Handle Desk Localized Camera Pan (Skills <-> Resume)
+	const isDeskSwitch = (fromKey === 'skills' && toSection === 'resume') || 
+	                     (fromKey === 'resume' && toSection === 'skills');
+
+	if (isDeskSwitch) {
+		const targetX = toSection === 'resume' ? '-28%' : '0%';
+		gsap.to(activeStage, {
+			x: targetX,
+			duration: 0.45,
+			ease: 'power2.inOut',
+			onComplete: () => {
+				onCompleteCallback();
+				gsap.set(activeStage, { clearProps: 'transform,x,y' });
+			}
+		});
+		return;
+	}
+
 	// 2. Preload incoming backdrop image
 	incomingImg.src = toConfig.image;
 

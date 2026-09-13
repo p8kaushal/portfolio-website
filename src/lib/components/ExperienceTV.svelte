@@ -137,8 +137,8 @@
 
 <div
 	bind:this={tvContainer}
-	class="experience-station tv-screen-viewport absolute z-20 overflow-hidden rounded-[6px] bg-slate-950 text-slate-100 opacity-100 pointer-events-auto flex flex-col justify-between select-none border border-slate-800/80"
-	style="left: {bounds.left}px; top: {bounds.top}px; width: {bounds.width}px; height: {bounds.height}px; box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.95);"
+	class="experience-station tv-screen-viewport absolute z-20 overflow-hidden rounded-[6px] bg-[#0B1329]/90 backdrop-blur-3xl border border-white/20 text-slate-100 opacity-100 pointer-events-auto flex flex-col justify-between select-none shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)]"
+	style="left: {bounds.left}px; top: {bounds.top}px; width: {bounds.width}px; height: {bounds.height}px;"
 >
 	<div
 		class="tv-glass-glare absolute inset-0 z-40 pointer-events-none"
@@ -157,8 +157,8 @@
 		style="background: linear-gradient(90deg, transparent, #38bdf8, #ffffff, #38bdf8, transparent);"
 	></div>
 
-	<div bind:this={dashboardContent} class="relative z-10 w-full h-full p-6 sm:p-8 flex flex-col justify-between opacity-0 bg-slate-950">
-		<div class="flex items-center justify-between pb-3 border-b border-slate-800/80 shrink-0 font-mono text-xs tracking-widest text-slate-400 uppercase">
+	<div bind:this={dashboardContent} class="relative z-10 w-full h-full p-6 sm:p-8 flex flex-col justify-between opacity-0 bg-transparent">
+		<div class="flex items-center justify-between pb-3 border-b border-white/10 shrink-0 font-mono text-xs tracking-widest text-sky-400 uppercase font-bold">
 			<span class="text-sky-400 font-bold">EXPERIENCE & EDUCATION</span>
 			<span class="font-bold text-slate-300">PARTH KAUSHAL</span>
 		</div>
@@ -173,13 +173,13 @@
 					<div>
 						<div class="mb-2.5 flex items-baseline justify-between gap-4">
 							<div>
-								<span class="text-xs font-mono font-semibold text-sky-400 bg-sky-500/10 px-2.5 py-0.5 rounded-full border border-sky-500/30 inline-block mb-1">
+								<span class="text-xs font-mono font-bold text-sky-300 bg-sky-500/20 px-2.5 py-0.5 rounded-full border border-sky-400/40 inline-block mb-1">
 									{careerTimeline[activeNodeIndex].period}
 								</span>
 								<h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
 									{careerTimeline[activeNodeIndex].role}
 								</h2>
-								<p class="text-xs sm:text-sm font-medium text-slate-400">
+								<p class="text-xs sm:text-sm font-medium text-slate-300">
 									{careerTimeline[activeNodeIndex].org}
 								</p>
 							</div>
@@ -194,7 +194,7 @@
 
 						<ul class="space-y-2 my-3">
 							{#each careerTimeline[activeNodeIndex].bulletPoints as point}
-								<li class="text-slate-300 text-xs sm:text-sm leading-relaxed flex items-start gap-2">
+								<li class="text-slate-200 text-xs sm:text-sm leading-relaxed flex items-start gap-2">
 									<span class="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0 mt-1.5"></span>
 									<span>{point}</span>
 								</li>
@@ -202,9 +202,9 @@
 						</ul>
 					</div>
 
-					<div class="flex flex-wrap gap-1.5 pt-2 border-t border-slate-800/80">
+					<div class="flex flex-wrap gap-1.5 pt-2 border-t border-white/10">
 						{#each careerTimeline[activeNodeIndex].techStack as tech}
-							<span class="bg-slate-900 text-slate-300 text-xs px-2.5 py-1 rounded-md font-mono border border-slate-800">
+							<span class="bg-slate-900/60 text-slate-200 text-xs px-2.5 py-1 rounded-md font-mono border border-white/15">
 								{tech}
 							</span>
 						{/each}
@@ -214,11 +214,11 @@
 		</div>
 
 		<div bind:this={trackContainer} class="relative pt-4 pb-1 shrink-0">
-			<div class="timeline-axis-line h-[2px] bg-gradient-to-r from-transparent via-sky-500 to-transparent w-full absolute top-7 left-0 right-0 z-0"></div>
+			<div class="timeline-axis-line h-[2px] bg-gradient-to-r from-transparent via-sky-400 to-transparent w-full absolute top-7 left-0 right-0 z-0"></div>
 
 			<div
 				bind:this={indicatorRing}
-				class="sliding-node-indicator absolute top-[21px] -ml-2.5 w-5 h-5 rounded-full border-2 border-sky-400 bg-sky-950 shadow-[0_0_12px_rgba(56,189,248,0.6)] z-20 pointer-events-none"
+				class="sliding-node-indicator absolute top-[21px] -ml-2.5 w-5 h-5 rounded-full border-2 border-sky-400 bg-sky-950 shadow-[0_0_12px_rgba(56,189,248,0.5)] z-20 pointer-events-none"
 				style="left: 0px;"
 			></div>
 
@@ -231,14 +231,14 @@
 						class="timeline-node-btn absolute top-0 -translate-x-1/2 flex flex-col items-center cursor-pointer group focus:outline-none"
 						style="left: {nodePositions[idx]}%;"
 					>
-						<div class="vertical-stem w-[1px] h-5 transition-colors duration-200 {activeNodeIndex === idx ? 'bg-sky-400 font-bold' : 'bg-slate-700 group-hover:bg-slate-500'}"></div>
-						<div class="circular-node-marker w-4 h-4 rounded-full border-2 transition-all duration-200 flex items-center justify-center {activeNodeIndex === idx ? 'border-sky-400 bg-sky-400 shadow-[0_0_10px_rgba(56,189,248,0.5)]' : 'border-slate-700 bg-slate-900 group-hover:border-slate-500'}">
+						<div class="vertical-stem w-[1px] h-5 transition-colors duration-200 {activeNodeIndex === idx ? 'bg-sky-400 font-bold' : 'bg-slate-600 group-hover:bg-slate-400'}"></div>
+						<div class="circular-node-marker w-4 h-4 rounded-full border-2 transition-all duration-200 flex items-center justify-center {activeNodeIndex === idx ? 'border-sky-400 bg-sky-400 shadow-[0_0_10px_rgba(56,189,248,0.5)]' : 'border-sky-400/60 bg-sky-950/80 group-hover:border-sky-400'}">
 							{#if activeNodeIndex === idx}
 								<div class="w-1.5 h-1.5 rounded-full bg-slate-950"></div>
 							{/if}
 						</div>
 						<div class="mt-1 text-center font-mono text-[11px] whitespace-nowrap">
-							<span class="block font-bold transition-colors duration-200 {activeNodeIndex === idx ? 'text-sky-400' : 'text-slate-500 group-hover:text-slate-300'}">
+							<span class="block font-bold transition-colors duration-200 {activeNodeIndex === idx ? 'text-sky-400' : 'text-slate-400 group-hover:text-slate-200'}">
 								{item.period}
 							</span>
 							<span class="block text-[10px] font-medium truncate max-w-[120px] transition-colors duration-200 {activeNodeIndex === idx ? 'text-white font-bold' : 'text-slate-400 group-hover:text-slate-200'}">
@@ -254,7 +254,7 @@
 		{#if isDrawerOpen}
 			<div
 				transition:fly={{ x: 200, duration: 250 }}
-				class="absolute inset-y-0 right-0 w-80 bg-slate-900/95 border-l border-sky-500/40 p-5 z-50 flex flex-col justify-between backdrop-blur-xl shadow-2xl font-mono text-xs"
+				class="absolute inset-y-0 right-0 w-80 bg-slate-950/90 backdrop-blur-2xl border-l border-white/20 p-6 z-50 flex flex-col justify-between shadow-2xl font-mono text-xs text-white"
 			>
 				<div>
 					<div class="flex items-center justify-between pb-3 border-b border-slate-800">

@@ -4,7 +4,8 @@
 	import { handleSectionTransition } from '$lib/animations/cameraChoreography';
 	import { SECTIONS } from '$lib/constants/assets';
 
-	// Re-ordered spatial navbar items matching physical index: About (0) -> Home (1) -> Experience (2) ... -> Contact (7)
+	let { ready = false } = $props<{ ready?: boolean }>();
+
 	const tabs: { id: TabType; label: string }[] = [
 		{ id: 'about', label: 'About' },
 		{ id: 'home', label: 'Home' },
@@ -29,34 +30,35 @@
 	}
 </script>
 
-<nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 max-w-[95vw]">
+<nav class="fixed top-6 left-1/2 -translate-x-1/2 z-40 max-w-[95vw] transition-all duration-700 {ready ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-4'}">
+	<!-- Outer Apple Glass Capsule -->
 	<div
-		class="backdrop-blur-2xl bg-white/75 border border-white/60 text-neutral-900 shadow-2xl rounded-full px-4 sm:px-6 py-2.5 flex items-center gap-4 sm:gap-6 overflow-x-auto no-scrollbar"
+		class="flex items-center gap-1.5 p-1.5 rounded-full bg-white/65 backdrop-blur-2xl border border-white/80 shadow-[0_12px_40px_rgba(0,0,0,0.18)] overflow-x-auto no-scrollbar"
 	>
-		<div class="flex items-center gap-1.5 sm:gap-2">
+		<div class="flex items-center gap-1">
 			{#each tabs as tab}
 				<button
 					type="button"
 					onclick={() => handleTabClick(tab.id)}
-					class="px-3.5 py-1 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap cursor-pointer hover:bg-neutral-200/60 {$activeTab === tab.id
-						? 'bg-sky-500/15 text-sky-700 font-semibold rounded-full px-3.5 py-1 transition-all duration-300 shadow-xs'
-						: 'text-neutral-600 hover:text-neutral-900'}"
+					class="relative px-4 py-2 rounded-full text-xs font-bold tracking-wide transition-all duration-300 whitespace-nowrap cursor-pointer {$activeTab === tab.id
+						? 'bg-white text-slate-950 font-extrabold shadow-[0_4px_16px_rgba(0,0,0,0.15)] border border-white scale-105'
+						: 'text-slate-950 font-bold hover:text-black hover:bg-white/40'}"
 				>
 					{tab.label}
 				</button>
 			{/each}
 		</div>
 
-		<div class="h-4 w-px bg-neutral-300/80 mx-1 shrink-0"></div>
+		<div class="h-4 w-px bg-slate-400/40 mx-1 shrink-0"></div>
 
 		<button
 			type="button"
 			onclick={handleMuteToggle}
-			class="p-1.5 rounded-full text-neutral-600 hover:text-neutral-900 hover:bg-neutral-200/50 transition-colors cursor-pointer shrink-0"
+			class="p-2 rounded-full text-slate-800 hover:text-slate-950 hover:bg-white/40 transition-colors cursor-pointer shrink-0"
 			aria-label={$isMuted ? 'Unmute Audio' : 'Mute Audio'}
 		>
 			{#if $isMuted}
-				<VolumeX class="w-4 h-4 text-neutral-500" />
+				<VolumeX class="w-4 h-4 text-slate-700" />
 			{:else}
 				<Volume2 class="w-4 h-4 text-sky-600" />
 			{/if}

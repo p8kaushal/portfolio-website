@@ -2,6 +2,8 @@
 	import '../app.css';
 	import { activeTab as activeSection } from '$lib/stores/navStore';
 	import Navbar from '$lib/components/Navbar.svelte';
+	import { onMount } from 'svelte';
+	import { gsap } from 'gsap';
 	import ExperienceTV from '$lib/components/ExperienceTV.svelte';
 	import ProjectsGrid from '$lib/components/ProjectsGrid.svelte';
 	import SkillsSheet from '$lib/components/SkillsSheet.svelte';
@@ -14,13 +16,41 @@
 
 	let { children } = $props();
 
+	let welcomeActive = $state(true);
+	let navReady = $state(false);
+
+	onMount(() => {
+		const tl = gsap.timeline();
+		tl.to('#welcome-overlay', {
+			opacity: 0,
+			duration: 1.2,
+			delay: 1.8,
+			ease: 'power2.inOut',
+			onComplete: () => {
+				welcomeActive = false;
+				navReady = true;
+			}
+		});
+	});
+
 	let activeSectionKey = $derived(($activeSection as keyof typeof SECTIONS) || 'home');
 	let activeImageSrc = $derived(SECTIONS[activeSectionKey]?.image || '/bg-office-center.jpg');
 </script>
 
 <main class="relative w-screen h-screen overflow-hidden bg-black select-none">
-	<!-- Navbar -->
-	<Navbar />
+	<!-- Blurred Welcome Overlay -->
+	{#if welcomeActive}
+		<div id="welcome-overlay" class="absolute inset-0 z-50 flex items-center justify-center overflow-hidden">
+			<img src="/bg-office-center.jpg" class="absolute inset-0 w-full h-full object-cover scale-110 filter blur-3xl opacity-70" alt="blurred office" />
+			<div class="absolute inset-0 bg-slate-950/40 backdrop-blur-2xl"></div>
+			<h1 class="relative z-10 text-4xl md:text-6xl font-sans font-black text-white tracking-[0.25em] uppercase drop-shadow-2xl">
+				PARTH KAUSHAL
+			</h1>
+		</div>
+	{/if}
+
+	<!-- Split Floating Apple Glass Navbar -->
+	<Navbar ready={navReady} />
 
 	<!-- Active Stage Layer -->
 	<div id="stage-active" class="absolute inset-0 w-full h-full z-10 pointer-events-auto">
@@ -31,46 +61,44 @@
 			alt="Stage Background"
 		/>
 
-		<!-- Presenter Video Avatars (Z-Index 30) -->
+		<!-- Presenter Videos (Raw Black Background at z-index: 30) -->
 		{#if $activeSection === 'home'}
-			<div class="absolute left-1/2 bottom-0 -translate-x-1/2 z-30 pointer-events-none">
-				<video
-					src="/presenter-home.webm"
-					autoplay
-					loop
-					muted
-					playsinline
-					class="h-[82vh] w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
-				></video>
-			</div>
+			<video
+				src="/presenter-home.webm"
+				autoplay
+				loop
+				muted
+				playsinline
+				class="absolute left-1/2 bottom-0 -translate-x-1/2 h-[82vh] w-auto object-contain z-30 pointer-events-none"
+			></video>
 
 			<div class="card-overlay absolute inset-0 z-30 pointer-events-auto hidden sm:block">
-				<div class="backdrop-blur-2xl bg-white/80 border border-white/60 shadow-2xl rounded-3xl p-6 text-neutral-900 absolute left-10 top-1/2 -translate-y-1/2 w-80">
+				<div class="bg-white/60 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-6 text-slate-900 absolute left-10 top-1/2 -translate-y-1/2 w-80">
 					<span class="inline-block px-3 py-1 rounded-full bg-sky-500/10 text-sky-700 text-xs font-mono font-semibold uppercase tracking-wider mb-2">STAGE 01</span>
-					<h1 class="text-2xl font-black text-neutral-900 mb-1">PARTH KAUSHAL</h1>
+					<h1 class="text-2xl font-black text-slate-900 mb-1">PARTH KAUSHAL</h1>
 					<p class="text-xs font-bold text-sky-700 mb-3">Senior Systems Architect</p>
 					<div class="flex items-center gap-2 p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-800 text-xs font-semibold">
 						<span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping shrink-0"></span> Available for Architecture Roles
 					</div>
 				</div>
 
-				<div class="backdrop-blur-2xl bg-white/80 border border-white/60 shadow-2xl rounded-3xl p-6 text-neutral-900 absolute right-10 top-1/2 -translate-y-1/2 w-80">
-					<h3 class="text-sm font-bold uppercase tracking-wider text-neutral-600 mb-2">Executive Overview</h3>
-					<p class="text-xs text-neutral-700 leading-relaxed mb-4">
+				<div class="bg-white/60 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-6 text-slate-900 absolute right-10 top-1/2 -translate-y-1/2 w-80">
+					<h3 class="text-sm font-bold uppercase tracking-wider text-slate-600 mb-2">Executive Overview</h3>
+					<p class="text-xs text-slate-700 leading-relaxed mb-4">
 						Building cinematic 2D spatial web experiences with SvelteKit, GSAP camera choreography, and high-performance WebM video avatars.
 					</p>
 					<div class="flex gap-2">
 						<button
 							type="button"
 							onclick={() => setTab('projects')}
-							class="flex-1 py-2 px-3 rounded-xl bg-neutral-900 text-white text-xs font-bold hover:bg-neutral-800 transition-colors flex items-center justify-center gap-1 cursor-pointer"
+							class="flex-1 py-2 px-3 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition-colors flex items-center justify-center gap-1 cursor-pointer"
 						>
 							Projects <ArrowRight class="w-3.5 h-3.5" />
 						</button>
 						<button
 							type="button"
 							onclick={() => setTab('experience')}
-							class="flex-1 py-2 px-3 rounded-xl bg-white border border-neutral-300 text-neutral-900 text-xs font-bold hover:bg-neutral-100 transition-colors flex items-center justify-center gap-1 cursor-pointer"
+							class="flex-1 py-2 px-3 rounded-xl bg-white/80 border border-slate-300 text-slate-900 text-xs font-bold hover:bg-white transition-colors flex items-center justify-center gap-1 cursor-pointer"
 						>
 							Experience
 						</button>
@@ -78,28 +106,32 @@
 				</div>
 			</div>
 		{:else if $activeSection === 'about'}
-			<div class="absolute left-[12%] bottom-0 z-30 pointer-events-none">
-				<video
-					src="/presenter-about.webm"
-					autoplay
-					loop
-					muted
-					playsinline
-					class="h-[82vh] w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
-				></video>
-			</div>
+			<video
+				src="/presenter-about.webm"
+				autoplay
+				loop
+				muted
+				playsinline
+				class="absolute left-[12%] bottom-0 h-[82vh] w-auto object-contain z-30 pointer-events-none"
+			></video>
 
 			<div class="card-overlay absolute inset-0 z-30 flex items-center justify-end p-6 pointer-events-auto">
-				<div class="backdrop-blur-2xl bg-white/80 border border-white/60 shadow-2xl rounded-3xl p-8 text-neutral-900 max-w-xl mr-[6%]">
+				<div class="bg-white/60 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-8 text-slate-900 max-w-xl mr-[6%]">
 					<span class="inline-block px-3.5 py-1 rounded-full bg-purple-500/10 text-purple-700 text-xs font-semibold uppercase tracking-wider mb-3">About Presenter</span>
-					<h2 class="text-2xl sm:text-3xl font-bold text-neutral-900 mb-2">Architecting Spatial Web</h2>
-					<p class="text-sm text-neutral-700 leading-relaxed mb-4">
+					<h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">Architecting Spatial Web</h2>
+					<p class="text-sm text-slate-700 leading-relaxed mb-4">
 						Passionate Frontend Engineer specializing in high-performance WebGL, CSS 3D spatial UI, and SvelteKit applications with Apple-grade polish.
 					</p>
-					<div class="grid grid-cols-2 gap-3 text-xs font-medium text-neutral-800">
-						<div class="p-2.5 rounded-xl bg-white/60 border border-neutral-200">📍 San Francisco, CA</div>
-						<div class="p-2.5 rounded-xl bg-white/60 border border-neutral-200">🚀 5+ Years Experience</div>
+					<div class="grid grid-cols-2 gap-3 text-xs font-medium text-slate-800 mb-4">
+						<div class="p-2.5 rounded-xl bg-white/40 border border-white/60">📍 San Francisco, CA</div>
+						<div class="p-2.5 rounded-xl bg-white/40 border border-white/60">🚀 5+ Years Experience</div>
 					</div>
+					<button
+						type="button"
+						class="w-full py-2.5 px-4 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition-colors shadow-md cursor-pointer"
+					>
+						About Presenter
+					</button>
 				</div>
 			</div>
 		{:else if $activeSection === 'experience'}

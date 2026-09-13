@@ -62,14 +62,14 @@
 
 	<!-- Blueprint Specification Drawer Modal on Left Paper Sheet -->
 	{#if selectedCategory}
-		<div class="absolute left-[14%] top-[16%] w-[34%] h-[68%] p-6 text-slate-900 font-mono bg-amber-50/95 border-2 border-slate-900 rotate-[-1deg] shadow-2xl z-40 flex flex-col justify-between">
+		<div class="absolute left-[14%] top-[16%] w-[34%] h-[68%] p-6 text-slate-900 font-mono bg-white/70 backdrop-blur-2xl border-2 border-slate-900 rotate-[-1deg] shadow-2xl z-40 flex flex-col justify-between">
 			<div>
 				<div class="flex items-center justify-between pb-2 border-b-2 border-slate-900 mb-3">
-					<h3 class="text-xs font-black uppercase text-slate-950 flex items-center gap-1.5"><FileCode class="w-4 h-4" /> Blueprint Spec</h3>
+					<h3 class="text-xs font-black uppercase text-slate-950 flex items-center gap-1.5"><FileCode class="w-4 h-4 text-sky-700" /> Blueprint Spec</h3>
 					<button
 						type="button"
 						onclick={() => { playSound('click'); selectedCategory = null; }}
-						class="p-1 rounded border border-slate-900 hover:bg-slate-900 hover:text-white transition-colors"
+						class="p-1 rounded border border-slate-900 hover:bg-slate-900 hover:text-white transition-colors cursor-pointer"
 					>
 						<X class="w-3.5 h-3.5" />
 					</button>

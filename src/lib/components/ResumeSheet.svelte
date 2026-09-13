@@ -50,14 +50,14 @@
 
 	<!-- Extended PDF Credentials Preview Drawer Modal -->
 	{#if isPdfPreviewOpen}
-		<div class="absolute left-[53%] top-[12%] w-[36%] h-[76%] p-6 text-slate-900 font-mono bg-white border-2 border-slate-900 rotate-[1deg] shadow-2xl z-40 flex flex-col justify-between overflow-y-auto no-scrollbar">
+		<div class="absolute left-[53%] top-[12%] w-[36%] h-[76%] p-6 text-slate-900 font-mono bg-white/80 backdrop-blur-2xl border-2 border-slate-900 rotate-[1deg] shadow-2xl z-40 flex flex-col justify-between overflow-y-auto no-scrollbar">
 			<div>
 				<div class="flex items-center justify-between pb-2 border-b-2 border-slate-900 mb-3">
-					<h3 class="text-xs font-black uppercase text-slate-950 flex items-center gap-1.5"><FileText class="w-4 h-4" /> Full Credentials</h3>
+					<h3 class="text-xs font-black uppercase text-slate-950 flex items-center gap-1.5"><FileText class="w-4 h-4 text-sky-700" /> Full Credentials</h3>
 					<button
 						type="button"
 						onclick={() => { playSound('click'); isPdfPreviewOpen = false; }}
-						class="p-1 rounded border border-slate-900 hover:bg-slate-900 hover:text-white transition-colors"
+						class="p-1 rounded border border-slate-900 hover:bg-slate-900 hover:text-white transition-colors cursor-pointer"
 					>
 						<X class="w-3.5 h-3.5" />
 					</button>

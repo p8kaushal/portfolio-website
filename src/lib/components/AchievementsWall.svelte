@@ -92,7 +92,7 @@
 
 	<!-- Interactive Framed Certificate Inspection Modal -->
 	{#if activeCertificateModal}
-		<div class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-xl flex items-center justify-center p-6 pointer-events-auto">
+		<div class="fixed inset-0 z-50 bg-black/40 backdrop-blur-3xl flex items-center justify-center p-6 pointer-events-auto">
 			<div class="relative w-full max-w-lg rounded-sm border-[12px] border-[#2a1a0e] bg-[#faf7f2] p-8 text-slate-900 shadow-[0_25px_60px_rgba(0,0,0,0.85)] font-serif">
 				<button
 					type="button"
