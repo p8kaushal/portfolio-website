@@ -24,7 +24,7 @@
 </script>
 
 <div class="card-overlay absolute inset-0 z-30 pointer-events-auto transition-transform duration-500 ease-out">
-	<div class="absolute left-[14%] top-[16%] w-[34%] h-[68%] p-6 text-slate-900 font-mono rotate-[-1deg] mix-blend-multiply flex flex-col justify-between">
+	<div class="absolute left-[14%] top-[16%] w-[34%] h-[68%] p-6 text-slate-900 font-mono rotate-[-1deg] mix-blend-multiply flex flex-col justify-between backdrop-blur-xl">
 		<div>
 			<div class="border-b-2 border-slate-900 pb-2 mb-4 flex justify-between items-baseline">
 				<div>
@@ -62,7 +62,10 @@
 
 	<!-- Blueprint Specification Drawer Modal on Left Paper Sheet -->
 	{#if selectedCategory}
-		<div class="absolute left-[14%] top-[16%] w-[34%] h-[68%] p-6 text-slate-900 font-mono bg-white/70 backdrop-blur-2xl border-2 border-slate-900 rotate-[-1deg] shadow-2xl z-40 flex flex-col justify-between">
+		<div
+			class="absolute left-[14%] top-[16%] w-[34%] h-[68%] p-6 text-slate-900 font-mono rotate-[-1deg] shadow-2xl z-40 flex flex-col justify-between backdrop-blur-2xl"
+			style="background-color: rgba(255, 255, 255, var(--glass-opacity)); backdrop-filter: blur(var(--glass-blur)); border: 1px solid rgba(255, 255, 255, 0.9);"
+		>
 			<div>
 				<div class="flex items-center justify-between pb-2 border-b-2 border-slate-900 mb-3">
 					<h3 class="text-xs font-black uppercase text-slate-950 flex items-center gap-1.5"><FileCode class="w-4 h-4 text-sky-700" /> Blueprint Spec</h3>

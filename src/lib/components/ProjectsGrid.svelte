@@ -44,7 +44,10 @@
 	let activeInspectorModal = $state<any | null>(null);
 </script>
 
-<div class="projects-station absolute left-1/2 top-[46%] -translate-x-1/2 -translate-y-1/2 w-[68%] h-[58%] z-30 rounded-xl bg-slate-900/85 backdrop-blur-3xl p-6 overflow-hidden text-white pointer-events-auto flex flex-col justify-between border border-white/15 shadow-2xl">
+<div
+	class="projects-station absolute left-1/2 top-[46%] -translate-x-1/2 -translate-y-1/2 w-[68%] h-[58%] z-30 rounded-xl p-6 overflow-hidden text-white pointer-events-auto flex flex-col justify-between shadow-2xl"
+	style="background-color: rgba(15, 23, 42, var(--glass-opacity)); backdrop-filter: blur(var(--glass-blur)); border: 1px solid rgba(255, 255, 255, 0.15);"
+>
 	<div class="absolute inset-0 z-40 pointer-events-none" style="background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
 
 	<div class="relative z-10 flex items-center justify-between pb-3 border-b border-white/10 text-xs font-mono text-slate-300">

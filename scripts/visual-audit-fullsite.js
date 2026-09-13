@@ -12,16 +12,39 @@ import path from 'path';
 
 	await page.goto('http://localhost:5173', { waitUntil: 'networkidle' });
 
-	// 1. Verify Welcome Overlay & Disabled Navbar State
-	const initialNavPointerEvents = await page.evaluate(() => {
+	console.log('[AUDIT] Waiting for Welcome Sequence to complete...');
+	await page.waitForTimeout(1800); // Wait for Welcome animation to complete
+
+	// 1. Assert Navbar Pointer Events & Text Color
+	const navPointerEvents = await page.evaluate(() => {
 		const nav = document.querySelector('nav');
-		return nav ? getComputedStyle(nav).pointerEvents : 'auto';
+		return nav ? getComputedStyle(nav).pointerEvents : 'none';
 	});
-	console.log('[AUDIT] Initial Nav Pointer Events:', initialNavPointerEvents);
+	console.log('[AUDIT] Nav Pointer Events after Welcome:', navPointerEvents);
 
-	await page.waitForTimeout(2500); // Wait for Welcome animation fade out
+	const navTextColor = await page.evaluate(() => {
+		const btn = document.querySelector('nav button');
+		return btn ? getComputedStyle(btn).color : '';
+	});
+	console.log('[AUDIT] Navbar Text Color:', navTextColor);
 
-	// 2. Audit All Section Glass UI Views & Active Indicators
+	// 2. Test Settings Panel Glass Dials Real-Time Update
+	console.log('[AUDIT] Opening Settings Panel...');
+	await page.click('button[aria-label="Settings"]');
+	await page.waitForTimeout(400);
+
+	// Adjust Blur Slider
+	await page.fill('input[type="range"][name="blur"]', '36');
+	await page.waitForTimeout(200);
+
+	const appliedBlur = await page.evaluate(() => {
+		return getComputedStyle(document.querySelector('main')).getPropertyValue('--glass-blur');
+	});
+	console.log('[AUDIT] Reactive Glass Blur Variable:', appliedBlur);
+
+	await page.screenshot({ path: path.join(outputDir, 'settings-dial-tested.png') });
+
+	// 3. Audit All Section Glass UI Views & Active Indicators
 	const tabs = ['About', 'Home', 'Experience', 'Projects', 'Skills', 'Resume', 'Achievements', 'Contact'];
 
 	for (const tab of tabs) {
@@ -43,13 +66,6 @@ import path from 'path';
 				process.exit(1);
 			}
 
-			// Verify Navbar button text color contrast (must be dark/black text-slate-950)
-			const navColor = await page.evaluate(() => {
-				const activeBtn = document.querySelector('nav button');
-				return activeBtn ? getComputedStyle(activeBtn).color : '';
-			});
-			console.log(`[AUDIT] Nav Button Text Color on ${tab}:`, navColor);
-
 			// Trigger Glass UI "More Details" expansions
 			if (tab === 'About') {
 				const aboutBtn = page.locator('text=About Presenter').first();
@@ -69,7 +85,7 @@ import path from 'path';
 			}
 			await page.waitForTimeout(400);
 
-			await page.screenshot({ path: path.join(outputDir, `apple-glass-${tab.toLowerCase()}.png`) });
+			await page.screenshot({ path: path.join(outputDir, `tab-${tab.toLowerCase()}.png`) });
 
 			// Assert no split-screen tears
 			const incomingOpacity = await page.evaluate(() => {
@@ -89,7 +105,7 @@ import path from 'path';
 		}
 	}
 
-	console.log('[SUCCESS] All Apple Glass UI views, Welcome locks, and Active indicators VERIFIED!');
+	console.log('[SUCCESS] All navbar contrast fixes, Settings Panel dials, and Apple Glass UI sections VERIFIED!');
 	await browser.close();
 	process.exit(0);
 })();

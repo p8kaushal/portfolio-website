@@ -8,7 +8,7 @@
 <div class="card-overlay absolute inset-0 z-30 pointer-events-auto transition-transform duration-500 ease-out">
 	<!-- Positioned strictly inside Right Blueprint Paper bounds -->
 	<div
-		class="absolute left-[53%] top-[12%] w-[36%] h-[76%] p-8 text-slate-900 font-mono rotate-[1deg] mix-blend-multiply flex flex-col justify-between overflow-y-auto no-scrollbar"
+		class="absolute left-[53%] top-[12%] w-[36%] h-[76%] p-8 text-slate-900 font-mono rotate-[1deg] mix-blend-multiply flex flex-col justify-between overflow-y-auto no-scrollbar backdrop-blur-xl"
 	>
 		<div>
 			<div class="border-b-2 border-slate-900 pb-2 mb-3 flex justify-between items-start">
@@ -50,7 +50,10 @@
 
 	<!-- Extended PDF Credentials Preview Drawer Modal -->
 	{#if isPdfPreviewOpen}
-		<div class="absolute left-[53%] top-[12%] w-[36%] h-[76%] p-6 text-slate-900 font-mono bg-white/80 backdrop-blur-2xl border-2 border-slate-900 rotate-[1deg] shadow-2xl z-40 flex flex-col justify-between overflow-y-auto no-scrollbar">
+		<div
+			class="absolute left-[53%] top-[12%] w-[36%] h-[76%] p-6 text-slate-900 font-mono rotate-[1deg] shadow-2xl z-40 flex flex-col justify-between overflow-y-auto no-scrollbar"
+			style="background-color: rgba(255, 255, 255, var(--glass-opacity)); backdrop-filter: blur(var(--glass-blur)); border: 1px solid rgba(255, 255, 255, 0.9);"
+		>
 			<div>
 				<div class="flex items-center justify-between pb-2 border-b-2 border-slate-900 mb-3">
 					<h3 class="text-xs font-black uppercase text-slate-950 flex items-center gap-1.5"><FileText class="w-4 h-4 text-sky-700" /> Full Credentials</h3>

@@ -137,8 +137,8 @@
 
 <div
 	bind:this={tvContainer}
-	class="experience-station tv-screen-viewport absolute z-20 overflow-hidden rounded-[6px] bg-[#0B1329]/90 backdrop-blur-3xl border border-white/20 text-slate-100 opacity-100 pointer-events-auto flex flex-col justify-between select-none shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)]"
-	style="left: {bounds.left}px; top: {bounds.top}px; width: {bounds.width}px; height: {bounds.height}px;"
+	class="experience-station tv-screen-viewport absolute z-20 overflow-hidden rounded-[6px] text-slate-100 opacity-100 pointer-events-auto flex flex-col justify-between select-none shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)] backdrop-blur-2xl"
+	style="left: {bounds.left}px; top: {bounds.top}px; width: {bounds.width}px; height: {bounds.height}px; background-color: rgba(11, 19, 41, var(--glass-opacity)); backdrop-filter: blur(var(--glass-blur)); border: 1px solid rgba(255, 255, 255, 0.2);"
 >
 	<div
 		class="tv-glass-glare absolute inset-0 z-40 pointer-events-none"

@@ -14,21 +14,22 @@
 	import { ArrowRight } from 'lucide-svelte';
 	import { setTab } from '$lib/stores/navStore';
 
+	import { glassSettings, resetGlassDefaults } from '$lib/stores/glassSettings';
+
 	let { children } = $props();
 
 	let welcomeActive = $state(true);
-	let navReady = $state(false);
+	let navReady = $state(true);
 
 	onMount(() => {
 		const tl = gsap.timeline();
 		tl.to('#welcome-overlay', {
 			opacity: 0,
-			duration: 1.2,
-			delay: 1.8,
+			duration: 0.6,
+			delay: 0.8,
 			ease: 'power2.inOut',
 			onComplete: () => {
 				welcomeActive = false;
-				navReady = true;
 			}
 		});
 	});
@@ -37,7 +38,10 @@
 	let activeImageSrc = $derived(SECTIONS[activeSectionKey]?.image || '/bg-office-center.jpg');
 </script>
 
-<main class="relative w-screen h-screen overflow-hidden bg-black select-none">
+<main
+	class="relative w-screen h-screen overflow-hidden bg-black select-none"
+	style="--glass-blur: {$glassSettings.blur}px; --glass-opacity: {$glassSettings.opacity};"
+>
 	<!-- Blurred Welcome Overlay -->
 	{#if welcomeActive}
 		<div id="welcome-overlay" class="absolute inset-0 z-50 flex items-center justify-center overflow-hidden">
@@ -145,7 +149,9 @@
 		{:else if $activeSection === 'achievements'}
 			<AchievementsWall />
 		{:else if $activeSection === 'contact'}
-			<ContactPhone />
+			<div id="contact-phone-container" class="absolute left-1/2 bottom-12 -translate-x-1/2 z-30 pointer-events-auto">
+				<ContactPhone />
+			</div>
 		{/if}
 	</div>
 
