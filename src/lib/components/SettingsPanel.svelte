@@ -12,7 +12,8 @@
 </script>
 
 <div
-	class="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-80 bg-white/80 backdrop-blur-[var(--glass-blur,24px)] border border-white/90 shadow-2xl rounded-2xl p-6 text-slate-950 font-sans animate-in fade-in slide-in-from-top-4"
+	style="background-color: rgba(255, 255, 255, {$glassSettings.opacity}); backdrop-filter: blur({$glassSettings.blur}px); -webkit-backdrop-filter: blur({$glassSettings.blur}px);"
+	class="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-80 border border-white/90 shadow-2xl rounded-2xl p-6 text-slate-950 font-sans animate-in fade-in slide-in-from-top-4 transition-all duration-200 backdrop-blur-2xl"
 >
 	<div class="flex items-center justify-between pb-3 border-b border-slate-900/10 mb-4">
 		<div class="flex items-center gap-2">

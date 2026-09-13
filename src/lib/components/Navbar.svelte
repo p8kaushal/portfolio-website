@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { activeTab, isMuted, setTab, toggleMute, type TabType } from '$lib/stores/navStore';
+	import { glassSettings } from '$lib/stores/glassSettings';
 	import { Volume2, VolumeX, Settings } from 'lucide-svelte';
 	import { handleSectionTransition } from '$lib/animations/cameraChoreography';
 	import { SECTIONS } from '$lib/constants/assets';
@@ -36,7 +37,8 @@
 <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-40 max-w-[95vw] transition-all duration-700 {ready ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-4'}">
 	<!-- Outer Apple Glass Capsule -->
 	<div
-		class="flex items-center gap-1.5 p-1.5 rounded-full bg-white/70 backdrop-blur-[var(--glass-blur,24px)] border border-white/90 shadow-[0_16px_48px_rgba(0,0,0,0.18)] overflow-x-auto no-scrollbar"
+		style="background-color: rgba(255, 255, 255, {$glassSettings.opacity}); backdrop-filter: blur({$glassSettings.blur}px); -webkit-backdrop-filter: blur({$glassSettings.blur}px);"
+		class="flex items-center gap-1.5 p-1.5 rounded-full border border-white/90 shadow-[0_16px_48px_rgba(0,0,0,0.18)] overflow-x-auto no-scrollbar"
 	>
 		<div class="flex items-center gap-1">
 			{#each tabs as tab}

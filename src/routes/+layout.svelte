@@ -77,7 +77,10 @@
 			></video>
 
 			<div class="card-overlay absolute inset-0 z-30 pointer-events-auto hidden sm:block">
-				<div class="bg-white/60 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-6 text-slate-900 absolute left-10 top-1/2 -translate-y-1/2 w-80">
+				<div
+					style="background-color: rgba(255, 255, 255, {$glassSettings.opacity}); backdrop-filter: blur({$glassSettings.blur}px); -webkit-backdrop-filter: blur({$glassSettings.blur}px);"
+					class="border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-6 text-slate-900 absolute left-10 top-1/2 -translate-y-1/2 w-80 transition-all duration-200 backdrop-blur-2xl"
+				>
 					<span class="inline-block px-3 py-1 rounded-full bg-sky-500/10 text-sky-700 text-xs font-mono font-semibold uppercase tracking-wider mb-2">STAGE 01</span>
 					<h1 class="text-2xl font-black text-slate-900 mb-1">PARTH KAUSHAL</h1>
 					<p class="text-xs font-bold text-sky-700 mb-3">Senior Systems Architect</p>
@@ -86,7 +89,10 @@
 					</div>
 				</div>
 
-				<div class="bg-white/60 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-6 text-slate-900 absolute right-10 top-1/2 -translate-y-1/2 w-80">
+				<div
+					style="background-color: rgba(255, 255, 255, {$glassSettings.opacity}); backdrop-filter: blur({$glassSettings.blur}px); -webkit-backdrop-filter: blur({$glassSettings.blur}px);"
+					class="border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-6 text-slate-900 absolute right-10 top-1/2 -translate-y-1/2 w-80 transition-all duration-200 backdrop-blur-2xl"
+				>
 					<h3 class="text-sm font-bold uppercase tracking-wider text-slate-600 mb-2">Executive Overview</h3>
 					<p class="text-xs text-slate-700 leading-relaxed mb-4">
 						Building cinematic 2D spatial web experiences with SvelteKit, GSAP camera choreography, and high-performance WebM video avatars.
@@ -120,7 +126,10 @@
 			></video>
 
 			<div class="card-overlay absolute inset-0 z-30 flex items-center justify-end p-6 pointer-events-auto">
-				<div class="bg-white/60 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-8 text-slate-900 max-w-xl mr-[6%]">
+				<div
+					style="background-color: rgba(255, 255, 255, {$glassSettings.opacity}); backdrop-filter: blur({$glassSettings.blur}px); -webkit-backdrop-filter: blur({$glassSettings.blur}px);"
+					class="border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-8 text-slate-900 max-w-xl mr-[6%] transition-all duration-200 backdrop-blur-2xl"
+				>
 					<span class="inline-block px-3.5 py-1 rounded-full bg-purple-500/10 text-purple-700 text-xs font-semibold uppercase tracking-wider mb-3">About Presenter</span>
 					<h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">Architecting Spatial Web</h2>
 					<p class="text-sm text-slate-700 leading-relaxed mb-4">
