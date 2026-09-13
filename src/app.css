@@ -1,27 +1,23 @@
 @import "tailwindcss";
 
-@layer base {
-	html,
-	body {
-		width: 100vw;
-		height: 100vh;
-		overflow: hidden;
-		margin: 0;
-		padding: 0;
-		background-color: #050505;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-	}
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000000;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-.canvas-container-full {
-	width: 100vw;
-	height: 100vh;
-	position: relative;
-	overflow: hidden;
+/* Hard reset to prevent raw browser button leaks */
+button {
+  background: transparent;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
 }
 
 /* Hide scrollbars globally */
@@ -31,4 +27,11 @@
 .no-scrollbar {
 	-ms-overflow-style: none;
 	scrollbar-width: none;
+}
+
+#wide-room-bg, #wide-room-layer, #mid-room-layer, #macro-room-layer, #stage-active, #stage-incoming {
+	transition: none !important;
+	will-change: transform, opacity;
+	transform-style: preserve-3d;
+	backface-visibility: hidden;
 }

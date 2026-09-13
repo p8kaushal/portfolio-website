@@ -1,10 +1,13 @@
 <script lang="ts">
 	import { activeTab, isMuted, setTab, toggleMute, type TabType } from '$lib/stores/navStore';
 	import { Volume2, VolumeX } from 'lucide-svelte';
+	import { handleSectionTransition } from '$lib/animations/cameraChoreography';
+	import { SECTIONS } from '$lib/constants/assets';
 
+	// Re-ordered spatial navbar items matching physical index: About (0) -> Home (1) -> Experience (2) ... -> Contact (7)
 	const tabs: { id: TabType; label: string }[] = [
-		{ id: 'home', label: 'Home' },
 		{ id: 'about', label: 'About' },
+		{ id: 'home', label: 'Home' },
 		{ id: 'experience', label: 'Experience' },
 		{ id: 'projects', label: 'Projects' },
 		{ id: 'skills', label: 'Skills' },
@@ -14,8 +17,11 @@
 	];
 
 	function handleTabClick(tabId: TabType) {
+		const current = $activeTab;
+		if (current === tabId) return;
+
 		setTab(tabId);
-		// Note: Click audio removed from top navbar per Step 5 directive
+		handleSectionTransition(current, tabId, () => {});
 	}
 
 	function handleMuteToggle() {
@@ -23,9 +29,9 @@
 	}
 </script>
 
-<nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 max-w-[95vw] sm:max-w-none">
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 max-w-[95vw]">
 	<div
-		class="backdrop-blur-2xl bg-white/75 border border-white/60 text-neutral-900 shadow-2xl rounded-full px-6 py-2.5 flex items-center gap-6 overflow-x-auto no-scrollbar"
+		class="backdrop-blur-2xl bg-white/75 border border-white/60 text-neutral-900 shadow-2xl rounded-full px-4 sm:px-6 py-2.5 flex items-center gap-4 sm:gap-6 overflow-x-auto no-scrollbar"
 	>
 		<div class="flex items-center gap-1.5 sm:gap-2">
 			{#each tabs as tab}

@@ -34,3 +34,9 @@ pnpm-debug.log*
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# Playwright & Testing Artifacts
+static/screenshots/
+playwright-report/
+test-results/
+*.log

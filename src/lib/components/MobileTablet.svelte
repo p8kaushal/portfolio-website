@@ -14,9 +14,22 @@
 		{ id: 'contact', label: 'Contact', icon: Mail }
 	];
 
+	import { playExperienceTransition, resetStageToHome } from '$lib/animations/cameraChoreography';
+
 	function selectTab(tabId: TabType) {
-		setTab(tabId);
 		playSound('click');
+		if ($activeTab === tabId) return;
+
+		if (tabId === 'experience') {
+			playExperienceTransition(() => {
+				setTab('experience');
+			});
+		} else {
+			if (tabId === 'home' || tabId === 'about') {
+				resetStageToHome();
+			}
+			setTab(tabId);
+		}
 	}
 </script>
 
