@@ -1,98 +1,68 @@
 <script lang="ts">
+	import { activeTab as activeSection } from '$lib/stores/navStore';
+	import { enterPaperFocus, isPaperFocused } from '$lib/animations/paperFocusChoreography';
 	import { playSound } from '$lib/utils/soundEngine';
-	import { FileCode, X, Sparkles } from 'lucide-svelte';
 
 	const skills = [
 		{
 			category: 'Frontend Architecture',
-			items: ['Svelte / SvelteKit', 'TypeScript', 'Tailwind CSS', 'GSAP Animation', 'HTML5 Canvas'],
-			details: 'Engineered high-performance SvelteKit 2D spatial canvas rendering engines with zero-lag GSAP camera choreographies.'
+			items: ['Svelte / SvelteKit', 'TypeScript', 'Tailwind CSS', 'GSAP Animation', 'HTML5 Canvas']
 		},
 		{
 			category: 'Systems & Performance',
-			items: ['Performance Tuning', 'Spatial UI Design', 'State Management', 'WebM Transparent Video'],
-			details: 'Optimized WebM alpha video decoding and double-buffered canvas compositing for 60 FPS spatial web presentations.'
+			items: ['Performance Tuning', 'Spatial UI Design', 'State Management', 'WebM Transparent Video']
 		},
 		{
 			category: 'Tooling & CI/CD',
-			items: ['Git & GitHub', 'Vite / Rollup', 'Figma Prototyping', 'Vercel CDN'],
-			details: 'Automated CI/CD pipelines with zero-downtime CDN deployments and Playwright visual regression harnesses.'
+			items: ['Git & GitHub', 'Vite / Rollup', 'Figma Prototyping', 'Vercel CDN']
 		}
 	];
 
-	let selectedCategory = $state<any | null>(null);
+	function handleClick() {
+		if ($activeSection === 'skills' && !$isPaperFocused) {
+			playSound('click');
+			enterPaperFocus('skills');
+		}
+	}
 </script>
 
-<div class="card-overlay absolute inset-0 z-30 pointer-events-auto transition-transform duration-500 ease-out">
-	<div class="absolute left-[14%] top-[16%] w-[34%] h-[68%] p-6 text-slate-900 font-mono rotate-[-1deg] mix-blend-multiply flex flex-col justify-between backdrop-blur-xl">
-		<div>
-			<div class="border-b-2 border-slate-900 pb-2 mb-4 flex justify-between items-baseline">
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div
+	id="paper-sheet-left"
+	onclick={handleClick}
+	class="absolute left-[14%] top-[16%] w-[34%] h-[68%] p-6 md:p-8 text-slate-900 font-mono rotate-[-1deg] bg-[#fbf9f5] border border-[#e2d9cc] rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.25)] flex flex-col justify-between z-30 transition-all duration-300 {$activeSection === 'skills' ? 'cursor-pointer hover:shadow-[0_30px_70px_rgba(0,0,0,0.38)] hover:scale-[1.015] pointer-events-auto' : 'opacity-40 pointer-events-none'}"
+>
+	{#if $activeSection === 'skills'}
+		<div class="space-y-4">
+			<div class="border-b-2 border-slate-900 pb-2 mb-3 flex justify-between items-baseline">
 				<div>
-					<h2 class="text-base font-black tracking-tight uppercase text-slate-950">TECHNICAL SKILLS</h2>
-					<p class="text-[10px] font-bold text-slate-800 uppercase">PARTH KAUSHAL // MANIFEST</p>
+					<h2 class="text-lg font-black tracking-tight uppercase text-slate-950">TECHNICAL SKILLS</h2>
+					<p class="text-[10px] font-bold text-slate-700 uppercase">PARTH KAUSHAL // MANIFEST</p>
 				</div>
-				<span class="text-[10px] font-bold text-slate-900">SYS_REV_2026</span>
+				<span class="text-[10px] font-bold text-slate-800">SYS_REV_2026</span>
 			</div>
-			<div class="space-y-4">
+			<div class="space-y-3">
 				{#each skills as skillGroup}
 					<div>
-						<button
-							type="button"
-							onclick={() => { playSound('click'); selectedCategory = skillGroup; }}
-							class="text-left w-full group cursor-pointer"
-						>
-							<h4 class="text-[11px] font-black uppercase tracking-wider text-slate-900 mb-1 group-hover:text-sky-700 flex items-center justify-between">
-								<span>{skillGroup.category}</span>
-								<span class="text-[9px] font-bold opacity-0 group-hover:opacity-100 transition-opacity">[inspect]</span>
-							</h4>
-							<div class="flex flex-wrap gap-1.5">
-								{#each skillGroup.items as item}
-									<span class="px-2 py-0.5 border border-slate-900 text-slate-950 text-[10px] font-bold uppercase group-hover:border-sky-700">{item}</span>
-								{/each}
-							</div>
-						</button>
+						<h4 class="text-[11px] font-black uppercase tracking-wider text-slate-900 mb-1 border-l-2 border-slate-900 pl-2">
+							{skillGroup.category}
+						</h4>
+						<div class="flex flex-wrap gap-1.5">
+							{#each skillGroup.items as item}
+								<span class="px-2 py-0.5 bg-slate-200/70 border border-slate-900/30 text-slate-950 text-[10px] font-bold uppercase">{item}</span>
+							{/each}
+						</div>
 					</div>
 				{/each}
 			</div>
 		</div>
-		<div class="border-t border-slate-900 pt-2 text-[9px] font-bold text-slate-900 text-center uppercase tracking-widest">
-			SKILLS_MANIFOLD_01
+		<div class="border-t border-slate-900/40 pt-2 text-[10px] font-bold text-slate-600 text-center uppercase tracking-widest">
+			[ CLICK SHEET TO ZOOM & INSPECT 🔍 ]
 		</div>
-	</div>
-
-	<!-- Blueprint Specification Drawer Modal on Left Paper Sheet -->
-	{#if selectedCategory}
-		<div
-			class="absolute left-[14%] top-[16%] w-[34%] h-[68%] p-6 text-slate-900 font-mono rotate-[-1deg] shadow-2xl z-40 flex flex-col justify-between backdrop-blur-2xl"
-			style="background-color: rgba(255, 255, 255, var(--glass-opacity)); backdrop-filter: blur(var(--glass-blur)); border: 1px solid rgba(255, 255, 255, 0.9);"
-		>
-			<div>
-				<div class="flex items-center justify-between pb-2 border-b-2 border-slate-900 mb-3">
-					<h3 class="text-xs font-black uppercase text-slate-950 flex items-center gap-1.5"><FileCode class="w-4 h-4 text-sky-700" /> Blueprint Spec</h3>
-					<button
-						type="button"
-						onclick={() => { playSound('click'); selectedCategory = null; }}
-						class="p-1 rounded border border-slate-900 hover:bg-slate-900 hover:text-white transition-colors cursor-pointer"
-					>
-						<X class="w-3.5 h-3.5" />
-					</button>
-				</div>
-				<h4 class="text-sm font-black uppercase text-sky-800 mb-2">{selectedCategory.category}</h4>
-				<p class="text-[11px] font-medium leading-relaxed text-slate-900 mb-4">{selectedCategory.details}</p>
-
-				<div class="border-t border-slate-900 pt-3">
-					<span class="text-[10px] font-black uppercase block mb-1">Production Integrations</span>
-					<div class="flex flex-wrap gap-1">
-						{#each selectedCategory.items as item}
-							<span class="px-2 py-0.5 bg-slate-900 text-white text-[9px] font-bold uppercase">{item}</span>
-						{/each}
-					</div>
-				</div>
-			</div>
-
-			<div class="border-t border-slate-900 pt-2 text-[9px] font-black text-slate-900 text-center uppercase tracking-widest">
-				SPEC_VERIFIED_OK
-			</div>
+	{:else}
+		<div class="w-full h-full flex items-center justify-center text-slate-400 font-mono text-xs italic">
+			[ Blank Sheet ]
 		</div>
 	{/if}
 </div>

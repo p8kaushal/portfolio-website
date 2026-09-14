@@ -12,6 +12,7 @@
 	import { playVerticalCraneDrop } from "$lib/animations/introChoreography";
 	import { SECTIONS } from "$lib/constants/assets";
 	import { ArrowRight } from "lucide-svelte";
+	import { isPaperFocused, focusedPaperType, exitPaperFocus } from "$lib/animations/paperFocusChoreography";
 	import { setTab } from "$lib/stores/navStore";
 	import { glassSettings } from "$lib/stores/glassSettings";
 
@@ -38,6 +39,100 @@
 	{#if welcomeActive}
 		<WelcomeOverlay onDescend={handleDescend} />
 	{/if}
+
+	<!-- Fixed Screen-Space Zoom Overlay -->
+	<div 
+		id="paper-zoom-overlay" 
+		class="fixed inset-0 z-50 hidden flex-col items-center justify-between p-8 bg-black/60 backdrop-blur-md pointer-events-auto"
+	>
+		<!-- Top Navigation Controls -->
+		<div class="w-full max-w-5xl flex justify-between items-center z-20">
+			<button 
+				type="button"
+				onclick={exitPaperFocus}
+				class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900/90 hover:bg-slate-800 border border-white/20 text-white font-mono text-xs font-bold shadow-2xl transition-all hover:scale-105 cursor-pointer"
+			>
+				← BACK TO DESK
+			</button>
+
+			{#if $focusedPaperType === 'resume'}
+				<a 
+					href="/resume.pdf" 
+					download
+					class="flex items-center gap-2 px-6 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-mono text-xs font-black shadow-2xl transition-all hover:scale-105"
+				>
+					📥 DOWNLOAD RESUME PDF
+				</a>
+			{/if}
+		</div>
+
+		<!-- Centered Interactive Paper Canvas -->
+		<div 
+			id="zoomed-card-content"
+			class="relative w-[90vw] max-w-2xl max-h-[78vh] overflow-y-auto bg-[#faf8f5] rounded-2xl border border-[#e2d9cc] shadow-[0_35px_90px_rgba(0,0,0,0.6)] p-10 md:p-14 text-slate-900 font-sans my-auto z-10"
+		>
+			{#if $focusedPaperType === 'skills'}
+				<!-- Detailed Skills Manifest -->
+				<div class="space-y-6 font-mono">
+					<div class="border-b-2 border-slate-900 pb-4 flex justify-between items-baseline">
+						<div>
+							<span class="text-xs font-mono font-bold uppercase tracking-widest text-slate-500">INSPECT MANIFEST</span>
+							<h1 class="text-3xl font-black text-slate-900 mt-1">TECHNICAL SKILLS</h1>
+						</div>
+						<span class="text-xs font-mono font-bold text-slate-400">PARTH KAUSHAL</span>
+					</div>
+					
+					<div class="space-y-4 font-mono text-sm">
+						<div>
+							<h3 class="font-bold text-slate-900 border-l-4 border-slate-900 pl-3 mb-2 uppercase">Frontend Architecture</h3>
+							<div class="flex flex-wrap gap-2">
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">SVELTEKIT</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">TYPESCRIPT</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">GSAP 3D</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">TAILWIND CSS</span>
+							</div>
+						</div>
+						<div>
+							<h3 class="font-bold text-slate-900 border-l-4 border-slate-900 pl-3 mb-2 uppercase">Systems & Performance</h3>
+							<div class="flex flex-wrap gap-2">
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">PERFORMANCE TUNING</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">SPATIAL UI DESIGN</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">WEBM TRANSPARENT VIDEO</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			{:else if $focusedPaperType === 'resume'}
+				<!-- Detailed Resume Credentials -->
+				<div class="space-y-6">
+					<div class="border-b-2 border-slate-900 pb-4">
+						<h1 class="text-3xl font-black text-slate-900">PARTH KAUSHAL</h1>
+						<p class="text-sm font-bold text-slate-600 mt-1">Senior Systems Architect • Executive Resume</p>
+					</div>
+
+					<div class="space-y-4 text-sm text-slate-700 font-sans leading-relaxed">
+						<div>
+							<h3 class="font-mono font-bold uppercase text-slate-900 border-b border-slate-300 pb-1 mb-2">Executive Summary</h3>
+							<p>5+ years of experience leading interactive web frontend architectures, high-performance canvas rendering pipelines, and 2D/3D spatial UI engines.</p>
+						</div>
+						<div>
+							<h3 class="font-mono font-bold uppercase text-slate-900 border-b border-slate-300 pb-1 mb-2">Career Timeline</h3>
+							<div class="space-y-2 font-mono text-xs">
+								<div>
+									<p class="font-bold text-sky-800 text-sm">NationState Simulation (2025)</p>
+									<p class="text-slate-600">Full-Stack Web Architect (Supabase & GSAP Canvas Engine)</p>
+								</div>
+								<div>
+									<p class="font-bold text-sky-800 text-sm">Resonant AI (2025–2026)</p>
+									<p class="text-slate-600">Neural Pipeline Architect (ONNX Speech Normalizers @ IIT Bombay)</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{/if}
+		</div>
+	</div>
 
 	<!-- Split Floating Apple Glass Navbar -->
 	<Navbar ready={navReady} />
