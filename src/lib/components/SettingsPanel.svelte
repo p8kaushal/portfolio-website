@@ -5,15 +5,32 @@
 
 	let { onClose = () => {} } = $props<{ onClose?: () => void }>();
 
+	function updateGlassBlur(val: number) {
+		$systemSettings.blur = val;
+		if (typeof window !== 'undefined') {
+			document.documentElement.style.setProperty('--glass-blur', `${val}px`);
+		}
+	}
+
+	function updateGlassOpacity(val: number) {
+		$systemSettings.opacity = val;
+		if (typeof window !== 'undefined') {
+			document.documentElement.style.setProperty('--glass-opacity', `${val}`);
+			document.documentElement.style.setProperty('--glass-bg', `rgba(255, 255, 255, ${val})`);
+		}
+	}
+
 	function handleReset() {
 		playSound("click");
 		resetSystemDefaults();
+		updateGlassBlur(24);
+		updateGlassOpacity(0.65);
 	}
 </script>
 
 <div
-	style="background-color: rgba(255, 255, 255, {$systemSettings.opacity}); backdrop-filter: blur({$systemSettings.blur}px); -webkit-backdrop-filter: blur({$systemSettings.blur}px);"
-	class="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-84 border border-white/90 shadow-2xl rounded-2xl p-6 text-slate-950 font-sans animate-in fade-in slide-in-from-top-4 transition-all duration-200 backdrop-blur-2xl"
+	style="background-color: var(--glass-bg, rgba(255, 255, 255, 0.65)); backdrop-filter: blur(var(--glass-blur, 24px)); -webkit-backdrop-filter: blur(var(--glass-blur, 24px));"
+	class="fixed top-20 left-1/2 -translate-x-1/2 z-50 w-84 border border-white/90 shadow-2xl rounded-2xl p-6 text-slate-950 font-sans animate-in fade-in slide-in-from-top-4 transition-all duration-200"
 >
 	<div class="flex items-center justify-between pb-3 border-b border-slate-900/10 mb-4">
 		<div class="flex items-center gap-2">
@@ -41,7 +58,8 @@
 				min="8"
 				max="40"
 				step="2"
-				bind:value={$systemSettings.blur}
+				value={$systemSettings.blur}
+				oninput={(e) => updateGlassBlur(Number((e.target as HTMLInputElement).value))}
 				class="w-full h-2 rounded-lg appearance-none cursor-pointer bg-slate-900/10 accent-sky-600 border border-white/40"
 			/>
 		</div>
@@ -57,7 +75,8 @@
 				min="0.2"
 				max="0.95"
 				step="0.05"
-				bind:value={$systemSettings.opacity}
+				value={$systemSettings.opacity}
+				oninput={(e) => updateGlassOpacity(Number((e.target as HTMLInputElement).value))}
 				class="w-full h-2 rounded-lg appearance-none cursor-pointer bg-slate-900/10 accent-sky-600 border border-white/40"
 			/>
 		</div>

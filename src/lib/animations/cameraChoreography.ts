@@ -6,6 +6,55 @@ import { playSpatialSweep } from "$lib/audio/spatialAudio";
 
 export type TabType = keyof typeof SECTIONS;
 
+export function animateSpatialCards(
+	incomingStage: HTMLElement, 
+	fromSection: string, 
+	toSection: string, 
+	speedMult: number = 1.0
+) {
+	const fromIdx = SECTIONS[fromSection]?.index ?? 1;
+	const toIdx = SECTIONS[toSection]?.index ?? 1;
+	const signedDelta = toIdx - fromIdx;
+	const absDelta = Math.abs(signedDelta);
+
+	if (absDelta === 0) return;
+
+	const cards = incomingStage.querySelectorAll('.floating-glass-card');
+	if (!cards || cards.length === 0) return;
+
+	// Signed Vector Mapping:
+	// Moving RIGHT (signedDelta > 0): Cards enter from RIGHT (+X -> 0)
+	// Moving LEFT (signedDelta < 0): Cards enter from LEFT (-X -> 0)
+	const direction = signedDelta > 0 ? 1 : -1;
+	const baseXOffset = 45 + (24 * absDelta); 
+	const initialX = direction * baseXOffset;
+
+	const bounceOvershoot = 1.0 + (0.30 * Math.log(1 + absDelta)); 
+	const duration = (0.40 + (0.07 * Math.min(absDelta, 5))) / speedMult;
+
+	// HARD RESET GSAP STATE TO OVERRIDE CSS
+	gsap.killTweensOf(cards);
+	gsap.set(cards, { clearProps: 'transform' });
+
+	gsap.fromTo(
+		cards,
+		{ 
+			x: `${initialX}px`, 
+			opacity: 0, 
+			scale: 0.94 
+		},
+		{
+			x: '0px',
+			opacity: 1,
+			scale: 1.0,
+			duration: duration,
+			stagger: 0.08,
+			ease: `back.out(${bounceOvershoot})`,
+			clearProps: 'transform' // PRESERVES CSS CLASS BACKDROP-FILTER & OPACITY
+		}
+	);
+}
+
 export function playSpatialTransition(
 	fromSection: string | undefined,
 	toSection: string,
@@ -30,7 +79,7 @@ export function playSpatialTransition(
 	gsap.set([activeStage, incomingStage], { clearProps: "transform,x,y,filter" });
 
 	// Outgoing Card Exit Slide & Fade Out
-	const outgoingCards = activeStage.querySelectorAll('.floating-glass-card');
+	const outgoingCards = activeStage.querySelectorAll('.floating-glass-card, .home-glass-card');
 	if (outgoingCards.length > 0) {
 		const exitCardX = toConfig.index > fromConfig.index ? -60 : 60;
 		gsap.to(outgoingCards, {
@@ -86,7 +135,8 @@ export function playSpatialTransition(
 	playSpatialSweep(delta, duration);
 	incomingImg.src = toConfig.image;
 
-	const stageCardEnterX = isMovingRight ? '60px' : '-60px';
+	// Execute content-aware spatial card animation on incoming stage
+	animateSpatialCards(incomingStage, fromKey, toSection, speedMult);
 
 	const tl = gsap.timeline({
 		onComplete: () => {
@@ -95,20 +145,9 @@ export function playSpatialTransition(
 			gsap.set(activeStage, { opacity: 1 });
 			gsap.set(incomingStage, { opacity: 0 });
 
-			// Unified Floating Stage Card Entry (Identical pipeline for Home and About)
-			const stageCard = document.querySelector('#stage-active .floating-glass-card');
-			if (stageCard) {
-				gsap.fromTo(
-					stageCard,
-					{ x: stageCardEnterX, opacity: 0 },
-					{
-						x: '0px',
-						opacity: 1,
-						duration: 0.50 / speedMult,
-						ease: 'power3.out',
-						clearProps: 'transform,opacity'
-					}
-				);
+			const activeStageEl = document.getElementById('stage-active');
+			if (activeStageEl) {
+				animateSpatialCards(activeStageEl, fromKey, toSection, speedMult);
 			}
 		}
 	});

@@ -1,14 +1,14 @@
 import { writable } from 'svelte/store';
 
 export interface SystemConfig {
-	blur: number; // 8px to 40px (Default: 24)
-	opacity: number; // 0.20 to 0.95 (Default: 0.65)
-	cameraSpeed: number; // 0.6x to 1.4x (Default: 1.0x - Apple Default)
-	enableMotionBlur: boolean; // true/false (Default: true)
-	enableSpatialAudio: boolean; // true/false (Default: true)
+	blur: number; // Default: 24 (px)
+	opacity: number; // Default: 0.65 (65%)
+	cameraSpeed: number; // Default: 1.0 (1.0x)
+	enableMotionBlur: boolean;
+	enableSpatialAudio: boolean;
 }
 
-export const DEFAULTS: SystemConfig = {
+export const DEFAULT_CONFIG: SystemConfig = {
 	blur: 24,
 	opacity: 0.65,
 	cameraSpeed: 1.0,
@@ -16,15 +16,30 @@ export const DEFAULTS: SystemConfig = {
 	enableSpatialAudio: true
 };
 
-export const systemSettings = writable<SystemConfig>({ ...DEFAULTS });
+export const DEFAULTS = DEFAULT_CONFIG;
+
+// Force clear stale local storage cache during development reset
+if (typeof window !== 'undefined') {
+	localStorage.removeItem('spatial_portfolio_settings');
+}
+
+export const systemSettings = writable<SystemConfig>({ ...DEFAULT_CONFIG });
 
 // Alias for backwards compatibility
 export const glassSettings = systemSettings;
 
+export function restoreDefaults() {
+	systemSettings.set({ ...DEFAULT_CONFIG });
+	if (typeof window !== 'undefined') {
+		document.documentElement.style.setProperty('--glass-blur', '24px');
+		document.documentElement.style.setProperty('--glass-opacity', '0.65');
+	}
+}
+
 export function resetSystemDefaults() {
-	systemSettings.set({ ...DEFAULTS });
+	restoreDefaults();
 }
 
 export function resetGlassDefaults() {
-	resetSystemDefaults();
+	restoreDefaults();
 }

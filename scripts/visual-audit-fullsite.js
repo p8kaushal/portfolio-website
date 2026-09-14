@@ -61,9 +61,9 @@ import path from 'path';
 			await btn.click({ force: true });
 			await page.waitForTimeout(700);
 
-			// Verify Glass backdrop blur class is applied
+			// Verify Glass backdrop blur style/class is applied
 			const hasGlass = await page.evaluate(() => {
-				return document.querySelector('.backdrop-blur-xl, .backdrop-blur-2xl, .backdrop-blur-3xl') !== null;
+				return document.querySelector('.floating-glass-card, [style*="backdrop-filter"]') !== null;
 			});
 
 			if (!hasGlass) {

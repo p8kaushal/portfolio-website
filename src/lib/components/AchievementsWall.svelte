@@ -74,7 +74,7 @@
 					type="button"
 					onmouseenter={() => playSound('click')}
 					onclick={() => { playSound('click'); activeCertificateModal = award; }}
-					class="snap-center shrink-0 w-80 text-left p-6 rounded-sm border-[10px] border-[#2a1a0e] bg-[#faf7f2] text-slate-900 shadow-[0_25px_60px_rgba(0,0,0,0.85)] hover:scale-[1.03] transition-all duration-300 cursor-pointer relative group"
+					class="floating-glass-card snap-center shrink-0 w-80 text-left p-6 rounded-sm border-[10px] border-[#2a1a0e] bg-[#faf7f2] text-slate-900 shadow-[0_25px_60px_rgba(0,0,0,0.85)] hover:scale-[1.03] transition-all duration-300 cursor-pointer relative group"
 				>
 					<div class="mb-3 flex items-center justify-between">
 						<Award class="w-8 h-8 text-amber-700" />

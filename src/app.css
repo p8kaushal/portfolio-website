@@ -1,5 +1,20 @@
 @import "tailwindcss";
 
+:root {
+  --glass-blur: 24px;
+  --glass-opacity: 0.65;
+  --glass-bg: rgba(255, 255, 255, var(--glass-opacity));
+  --glass-border: rgba(255, 255, 255, 0.8);
+}
+
+.apple-glass {
+  background-color: var(--glass-bg) !important;
+  backdrop-filter: blur(var(--glass-blur)) !important;
+  -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+}
+
 html, body {
   margin: 0;
   padding: 0;
