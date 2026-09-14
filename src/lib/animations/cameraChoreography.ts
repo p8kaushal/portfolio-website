@@ -1,5 +1,8 @@
-import { gsap } from 'gsap';
-import { SECTIONS } from '../constants/assets';
+import { gsap } from "gsap";
+import { get } from "svelte/store";
+import { SECTIONS } from "../constants/assets";
+import { systemSettings } from "$lib/stores/glassSettings";
+import { playSpatialSweep } from "$lib/audio/spatialAudio";
 
 export type TabType = keyof typeof SECTIONS;
 
@@ -8,79 +11,100 @@ export function playSpatialTransition(
 	toSection: string,
 	onCompleteCallback: () => void
 ) {
-	const fromKey = fromSection && SECTIONS[fromSection] ? fromSection : 'home';
+	const fromKey = fromSection && SECTIONS[fromSection] ? fromSection : "home";
 	const fromConfig = SECTIONS[fromKey];
-	const toConfig = SECTIONS[toSection] || SECTIONS['home'];
+	const toConfig = SECTIONS[toSection] || SECTIONS["home"];
+	const delta = Math.abs(toConfig.index - fromConfig.index);
 
-	const activeStage = document.getElementById('stage-active');
-	const incomingStage = document.getElementById('stage-incoming');
-	const incomingImg = document.getElementById('incoming-bg-img') as HTMLImageElement;
+	const activeStage = document.getElementById("stage-active");
+	const incomingStage = document.getElementById("stage-incoming");
+	const incomingImg = document.getElementById("incoming-bg-img") as HTMLImageElement;
 
 	if (!activeStage || !incomingStage || !incomingImg) {
 		onCompleteCallback();
 		return;
 	}
 
-	// 1. HARD CLEANUP: Kill running tweens and reset transforms to prevent 50-50 splits
+	// 1. HARD CLEANUP: Prevent transform & filter bleed
 	gsap.killTweensOf([activeStage, incomingStage]);
-	gsap.set([activeStage, incomingStage], { clearProps: 'transform,x,y' });
+	gsap.set([activeStage, incomingStage], { clearProps: "transform,x,y,filter" });
 
-	// Handle Desk Localized Camera Pan (Skills <-> Resume)
-	const isDeskSwitch = (fromKey === 'skills' && toSection === 'resume') || 
-	                     (fromKey === 'resume' && toSection === 'skills');
+	// 2. LOCALIZED DESK PAN (Skills <-> Resume) - ZERO BLUR
+	const isDeskSwitch = (fromKey === "skills" && toSection === "resume") || 
+	                     (fromKey === "resume" && toSection === "skills");
 
 	if (isDeskSwitch) {
-		const targetX = toSection === 'resume' ? '-28%' : '0%';
-		gsap.to(activeStage, {
-			x: targetX,
-			duration: 0.45,
-			ease: 'power2.inOut',
-			onComplete: () => {
-				onCompleteCallback();
-				gsap.set(activeStage, { clearProps: 'transform,x,y' });
-			}
-		});
-		return;
+		const deskWrapper = document.getElementById("desk-paper-wrapper");
+		if (deskWrapper) {
+			const targetX = toSection === "resume" ? "-28%" : "0%";
+			gsap.to(deskWrapper, {
+				x: targetX,
+				duration: 0.38,
+				ease: "power3.inOut",
+				onComplete: () => {
+					onCompleteCallback();
+					gsap.set(activeStage, { clearProps: "transform,x,y,filter" });
+				}
+			});
+			return;
+		}
 	}
 
-	// 2. Preload incoming backdrop image
-	incomingImg.src = toConfig.image;
+	// 3. MID-FLIGHT VELOCITY BLUR LIFECYCLE (All Other Sections)
+	const settings = get(systemSettings);
+	const speedMult = settings.cameraSpeed || 1.0;
 
-	// 3. Calculate spatial direction vector
+	let baseDuration = 0.40;
+	let panDistance = "14vw";
+
+	if (delta === 2 || delta === 3) {
+		baseDuration = 0.65;
+		panDistance = "25vw";
+	} else if (delta >= 4) {
+		baseDuration = 0.88;
+		panDistance = "40vw";
+	}
+
+	const duration = baseDuration / speedMult;
 	const isMovingRight = toConfig.index > fromConfig.index;
-	const panStart = isMovingRight ? '12vw' : '-12vw';
-	const panExit = isMovingRight ? '-12vw' : '12vw';
+
+	const enterX = isMovingRight ? panDistance : `-${panDistance}`;
+	const exitX = isMovingRight ? `-${panDistance}` : panDistance;
+
+	playSpatialSweep(delta, duration);
+	incomingImg.src = toConfig.image;
 
 	const tl = gsap.timeline({
 		onComplete: () => {
 			onCompleteCallback();
-			// Reset transforms cleanly after state swap
-			gsap.set([activeStage, incomingStage], { clearProps: 'transform,x,y' });
+			gsap.set([activeStage, incomingStage], { clearProps: "transform,x,y,filter" });
 			gsap.set(activeStage, { opacity: 1 });
 			gsap.set(incomingStage, { opacity: 0 });
 		}
 	});
 
-	// 4. Dual-layer cinematic camera dolly pan
-	tl.set(incomingStage, { x: panStart, opacity: 0 })
-		.to(activeStage, { x: panExit, opacity: 0, duration: 0.55, ease: 'power2.inOut' }, 0)
-		.to(incomingStage, { x: '0vw', opacity: 1, duration: 0.55, ease: 'power2.inOut' }, 0);
+	// Lifecycle: Crisp start -> Horizontal blur peak mid-flight -> Tear down to 0px before landing
+	tl.set(incomingStage, { x: enterX, opacity: 0, filter: "blur(0px)" }, 0)
+	  .to([activeStage, incomingStage], { filter: "blur(20px, 0px) scaleX(1.02)", duration: duration * 0.35, ease: "power2.in" }, 0.05)
+	  .to(activeStage, { x: exitX, opacity: 0, duration, ease: "expo.out" }, 0)
+	  .to(incomingStage, { x: "0vw", opacity: 1, duration, ease: "expo.out" }, 0)
+	  .to([activeStage, incomingStage], { filter: "blur(0px, 0px) scaleX(1.0)", duration: duration * 0.45, ease: "power2.out" }, duration * 0.40);
 }
 
 export function handleSectionTransition(fromSection: string | undefined, toSection: string, onCompleteCallback: () => void) {
-	playSpatialTransition(fromSection, toSection, onCompleteCallback);
+	playSpatialTransition(fromSection || "home", toSection, onCompleteCallback);
 }
 
 export function animateSpatialTransition(fromSection: string | undefined, toSection: string, onCompleteCallback: () => void) {
-	playSpatialTransition(fromSection, toSection, onCompleteCallback);
+	playSpatialTransition(fromSection || "home", toSection, onCompleteCallback);
 }
 
 export function playExperienceTransition(onCompleteCallback: () => void) {
-	playSpatialTransition(undefined, 'experience', onCompleteCallback);
+	playSpatialTransition("home", "experience", onCompleteCallback);
 }
 
 export function resetStageToHome() {
-	playSpatialTransition(undefined, 'home', () => {});
+	playSpatialTransition(undefined, "home", () => {});
 }
 
 export function animateCamera(targetTab: string, containerElement: HTMLElement, currentTab?: string) {

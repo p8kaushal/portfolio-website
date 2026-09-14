@@ -1,20 +1,19 @@
 <script lang="ts">
-	import '../app.css';
-	import { activeTab as activeSection } from '$lib/stores/navStore';
-	import Navbar from '$lib/components/Navbar.svelte';
-	import { onMount } from 'svelte';
-	import { gsap } from 'gsap';
-	import ExperienceTV from '$lib/components/ExperienceTV.svelte';
-	import ProjectsGrid from '$lib/components/ProjectsGrid.svelte';
-	import SkillsSheet from '$lib/components/SkillsSheet.svelte';
-	import ResumeSheet from '$lib/components/ResumeSheet.svelte';
-	import AchievementsWall from '$lib/components/AchievementsWall.svelte';
-	import ContactPhone from '$lib/components/ContactPhone.svelte';
-	import { SECTIONS } from '$lib/constants/assets';
-	import { ArrowRight } from 'lucide-svelte';
-	import { setTab } from '$lib/stores/navStore';
-
-	import { glassSettings, resetGlassDefaults } from '$lib/stores/glassSettings';
+	import "../app.css";
+	import { activeTab as activeSection } from "$lib/stores/navStore";
+	import Navbar from "$lib/components/Navbar.svelte";
+	import { onMount } from "svelte";
+	import { gsap } from "gsap";
+	import ExperienceTV from "$lib/components/ExperienceTV.svelte";
+	import ProjectsGrid from "$lib/components/ProjectsGrid.svelte";
+	import SkillsSheet from "$lib/components/SkillsSheet.svelte";
+	import ResumeSheet from "$lib/components/ResumeSheet.svelte";
+	import AchievementsWall from "$lib/components/AchievementsWall.svelte";
+	import ContactPhone from "$lib/components/ContactPhone.svelte";
+	import { SECTIONS } from "$lib/constants/assets";
+	import { ArrowRight } from "lucide-svelte";
+	import { setTab } from "$lib/stores/navStore";
+	import { glassSettings, resetGlassDefaults } from "$lib/stores/glassSettings";
 
 	let { children } = $props();
 
@@ -23,19 +22,19 @@
 
 	onMount(() => {
 		const tl = gsap.timeline();
-		tl.to('#welcome-overlay', {
+		tl.to("#welcome-overlay", {
 			opacity: 0,
 			duration: 0.6,
 			delay: 0.8,
-			ease: 'power2.inOut',
+			ease: "power2.inOut",
 			onComplete: () => {
 				welcomeActive = false;
 			}
 		});
 	});
 
-	let activeSectionKey = $derived(($activeSection as keyof typeof SECTIONS) || 'home');
-	let activeImageSrc = $derived(SECTIONS[activeSectionKey]?.image || '/bg-office-center.jpg');
+	let activeSectionKey = $derived(($activeSection as keyof typeof SECTIONS) || "home");
+	let activeImageSrc = $derived(SECTIONS[activeSectionKey]?.image || "/bg-office-center.jpg");
 </script>
 
 <main
@@ -66,7 +65,7 @@
 		/>
 
 		<!-- Presenter Videos (Raw Black Background at z-index: 30) -->
-		{#if $activeSection === 'home'}
+		{#if $activeSection === "home"}
 			<video
 				src="/presenter-home.webm"
 				autoplay
@@ -100,14 +99,14 @@
 					<div class="flex gap-2">
 						<button
 							type="button"
-							onclick={() => setTab('projects')}
+							onclick={() => setTab("projects")}
 							class="flex-1 py-2 px-3 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition-colors flex items-center justify-center gap-1 cursor-pointer"
 						>
 							Projects <ArrowRight class="w-3.5 h-3.5" />
 						</button>
 						<button
 							type="button"
-							onclick={() => setTab('experience')}
+							onclick={() => setTab("experience")}
 							class="flex-1 py-2 px-3 rounded-xl bg-white/80 border border-slate-300 text-slate-900 text-xs font-bold hover:bg-white transition-colors flex items-center justify-center gap-1 cursor-pointer"
 						>
 							Experience
@@ -115,7 +114,7 @@
 					</div>
 				</div>
 			</div>
-		{:else if $activeSection === 'about'}
+		{:else if $activeSection === "about"}
 			<video
 				src="/presenter-about.webm"
 				autoplay
@@ -147,17 +146,18 @@
 					</button>
 				</div>
 			</div>
-		{:else if $activeSection === 'experience'}
-			<ExperienceTV isActive={$activeSection === 'experience'} />
-		{:else if $activeSection === 'projects'}
+		{:else if $activeSection === "experience"}
+			<ExperienceTV isActive={$activeSection === "experience"} />
+		{:else if $activeSection === "projects"}
 			<ProjectsGrid />
-		{:else if $activeSection === 'skills'}
-			<SkillsSheet />
-		{:else if $activeSection === 'resume'}
-			<ResumeSheet />
-		{:else if $activeSection === 'achievements'}
+		{:else if $activeSection === "skills" || $activeSection === "resume"}
+			<div id="desk-paper-wrapper" class="absolute inset-0 w-[130%] h-full flex transition-transform duration-100 pointer-events-auto z-30" style="transform: translateX({$activeSection === 'resume' ? '-28%' : '0%'});">
+				<SkillsSheet />
+				<ResumeSheet />
+			</div>
+		{:else if $activeSection === "achievements"}
 			<AchievementsWall />
-		{:else if $activeSection === 'contact'}
+		{:else if $activeSection === "contact"}
 			<div id="contact-phone-container" class="absolute left-1/2 bottom-12 -translate-x-1/2 z-30 pointer-events-auto">
 				<ContactPhone />
 			</div>
