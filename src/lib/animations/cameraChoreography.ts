@@ -145,9 +145,20 @@ export function playSpatialTransition(
 			gsap.set(activeStage, { opacity: 1 });
 			gsap.set(incomingStage, { opacity: 0 });
 
+			const monitorRoot = document.getElementById('projects-monitor-root');
+			if (monitorRoot) {
+				gsap.set(monitorRoot, { clearProps: "transform,x,y" });
+			}
+
 			const activeStageEl = document.getElementById('stage-active');
 			if (activeStageEl) {
 				animateSpatialCards(activeStageEl, fromKey, toSection, speedMult);
+			}
+
+			if (toSection === 'projects') {
+				import('$lib/animations/monitorBootChoreography').then((m) => {
+					m.playMonitorBootAnimation();
+				});
 			}
 		}
 	});

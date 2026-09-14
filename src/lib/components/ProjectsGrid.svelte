@@ -1,134 +1,195 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { systemSettings } from '$lib/stores/glassSettings';
 	import { playSound } from '$lib/utils/soundEngine';
-	import { ExternalLink, Monitor, Cpu, X, CheckCircle2 } from 'lucide-svelte';
+	import { playMonitorBootAnimation } from '$lib/animations/monitorBootChoreography';
+	import ProjectDetailModal from './ProjectDetailModal.svelte';
 
-	const projects = [
+	let { projects = [
 		{
+			id: 'keynote-3d',
 			title: 'Keynote Studio 3D',
+			year: '2026',
+			category: 'Spatial Web',
 			tech: 'SvelteKit • GSAP • Tailwind',
-			desc: 'Cinematic Apple Keynote virtual stage portfolio engine.',
-			fullDesc: 'High-performance interactive 2D spatial canvas rendering engine with GSAP camera choreography, WebM transparent video loops, and responsive glass tablet controls.',
-			link: 'https://github.com',
-			inspectorSpecs: {
-				architecture: '4-Layer Z-Index Canvas Stack with GPU-accelerated CSS transforms',
-				performance: '60 FPS Motion Blur; 0ms dropped frames during camera pans',
-				pipeline: 'Automatic WebM green-screen chroma keyer with custom alpha mask generation'
-			}
+			tags: ['SvelteKit', 'GSAP 3D', 'WebM', 'Tailwind'],
+			thumbnailUrl: '/bg-office-center.jpg',
+			description: 'Cinematic Apple Keynote virtual stage portfolio engine with transparent WebM avatars and 2D spatial navigation.',
+			longDescription: 'High-performance interactive 2D spatial canvas rendering engine with GSAP camera choreography, WebM transparent video loops, and responsive glass tablet controls.',
+			liveUrl: 'https://keynote-studio-3d.vercel.app',
+			githubUrl: 'https://github.com/p8kaushal/portfolio-website',
+			highlights: [
+				'4-Layer Z-Index Canvas Stack with GPU acceleration',
+				'60 FPS Motion Blur with 0ms dropped frames',
+				'Automatic WebM green-screen chroma keyer'
+			]
 		},
 		{
+			id: 'spatial-ui-kit',
 			title: 'Spatial UI Kit',
+			year: '2025',
+			category: 'Canvas Engine',
 			tech: 'TypeScript • Canvas • WebGL',
-			desc: 'High-performance interactive vector device frames.',
-			fullDesc: 'Resolution-independent CSS/SVG vector device frames optimized for spatial camera transitions and zero resolution degradation.',
-			link: 'https://github.com',
-			inspectorSpecs: {
-				architecture: 'Resolution-independent SVG vector path composition engine',
-				performance: 'Sub-millisecond scaling re-renders across 4K displays',
-				pipeline: 'Automated dynamic hardware aspect-ratio anchoring math'
-			}
+			tags: ['TypeScript', 'SVG Vectors', 'Canvas2D', 'CSS3D'],
+			thumbnailUrl: '/bg-projects.jpg',
+			description: 'High-performance interactive vector device frames and resolution-independent layout anchors.',
+			longDescription: 'Resolution-independent CSS/SVG vector device frames optimized for spatial camera transitions and zero resolution degradation across 4K displays.',
+			liveUrl: 'https://spatial-ui-kit.vercel.app',
+			githubUrl: 'https://github.com/p8kaushal/spatial-ui-kit',
+			highlights: [
+				'Resolution-independent SVG vector path composition',
+				'Sub-millisecond scaling re-renders on 4K screens',
+				'Automated dynamic hardware aspect-ratio anchoring math'
+			]
 		},
 		{
+			id: 'ai-presenter-keyer',
 			title: 'AI Presenter Keyer',
+			year: '2025',
+			category: 'Video Pipeline',
 			tech: 'WebM • HTML5 • FFmpeg',
-			desc: 'Transparent video keying pipeline for real-time web avatars.',
-			fullDesc: 'Automated green-screen background removal and FFmpeg WebM encoding pipeline for real-time HTML5 video presenter avatars.',
-			link: 'https://github.com',
-			inspectorSpecs: {
-				architecture: 'Dual-pass FFmpeg chroma key filter chain (colorkey=0x00FF00:0.3:0.2)',
-				performance: 'Sub-100ms video decoding latency over HTTP/2 CDN edge',
-				pipeline: 'HTML5 Canvas2D real-time pixel shader fallback'
-			}
+			tags: ['FFmpeg', 'WebM', 'Chroma Key', 'HTML5'],
+			thumbnailUrl: '/bg-experience.jpg',
+			description: 'Transparent video keying pipeline and dual-pass alpha channel generator for real-time HTML5 presenter avatars.',
+			longDescription: 'Automated green-screen background removal and FFmpeg WebM encoding pipeline for real-time HTML5 video presenter avatars.',
+			liveUrl: 'https://ai-presenter-keyer.vercel.app',
+			githubUrl: 'https://github.com/p8kaushal/ai-presenter-keyer',
+			highlights: [
+				'Dual-pass FFmpeg chroma key filter chain',
+				'Sub-100ms video decoding latency over CDN edge',
+				'HTML5 Canvas2D real-time pixel shader fallback'
+			]
+		},
+		{
+			id: 'nation-state-sim',
+			title: 'NationState Sim',
+			year: '2025',
+			category: 'Simulations',
+			tech: 'SvelteKit • Supabase • Canvas',
+			tags: ['SvelteKit', 'Supabase', 'WebSockets', 'Canvas API'],
+			thumbnailUrl: '/bg-desk-papers.jpg',
+			description: 'Geopolitical strategy engine with real-time dynamic market simulation and multiplayer socket sync.',
+			longDescription: 'Full-stack geopolitical simulation web platform featuring real-time economic state machines and live map rendering.',
+			liveUrl: 'https://nation-state-sim.vercel.app',
+			githubUrl: 'https://github.com/p8kaushal/nation-state-sim',
+			highlights: [
+				'Event-driven Supabase Realtime socket bus',
+				'120 updates/sec server state broadcasting',
+				'Custom quadtree map spatial partitioner'
+			]
+		},
+		{
+			id: 'neural-speech-normalizer',
+			title: 'Neural Speech Normalizer',
+			year: '2025',
+			category: 'AI / Research',
+			tech: 'Python • PyTorch • ONNX',
+			tags: ['Python', 'ONNX', 'PyTorch', 'IIT Bombay'],
+			thumbnailUrl: '/bg-office-center.jpg',
+			description: 'Low-latency neural audio normalization pipeline for edge deployment developed during research fellowship.',
+			longDescription: 'Edge-optimized neural speech preprocessing pipeline converting noisy acoustic inputs into clean normalized speech features.',
+			liveUrl: 'https://neural-speech.vercel.app',
+			githubUrl: 'https://github.com/p8kaushal/neural-speech-normalizer',
+			highlights: [
+				'Quantized INT8 ONNX Runtime model export',
+				'< 15ms inference latency on ARM CPU',
+				'Automated PyTorch TorchScript JIT tracing'
+			]
+		},
+		{
+			id: 'glass-spatial-studio',
+			title: 'Glass Spatial Studio',
+			year: '2024',
+			category: 'Design Systems',
+			tech: 'CSS Custom Properties • Svelte',
+			tags: ['Svelte', 'CSS Variables', 'Apple Design', 'Backdrop Filter'],
+			thumbnailUrl: '/bg-projects.jpg',
+			description: 'Apple-inspired glassmorphism component library with reactive blur and opacity system controls.',
+			longDescription: 'Design system implementing translucent glass cards, dynamic backdrop blurs, and unified spatial state control.',
+			liveUrl: 'https://glass-spatial-studio.vercel.app',
+			githubUrl: 'https://github.com/p8kaushal/glass-spatial-studio',
+			highlights: [
+				'Unified CSS custom variable reactive binding',
+				'Zero layout thrashing hardware composite layers',
+				'Automated cross-browser backdrop-filter fallback cascade'
+			]
 		}
-	];
+	] }: { projects?: any[] } = $props();
 
-	let activeInspectorModal = $state<any | null>(null);
+	let selectedProject = $state<any | null>(null);
+
+	onMount(() => {
+		playMonitorBootAnimation();
+	});
 </script>
 
-<div
-	class="projects-station absolute left-1/2 top-[46%] -translate-x-1/2 -translate-y-1/2 w-[68%] h-[58%] z-30 rounded-xl p-6 overflow-hidden text-white pointer-events-auto flex flex-col justify-between shadow-2xl"
-	style="background-color: rgba(15, 23, 42, var(--glass-opacity)); backdrop-filter: blur(var(--glass-blur)); border: 1px solid rgba(255, 255, 255, 0.15);"
+<div 
+  id="projects-monitor-root"
+  class="absolute top-[12%] left-1/2 -translate-x-1/2 w-[76vw] max-w-[1140px] h-[60vh] max-h-[640px] rounded-[24px] bg-slate-950/90 border border-white/20 shadow-[0_32px_90px_rgba(0,0,0,0.6)] flex flex-col overflow-hidden pointer-events-auto z-20 transition-opacity duration-300 opacity-100"
+  style="background-color: rgba(255, 255, 255, {$systemSettings.opacity}); backdrop-filter: blur({$systemSettings.blur}px); -webkit-backdrop-filter: blur({$systemSettings.blur}px);"
 >
-	<div class="absolute inset-0 z-40 pointer-events-none" style="background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);"></div>
+  <!-- macOS Traffic Dots Header Bar -->
+  <div class="w-full h-11 bg-slate-950/90 border-b border-white/10 px-5 flex items-center justify-between select-none shrink-0 z-30">
+    <div class="flex items-center gap-2">
+      <span class="w-3 h-3 rounded-full bg-rose-500/90 shadow-[0_0_8px_rgba(244,63,94,0.6)]"></span>
+      <span class="w-3 h-3 rounded-full bg-amber-500/90 shadow-[0_0_8px_rgba(245,158,11,0.6)]"></span>
+      <span class="w-3 h-3 rounded-full bg-emerald-500/90 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider">DisplayPort 1.4 • 144Hz</span>
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+    </div>
+  </div>
 
-	<div class="relative z-10 flex items-center justify-between pb-3 border-b border-white/10 text-xs font-mono text-slate-300">
-		<div class="flex items-center gap-2">
-			<div class="flex items-center gap-1.5">
-				<span class="w-3 h-3 rounded-full bg-[#FF5F56] inline-block shadow-xs"></span>
-				<span class="w-3 h-3 rounded-full bg-[#FFBD2E] inline-block shadow-xs"></span>
-				<span class="w-3 h-3 rounded-full bg-[#27C93F] inline-block shadow-xs"></span>
-			</div>
-			<span class="ml-2 font-bold tracking-wider text-slate-200">STUDIO MONITOR OS</span>
-		</div>
-		<span class="font-bold text-sky-400">32" 4K DISPLAY</span>
-	</div>
+  <!-- Scrollable Projects Body Grid -->
+  <div 
+    id="projects-scroll-container"
+    class="flex-1 w-full overflow-y-auto overflow-x-hidden p-6 md:p-8 scroll-smooth pointer-events-auto z-20"
+    style="scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.2) transparent;"
+  >
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-8">
+      {#each projects as project}
+        <!-- High-Contrast Readable Card Item -->
+        <button
+          type="button"
+          onmouseenter={() => playSound('click')}
+          onclick={() => { playSound('click'); selectedProject = project; }}
+          class="project-card pointer-events-auto p-5 rounded-2xl bg-white/85 border border-white/90 shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:shadow-2xl hover:border-sky-500/60 transition-all duration-300 hover:scale-[1.015] cursor-pointer group flex flex-col justify-between text-slate-950 text-left"
+        >
+          <div>
+            <!-- Media Thumbnail Preview -->
+            <div class="relative aspect-video w-full rounded-xl overflow-hidden mb-3.5 bg-slate-950 border border-slate-200">
+              <img 
+                src={project?.thumbnailUrl || '/images/projects/placeholder.jpg'} 
+                alt={project?.title || 'Project'}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <span class="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-slate-950/90 border border-white/20 text-[10px] font-mono font-bold text-sky-400 backdrop-blur-md">
+                {project?.year ?? '2026'}
+              </span>
+            </div>
 
-	<div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-4 overflow-y-auto max-h-full no-scrollbar my-auto">
-		{#each projects as proj}
-			<button
-				type="button"
-				onmouseenter={() => playSound('click')}
-				onclick={() => { playSound('click'); activeInspectorModal = proj; }}
-				class="group text-left p-5 rounded-lg bg-white/10 backdrop-blur-xl border border-white/15 hover:bg-white/20 transition-all duration-200 flex flex-col justify-between cursor-pointer shadow-lg"
-			>
-				<div>
-					<span class="text-[10px] font-mono text-sky-400 font-bold block mb-1.5">{proj.tech}</span>
-					<h4 class="text-lg font-bold text-white group-hover:text-sky-300 transition-colors mb-2">{proj.title}</h4>
-					<p class="text-xs text-slate-200 leading-relaxed mb-4">{proj.desc}</p>
-				</div>
-				<span class="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-400 group-hover:underline transition-colors">
-					Focus Project <ExternalLink class="w-3.5 h-3.5" />
-				</span>
-			</button>
-		{/each}
-	</div>
+            <!-- Black Readable Typography -->
+            <h3 class="text-base font-black text-slate-950 group-hover:text-sky-600 transition-colors flex items-center justify-between">
+              {project?.title ?? 'Untitled Project'}
+              <span class="text-xs text-slate-500 group-hover:text-sky-600 transition-colors">↗</span>
+            </h3>
+            <p class="text-xs text-slate-800 mt-1.5 font-semibold leading-relaxed line-clamp-2">
+              {project?.description ?? ''}
+            </p>
+          </div>
 
-	<!-- Interactive Studio Monitor Device Inspector Modal -->
-	{#if activeInspectorModal}
-		<div class="absolute inset-0 z-50 bg-slate-900/70 backdrop-blur-2xl p-6 flex flex-col justify-between text-white border border-slate-700/50">
-			<div>
-				<div class="flex items-center justify-between pb-3 border-b border-slate-800">
-					<div class="flex items-center gap-2">
-						<Cpu class="w-5 h-5 text-emerald-400" />
-						<h3 class="text-lg font-bold text-white">{activeInspectorModal.title}</h3>
-					</div>
-					<button
-						type="button"
-						onclick={() => { playSound('click'); activeInspectorModal = null; }}
-						class="p-1.5 rounded bg-slate-900/80 hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
-					>
-						<X class="w-5 h-5" />
-					</button>
-				</div>
+          <div class="mt-4 pt-3 border-t border-slate-200/80 flex flex-wrap gap-1.5">
+            {#each (project?.tags ?? []) as tag}
+              <span class="text-[10px] font-mono font-bold px-2.5 py-0.5 bg-slate-900 text-white rounded-md">{tag}</span>
+            {/each}
+          </div>
+        </button>
+      {/each}
+    </div>
+  </div>
 
-				<div class="mt-4 space-y-4 font-mono text-xs">
-					<div class="p-3 rounded bg-slate-950/80 border border-slate-800">
-						<span class="text-[10px] text-emerald-400 font-bold uppercase block mb-1">Architecture Specification</span>
-						<p class="text-slate-200">{activeInspectorModal.inspectorSpecs.architecture}</p>
-					</div>
-
-					<div class="p-3 rounded bg-slate-950/80 border border-slate-800">
-						<span class="text-[10px] text-emerald-400 font-bold uppercase block mb-1">Performance Benchmarks</span>
-						<p class="text-slate-200">{activeInspectorModal.inspectorSpecs.performance}</p>
-					</div>
-
-					<div class="p-3 rounded bg-slate-950/80 border border-slate-800">
-						<span class="text-[10px] text-emerald-400 font-bold uppercase block mb-1">Build Pipeline</span>
-						<p class="text-slate-200">{activeInspectorModal.inspectorSpecs.pipeline}</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="flex items-center justify-between pt-3 border-t border-slate-800">
-				<span class="text-[10px] font-mono text-slate-500 uppercase">INSPECTOR_ACTIVE</span>
-				<a
-					href={activeInspectorModal.link}
-					target="_blank"
-					rel="noreferrer"
-					class="px-4 py-2 rounded bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold font-mono text-xs flex items-center gap-2 transition-colors"
-				>
-					<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> Launch GitHub Repository <ExternalLink class="w-3.5 h-3.5" />
-				</a>
-			</div>
-		</div>
-	{/if}
+  {#if selectedProject}
+    <ProjectDetailModal project={selectedProject} onClose={() => (selectedProject = null)} />
+  {/if}
 </div>
