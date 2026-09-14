@@ -63,10 +63,12 @@
 				class="absolute left-1/2 bottom-0 -translate-x-1/2 h-[82vh] w-auto object-contain z-30 pointer-events-none"
 			></video>
 
-			<div class="card-overlay absolute inset-0 z-30 pointer-events-auto hidden sm:block">
+			<div id="home-stage-root" class="floating-glass-card absolute inset-0 z-30 flex items-center justify-between px-10 md:px-16 pointer-events-none hidden sm:flex">
+				<!-- Left Glass Card -->
 				<div
+					id="home-card-left"
 					style="background-color: rgba(255, 255, 255, {$glassSettings.opacity}); backdrop-filter: blur({$glassSettings.blur}px); -webkit-backdrop-filter: blur({$glassSettings.blur}px);"
-					class="home-glass-card border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-6 text-slate-900 absolute left-10 top-1/2 -translate-y-1/2 w-80 transition-all duration-200 backdrop-blur-2xl"
+					class="home-glass-card pointer-events-auto border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-6 text-slate-900 w-80 transition-all duration-200 backdrop-blur-2xl"
 				>
 					<span class="inline-block px-3 py-1 rounded-full bg-sky-500/10 text-sky-700 text-xs font-mono font-semibold uppercase tracking-wider mb-2">STAGE 01</span>
 					<h1 class="text-2xl font-black text-slate-900 mb-1">PARTH KAUSHAL</h1>
@@ -76,9 +78,13 @@
 					</div>
 				</div>
 
+				<!-- Center Presenter Slot Reserved -->
+
+				<!-- Right Glass Card -->
 				<div
+					id="home-card-right"
 					style="background-color: rgba(255, 255, 255, {$glassSettings.opacity}); backdrop-filter: blur({$glassSettings.blur}px); -webkit-backdrop-filter: blur({$glassSettings.blur}px);"
-					class="home-glass-card border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-6 text-slate-900 absolute right-10 top-1/2 -translate-y-1/2 w-80 transition-all duration-200 backdrop-blur-2xl"
+					class="home-glass-card pointer-events-auto border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-6 text-slate-900 w-80 transition-all duration-200 backdrop-blur-2xl"
 				>
 					<h3 class="text-sm font-bold uppercase tracking-wider text-slate-600 mb-2">Executive Overview</h3>
 					<p class="text-xs text-slate-700 leading-relaxed mb-4">
@@ -115,7 +121,7 @@
 			<div class="card-overlay absolute inset-0 z-30 flex items-center justify-end p-6 pointer-events-auto">
 				<div
 					style="background-color: rgba(255, 255, 255, {$glassSettings.opacity}); backdrop-filter: blur({$glassSettings.blur}px); -webkit-backdrop-filter: blur({$glassSettings.blur}px);"
-					class="border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-8 text-slate-900 max-w-xl mr-[6%] transition-all duration-200 backdrop-blur-2xl"
+					class="floating-glass-card border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-8 text-slate-900 max-w-xl mr-[6%] transition-all duration-200 backdrop-blur-2xl"
 				>
 					<span class="inline-block px-3.5 py-1 rounded-full bg-purple-500/10 text-purple-700 text-xs font-semibold uppercase tracking-wider mb-3">About Presenter</span>
 					<h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">Architecting Spatial Web</h2>

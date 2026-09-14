@@ -29,6 +29,18 @@ export function playSpatialTransition(
 	gsap.killTweensOf([activeStage, incomingStage]);
 	gsap.set([activeStage, incomingStage], { clearProps: "transform,x,y,filter" });
 
+	// Outgoing Card Exit Slide & Fade Out
+	const outgoingCards = activeStage.querySelectorAll('.floating-glass-card');
+	if (outgoingCards.length > 0) {
+		const exitCardX = toConfig.index > fromConfig.index ? -60 : 60;
+		gsap.to(outgoingCards, {
+			x: exitCardX,
+			opacity: 0,
+			duration: 0.25,
+			ease: "power2.in"
+		});
+	}
+
 	// 2. LOCALIZED DESK PAN (Skills <-> Resume) - ZERO BLUR
 	const isDeskSwitch = (fromKey === "skills" && toSection === "resume") || 
 	                     (fromKey === "resume" && toSection === "skills");
@@ -74,12 +86,30 @@ export function playSpatialTransition(
 	playSpatialSweep(delta, duration);
 	incomingImg.src = toConfig.image;
 
+	const stageCardEnterX = isMovingRight ? '60px' : '-60px';
+
 	const tl = gsap.timeline({
 		onComplete: () => {
 			onCompleteCallback();
 			gsap.set([activeStage, incomingStage], { clearProps: "transform,x,y,filter" });
 			gsap.set(activeStage, { opacity: 1 });
 			gsap.set(incomingStage, { opacity: 0 });
+
+			// Unified Floating Stage Card Entry (Identical pipeline for Home and About)
+			const stageCard = document.querySelector('#stage-active .floating-glass-card');
+			if (stageCard) {
+				gsap.fromTo(
+					stageCard,
+					{ x: stageCardEnterX, opacity: 0 },
+					{
+						x: '0px',
+						opacity: 1,
+						duration: 0.50 / speedMult,
+						ease: 'power3.out',
+						clearProps: 'transform,opacity'
+					}
+				);
+			}
 		}
 	});
 
