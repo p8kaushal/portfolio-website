@@ -31,7 +31,7 @@ export function enterPaperFocus(type: "skills" | "resume") {
   // 2. Reveal Fixed Screen-Space Zoom Overlay
   if (focusModal) {
     focusModal.style.display = "flex";
-    const cardContent = focusModal.querySelector("#zoomed-card-content");
+    const cardContent = focusModal.querySelector("#zoomed-paper-card");
 
     gsap.killTweensOf([focusModal, cardContent]);
     gsap.fromTo(
@@ -78,7 +78,7 @@ export function exitPaperFocus() {
 
   // 2. Hide Zoom Overlay
   if (focusModal) {
-    const cardContent = focusModal.querySelector("#zoomed-card-content");
+    const cardContent = focusModal.querySelector("#zoomed-paper-card");
     gsap.to(cardContent, { scale: 0.85, opacity: 0, duration: 0.3 });
     gsap.to(focusModal, {
       opacity: 0,

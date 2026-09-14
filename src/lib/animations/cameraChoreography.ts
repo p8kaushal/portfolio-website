@@ -20,7 +20,10 @@ export function animateSpatialCards(
 	if (absDelta === 0) return;
 
 	const cards = incomingStage.querySelectorAll('.floating-glass-card');
-	if (!cards || cards.length === 0) return;
+	if (!cards || cards.length === 0) {
+		gsap.to(incomingStage, { opacity: 1, duration: 0.3 });
+		return;
+	}
 
 	// Signed Vector Mapping:
 	// Moving RIGHT (signedDelta > 0): Cards enter from RIGHT (+X -> 0)
@@ -50,7 +53,7 @@ export function animateSpatialCards(
 			duration: duration,
 			stagger: 0.08,
 			ease: `back.out(${bounceOvershoot})`,
-			clearProps: 'transform' // PRESERVES CSS CLASS BACKDROP-FILTER & OPACITY
+			clearProps: 'transform,opacity,scale' // PRESERVES CSS CLASS BACKDROP-FILTER & OPACITY
 		}
 	);
 }
@@ -159,6 +162,19 @@ export function playSpatialTransition(
 				import('$lib/animations/monitorBootChoreography').then((m) => {
 					m.playMonitorBootAnimation();
 				});
+			}
+
+			if (toSection === 'achievements') {
+				const achStage = document.getElementById('achievements-stage-root');
+				if (achStage) {
+					gsap.killTweensOf(achStage);
+					gsap.set(achStage, { clearProps: 'transform', opacity: 1, visibility: 'visible' });
+					gsap.fromTo(
+						achStage,
+						{ opacity: 0, y: 20 },
+						{ opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+					);
+				}
 			}
 		}
 	});

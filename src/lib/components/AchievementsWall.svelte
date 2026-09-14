@@ -1,124 +1,166 @@
 <script lang="ts">
+	import { onMount, onDestroy } from 'svelte';
+	import { fly, fade } from 'svelte/transition';
+	import { cubicOut } from 'svelte/easing';
 	import { playSound } from '$lib/utils/soundEngine';
-	import { Award, ChevronLeft, ChevronRight, ShieldCheck, X } from 'lucide-svelte';
+	import { openCertificateFocus } from '$lib/animations/certificateFocusChoreography';
 
-	let carouselRef = $state<HTMLElement | null>(null);
-	let activeCertificateModal = $state<any | null>(null);
-
-	const awards = [
+	let { achievements = [
 		{
-			title: 'Awwwards Site of the Day',
+			id: 'awwwards-sotd',
+			title: 'Site of the Day',
+			issuer: 'Awwwards International',
 			year: '2025',
-			org: 'Awwwards International',
-			details: 'Recognized for outstanding web design, interactive spatial UI, and sub-second performance.',
-			seal: 'GOLD CERTIFICATE #2025-AWD-01',
-			verification: 'Verified by International Jury Panel'
+			badge: 'GOLD EXCELLENCE',
+			description: 'Recognized for outstanding WebGL spatial design and interactive UI mechanics.',
+			details: 'Awarded by an international panel of 12 judges evaluating visual design, performance, and technical execution.',
+			certificateCode: 'AWW-2025-9941'
 		},
 		{
+			id: 'fwa-month',
 			title: 'FWA of the Month',
+			issuer: 'Favorite Website Awards',
 			year: '2024',
-			org: 'Favorite Website Awards',
-			details: 'Awarded for pioneering GSAP spatial camera transitions and 4-layer composition engines.',
-			seal: 'GOLD CERTIFICATE #2024-FWA-04',
-			verification: 'Verified by FWA Official Board'
+			badge: 'TOP INNOVATION',
+			description: 'Awarded for pioneering GSAP spatial camera transitions and composition engines.',
+			details: 'Featured globally on FWA showcase for pushing boundaries in browser-based 3D spatial navigation.',
+			certificateCode: 'FWA-MONTH-8820'
 		},
 		{
+			id: 'apple-design-nominee',
 			title: 'Apple Design Award Nominee',
+			issuer: 'WWDC Developer Showcase',
 			year: '2024',
-			org: 'WWDC Developer Showcase',
-			details: 'Nominated for Apple Keynote-inspired human-scale portfolio interface.',
-			seal: 'FINALIST HONORS #WWDC-2024',
-			verification: 'Verified by WWDC Developer Showcase'
-		},
-		{
-			title: 'Best Web Animation',
-			year: '2023',
-			org: 'CSS Design Awards',
-			details: 'Honored for 60 FPS motion-blur camera transitions.',
-			seal: 'SPECIAL KUDOS #2023-CSSDA',
-			verification: 'Verified by CSS Design Awards Committee'
+			badge: 'FINALIST',
+			description: 'Nominated for Apple Keynote-inspired human scale portfolio interface design.',
+			details: 'Selected as a finalist in Spatial Computing & Interactive UI category during annual developer honors.',
+			certificateCode: 'ADA-2024-0104'
 		}
-	];
+	] }: { achievements?: any[] } = $props();
 
-	function scrollCarousel(direction: 'left' | 'right') {
+	let activeIndex = $state(0);
+	let direction = $state(1); // 1 = right, -1 = left
+	let autoplayTimer = $state<any | null>(null);
+	let isHovered = $state(false);
+
+	function nextSlide() {
+		if (!achievements?.length) return;
 		playSound('click');
-		if (carouselRef) {
-			const scrollAmount = direction === 'left' ? -320 : 320;
-			carouselRef.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+		direction = 1;
+		activeIndex = (activeIndex + 1) % achievements.length;
+	}
+
+	function prevSlide() {
+		if (!achievements?.length) return;
+		playSound('click');
+		direction = -1;
+		activeIndex = (activeIndex - 1 + achievements.length) % achievements.length;
+	}
+
+	function startAutoplay() {
+		stopAutoplay();
+		autoplayTimer = setInterval(() => {
+			if (!isHovered && achievements?.length) nextSlide();
+		}, 4500);
+	}
+
+	function stopAutoplay() {
+		if (autoplayTimer) {
+			clearInterval(autoplayTimer);
+			autoplayTimer = null;
 		}
 	}
+
+	onMount(() => startAutoplay());
+	onDestroy(() => stopAutoplay());
 </script>
 
-<div class="card-overlay absolute inset-0 z-30 flex items-center justify-center p-6 pointer-events-auto">
-	<div class="relative w-full max-w-5xl">
-		<button
-			type="button"
-			onclick={() => scrollCarousel('left')}
-			class="absolute -left-6 top-1/2 -translate-y-1/2 z-40 p-3 rounded-full backdrop-blur-xl bg-slate-900/80 border border-white/20 text-white shadow-2xl hover:bg-slate-800 transition-all cursor-pointer"
-			aria-label="Scroll Carousel Left"
-		>
-			<ChevronLeft class="w-6 h-6" />
-		</button>
-		<button
-			type="button"
-			onclick={() => scrollCarousel('right')}
-			class="absolute -right-6 top-1/2 -translate-y-1/2 z-40 p-3 rounded-full backdrop-blur-xl bg-slate-900/80 border border-white/20 text-white shadow-2xl hover:bg-slate-800 transition-all cursor-pointer"
-			aria-label="Scroll Carousel Right"
-		>
-			<ChevronRight class="w-6 h-6" />
-		</button>
+<div 
+  id="achievements-stage-root"
+  role="region"
+  aria-label="Achievements Hall of Fame"
+  class="relative w-full h-full flex flex-col items-center justify-center p-6 z-30 pointer-events-auto select-none"
+  onmouseenter={() => (isHovered = true)}
+  onmouseleave={() => (isHovered = false)}
+>
+  <!-- Main Carousel Outer Frame (Header Removed) -->
+  <div class="relative w-full max-w-2xl h-[380px] flex items-center justify-center">
+    
+    <!-- Prev Arrow -->
+    <button 
+      type="button"
+      onclick={prevSlide}
+      aria-label="Previous Certificate"
+      class="absolute left-0 z-40 w-12 h-12 rounded-full bg-slate-950/90 hover:bg-slate-900 border border-white/20 text-white font-mono text-lg font-bold shadow-2xl flex items-center justify-center backdrop-blur-md transition-all hover:scale-110 active:scale-95 cursor-pointer"
+    >
+      ←
+    </button>
 
-		<div bind:this={carouselRef} class="flex gap-8 overflow-x-auto snap-x scrollbar-none p-6">
-			{#each awards as award}
-				<button
-					type="button"
-					onmouseenter={() => playSound('click')}
-					onclick={() => { playSound('click'); activeCertificateModal = award; }}
-					class="floating-glass-card snap-center shrink-0 w-80 text-left p-6 rounded-sm border-[10px] border-[#2a1a0e] bg-[#faf7f2] text-slate-900 shadow-[0_25px_60px_rgba(0,0,0,0.85)] hover:scale-[1.03] transition-all duration-300 cursor-pointer relative group"
-				>
-					<div class="mb-3 flex items-center justify-between">
-						<Award class="w-8 h-8 text-amber-700" />
-						<span class="bg-amber-500/15 text-amber-800 border border-amber-500/40 text-[10px] font-mono px-2.5 py-1 rounded-full font-bold">
-							{award.year}
-						</span>
-					</div>
-					<h4 class="text-xl font-serif font-bold text-slate-900 group-hover:text-amber-800 transition-colors mb-1">{award.title}</h4>
-					<p class="text-xs font-serif text-slate-600 mb-3">{award.org}</p>
-					<p class="text-[11px] font-serif text-slate-700 leading-relaxed line-clamp-2">{award.details}</p>
-				</button>
-			{/each}
-		</div>
-	</div>
+    <!-- Center Certificate Frame (No Peek Cards) -->
+    <div class="relative w-full h-full flex items-center justify-center px-14 overflow-hidden">
+      {#key activeIndex}
+        <button 
+          type="button"
+          id="certificate-frame-current"
+          in:fly={{ x: direction * 40, duration: 350, easing: cubicOut }}
+          out:fade={{ duration: 150 }}
+          onclick={() => { playSound('click'); openCertificateFocus(achievements[activeIndex]); }}
+          class="floating-glass-card absolute w-full max-w-[540px] bg-[#1a120b] border-[8px] border-[#2d1e12] rounded-2xl shadow-[0_30px_90px_rgba(0,0,0,0.8)] p-5 cursor-pointer transition-all duration-300 hover:scale-[1.015] z-30 group text-left outline outline-1 outline-[#d4af37]/40 pointer-events-auto"
+        >
+          <!-- Parchment Inner Matting -->
+          <div class="bg-[#f4efe6] p-6 rounded-lg border border-[#e2d7c5] shadow-inner flex flex-col justify-between h-full relative">
+            <div class="space-y-3 text-slate-950">
+              <div class="flex justify-between items-start border-b-2 border-amber-900/30 pb-3">
+                <div>
+                  <span class="text-[9px] font-mono font-bold tracking-widest text-amber-900 uppercase">OFFICIAL CERTIFICATE OF ACHIEVEMENT</span>
+                  <h3 class="text-2xl font-black text-slate-950 font-serif mt-0.5">{achievements[activeIndex].title}</h3>
+                </div>
+                <span class="px-2.5 py-1 bg-amber-900/10 border border-amber-900/30 text-amber-950 font-mono text-[10px] font-bold rounded">
+                  {achievements[activeIndex].year}
+                </span>
+              </div>
 
-	<!-- Interactive Framed Certificate Inspection Modal -->
-	{#if activeCertificateModal}
-		<div class="fixed inset-0 z-50 bg-black/40 backdrop-blur-3xl flex items-center justify-center p-6 pointer-events-auto">
-			<div class="relative w-full max-w-lg rounded-sm border-[12px] border-[#2a1a0e] bg-[#faf7f2] p-8 text-slate-900 shadow-[0_25px_60px_rgba(0,0,0,0.85)] font-serif">
-				<button
-					type="button"
-					onclick={() => { playSound('click'); activeCertificateModal = null; }}
-					class="absolute top-3 right-3 p-1.5 rounded-full bg-amber-900/10 hover:bg-amber-900/20 text-slate-800 transition-colors cursor-pointer"
-				>
-					<X class="w-5 h-5" />
-				</button>
+              <p class="text-xs text-slate-900 font-semibold leading-relaxed font-sans">
+                {achievements[activeIndex].description}
+              </p>
 
-				<div class="text-center">
-					<div class="w-12 h-12 rounded-full bg-amber-500/20 border-2 border-amber-600 mx-auto flex items-center justify-center mb-3">
-						<Award class="w-6 h-6 text-amber-700" />
-					</div>
-					<span class="font-mono text-[10px] font-bold text-amber-800 uppercase tracking-widest block mb-1">
-						{activeCertificateModal.seal}
-					</span>
-					<h3 class="text-2xl font-serif font-bold text-slate-900 mb-1">{activeCertificateModal.title}</h3>
-					<p class="text-xs font-serif font-bold text-amber-900 uppercase mb-4">{activeCertificateModal.org} • {activeCertificateModal.year}</p>
-					<p class="text-xs font-serif text-slate-700 leading-relaxed italic mb-6">{activeCertificateModal.details}</p>
+              <div class="pt-2 text-[11px] font-mono font-bold text-slate-600 flex justify-between items-center">
+                <span>ISSUED BY: {achievements[activeIndex].issuer}</span>
+                <span class="text-amber-900 font-bold">[ CLICK TO ZOOM & INSPECT 🔍 ]</span>
+              </div>
+            </div>
 
-					<div class="pt-4 border-t border-amber-900/20 flex items-center justify-between text-[10px] font-mono text-slate-600">
-						<span class="flex items-center gap-1 font-bold text-emerald-700"><ShieldCheck class="w-4 h-4" /> OFFICIAL SEAL</span>
-						<span>{activeCertificateModal.verification}</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	{/if}
+            <!-- Wax Seal -->
+            <div class="absolute bottom-4 right-4 w-11 h-11 rounded-full bg-gradient-to-tr from-amber-700 via-amber-400 to-yellow-600 shadow-xl flex flex-col items-center justify-center border-2 border-amber-200">
+              <span class="text-[8px] font-mono font-black text-slate-950 uppercase tracking-tighter">VERIFIED</span>
+            </div>
+          </div>
+        </button>
+      {/key}
+    </div>
+
+    <!-- Next Arrow -->
+    <button 
+      type="button"
+      onclick={nextSlide}
+      aria-label="Next Certificate"
+      class="absolute right-0 z-40 w-12 h-12 rounded-full bg-slate-950/90 hover:bg-slate-900 border border-white/20 text-white font-mono text-lg font-bold shadow-2xl flex items-center justify-center backdrop-blur-md transition-all hover:scale-110 active:scale-95 cursor-pointer"
+    >
+      →
+    </button>
+  </div>
+
+  <!-- Indicator Dots -->
+  <div class="flex items-center gap-2 mt-6">
+    {#each achievements as _, i}
+      <button 
+        type="button"
+        onclick={() => { playSound('click'); direction = i > activeIndex ? 1 : -1; activeIndex = i; }}
+        aria-label={`Go to slide ${i + 1}`}
+        class={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+          i === activeIndex ? 'w-8 bg-amber-400 shadow-[0_0_10px_rgba(251,191,36,0.8)]' : 'w-2 bg-white/30 hover:bg-white/60'
+        }`}
+      ></button>
+    {/each}
+  </div>
 </div>

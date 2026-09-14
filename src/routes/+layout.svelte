@@ -13,6 +13,7 @@
 	import { SECTIONS } from "$lib/constants/assets";
 	import { ArrowRight } from "lucide-svelte";
 	import { isPaperFocused, focusedPaperType, exitPaperFocus } from "$lib/animations/paperFocusChoreography";
+	import { activeFocusedCertificate, closeCertificateFocus } from "$lib/animations/certificateFocusChoreography";
 	import { setTab } from "$lib/stores/navStore";
 	import { glassSettings } from "$lib/stores/glassSettings";
 
@@ -43,14 +44,19 @@
 	<!-- Fixed Screen-Space Zoom Overlay -->
 	<div 
 		id="paper-zoom-overlay" 
-		class="fixed inset-0 z-50 hidden flex-col items-center justify-between p-8 bg-black/60 backdrop-blur-md pointer-events-auto"
+		role="dialog"
+		aria-label="Paper Focus Inspection"
+		tabindex="-1"
+		class="fixed inset-0 z-50 hidden flex-col items-center justify-between p-8 bg-black/60 backdrop-blur-md pointer-events-auto select-none"
+		onclick={(e) => { if (e.target === e.currentTarget) exitPaperFocus(); }}
+		onkeydown={(e) => { if (e.key === 'Escape') exitPaperFocus(); }}
 	>
 		<!-- Top Navigation Controls -->
-		<div class="w-full max-w-5xl flex justify-between items-center z-20">
+		<div class="w-full max-w-5xl flex justify-between items-center z-20 pointer-events-auto">
 			<button 
 				type="button"
 				onclick={exitPaperFocus}
-				class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900/90 hover:bg-slate-800 border border-white/20 text-white font-mono text-xs font-bold shadow-2xl transition-all hover:scale-105 cursor-pointer"
+				class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900/90 hover:bg-slate-800 border border-white/20 text-white font-mono text-xs font-bold shadow-2xl transition-all hover:scale-105 active:scale-95 cursor-pointer"
 			>
 				← BACK TO DESK
 			</button>
@@ -59,7 +65,7 @@
 				<a 
 					href="/resume.pdf" 
 					download
-					class="flex items-center gap-2 px-6 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-mono text-xs font-black shadow-2xl transition-all hover:scale-105"
+					class="flex items-center gap-2 px-6 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-mono text-xs font-black shadow-2xl transition-all hover:scale-105 active:scale-95 cursor-pointer"
 				>
 					📥 DOWNLOAD RESUME PDF
 				</a>
@@ -68,8 +74,8 @@
 
 		<!-- Centered Interactive Paper Canvas -->
 		<div 
-			id="zoomed-card-content"
-			class="relative w-[90vw] max-w-2xl max-h-[78vh] overflow-y-auto bg-[#faf8f5] rounded-2xl border border-[#e2d9cc] shadow-[0_35px_90px_rgba(0,0,0,0.6)] p-10 md:p-14 text-slate-900 font-sans my-auto z-10"
+			id="zoomed-paper-card"
+			class="relative w-[90vw] max-w-2xl max-h-[78vh] overflow-y-auto bg-[#faf8f5] rounded-2xl border border-[#e2d9cc] shadow-[0_35px_90px_rgba(0,0,0,0.6)] p-10 md:p-14 text-slate-900 font-sans my-auto z-10 pointer-events-auto"
 		>
 			{#if $focusedPaperType === 'skills'}
 				<!-- Detailed Skills Manifest -->
@@ -134,17 +140,105 @@
 		</div>
 	</div>
 
+	<!-- Certificate Focus Inspection Overlay -->
+	{#if $activeFocusedCertificate}
+		<div 
+			id="certificate-focus-overlay"
+			class="fixed inset-0 z-50 flex items-center justify-center p-8 bg-black/60 backdrop-blur-xl pointer-events-auto"
+		>
+			<!-- Top Nav Controls -->
+			<div class="absolute top-8 left-12 right-12 flex justify-between items-center z-20 pointer-events-auto">
+				<button 
+					type="button"
+					onclick={closeCertificateFocus}
+					class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-950/90 hover:bg-slate-900 border border-white/20 text-white font-mono text-xs font-bold shadow-2xl transition-all hover:scale-105 cursor-pointer"
+				>
+					← BACK TO WALL
+				</button>
+
+				<span class="px-3.5 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/30 text-[10px] font-mono font-bold text-amber-300 uppercase tracking-wider backdrop-blur-md">
+					VERIFIED CERTIFICATE // ID: {$activeFocusedCertificate.certificateCode}
+				</span>
+			</div>
+
+			<!-- Centered Split Inspector (Left Certificate, Right Glass Details) -->
+			<div class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-12 gap-8 items-center z-10 my-auto">
+				
+				<!-- LEFT: Zoomed Certificate Sheet with 3D Tilt -->
+				<div 
+					id="zoomed-certificate-sheet"
+					class="md:col-span-7 bg-[#1a120b] border-[8px] border-[#2d1e12] rounded-2xl shadow-[0_35px_90px_rgba(0,0,0,0.8)] p-6"
+				>
+					<div class="bg-[#f4efe6] p-8 rounded-lg border border-[#e2d7c5] shadow-inner flex flex-col justify-between space-y-6">
+						<div class="space-y-4 text-slate-950">
+							<div class="flex justify-between items-start border-b-2 border-amber-900/30 pb-4">
+								<div>
+									<span class="text-[10px] font-mono font-bold tracking-widest text-amber-900 uppercase">OFFICIAL CERTIFICATE OF ACHIEVEMENT</span>
+									<h1 class="text-3xl font-black text-slate-950 font-serif mt-1">{$activeFocusedCertificate.title}</h1>
+								</div>
+								<span class="px-3 py-1 bg-amber-900/10 border border-amber-900/30 text-amber-950 font-mono text-xs font-bold rounded">
+									{$activeFocusedCertificate.year}
+								</span>
+							</div>
+
+							<p class="text-xs text-slate-800 font-medium leading-relaxed font-sans">
+								{$activeFocusedCertificate.description}
+							</p>
+
+							<div class="pt-2 text-xs font-mono font-bold text-slate-600">
+								ISSUED BY: {$activeFocusedCertificate.issuer}
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- RIGHT: High-Contrast Ultra-Legible Frosted Glass Card -->
+				<div 
+					class="md:col-span-5 p-8 rounded-3xl border border-white/90 bg-white/95 text-slate-950 shadow-[0_25px_60px_rgba(0,0,0,0.5)] flex flex-col justify-between space-y-6"
+					style="backdrop-filter: blur({$glassSettings.blur}px);"
+				>
+					<div>
+						<span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-[10px] font-mono font-bold text-amber-900 uppercase tracking-widest">
+							{$activeFocusedCertificate.badge}
+						</span>
+						
+						<!-- High-Contrast Black Title & Subtitle -->
+						<h2 class="text-3xl font-black text-slate-950 mt-3 font-sans">Executive Summary</h2>
+						<p class="text-xs text-slate-800 mt-2 leading-relaxed font-semibold">
+							{$activeFocusedCertificate.details}
+						</p>
+					</div>
+
+					<div class="pt-4 border-t border-slate-200 flex justify-between items-center text-xs font-mono">
+						<span class="text-slate-600 font-bold">STATUS: VERIFIED</span>
+						<button 
+							type="button"
+							onclick={closeCertificateFocus}
+							class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-mono text-xs font-bold shadow-lg transition-all hover:scale-105 cursor-pointer"
+						>
+							DONE INSPECTING
+						</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	{/if}
+
 	<!-- Split Floating Apple Glass Navbar -->
 	<Navbar ready={navReady} />
 
 	<!-- Active Stage Layer -->
 	<div id="stage-active" class="absolute inset-0 w-full h-full z-10 pointer-events-auto overflow-hidden bg-black">
-		<img
-			id="active-bg-img"
-			src={activeImageSrc}
-			class="w-full h-full object-cover"
-			alt="Stage Background"
-		/>
+		<!-- Z-INDEX 0: BACKGROUND ROOM & MACRO WALL IMAGES -->
+		<div id="bg-image-layer" class="absolute inset-0 z-0 pointer-events-none">
+			<img
+				id="active-bg-img"
+				src={activeImageSrc}
+				class="w-full h-full object-cover transition-opacity duration-700"
+				alt="Stage Background"
+			/>
+		</div>
 
 		<!-- Presenter Videos (Raw Black Background at z-index: 30) -->
 		{#if $activeSection === "home"}
