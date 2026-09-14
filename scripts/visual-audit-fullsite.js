@@ -13,7 +13,13 @@ import path from 'path';
 	await page.goto('http://localhost:5173', { waitUntil: 'networkidle' });
 
 	console.log('[AUDIT] Waiting for Welcome Sequence to complete...');
-	await page.waitForTimeout(1800); // Wait for Welcome animation to complete
+	const isWelcomeVisible = await page.isVisible('text=DESCEND INTO STUDIO');
+	if (isWelcomeVisible) {
+		await page.click('text=DESCEND INTO STUDIO');
+		await page.waitForTimeout(1400);
+	} else {
+		await page.waitForTimeout(1800);
+	}
 
 	// 1. Assert Navbar Pointer Events & Text Color
 	const navPointerEvents = await page.evaluate(() => {

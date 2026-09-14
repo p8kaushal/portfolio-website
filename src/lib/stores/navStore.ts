@@ -5,6 +5,7 @@ export type TabType = 'home' | 'about' | 'experience' | 'projects' | 'skills' | 
 export const activeTab = writable<TabType>('home');
 export const isMuted = writable<boolean>(true);
 export const isTransitioning = writable<boolean>(false);
+export const isWelcomeCompleted = writable<boolean>(false);
 
 export const setTab = (tab: TabType) => {
 	activeTab.set(tab);

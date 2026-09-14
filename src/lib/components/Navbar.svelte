@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { activeTab, isMuted, setTab, toggleMute, type TabType } from '$lib/stores/navStore';
-	import { glassSettings } from '$lib/stores/glassSettings';
+	import { activeTab, isMuted, setTab, toggleMute, isWelcomeCompleted, type TabType } from '$lib/stores/navStore';
+	import { systemSettings } from '$lib/stores/glassSettings';
 	import { Volume2, VolumeX, Settings } from 'lucide-svelte';
 	import { handleSectionTransition } from '$lib/animations/cameraChoreography';
-	import { SECTIONS } from '$lib/constants/assets';
 	import SettingsPanel from '$lib/components/SettingsPanel.svelte';
 
 	let { ready = false } = $props<{ ready?: boolean }>();
@@ -34,11 +33,12 @@
 	}
 </script>
 
-<nav class="fixed top-6 left-1/2 -translate-x-1/2 z-40 max-w-[95vw] transition-all duration-700 {ready ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-4'}">
-	<!-- Outer Apple Glass Capsule -->
-	<div
-		style="background-color: rgba(255, 255, 255, {$glassSettings.opacity}); backdrop-filter: blur({$glassSettings.blur}px); -webkit-backdrop-filter: blur({$glassSettings.blur}px);"
-		class="flex items-center gap-1.5 p-1.5 rounded-full border border-white/90 shadow-[0_16px_48px_rgba(0,0,0,0.18)] overflow-x-auto no-scrollbar"
+<!-- Outer Centering Overlay (Handles 100% Horizontal Viewport Centering) -->
+<div class="fixed top-6 left-0 right-0 z-40 flex justify-center pointer-events-none px-4">
+	<nav
+		id="main-navbar"
+		style="background-color: rgba(255, 255, 255, {$systemSettings.opacity}); backdrop-filter: blur({$systemSettings.blur}px); -webkit-backdrop-filter: blur({$systemSettings.blur}px);"
+		class="flex items-center gap-1.5 p-1.5 rounded-full border border-white/80 shadow-[0_16px_48px_rgba(0,0,0,0.18)] max-w-fit w-auto transition-opacity duration-300 {$isWelcomeCompleted ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}"
 	>
 		<div class="flex items-center gap-1">
 			{#each tabs as tab}
@@ -46,7 +46,7 @@
 					type="button"
 					onclick={() => handleTabClick(tab.id)}
 					style="color: {$activeTab === tab.id ? '#020617' : '#0f172a'}; font-weight: {$activeTab === tab.id ? '800' : '700'};"
-					class="relative px-4 py-2 rounded-full text-xs tracking-wide transition-all duration-300 whitespace-nowrap cursor-pointer {$activeTab === tab.id
+					class="relative px-3 py-1.5 rounded-full text-xs tracking-wide transition-all duration-300 whitespace-nowrap cursor-pointer {$activeTab === tab.id
 						? 'bg-white text-slate-950 font-black shadow-[0_4px_16px_rgba(0,0,0,0.18)] border border-white scale-105'
 						: 'text-slate-950 font-bold hover:text-black hover:bg-white/40 transition-colors'}"
 				>
@@ -80,8 +80,8 @@
 				<Settings class="w-4 h-4 text-slate-950" />
 			</button>
 		</div>
-	</div>
-</nav>
+	</nav>
+</div>
 
 {#if isSettingsOpen}
 	<SettingsPanel onClose={() => isSettingsOpen = false} />

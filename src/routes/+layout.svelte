@@ -2,36 +2,29 @@
 	import "../app.css";
 	import { activeTab as activeSection } from "$lib/stores/navStore";
 	import Navbar from "$lib/components/Navbar.svelte";
-	import { onMount } from "svelte";
-	import { gsap } from "gsap";
 	import ExperienceTV from "$lib/components/ExperienceTV.svelte";
 	import ProjectsGrid from "$lib/components/ProjectsGrid.svelte";
 	import SkillsSheet from "$lib/components/SkillsSheet.svelte";
 	import ResumeSheet from "$lib/components/ResumeSheet.svelte";
 	import AchievementsWall from "$lib/components/AchievementsWall.svelte";
 	import ContactPhone from "$lib/components/ContactPhone.svelte";
+	import WelcomeOverlay from "$lib/components/WelcomeOverlay.svelte";
+	import { playVerticalCraneDrop } from "$lib/animations/introChoreography";
 	import { SECTIONS } from "$lib/constants/assets";
 	import { ArrowRight } from "lucide-svelte";
 	import { setTab } from "$lib/stores/navStore";
-	import { glassSettings, resetGlassDefaults } from "$lib/stores/glassSettings";
+	import { glassSettings } from "$lib/stores/glassSettings";
 
 	let { children } = $props();
 
 	let welcomeActive = $state(true);
 	let navReady = $state(true);
 
-	onMount(() => {
-		const tl = gsap.timeline();
-		tl.to("#welcome-overlay", {
-			opacity: 0,
-			duration: 0.6,
-			delay: 0.8,
-			ease: "power2.inOut",
-			onComplete: () => {
-				welcomeActive = false;
-			}
+	function handleDescend() {
+		playVerticalCraneDrop(() => {
+			welcomeActive = false;
 		});
-	});
+	}
 
 	let activeSectionKey = $derived(($activeSection as keyof typeof SECTIONS) || "home");
 	let activeImageSrc = $derived(SECTIONS[activeSectionKey]?.image || "/bg-office-center.jpg");
@@ -41,22 +34,16 @@
 	class="relative w-screen h-screen overflow-hidden bg-black select-none"
 	style="--glass-blur: {$glassSettings.blur}px; --glass-opacity: {$glassSettings.opacity};"
 >
-	<!-- Blurred Welcome Overlay -->
+	<!-- Keynote Welcome Overlay -->
 	{#if welcomeActive}
-		<div id="welcome-overlay" class="absolute inset-0 z-50 flex items-center justify-center overflow-hidden">
-			<img src="/bg-office-center.jpg" class="absolute inset-0 w-full h-full object-cover scale-110 filter blur-3xl opacity-70" alt="blurred office" />
-			<div class="absolute inset-0 bg-slate-950/40 backdrop-blur-2xl"></div>
-			<h1 class="relative z-10 text-4xl md:text-6xl font-sans font-black text-white tracking-[0.25em] uppercase drop-shadow-2xl">
-				PARTH KAUSHAL
-			</h1>
-		</div>
+		<WelcomeOverlay onDescend={handleDescend} />
 	{/if}
 
 	<!-- Split Floating Apple Glass Navbar -->
 	<Navbar ready={navReady} />
 
 	<!-- Active Stage Layer -->
-	<div id="stage-active" class="absolute inset-0 w-full h-full z-10 pointer-events-auto">
+	<div id="stage-active" class="absolute inset-0 w-full h-full z-10 pointer-events-auto overflow-hidden bg-black">
 		<img
 			id="active-bg-img"
 			src={activeImageSrc}
@@ -67,6 +54,7 @@
 		<!-- Presenter Videos (Raw Black Background at z-index: 30) -->
 		{#if $activeSection === "home"}
 			<video
+				id="presenter-avatar-home"
 				src="/presenter-home.webm"
 				autoplay
 				loop
@@ -78,7 +66,7 @@
 			<div class="card-overlay absolute inset-0 z-30 pointer-events-auto hidden sm:block">
 				<div
 					style="background-color: rgba(255, 255, 255, {$glassSettings.opacity}); backdrop-filter: blur({$glassSettings.blur}px); -webkit-backdrop-filter: blur({$glassSettings.blur}px);"
-					class="border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-6 text-slate-900 absolute left-10 top-1/2 -translate-y-1/2 w-80 transition-all duration-200 backdrop-blur-2xl"
+					class="home-glass-card border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-6 text-slate-900 absolute left-10 top-1/2 -translate-y-1/2 w-80 transition-all duration-200 backdrop-blur-2xl"
 				>
 					<span class="inline-block px-3 py-1 rounded-full bg-sky-500/10 text-sky-700 text-xs font-mono font-semibold uppercase tracking-wider mb-2">STAGE 01</span>
 					<h1 class="text-2xl font-black text-slate-900 mb-1">PARTH KAUSHAL</h1>
@@ -90,7 +78,7 @@
 
 				<div
 					style="background-color: rgba(255, 255, 255, {$glassSettings.opacity}); backdrop-filter: blur({$glassSettings.blur}px); -webkit-backdrop-filter: blur({$glassSettings.blur}px);"
-					class="border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-6 text-slate-900 absolute right-10 top-1/2 -translate-y-1/2 w-80 transition-all duration-200 backdrop-blur-2xl"
+					class="home-glass-card border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-3xl p-6 text-slate-900 absolute right-10 top-1/2 -translate-y-1/2 w-80 transition-all duration-200 backdrop-blur-2xl"
 				>
 					<h3 class="text-sm font-bold uppercase tracking-wider text-slate-600 mb-2">Executive Overview</h3>
 					<p class="text-xs text-slate-700 leading-relaxed mb-4">
