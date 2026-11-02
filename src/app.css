@@ -2,9 +2,9 @@
 
 :root {
   --glass-blur: 24px;
-  --glass-opacity: 0.65;
+  --glass-opacity: 0.72;
   --glass-bg: rgba(255, 255, 255, var(--glass-opacity));
-  --glass-border: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.85);
 }
 
 .apple-glass {

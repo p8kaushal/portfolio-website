@@ -88,39 +88,50 @@
 
 <div
 	id="welcome-overlay"
-	class="fixed inset-0 z-50 flex flex-col items-center justify-center py-12 px-6 pointer-events-auto bg-black/75 backdrop-blur-2xl text-center select-none overflow-hidden"
+	class="fixed inset-0 z-50 flex flex-col items-center justify-center py-12 px-4 sm:px-6 pointer-events-auto bg-slate-950/45 backdrop-blur-2xl text-center select-none overflow-hidden"
 >
-	<!-- Studio Color Harmonization Ambient Background Glows -->
-	<div class="absolute -left-32 top-1/4 w-[500px] h-[500px] rounded-full bg-amber-600/18 blur-[120px] pointer-events-none"></div>
-	<div class="absolute -right-32 bottom-1/4 w-[500px] h-[500px] rounded-full bg-sky-500/12 blur-[120px] pointer-events-none"></div>
+	<!-- Studio Ambient Background Glows matching the light keynote theme -->
+	<div class="absolute -left-32 top-1/4 w-[500px] h-[500px] rounded-full bg-sky-400/20 blur-[130px] pointer-events-none"></div>
+	<div class="absolute -right-32 bottom-1/4 w-[500px] h-[500px] rounded-full bg-slate-300/25 blur-[130px] pointer-events-none"></div>
 
 	<!-- Main Interactive 3D Parallax Glass Card -->
 	<div
 		id="welcome-glass-card"
 		bind:this={cardRef}
-		class="relative max-w-4xl w-[90vw] p-10 md:p-16 rounded-[40px] border border-white/20 bg-slate-950/60 backdrop-blur-3xl shadow-[0_30px_100px_rgba(0,0,0,0.85)] flex flex-col items-center text-center overflow-hidden transition-colors duration-300"
-		style="background: radial-gradient(600px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), rgba(255, 255, 255, 0.12), transparent 40%), rgba(15, 23, 42, var(--glass-opacity, 0.65));"
+		class="relative max-w-3xl w-[92vw] sm:w-[88vw] p-8 sm:p-12 md:p-14 rounded-[36px] sm:rounded-[44px] border border-white/90 bg-white/75 backdrop-blur-3xl shadow-[0_30px_90px_rgba(0,0,0,0.18)] flex flex-col items-center text-center overflow-hidden transition-colors duration-300 apple-glass"
+		style="background: radial-gradient(600px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), rgba(255, 255, 255, 0.92), rgba(255, 255, 255, var(--glass-opacity, 0.72))), var(--glass-bg, rgba(255, 255, 255, 0.72));"
 	>
 		<!-- Shimmer Border Accent -->
-		<div class="absolute inset-0 rounded-[40px] border border-white/10 pointer-events-none"></div>
+		<div class="absolute inset-0 rounded-[36px] sm:rounded-[44px] border border-white/60 pointer-events-none"></div>
 
-		<!-- Top System Badge -->
-		<div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white/90 font-mono text-xs tracking-widest uppercase px-4 py-1.5 rounded-full shadow-lg backdrop-blur-md mb-8">
-			<Sparkles class="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+		<!-- Top System Badge (matches Stage 01 and Section Badges) -->
+		<div class="inline-flex items-center gap-2 bg-sky-500/10 border border-sky-500/20 text-sky-800 font-mono text-[11px] sm:text-xs tracking-widest uppercase px-4 py-1.5 rounded-full shadow-xs backdrop-blur-md mb-6 sm:mb-8">
+			<Sparkles class="w-3.5 h-3.5 text-sky-600 animate-pulse" />
 			<span>SPATIAL SYSTEMS ARCHITECT • 2026 KEYNOTE</span>
 		</div>
 
 		<!-- Center Main Title Group -->
-		<div id="welcome-title-group" class="max-w-3xl space-y-4 mb-10">
+		<div id="welcome-title-group" class="max-w-2xl space-y-3 sm:space-y-4 mb-8 sm:mb-10">
 			<h1
 				id="welcome-title-text"
-				class="font-black text-5xl sm:text-7xl md:text-8xl tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-100 to-white drop-shadow-[0_20px_50px_rgba(255,255,255,0.15)] uppercase bg-[length:200%_auto]"
+				class="font-black text-4xl sm:text-6xl md:text-7xl tracking-tight text-slate-950 uppercase bg-gradient-to-r from-slate-950 via-slate-800 to-slate-950 text-transparent bg-clip-text drop-shadow-xs"
 			>
 				PARTH KAUSHAL
 			</h1>
-			<p class="text-sm sm:text-lg md:text-xl font-medium text-slate-300 tracking-wide max-w-2xl mx-auto">
+			<p class="text-xs sm:text-base md:text-lg font-medium text-slate-700 tracking-wide max-w-xl mx-auto leading-relaxed">
 				Architecting Next-Gen Spatial Web & Hardware Interfaces
 			</p>
+			<div class="flex flex-wrap items-center justify-center gap-2 pt-2">
+				<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/5 border border-slate-900/10 text-slate-800 text-[11px] font-semibold">
+					<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Live Interactive Keynote
+				</span>
+				<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/5 border border-slate-900/10 text-slate-800 text-[11px] font-semibold">
+					💎 Apple Glass 2.0
+				</span>
+				<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/5 border border-slate-900/10 text-slate-800 text-[11px] font-semibold">
+					🧭 Spatial Choreography
+				</span>
+			</div>
 		</div>
 
 		<!-- Bottom CTA Button -->
@@ -128,7 +139,7 @@
 			<button
 				type="button"
 				onclick={triggerDescend}
-				class="bg-white/15 hover:bg-white/25 border border-white/30 text-white font-semibold text-sm px-8 py-4 rounded-full transition-all flex items-center gap-3 shadow-2xl cursor-pointer hover:scale-105 active:scale-95 group"
+				class="bg-slate-950 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm px-8 py-4 rounded-full transition-all flex items-center gap-3 shadow-[0_12px_32px_rgba(15,23,42,0.3)] hover:scale-105 active:scale-95 cursor-pointer group"
 			>
 				<span>DESCEND INTO STUDIO</span>
 				<ArrowDown class="w-4 h-4 text-white group-hover:translate-y-0.5 transition-transform" />

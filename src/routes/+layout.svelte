@@ -247,15 +247,46 @@
 				id="presenter-avatar-home"
 				webmSrc="/videos/presenter-transparent.webm"
 				movSrc="/videos/presenter-transparent.mov"
-				class="absolute left-1/2 bottom-0 -translate-x-1/2 h-[82vh] w-auto object-contain z-30 pointer-events-none select-none"
+				class="absolute left-1/2 bottom-0 -translate-x-1/2 h-[60dvh] sm:h-[70dvh] md:h-[78dvh] lg:h-[82dvh] max-w-[92vw] sm:max-w-none w-auto object-contain z-30 pointer-events-none select-none"
 				alt="Parth Kaushal - Home Stage Presenter"
 			/>
 
-			<div id="home-stage-root" class="absolute inset-0 z-30 flex items-center justify-between px-10 md:px-16 pointer-events-none hidden sm:flex">
+			<!-- Mobile Top Stage Card (sm:hidden) -->
+			<div class="sm:hidden absolute top-16 left-3 right-3 z-30 flex flex-col items-center pointer-events-none">
+				<div class="floating-glass-card home-glass-card apple-glass pointer-events-auto rounded-2xl p-4 text-slate-900 w-full max-w-sm shadow-xl text-center">
+					<div class="flex items-center justify-between mb-1">
+						<span class="inline-block px-2.5 py-0.5 rounded-full bg-sky-500/10 text-sky-800 text-[10px] font-mono font-bold uppercase tracking-wider">STAGE 01</span>
+						<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-800 text-[10px] font-semibold">
+							<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Available
+						</span>
+					</div>
+					<h1 class="text-xl font-black text-slate-950 tracking-tight">PARTH KAUSHAL</h1>
+					<p class="text-[11px] font-bold text-sky-700 mb-2">Senior Systems Architect</p>
+					<div class="flex gap-2">
+						<button
+							type="button"
+							onclick={() => setTab("projects")}
+							class="flex-1 py-1.5 px-2.5 rounded-lg bg-slate-900 text-white text-[11px] font-bold hover:bg-slate-800 transition-colors flex items-center justify-center gap-1 shadow-xs cursor-pointer"
+						>
+							Projects <ArrowRight class="w-3 h-3" />
+						</button>
+						<button
+							type="button"
+							onclick={() => setTab("about")}
+							class="flex-1 py-1.5 px-2.5 rounded-lg bg-white/80 border border-slate-300 text-slate-900 text-[11px] font-bold hover:bg-white transition-colors cursor-pointer"
+						>
+							About
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Desktop & Tablet Home Stage Cards (hidden sm:flex) -->
+			<div id="home-stage-root" class="absolute inset-0 z-30 flex items-center justify-between px-6 md:px-12 lg:px-16 pointer-events-none hidden sm:flex">
 				<!-- Left Glass Card -->
 				<div
 					id="home-card-left"
-					class="floating-glass-card apple-glass pointer-events-auto rounded-3xl p-6 text-slate-900 w-80"
+					class="floating-glass-card home-glass-card apple-glass pointer-events-auto rounded-3xl p-6 text-slate-900 w-72 lg:w-80 shadow-xl"
 				>
 					<span class="inline-block px-3 py-1 rounded-full bg-sky-500/10 text-sky-700 text-xs font-mono font-semibold uppercase tracking-wider mb-2">STAGE 01</span>
 					<h1 class="text-2xl font-black text-slate-900 mb-1">PARTH KAUSHAL</h1>
@@ -270,7 +301,7 @@
 				<!-- Right Glass Card -->
 				<div
 					id="home-card-right"
-					class="floating-glass-card apple-glass pointer-events-auto rounded-3xl p-6 text-slate-900 w-80"
+					class="floating-glass-card home-glass-card apple-glass pointer-events-auto rounded-3xl p-6 text-slate-900 w-72 lg:w-80 shadow-xl"
 				>
 					<h3 class="text-sm font-bold uppercase tracking-wider text-slate-600 mb-2">Executive Overview</h3>
 					<p class="text-xs text-slate-700 leading-relaxed mb-4">
@@ -299,14 +330,14 @@
 				id="presenter-avatar-about"
 				webmSrc="/videos/presenter-about-transparent.webm"
 				movSrc="/videos/presenter-about-transparent.mov"
-				class="absolute left-[12%] bottom-0 h-[82vh] w-auto object-contain z-30 pointer-events-none select-none"
+				class="absolute left-1/2 -translate-x-1/2 lg:left-[10%] xl:left-[12%] lg:translate-x-0 bottom-0 h-[52dvh] sm:h-[62dvh] md:h-[72dvh] lg:h-[82dvh] max-w-[92vw] sm:max-w-none w-auto object-contain z-30 pointer-events-none select-none"
 				alt="Parth Kaushal - About Stage Presenter"
 			/>
 
-			<div class="card-overlay absolute inset-0 z-30 flex items-center justify-end p-6 pointer-events-auto">
+			<div class="card-overlay absolute inset-0 z-30 flex items-start lg:items-center justify-center lg:justify-end p-4 sm:p-6 pt-16 sm:pt-20 lg:pt-6 pointer-events-none">
 				<div
 					id="about-glass-card"
-					class="floating-glass-card apple-glass pointer-events-auto rounded-3xl p-8 text-slate-900 max-w-xl mr-[6%]"
+					class="floating-glass-card apple-glass pointer-events-auto rounded-3xl p-6 sm:p-8 text-slate-900 w-[92vw] sm:w-[480px] lg:max-w-xl lg:mr-[6%] shadow-2xl"
 				>
 					<span class="inline-block px-3.5 py-1 rounded-full bg-purple-500/10 text-purple-700 text-xs font-semibold uppercase tracking-wider mb-3">About Presenter</span>
 					<h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">Architecting Spatial Web</h2>
@@ -319,9 +350,10 @@
 					</div>
 					<button
 						type="button"
+						onclick={() => setTab("projects")}
 						class="w-full py-2.5 px-4 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition-colors shadow-md cursor-pointer"
 					>
-						About Presenter
+						Explore Projects Portfolio
 					</button>
 				</div>
 			</div>

@@ -24,7 +24,7 @@
 		playSound("click");
 		resetSystemDefaults();
 		updateGlassBlur(24);
-		updateGlassOpacity(0.65);
+		updateGlassOpacity(0.72);
 	}
 </script>
 
