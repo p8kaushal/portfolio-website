@@ -5,6 +5,9 @@ import { portfolio } from './content.js';
 export function mountPC(host, { onExit = () => {} } = {}) {
   const root = document.createElement('div');
   root.className = 'pc-environment';
+  root.setAttribute('role', 'dialog');
+  root.setAttribute('aria-modal', 'true');
+  root.setAttribute('aria-label', 'Interactive computer');
   root.hidden = true;
   root.innerHTML = `<style>
     .pc-environment[hidden]{display:none}.pc-environment{position:fixed;inset:0;z-index:3000;background:#192c2b;color:#eef5ed;font-family:system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden}
@@ -35,7 +38,7 @@ export function mountPC(host, { onExit = () => {} } = {}) {
   function updateTasks(){
     tasks.replaceChildren();
     windows.forEach((record, id) => {
-      const button=document.createElement('button');button.type='button';button.className='pc-task';button.textContent=labels[id];button.setAttribute('aria-pressed', String(!record.element.hidden));button.onclick=()=>{record.element.hidden=false;bring(record);};tasks.append(button);
+      const button=document.createElement('button');button.type='button';button.className='pc-task';button.textContent=labels[id];button.dataset.task=id;button.setAttribute('aria-pressed', String(!record.element.hidden));button.onclick=()=>{record.element.hidden=false;bring(record);tasks.querySelector(`[data-task="${id}"]`)?.focus();};tasks.append(button);
     });
   }
   function bring(record){record.element.style.zIndex=String(++z);updateTasks();}
@@ -122,8 +125,8 @@ export function mountPC(host, { onExit = () => {} } = {}) {
     element.innerHTML=`<div class="pc-titlebar"><strong>${escapeText(labels[id])}</strong><button type="button" class="pc-minimize" aria-label="Minimize ${escapeText(labels[id])}">−</button><button type="button" class="pc-close" aria-label="Close ${escapeText(labels[id])}">×</button></div><div class="pc-window-body"></div>`;
     workspace.append(element);const record={element,body:element.querySelector('.pc-window-body')};windows.set(id,record);bring(record);
     element.addEventListener('pointerdown',()=>bring(record));
-    element.querySelector('.pc-minimize').onclick=()=>{element.hidden=true;updateTasks();};
-    element.querySelector('.pc-close').onclick=()=>{element.remove();windows.delete(id);updateTasks();};
+    element.querySelector('.pc-minimize').onclick=()=>{element.hidden=true;updateTasks();tasks.querySelector(`[data-task="${id}"]`)?.focus();};
+    element.querySelector('.pc-close').onclick=()=>{element.remove();windows.delete(id);updateTasks();root.querySelector(`[data-launch="${id}"]`)?.focus();};
     const titlebar=element.querySelector('.pc-titlebar');titlebar.addEventListener('pointerdown', event=>{
       if(event.target.closest('button') || event.pointerType==='touch' || matchMedia('(max-width:650px)').matches)return;
       const bounds=workspace.getBoundingClientRect(), initial=element.getBoundingClientRect(), startX=event.clientX, startY=event.clientY;
@@ -136,7 +139,17 @@ export function mountPC(host, { onExit = () => {} } = {}) {
   root.querySelectorAll('[data-launch]').forEach(button=>button.onclick=()=>launch(button.dataset.launch));
   root.querySelector('.pc-start').onclick=()=>launch('projects');
   function close(){if(root.hidden)return;root.hidden=true;dragCleanup?.();onExit();if(previouslyFocused?.isConnected)previouslyFocused.focus();}
-  function keydown(event){if(!root.hidden&&event.key==='Escape'){event.preventDefault();event.stopPropagation();close();}}
+  function keydown(event){
+    if(root.hidden)return;
+    if(event.key==='Escape'){event.preventDefault();event.stopPropagation();close();return;}
+    if(event.key!=='Tab')return;
+    const focusable=[...root.querySelectorAll('button:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])')].filter(el=>el.getClientRects().length&&!el.closest('[hidden]'));
+    if(!focusable.length)return;
+    const first=focusable[0],last=focusable.at(-1),active=document.activeElement;
+    if(!root.contains(active)){event.preventDefault();(event.shiftKey?last:first).focus()}
+    else if(event.shiftKey&&active===first){event.preventDefault();last.focus()}
+    else if(!event.shiftKey&&active===last){event.preventDefault();first.focus()}
+  }
   root.querySelector('.pc-exit').onclick=close;
   document.addEventListener('keydown',keydown,true);
   return {open(){previouslyFocused=document.activeElement;root.hidden=false;setTime();root.querySelector('.pc-exit').focus();},close,destroy(){dragCleanup?.();document.removeEventListener('keydown',keydown,true);root.remove();}};

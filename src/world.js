@@ -54,7 +54,8 @@ export function createWorld(THREE) {
   // Skirting gives the architecture a crisp, designed edge.
   box(0,.16,-7.79,27.7,.25,.08,'#b39d80'); box(0,.16,9.79,27.7,.25,.08,'#b39d80');
   // Window treatment is procedurally modelled; no textures are loaded.
-  const windowBack=(x,z=-7.77)=>{box(x,2.2,z,2.5,1.65,.07,'#9b765e');box(x,2.2,z+.05,2.27,1.42,.06,'#cfab79');box(x,2.2,z+.09,.07,1.42,.03,'#e1c59c');box(x,2.2,z+.09,2.27,.07,.03,'#e1c59c');};
+  const windowMaterial = new THREE.MeshBasicMaterial({color:'#c9c0a7'});
+  const windowBack=(x,z=-7.77)=>{box(x,2.2,z,2.5,1.65,.07,'#9b765e');const pane=box(x,2.2,z+.05,2.27,1.42,.06,'#cfab79');pane.material=windowMaterial;box(x,2.2,z+.09,.07,1.42,.03,'#e1c59c');box(x,2.2,z+.09,2.27,.07,.03,'#e1c59c');};
   windowBack(-8.3); windowBack(0); windowBack(8.4);
 
   // BEDROOM: bed, nightstand, wardrobe and mirror.
@@ -140,9 +141,10 @@ export function createWorld(THREE) {
 
   // Geometric streaks on the floor suggest late-afternoon light without
   // expensive realtime shadows. They are translucent and don't affect collision.
+  const lightPatches = [];
   const lightPatch = (x,z,w,d) => {
     const patch = new THREE.Mesh(new THREE.PlaneGeometry(w,d), new THREE.MeshBasicMaterial({color:'#ddd0b5',transparent:true,opacity:.11,depthWrite:false,side:THREE.DoubleSide}));
-    patch.rotation.x=-Math.PI/2; patch.rotation.z=-.18; patch.position.set(x,.081,z); scene.add(patch);
+    patch.rotation.x=-Math.PI/2; patch.rotation.z=-.18; patch.position.set(x,.081,z); scene.add(patch); lightPatches.push(patch.material);
   };
   lightPatch(-8.3,-5.7,2.1,3.4); lightPatch(0,-5.8,2.1,3.4); lightPatch(8.4,-5.8,2.1,3.4);
   // A simple retro rug motif, composed entirely of geometry.
@@ -150,8 +152,43 @@ export function createWorld(THREE) {
   // Flat graphic picture details are generated in scene, not imported textures.
   box(2.8,1.85,-7.68,1.04,.07,.02,'#855e4b');
   box(2.48,2.0,-7.67,.13,.27,.02,'#885f4b'); box(2.78,2.06,-7.67,.14,.39,.02,'#885f4b'); box(3.08,1.98,-7.67,.14,.23,.02,'#885f4b');
-  scene.add(new THREE.HemisphereLight('#f4e7d4','#74786d',1.35));
+  const ambient = new THREE.HemisphereLight('#f4e7d4','#74786d',1.35);scene.add(ambient);
   const sun = new THREE.DirectionalLight('#f5e5ce',1.15);sun.position.set(-3,8,4);scene.add(sun);
+  // A few low-cost, code-built ceiling lights keep each room readable at night.
+  // They do not cast realtime shadows and do not affect player collisions.
+  const lamps = [];
+  for (const x of [-8.4,0,8.4]) {
+    const fixture=box(x,3.28,1,.7,.12,.7,'#766650');
+    const glow=new THREE.Mesh(new THREE.BoxGeometry(.52,.035,.52),new THREE.MeshBasicMaterial({color:'#e9d4af'}));
+    glow.position.set(x,3.19,1);scene.add(glow);
+    const lamp=new THREE.PointLight('#f6d8ad',0,12,2);lamp.position.set(x,3.02,1);scene.add(lamp);
+    lamps.push({lamp,glow});
+  }
+  const daySky=new THREE.Color('#c8b49a'),nightSky=new THREE.Color('#384451');
+  const dayWindow=new THREE.Color('#c9c0a7'),nightWindow=new THREE.Color('#536476');
+  const daySun=new THREE.Color('#f5e5ce'),nightSun=new THREE.Color('#9baec4');
+  const dayGlow=new THREE.Color('#e3d3b5'),nightGlow=new THREE.Color('#ffe0ac');
+  const lightColor=new THREE.Color();
+  let timeMode='cycle', cycleStart=null, lastLighting=-Infinity;
+  function applyDaylight(amount){
+    const daylight=THREE.MathUtils.clamp(amount,0,1),night=1-daylight;
+    scene.background.lerpColors(nightSky,daySky,daylight);
+    scene.fog.color.copy(scene.background);
+    windowMaterial.color.lerpColors(nightWindow,dayWindow,daylight);
+    sun.color.lerpColors(nightSun,daySun,daylight);
+    ambient.intensity=.73+daylight*.62;
+    sun.intensity=.20+daylight*.95;
+    lightColor.lerpColors(nightGlow,dayGlow,daylight);
+    for(const {lamp,glow} of lamps){lamp.intensity=night*5.5;glow.material.color.copy(lightColor);}
+    for(const material of lightPatches)material.opacity=.015+daylight*.095;
+  }
+  function setTimeMode(mode){
+    timeMode=['cycle','day','night'].includes(mode)?mode:'cycle';
+    cycleStart=null;lastLighting=-Infinity;
+    // Deterministic, immediately visible settings; cycling starts in daylight.
+    applyDaylight(timeMode==='night'?0:1);
+  }
+  setTimeMode('cycle');
 
   // High-contrast hovering diamonds mark the objects visitors can use. They are
   // drawn in the scene, occluded by furniture, and never pulse or flash.
@@ -169,7 +206,8 @@ export function createWorld(THREE) {
     const gem = new THREE.Mesh(markerGeometry, markerMaterial);
     gem.position.set(x,y,z); scene.add(gem); markers.push({mesh:gem,base:y});
   }
-  const reduceMotion = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  const motionPreference = typeof window !== 'undefined' ? window.matchMedia?.('(prefers-reduced-motion: reduce)') : null;
+  let lastReducedMotion = !!motionPreference?.matches;
 
   // A procedural likeness based on Parth's reference photographs. The low-poly
   // materials and geometry are generated at runtime; no photographs are used as textures.
@@ -253,7 +291,7 @@ export function createWorld(THREE) {
   setQuality('high');
   character.visible=false;scene.add(character);
   return {
-    scene, colliders, character, setQuality,
+    scene, colliders, character, setQuality, setTimeMode,
     spawn: { x: 0, y: 1.65, z: -.2, yaw: 0 },
     computer: { id: 'projects', label: 'Use the computer', position: new THREE.Vector3(7.55,1.2,-4.2), radius: 2.3 },
     // Points sit on their objects; radii extend into the walkable approach.
@@ -265,6 +303,19 @@ export function createWorld(THREE) {
       { id: 'tv', label: 'Watch the TV', position: new THREE.Vector3(0, 2.0, -7.0), radius: 2.25 },
       { id: 'tv', label: 'Sit and watch TV', position: new THREE.Vector3(0, 1.0, 3.95), radius: 1.7 },
     ],
-    update(now = 0) { if (!reduceMotion) for (const {mesh,base} of markers) { mesh.position.y = base + Math.sin(now * .0015) * .065; mesh.rotation.y = now * .00035; } }
+    update(now = 0) {
+      const reduceMotion = !!motionPreference?.matches;
+      if(reduceMotion!==lastReducedMotion){lastReducedMotion=reduceMotion;cycleStart=null;lastLighting=-Infinity;if(reduceMotion&&timeMode==='cycle')applyDaylight(1);}
+      if (!reduceMotion) for (const {mesh,base} of markers) { mesh.position.y = base + Math.sin(now * .0015) * .065; mesh.rotation.y = now * .00035; }
+      // The introductory portrait breathes and shifts gently, without moving its feet.
+      if(character.visible){const breath=reduceMotion?0:Math.sin(now*.002);character.position.y=breath*.012;character.scale.y=1+breath*.005;character.rotation.z=breath*.006;}
+      // Three-minute loop, anchored when cycling begins rather than wall-clock time.
+      // Throttle updates: light changes are gradual and do not need per-frame work.
+      if(timeMode==='cycle'&&!reduceMotion&&now-lastLighting>=100){
+        if(cycleStart===null)cycleStart=now;
+        applyDaylight(.5+.5*Math.cos((now-cycleStart)*Math.PI*2/180000));
+        lastLighting=now;
+      }
+    }
   };
 }
