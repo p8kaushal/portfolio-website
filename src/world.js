@@ -65,10 +65,15 @@ export function createWorld(THREE) {
   box(-9.75,1.02,-5.55,1.15,.18,.72,'#e1d4b8'); box(-8.3,1.02,-5.55,1.15,.18,.72,'#e1d4b8');
   box(-10.86,.7,-5.1,.8,1.35,1.2,'#ad8a68',true); box(-10.86,1.41,-5.1,.86,.1,1.25,'#d0aa7b');
   cylinder(-10.86,1.65,-5.1,.17,.23,.4,'#e5c88f');
-  box(-10.93,1.45,3.2,1.75,2.9,3.7,'#aa886b',true);
-  box(-9.99,1.55,3.2,.12,2.35,1.15,'#aac6bb');
-  box(-9.9,1.55,3.2,.06,2.18,.98,'#aabcb0');
-  box(-9.9,.55,4.34,.08,.07,.25,'#e6ce91');
+  // Wardrobe sits flush to the bedroom's west wall; its mirror faces the room.
+  box(-12.95,1.45,3.2,1.75,2.9,3.7,'#795e4c',true);
+  box(-12.035,1.53,3.2,.09,2.52,1.45,'#5d4b3e');
+  box(-11.975,1.53,3.2,.04,2.34,1.26,'#a8b8b4');
+  box(-11.94,1.53,2.87,.012,2.15,.025,'#d5ded1');
+  box(-12.025,1.47,4.45,.08,2.45,.08,'#b19576');
+  box(-11.98,1.35,4.53,.05,.23,.05,'#d9bb79');
+  box(-12.035,1.47,1.95,.08,2.45,.08,'#b19576');
+  box(-11.98,1.35,1.87,.05,.23,.05,'#d9bb79');
   art(-7.6,2,-7.74,1.0,.7,'#d5a27e'); plant(-5.5,7.6,1.25);
   // A low reading bench and wall accents give the larger bedroom a useful edge.
   box(-12.65,.43,6.3,1.5,.65,2.5,'#b88f74',true); box(-12.65,.8,6.3,1.4,.12,2.35,'#dfc7a7');
@@ -102,11 +107,30 @@ export function createWorld(THREE) {
   box(0,.43,4.35,4.25,.7,1.25,'#5f7355',true); box(0,1.0,4.88,4.25,1.1,.32,'#5f7355');
   box(-1.25,.85,4.2,1,.22,.75,'#8c9970'); box(0,.85,4.2,1,.22,.75,'#8c9970'); box(1.25,.85,4.2,1,.22,.75,'#8c9970');
   table(0,1.7,2.5,1.15,'#af8866'); box(.15,.89,1.7,.5,.09,.4,'#eee1bd');
-  box(0,.48,-6.8,4.2,.85,1.0,'#a47e5d',true); box(0,1.85,-7.13,3.45,1.9,.2,'#384942'); box(0,1.85,-7.0,3.1,1.55,.03,'#638275');
-  box(0,1.3,-6.97,1.9,.035,.015,'#b0c6aa'); box(-.72,2.03,-6.97,.13,.48,.015,'#d1bb86'); box(-.4,1.88,-6.97,.13,.78,.015,'#d1bb86');box(-.08,2.12,-6.97,.13,.3,.015,'#d1bb86');
-  box(-2.9,1.18,-6.9,1.15,2.35,.9,'#997356',true);
-  for(let y=.6;y<2.1;y+=.7) box(-2.9,y,-6.35,1.05,.08,.55,'#d5b38a');
-  for(const [x,y] of [[-3.15,.86],[-2.7,.86],[-2.9,1.56]]) { cylinder(x,y,-6.35,.13,.07,.25,'#e2bf72',8); box(x,y-.16,-6.35,.22,.08,.22,'#735b44'); }
+  // Media console is set against the back wall, with a framed flat screen.
+  box(0,.48,-7.14,4.2,.85,1.0,'#745b48',true);
+  box(0,.93,-7.14,4.28,.10,1.04,'#a58b6d');
+  for (const x of [-1.35,0,1.35]) { box(x,.48,-6.62,1.26,.66,.035,'#886e55'); box(x,.53,-6.59,.28,.035,.025,'#c8b28d'); }
+  box(0,1.06,-7.05,.85,.10,.45,'#292f2b');
+  box(0,1.22,-7.12,.14,.26,.12,'#292f2b');
+  box(0,2.06,-7.10,3.65,2.05,.16,'#2b302c');
+  box(0,2.08,-7.005,3.39,1.78,.035,'#4b5c50');
+  box(0,1.18,-6.98,.09,.035,.02,'#b3b29a');
+  // Cabinet backs to the same wall; shelves, frame and trophies use geometry.
+  box(-3.13,1.37,-7.46,1.35,2.72,.55,'#795d47',true);
+  box(-3.13,2.76,-7.43,1.45,.12,.65,'#b29471');
+  box(-3.13,.10,-7.43,1.45,.18,.65,'#5f493b');
+  box(-3.13,1.40,-7.15,1.15,2.47,.03,'#4d5040');
+  for(let y=.75;y<2.5;y+=.76) box(-3.13,y,-7.13,1.23,.07,.56,'#bda081');
+  for(const x of [-3.79,-2.47]) box(x,1.4,-7.10,.08,2.7,.08,'#a88b6a');
+  // Distinct cups, stems and plinths make awards legible in the cabinet.
+  for(const [x,y] of [[-3.43,.98],[-2.85,.98],[-3.13,1.74]]) {
+    box(x,y-.16,-6.98,.30,.10,.24,'#4d4132');
+    cylinder(x,y-.04,-6.98,.055,.075,.18,'#b69a57',8);
+    cylinder(x,y+.13,-6.98,.16,.095,.22,'#d7b970',10);
+    box(x-.19,y+.13,-6.98,.06,.17,.06,'#c9a960');
+    box(x+.19,y+.13,-6.98,.06,.17,.06,'#c9a960');
+  }
   art(2.8,2,-7.74,1.3,.95,'#cd9a7c'); plant(2.85,8.4,1.1);
   // A console behind the seating defines the larger living room.
   box(-.6,.48,9.25,3.2,.9,.65,'#a17d60',true); box(-.6,.96,9.25,3.3,.08,.7,'#ceb28e');
@@ -152,10 +176,11 @@ export function createWorld(THREE) {
     // Points sit on their objects; radii extend into the walkable approach.
     // The nearest target resolves overlaps between the desk items and the TV cabinet.
     targets: [
-      { id: 'mirror', label: 'Look in the mirror', position: new THREE.Vector3(-9.9, 1.55, 3.2), radius: 1.8 },
+      { id: 'mirror', label: 'Look in the mirror', position: new THREE.Vector3(-11.95, 1.55, 3.2), radius: 2.0 },
       { id: 'file', label: 'Open the file', position: new THREE.Vector3(9.5, .95, -5.13), radius: 1.8 },
-      { id: 'awards', label: 'Inspect the trophies', position: new THREE.Vector3(-2.9, 1.4, -6.35), radius: 1.7 },
-      { id: 'tv', label: 'Watch the timeline', position: new THREE.Vector3(0, 1.85, -7.0), radius: 2.0 },
+      { id: 'awards', label: 'Inspect the trophies', position: new THREE.Vector3(-3.13, 1.4, -7.0), radius: 2.0 },
+      { id: 'tv', label: 'Watch the TV', position: new THREE.Vector3(0, 2.0, -7.0), radius: 2.25 },
+      { id: 'tv', label: 'Sit and watch TV', position: new THREE.Vector3(0, 1.0, 3.95), radius: 1.7 },
     ],
     update() {}
   };

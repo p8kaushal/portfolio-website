@@ -36,7 +36,6 @@ export const portfolio = {
   ],
   contact: [
     { title: 'Email', label: 'parth.kaushal.007@gmail.com', href: 'mailto:parth.kaushal.007@gmail.com' },
-    { title: 'Academic email', label: 'parth.1251050244@vit.edu', href: 'mailto:parth.1251050244@vit.edu' },
     { title: 'GitHub', label: 'github.com/p8kaushal', href: 'https://github.com/p8kaushal' },
     { title: 'LinkedIn', label: 'Parth Kaushal', href: 'https://www.linkedin.com/in/parth-kaushal-0b3518386' },
     { title: 'X', label: '@_ParthKaushal', href: 'https://x.com/_ParthKaushal' },
