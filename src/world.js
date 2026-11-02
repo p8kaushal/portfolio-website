@@ -2,12 +2,12 @@
 /** Procedural, asset-free house for the first-person portfolio. */
 export function createWorld(THREE) {
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color('#d8a773');
+  scene.background = new THREE.Color('#c8b49a');
   // Distance haze and a warm, flat-lit palette evoke early 3D game worlds.
-  scene.fog = new THREE.Fog('#d8a773', 18, 43);
+  scene.fog = new THREE.Fog('#c8b49a', 18, 43);
   const colliders = [];
   const materials = {};
-  const mat = (color, roughness = 1) => materials[color] ||= new THREE.MeshStandardMaterial({ color, roughness, flatShading: true });
+  const mat = (color, roughness = 1) => { if (!materials[color]) { const softened = new THREE.Color(color); const hsl = {}; softened.getHSL(hsl); softened.setHSL(hsl.h, hsl.s * .78, hsl.l); materials[color] = new THREE.MeshStandardMaterial({ color: softened, roughness, flatShading: true }); } return materials[color]; };
   const box = (x, y, z, w, h, d, color, collision = false) => {
     const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat(color));
     mesh.position.set(x, y, z);
@@ -115,7 +115,7 @@ export function createWorld(THREE) {
   // Geometric streaks on the floor suggest late-afternoon light without
   // expensive realtime shadows. They are translucent and don't affect collision.
   const lightPatch = (x,z,w,d) => {
-    const patch = new THREE.Mesh(new THREE.PlaneGeometry(w,d), new THREE.MeshBasicMaterial({color:'#edc184',transparent:true,opacity:.16,depthWrite:false,side:THREE.DoubleSide}));
+    const patch = new THREE.Mesh(new THREE.PlaneGeometry(w,d), new THREE.MeshBasicMaterial({color:'#ddd0b5',transparent:true,opacity:.11,depthWrite:false,side:THREE.DoubleSide}));
     patch.rotation.x=-Math.PI/2; patch.rotation.z=-.18; patch.position.set(x,.081,z); scene.add(patch);
   };
   lightPatch(-8.3,-5.7,2.1,3.4); lightPatch(0,-5.8,2.1,3.4); lightPatch(8.4,-5.8,2.1,3.4);
@@ -124,8 +124,8 @@ export function createWorld(THREE) {
   // Flat graphic picture details are generated in scene, not imported textures.
   box(2.8,1.85,-7.68,1.04,.07,.02,'#855e4b');
   box(2.48,2.0,-7.67,.13,.27,.02,'#885f4b'); box(2.78,2.06,-7.67,.14,.39,.02,'#885f4b'); box(3.08,1.98,-7.67,.14,.23,.02,'#885f4b');
-  scene.add(new THREE.HemisphereLight('#ffdbab','#5e6150',1.55));
-  const sun = new THREE.DirectionalLight('#ffd092',1.5);sun.position.set(-3,8,4);scene.add(sun);
+  scene.add(new THREE.HemisphereLight('#f4e7d4','#74786d',1.35));
+  const sun = new THREE.DirectionalLight('#f5e5ce',1.15);sun.position.set(-3,8,4);scene.add(sun);
 
   // Neutral, procedural figure exposed for a separate introductory camera.
   const character = new THREE.Group();
