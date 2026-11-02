@@ -149,6 +149,14 @@ export function createWorld(THREE) {
     scene, colliders, character,
     spawn: { x: 0, y: 1.65, z: -.2, yaw: 0 },
     computer: { id: 'projects', label: 'Use the computer', position: new THREE.Vector3(7.55,1.2,-4.2), radius: 2.3 },
+    // Points sit on their objects; radii extend into the walkable approach.
+    // The nearest target resolves overlaps between the desk items and the TV cabinet.
+    targets: [
+      { id: 'mirror', label: 'Look in the mirror', position: new THREE.Vector3(-9.9, 1.55, 3.2), radius: 1.8 },
+      { id: 'file', label: 'Open the file', position: new THREE.Vector3(9.5, .95, -5.13), radius: 1.8 },
+      { id: 'awards', label: 'Inspect the trophies', position: new THREE.Vector3(-2.9, 1.4, -6.35), radius: 1.7 },
+      { id: 'tv', label: 'Watch the timeline', position: new THREE.Vector3(0, 1.85, -7.0), radius: 2.0 },
+    ],
     update() {}
   };
 }
