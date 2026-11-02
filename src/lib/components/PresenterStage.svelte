@@ -40,22 +40,22 @@
 	});
 
 	const projects = [
-		{ title: 'Keynote Studio 3D', tech: 'SvelteKit • GSAP • Tailwind', desc: 'Cinematic Apple Keynote virtual stage portfolio engine.', fullDesc: 'High-performance interactive 2D spatial canvas rendering engine with GSAP camera choreography, WebM transparent video loops, and responsive glass tablet controls.', link: 'https://github.com' },
-		{ title: 'Spatial UI Kit', tech: 'TypeScript • Canvas • WebGL', desc: 'High-performance interactive vector device frames.', fullDesc: 'Resolution-independent CSS/SVG vector device frames optimized for spatial camera transitions and zero resolution degradation.', link: 'https://github.com' },
-		{ title: 'AI Presenter Keyer', tech: 'WebM • HTML5 • FFmpeg', desc: 'Transparent video keying pipeline for real-time web avatars.', fullDesc: 'Automated green-screen background removal and FFmpeg WebM encoding pipeline for real-time HTML5 video presenter avatars.', link: 'https://github.com' }
+		{ title: 'IPL Match Win Predictor', tech: 'Python • scikit-learn • Flask', desc: 'Predicting second-innings IPL win probabilities based on live match dynamics.', fullDesc: 'Interactive ML web application trained on historical ball-by-ball IPL match data. The pipeline models second-innings situations to calculate real-time win probabilities.', link: 'https://github.com/p8kaushal/ipl-win-predictor' },
+		{ title: 'FaceTrack Gesture Control', tech: 'OpenCV • MediaPipe • Python', desc: 'Biometric facial recognition and touchless gesture device interaction.', fullDesc: 'Computer vision suite integrating 68-point facial landmark detection and 21-point hand tracking for touchless desktop gesture control.', link: 'https://github.com/p8kaushal/facemark-gesture-control' },
+		{ title: 'ResonantAI Emotion Analyzer', tech: 'Python • Librosa • FastAPI', desc: 'Audio intelligence pipeline analyzing vocal tone and acoustic features.', fullDesc: 'Intelligent audio signal processing system extracting MFCCs and spectral contrast features for real-time vocal emotion classification.', link: 'https://github.com/p8kaushal/resonant-ai' }
 	];
 
 	const skills = [
-		{ category: 'Frontend Architecture', items: ['Svelte / SvelteKit', 'TypeScript', 'Tailwind CSS', 'GSAP Animation', 'HTML5 Canvas'] },
-		{ category: 'Systems & Performance', items: ['Performance Tuning', 'Spatial UI Design', 'State Management', 'WebM Transparent Video'] },
-		{ category: 'Tooling & CI/CD', items: ['Git & GitHub', 'Vite / Rollup', 'Figma Prototyping', 'Vercel CDN'] }
+		{ category: 'Programming Languages', items: ['Python', 'JavaScript', 'TypeScript', 'C', 'C++', 'SQL'] },
+		{ category: 'Web & Backend', items: ['Node.js', 'Express.js', 'Flask', 'FastAPI', 'PostgreSQL', 'Supabase', 'SvelteKit'] },
+		{ category: 'AI, ML & Vision', items: ['OpenCV', 'scikit-learn', 'MediaPipe', 'pandas', 'NumPy', 'Librosa'] },
+		{ category: 'Spatial & Embedded', items: ['Unity', 'Unreal Engine', 'WebGL', 'Babylon.js', 'FreeRTOS', 'ESP32'] }
 	];
 
 	const awards = [
-		{ title: 'Awwwards Site of the Day', year: '2025', org: 'Awwwards International', details: 'Recognized for outstanding web design, interactive spatial UI, and sub-second performance.' },
-		{ title: 'FWA of the Month', year: '2024', org: 'Favorite Website Awards', details: 'Awarded for pioneering GSAP spatial camera transitions and 4-layer composition engines.' },
-		{ title: 'Apple Design Award Nominee', year: '2024', org: 'WWDC Developer Showcase', details: 'Nominated for Apple Keynote-inspired human-scale portfolio interface.' },
-		{ title: 'Best Web Animation', year: '2023', org: 'CSS Design Awards', details: 'Honored for 60 FPS motion-blur camera transitions.' }
+		{ title: '1st Place — National Stock Market Simulation', year: '2025', org: 'IIT Bombay', details: 'Secured 1st position across pan-India collegiate participants in algorithmic trading and macroeconomic portfolio strategy.' },
+		{ title: '3rd Place — Pan-IIT Business Case Competition', year: '2025', org: 'IIT Bombay', details: 'Awarded 3rd place for architecting an analytical market-entry strategy and financial scalability model.' },
+		{ title: 'Finalist — Smart India Hackathon 2026', year: '2026', org: 'Ministry of Education, Govt. of India', details: 'Qualified for Internal Round 2 of SIH 2026 for high-impact software solutions.' }
 	];
 
 	function scrollCarousel(direction: 'left' | 'right') {
@@ -158,7 +158,7 @@
 						<div class="border-b-2 border-slate-900 pb-2 mb-3 flex justify-between items-start">
 							<div>
 								<h2 class="text-lg font-black tracking-tight text-slate-950">PARTH KAUSHAL</h2>
-								<p class="text-[11px] font-bold text-slate-900 uppercase">Senior Systems Architect</p>
+								<p class="text-[11px] font-bold text-slate-900 uppercase">Full-Stack Developer & AI/ML Enthusiast</p>
 							</div>
 							<a
 								href="/resume.pdf"
@@ -172,11 +172,11 @@
 						<div class="space-y-3 text-xs text-slate-950 leading-snug">
 							<div>
 								<h4 class="font-black text-[11px] uppercase border-b border-slate-900 mb-1">Executive Summary</h4>
-								<p class="text-[10px] font-medium">5+ years of experience leading interactive web frontend architectures, high-performance canvas rendering, and 2D spatial UI engines.</p>
+								<p class="text-[10px] font-medium">B.Tech in CSE at VIT Pune (9.07 CGPA). Avionics Subdivision Engineer at DRDS. Building full-stack web platforms, machine learning pipelines, and interactive 3D simulations.</p>
 							</div>
 							<div>
 								<h4 class="font-black text-[11px] uppercase border-b border-slate-900 mb-1">Core Competencies</h4>
-								<p class="text-[10px] font-medium">SvelteKit, GSAP 3D Timelines, WebM Transparent Video Pipelines, TypeScript, Tailwind CSS, Performance Tuning.</p>
+								<p class="text-[10px] font-medium">Python, TypeScript, Node.js, OpenCV, scikit-learn, Flask, FastAPI, SvelteKit, FreeRTOS, ESP32, PostgreSQL.</p>
 							</div>
 						</div>
 					</div>
@@ -265,12 +265,12 @@
 
 				<div class="text-center my-auto">
 					<h3 class="text-xl font-extrabold text-white mb-1">Get In Touch</h3>
-					<p class="text-[11px] text-slate-400 leading-snug">Available for architecture roles & virtual keynote projects.</p>
+					<p class="text-[11px] text-slate-400 leading-snug">Available for hackathons, collaborations & software roles.</p>
 				</div>
 
 				<div class="grid grid-cols-2 gap-3 mb-4">
 					<a
-						href="mailto:hello@example.com"
+						href="mailto:parth.kaushal.007@gmail.com"
 						onmouseenter={() => playSound('click')}
 						onclick={() => playSound('click')}
 						class="p-3 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col items-center hover:scale-105 hover:bg-slate-800 hover:border-sky-400/50 transition-all cursor-pointer"
@@ -279,7 +279,7 @@
 						<span class="text-xs font-medium">Email</span>
 					</a>
 					<a
-						href="https://github.com"
+						href="https://github.com/p8kaushal"
 						target="_blank"
 						rel="noreferrer"
 						onmouseenter={() => playSound('click')}
@@ -323,16 +323,16 @@
 			<div class="backdrop-blur-2xl bg-white/80 border border-white/60 shadow-2xl rounded-3xl p-6 text-neutral-900 absolute left-10 top-1/2 -translate-y-1/2 w-80">
 				<span class="inline-block px-3 py-1 rounded-full bg-sky-500/10 text-sky-700 text-xs font-mono font-semibold uppercase tracking-wider mb-2">STAGE 01</span>
 				<h1 class="text-2xl font-black text-neutral-900 mb-1">PARTH KAUSHAL</h1>
-				<p class="text-xs font-bold text-sky-700 mb-3">Senior Systems Architect</p>
+				<p class="text-xs font-bold text-sky-700 mb-3">Full-Stack Developer & AI/ML Enthusiast</p>
 				<div class="flex items-center gap-2 p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-800 text-xs font-semibold">
-					<span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping shrink-0"></span> Available for Architecture Roles
+					<span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping shrink-0"></span> Open to Collaborations & Hackathons
 				</div>
 			</div>
 
 			<div class="backdrop-blur-2xl bg-white/80 border border-white/60 shadow-2xl rounded-3xl p-6 text-neutral-900 absolute right-10 top-1/2 -translate-y-1/2 w-80">
 				<h3 class="text-sm font-bold uppercase tracking-wider text-neutral-600 mb-2">Executive Overview</h3>
 				<p class="text-xs text-neutral-700 leading-relaxed mb-4">
-					Building cinematic 2D spatial web experiences with SvelteKit, GSAP camera choreography, and high-performance WebM video avatars.
+					I'm a developer who loves turning ideas into working products. I build full-stack applications, AI-powered tools, interactive games, and intelligent systems, while exploring emerging technologies like Web3 and blockchain.
 				</p>
 				<div class="flex gap-2">
 					<button
@@ -357,14 +357,14 @@
 	{#if $activeTab === 'about'}
 		<div class="card-overlay absolute inset-0 z-30 flex items-center justify-end p-6 pointer-events-auto">
 			<div class="backdrop-blur-2xl bg-white/80 border border-white/60 shadow-2xl rounded-3xl p-8 text-neutral-900 max-w-xl mr-[6%]">
-				<span class="inline-block px-3.5 py-1 rounded-full bg-purple-500/10 text-purple-700 text-xs font-semibold uppercase tracking-wider mb-3">About Presenter</span>
-				<h2 class="text-2xl sm:text-3xl font-bold text-neutral-900 mb-2">Architecting Spatial Web</h2>
+				<span class="inline-block px-3.5 py-1 rounded-full bg-purple-500/10 text-purple-700 text-xs font-semibold uppercase tracking-wider mb-3">About Parth Kaushal</span>
+				<h2 class="text-2xl sm:text-3xl font-bold text-neutral-900 mb-2">Curious by Nature. Builder by Choice.</h2>
 				<p class="text-sm text-neutral-700 leading-relaxed mb-4">
-					Passionate Frontend Engineer specializing in high-performance WebGL, CSS 3D spatial UI, and SvelteKit applications with Apple-grade polish.
+					Computer Science undergraduate at Vishwakarma Institute of Technology, Pune. Passionate about full-stack development, artificial intelligence, machine learning, and game development.
 				</p>
 				<div class="grid grid-cols-2 gap-3 text-xs font-medium text-neutral-800">
-					<div class="p-2.5 rounded-xl bg-white/60 border border-neutral-200">📍 San Francisco, CA</div>
-					<div class="p-2.5 rounded-xl bg-white/60 border border-neutral-200">🚀 5+ Years Experience</div>
+					<div class="p-2.5 rounded-xl bg-white/60 border border-neutral-200">📍 Pune, India</div>
+					<div class="p-2.5 rounded-xl bg-white/60 border border-neutral-200">🎓 9.07 CGPA (VIT Pune)</div>
 				</div>
 			</div>
 		</div>

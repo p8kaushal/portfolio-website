@@ -107,7 +107,7 @@
 		<!-- Top System Badge (matches Stage 01 and Section Badges) -->
 		<div class="inline-flex items-center gap-2 bg-sky-500/10 border border-sky-500/20 text-sky-800 font-mono text-[11px] sm:text-xs tracking-widest uppercase px-4 py-1.5 rounded-full shadow-xs backdrop-blur-md mb-6 sm:mb-8">
 			<Sparkles class="w-3.5 h-3.5 text-sky-600 animate-pulse" />
-			<span>SPATIAL SYSTEMS ARCHITECT • 2026 KEYNOTE</span>
+			<span>FULL-STACK DEVELOPER & AI/ML ENTHUSIAST • PUNE, INDIA</span>
 		</div>
 
 		<!-- Center Main Title Group -->
@@ -119,30 +119,32 @@
 				PARTH KAUSHAL
 			</h1>
 			<p class="text-xs sm:text-base md:text-lg font-medium text-slate-700 tracking-wide max-w-xl mx-auto leading-relaxed">
-				Architecting Next-Gen Spatial Web & Hardware Interfaces
+				Building Intelligent Applications, Interactive Experiences & Real-World Software
 			</p>
 			<div class="flex flex-wrap items-center justify-center gap-2 pt-2">
 				<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/5 border border-slate-900/10 text-slate-800 text-[11px] font-semibold">
-					<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Live Interactive Keynote
+					<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Available for Opportunities
 				</span>
 				<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/5 border border-slate-900/10 text-slate-800 text-[11px] font-semibold">
-					💎 Apple Glass 2.0
+					📍 Pune, Maharashtra, India
 				</span>
 				<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/5 border border-slate-900/10 text-slate-800 text-[11px] font-semibold">
-					🧭 Spatial Choreography
+					🎓 VIT Pune • 9.07 CGPA
 				</span>
 			</div>
 		</div>
 
-		<!-- Bottom CTA Button -->
+		<!-- Bottom CTA Button (Guaranteed High Contrast Solid Dark Pill) -->
 		<div>
 			<button
+				id="descend-studio-btn"
 				type="button"
 				onclick={triggerDescend}
-				class="bg-slate-950 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm px-8 py-4 rounded-full transition-all flex items-center gap-3 shadow-[0_12px_32px_rgba(15,23,42,0.3)] hover:scale-105 active:scale-95 cursor-pointer group"
+				class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-slate-950 text-white font-extrabold text-xs sm:text-sm tracking-wider shadow-[0_12px_32px_rgba(15,23,42,0.4)] hover:bg-slate-800 hover:scale-105 active:scale-95 transition-all cursor-pointer border border-slate-800 group"
+				style="background-color: #020617 !important; color: #ffffff !important;"
 			>
-				<span>DESCEND INTO STUDIO</span>
-				<ArrowDown class="w-4 h-4 text-white group-hover:translate-y-0.5 transition-transform" />
+				<span class="font-black tracking-wider" style="color: #ffffff !important;">DESCEND INTO STUDIO</span>
+				<ArrowDown class="w-4 h-4 text-white group-hover:translate-y-0.5 transition-transform" style="color: #ffffff !important;" />
 			</button>
 		</div>
 	</div>

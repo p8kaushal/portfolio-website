@@ -5,16 +5,20 @@
 
 	const skills = [
 		{
-			category: 'Frontend Architecture',
-			items: ['Svelte / SvelteKit', 'TypeScript', 'Tailwind CSS', 'GSAP Animation', 'HTML5 Canvas']
+			category: 'Programming Languages',
+			items: ['Python', 'JavaScript', 'TypeScript', 'C', 'C++', 'HTML5 / CSS3', 'SQL']
 		},
 		{
-			category: 'Systems & Performance',
-			items: ['Performance Tuning', 'Spatial UI Design', 'State Management', 'WebM Transparent Video']
+			category: 'Web & Backend',
+			items: ['Node.js', 'Express.js', 'Flask', 'FastAPI', 'PostgreSQL', 'Supabase', 'SvelteKit']
 		},
 		{
-			category: 'Tooling & CI/CD',
-			items: ['Git & GitHub', 'Vite / Rollup', 'Figma Prototyping', 'Vercel CDN']
+			category: 'AI, ML & Computer Vision',
+			items: ['OpenCV', 'scikit-learn', 'MediaPipe', 'pandas', 'NumPy', 'Librosa', 'face-recognition']
+		},
+		{
+			category: 'Spatial, Game Dev & Embedded',
+			items: ['Unity', 'Unreal Engine', 'WebGL', 'Babylon.js', 'FreeRTOS', 'ESP32', 'Git / Linux']
 		}
 	];
 

@@ -7,34 +7,34 @@
 
 	let { achievements = [
 		{
-			id: 'awwwards-sotd',
-			title: 'Site of the Day',
-			issuer: 'Awwwards International',
+			id: 'iitb-stock-market',
+			title: '1st Place — National Stock Market Simulation',
+			issuer: 'Indian Institute of Technology Bombay (IIT Bombay)',
 			year: '2025',
-			badge: 'GOLD EXCELLENCE',
-			description: 'Recognized for outstanding WebGL spatial design and interactive UI mechanics.',
-			details: 'Awarded by an international panel of 12 judges evaluating visual design, performance, and technical execution.',
-			certificateCode: 'AWW-2025-9941'
+			badge: 'NATIONAL WINNER // 1ST PLACE',
+			description: 'Secured 1st position across pan-India collegiate participants in macroeconomic portfolio valuation, algorithmic trading strategy, and risk-adjusted return simulation.',
+			details: 'Achieved highest portfolio alpha in simulated high-frequency order book conditions, navigating macroeconomic shocks, volatility spikes, and liquidity constraints under rigorous competitive evaluation.',
+			certificateCode: 'IITB-SMS-2025-01'
 		},
 		{
-			id: 'fwa-month',
-			title: 'FWA of the Month',
-			issuer: 'Favorite Website Awards',
-			year: '2024',
-			badge: 'TOP INNOVATION',
-			description: 'Awarded for pioneering GSAP spatial camera transitions and composition engines.',
-			details: 'Featured globally on FWA showcase for pushing boundaries in browser-based 3D spatial navigation.',
-			certificateCode: 'FWA-MONTH-8820'
+			id: 'iitb-case-comp',
+			title: '3rd Place — Pan-IIT Business Case Competition',
+			issuer: 'Indian Institute of Technology Bombay (IIT Bombay)',
+			year: '2025',
+			badge: 'PODIUM FINISH // 3RD PLACE',
+			description: 'Awarded 3rd place for architecting an analytical market-entry strategy, technological scalability roadmap, and financial viability model.',
+			details: 'Evaluated on quantitative problem structuring, unit economics modeling, technological barrier-to-entry analysis, and executive presentation before venture capital jurors.',
+			certificateCode: 'IITB-CASE-2025-03'
 		},
 		{
-			id: 'apple-design-nominee',
-			title: 'Apple Design Award Nominee',
-			issuer: 'WWDC Developer Showcase',
-			year: '2024',
-			badge: 'FINALIST',
-			description: 'Nominated for Apple Keynote-inspired human scale portfolio interface design.',
-			details: 'Selected as a finalist in Spatial Computing & Interactive UI category during annual developer honors.',
-			certificateCode: 'ADA-2024-0104'
+			id: 'sih-2026-finalist',
+			title: 'Finalist — Smart India Hackathon 2026',
+			issuer: 'Ministry of Education, Govt. of India',
+			year: '2026',
+			badge: 'NATIONAL HACKATHON FINALIST',
+			description: 'Qualified for Internal Round 2 of SIH 2026, engineering an innovative software solution for critical national infrastructure and governance challenges.',
+			details: 'Selected among top college engineering cohorts for technical execution, architectural robustness, and real-time problem-solving under strict 36-hour sprint milestones.',
+			certificateCode: 'SIH-2026-R2-VIT'
 		}
 	] }: { achievements?: any[] } = $props();
 

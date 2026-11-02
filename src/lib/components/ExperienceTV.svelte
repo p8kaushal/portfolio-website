@@ -24,57 +24,57 @@
 
 	const careerTimeline = [
 		{
-			period: '2025',
-			role: 'Full-Stack Web Architect',
-			org: 'NationState Simulation',
-			badge: 'SPATIAL WEB ARCHITECTURE',
-			shortSummary: 'Architected scalable multi-user simulation engines, Supabase Auth integrations, and 60 FPS spatial canvas layouts.',
+			period: '2025 – Present',
+			role: 'Independent Software Developer',
+			org: 'Personal Projects & Systems Exploration',
+			badge: 'FULL-STACK • AI/ML • GAME DEV',
+			shortSummary: 'Building and experimenting with software projects across web development, machine learning, computer vision, game development, and desktop applications.',
 			bulletPoints: [
-				'Designed multi-tenant Supabase Auth & real-time state synchronization for 10,000+ active sessions.',
-				'Engineered 60 FPS GSAP spatial camera pan choreographies and 2D canvas composition engines.',
-				'Optimized web assets & WebM video pipelines achieving sub-second global CDN response times.'
+				'Developed machine learning applications using real-world datasets, including an IPL match prediction project built with pandas, scikit-learn, and Flask.',
+				'Worked on web-based product concepts such as Skill Swap and RentWheels, exploring application design, user-facing functionality, and backend development.',
+				'Explored game development and interactive experiences using Unity, Unreal Engine, Phaser, WebGL, and Babylon.js.'
 			],
-			techStack: ['SvelteKit', 'TypeScript', 'Supabase', 'Tailwind CSS', 'GSAP 3D'],
+			techStack: ['Python', 'TypeScript', 'Node.js', 'Flask', 'FastAPI', 'PostgreSQL', 'OpenCV', 'scikit-learn'],
 			extendedSpecs: {
-				telemetry: '60.0 FPS Sync Rate | 12ms Frame Budget | 99.98% CDN Cache Hit Ratio',
-				routine: 'Canvas2D double-buffered compositor with offscreen Web Worker chunking',
-				benchmarks: 'Sub-100ms cold start initialization; zero garbage-collection memory spikes'
+				telemetry: 'Active Prototyping Pipeline | Multi-Disciplinary Systems | 9.07 GPA Foundation',
+				routine: 'End-to-end rapid prototyping from conceptual system diagrams to full-stack implementation',
+				benchmarks: 'Sub-50ms API responses, modular architectures, and scalable full-stack deployments'
 			}
 		},
 		{
-			period: '2025 – 2026',
-			role: 'Neural Pipeline Architect',
-			org: 'Resonant AI (Eureka! IIT Bombay)',
-			badge: 'AI & SPEECH PIPELINES',
-			shortSummary: 'Pioneered ONNX speech normalizers, streaming audio transformers, and sub-100ms real-time voice inference.',
+			period: '2025 – 2029 (Exp.)',
+			role: 'B.Tech — Computer Science & Engineering',
+			org: 'Vishwakarma Institute of Technology, Pune',
+			badge: 'CS • IoT • CYBERSECURITY • BLOCKCHAIN',
+			shortSummary: 'Pursuing undergraduate studies in Computer Science and Engineering with a focus on IoT, Cybersecurity, and Blockchain Technology. Maintaining a 9.07 CGPA.',
 			bulletPoints: [
-				'Built streaming audio transformer architecture running low-latency ONNX speech normalizers.',
-				'Achieved sub-100ms end-to-end voice inference on edge GPUs for interactive real-time avatars.',
-				'Awarded top honors at Eureka! IIT Bombay for pioneering neural audio compression pipelines.'
+				'Maintained a strong academic record with a 9.07 CGPA across core engineering disciplines.',
+				'Finalist at Smart India Hackathon 2026 (Internal Round 2), tackling real-world problem statements.',
+				'Active participant in collegiate hackathons, technical clubs, and peer collaborative engineering projects.'
 			],
-			techStack: ['Python', 'PyTorch', 'ONNX Runtime', 'SvelteKit', 'WebRTC Audio'],
+			techStack: ['C/C++', 'Python', 'Data Structures', 'Algorithms', 'DBMS', 'Computer Networks', 'Linux'],
 			extendedSpecs: {
-				telemetry: '84ms Audio-to-Lip Sync | 16kHz PCM Stream Input | INT8 Quantized Model Weight (42MB)',
-				routine: 'ONNX Runtime WebAssembly execution thread with SIMD vectorization',
-				benchmarks: 'Top Award Winner @ Eureka! IIT Bombay; 4.2x speedup over standard PyTorch Web API'
+				telemetry: '9.07 / 10.0 CGPA | SIH 2026 Round 2 Finalist | VIT Pune Department of CSE',
+				routine: 'Algorithmic problem-solving, operating systems principles, and distributed networking fundamentals',
+				benchmarks: 'Top academic standing; rigorous coursework in IoT architectures, cryptography, and systems programming'
 			}
 		},
 		{
 			period: '2026 – Present',
-			role: 'Embedded Avionics Lead',
-			org: 'NIDAR VEGAPilot Project',
-			badge: 'AVIONICS ARCHITECTURE',
-			shortSummary: 'Architecting Q16.16 fixed-point sensor fusion pipelines & real-time telemetry systems for autonomous flight controls.',
+			role: 'Avionics Subdivision Engineer',
+			org: 'Drone Research & Development SIG (DRDS), VIT Pune',
+			badge: 'AVIONICS • SWARM UAVs • TELEMETRY',
+			shortSummary: 'Contributing to the avionics systems and hardware-software telemetry integration for autonomous UAVs under Mission 1 – RescueSwarm.',
 			bulletPoints: [
-				'Engineered zero-heap Q16.16 fixed-point math engine for ARM Cortex-M flight computers.',
-				'Architected deterministic 100 Hz sensor fusion pipeline combining IMU, Baro, and Optical Flow inputs.',
-				'Designed micro-telemetry protocol reducing bandwidth consumption by 64% over RF links.'
+				'Working on avionics firmware and sensor fusion integration for autonomous UAV swarm navigation in disaster response.',
+				'Developing low-latency telemetry communication between onboard companion computers and ground control stations.',
+				'Collaborating on hardware-in-the-loop (HIL) testing, fail-safe protocols, and flight controller calibration.'
 			],
-			techStack: ['C/C++', 'Fixed-Point Math', 'ARM Cortex-M', 'FreeRTOS', 'Telemetry Protocol'],
+			techStack: ['Embedded C', 'C++', 'FreeRTOS', 'ESP32', 'STM32', 'Sensor Fusion', 'Telemetry Protocols'],
 			extendedSpecs: {
-				telemetry: '100 Hz Fixed Cycle Loop | FreeRTOS Preemptive Priority 4 | 0 Dynamic Allocations (Zero Heap)',
-				routine: 'Q16.16 Fixed-Point Matrix Inversion routine in C99: int32_t fix_mul(int32_t a, int32_t b)',
-				benchmarks: 'Zero-overflow safety verified across 10,000 simulated flight hours in Hardware-In-Loop (HIL)'
+				telemetry: 'Sub-50ms Swarm Telemetry Link | Deterministic Sensor Polling | Fail-Safe Redundancy',
+				routine: 'Mission 1 – RescueSwarm: Autonomous multi-rotor coordination and RF communications stack',
+				benchmarks: 'Verified in Hardware-In-The-Loop (HIL) bench simulations; robust packet recovery protocols'
 			}
 		}
 	];

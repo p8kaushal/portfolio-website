@@ -7,111 +7,111 @@
 
 	let { projects = [
 		{
-			id: 'keynote-3d',
-			title: 'Keynote Studio 3D',
-			year: '2026',
-			category: 'Spatial Web',
-			tech: 'SvelteKit • GSAP • Tailwind',
-			tags: ['SvelteKit', 'GSAP 3D', 'WebM', 'Tailwind'],
-			thumbnailUrl: '/bg-office-center.jpg',
-			description: 'Cinematic Apple Keynote virtual stage portfolio engine with transparent WebM avatars and 2D spatial navigation.',
-			longDescription: 'High-performance interactive 2D spatial canvas rendering engine with GSAP camera choreography, WebM transparent video loops, and responsive glass tablet controls.',
-			liveUrl: 'https://keynote-studio-3d.vercel.app',
-			githubUrl: 'https://github.com/p8kaushal/portfolio-website',
-			highlights: [
-				'4-Layer Z-Index Canvas Stack with GPU acceleration',
-				'60 FPS Motion Blur with 0ms dropped frames',
-				'Automatic WebM green-screen chroma keyer'
-			]
-		},
-		{
-			id: 'spatial-ui-kit',
-			title: 'Spatial UI Kit',
+			id: 'ipl-win-predictor',
+			title: 'IPL Match Win Predictor',
 			year: '2025',
-			category: 'Canvas Engine',
-			tech: 'TypeScript • Canvas • WebGL',
-			tags: ['TypeScript', 'SVG Vectors', 'Canvas2D', 'CSS3D'],
+			category: 'Machine Learning',
+			tech: 'Python • scikit-learn • Flask • pandas',
+			tags: ['Python', 'scikit-learn', 'Flask', 'pandas', 'Machine Learning'],
 			thumbnailUrl: '/bg-projects.jpg',
-			description: 'High-performance interactive vector device frames and resolution-independent layout anchors.',
-			longDescription: 'Resolution-independent CSS/SVG vector device frames optimized for spatial camera transitions and zero resolution degradation across 4K displays.',
-			liveUrl: 'https://spatial-ui-kit.vercel.app',
-			githubUrl: 'https://github.com/p8kaushal/spatial-ui-kit',
+			description: 'Machine learning web application predicting second-innings IPL win probabilities based on live match dynamics.',
+			longDescription: 'Interactive ML web application trained on extensive historical ball-by-ball IPL match data. The pipeline models second-innings match situations (target, current score, wickets in hand, overs remaining, and required run rate) to calculate real-time win probabilities for chasing teams.',
+			liveUrl: 'https://github.com/p8kaushal/ipl-win-predictor',
+			githubUrl: 'https://github.com/p8kaushal/ipl-win-predictor',
 			highlights: [
-				'Resolution-independent SVG vector path composition',
-				'Sub-millisecond scaling re-renders on 4K screens',
-				'Automated dynamic hardware aspect-ratio anchoring math'
+				'Trained classification models achieving high accuracy on ball-by-ball match dataset',
+				'Dynamic feature engineering for target, run rates, wickets, and venue statistics',
+				'Interactive Flask web interface with responsive scenario simulation controls'
 			]
 		},
 		{
-			id: 'ai-presenter-keyer',
-			title: 'AI Presenter Keyer',
+			id: 'facetrack-cv',
+			title: 'FaceTrack — Face & Gesture Control',
 			year: '2025',
-			category: 'Video Pipeline',
-			tech: 'WebM • HTML5 • FFmpeg',
-			tags: ['FFmpeg', 'WebM', 'Chroma Key', 'HTML5'],
+			category: 'Computer Vision',
+			tech: 'Python • OpenCV • MediaPipe • dlib',
+			tags: ['OpenCV', 'MediaPipe', 'Python', 'Biometrics', 'Computer Vision'],
 			thumbnailUrl: '/bg-experience.jpg',
-			description: 'Transparent video keying pipeline and dual-pass alpha channel generator for real-time HTML5 presenter avatars.',
-			longDescription: 'Automated green-screen background removal and FFmpeg WebM encoding pipeline for real-time HTML5 video presenter avatars.',
-			liveUrl: 'https://ai-presenter-keyer.vercel.app',
-			githubUrl: 'https://github.com/p8kaushal/ai-presenter-keyer',
+			description: 'Real-time computer vision system for biometric facial recognition and touchless gesture-based device interaction.',
+			longDescription: 'High-performance computer vision suite integrating 68-point facial landmark detection and 128-dimensional dlib face embeddings for instant biometric authentication, combined with 21-point MediaPipe hand landmark tracking for contactless gesture control of desktop media and system actions.',
+			liveUrl: 'https://github.com/p8kaushal/facemark-gesture-control',
+			githubUrl: 'https://github.com/p8kaushal/facemark-gesture-control',
 			highlights: [
-				'Dual-pass FFmpeg chroma key filter chain',
-				'Sub-100ms video decoding latency over CDN edge',
-				'HTML5 Canvas2D real-time pixel shader fallback'
+				'68-point facial landmark and dlib embedding biometric verification',
+				'21-point hand skeleton tracking with MediaPipe for touchless gesture controls',
+				'Smooth 30+ FPS real-time processing loop optimized on standard webcams'
 			]
 		},
 		{
-			id: 'nation-state-sim',
-			title: 'NationState Sim',
-			year: '2025',
-			category: 'Simulations',
-			tech: 'SvelteKit • Supabase • Canvas',
-			tags: ['SvelteKit', 'Supabase', 'WebSockets', 'Canvas API'],
-			thumbnailUrl: '/bg-desk-papers.jpg',
-			description: 'Geopolitical strategy engine with real-time dynamic market simulation and multiplayer socket sync.',
-			longDescription: 'Full-stack geopolitical simulation web platform featuring real-time economic state machines and live map rendering.',
-			liveUrl: 'https://nation-state-sim.vercel.app',
-			githubUrl: 'https://github.com/p8kaushal/nation-state-sim',
-			highlights: [
-				'Event-driven Supabase Realtime socket bus',
-				'120 updates/sec server state broadcasting',
-				'Custom quadtree map spatial partitioner'
-			]
-		},
-		{
-			id: 'neural-speech-normalizer',
-			title: 'Neural Speech Normalizer',
-			year: '2025',
-			category: 'AI / Research',
-			tech: 'Python • PyTorch • ONNX',
-			tags: ['Python', 'ONNX', 'PyTorch', 'IIT Bombay'],
+			id: 'resonant-ai',
+			title: 'ResonantAI — Audio Emotion Analyzer',
+			year: '2025 – 2026',
+			category: 'Audio Intelligence',
+			tech: 'Python • Librosa • FastAPI • scikit-learn',
+			tags: ['Audio Processing', 'FastAPI', 'Librosa', 'Speech Emotion', 'AI'],
 			thumbnailUrl: '/bg-office-center.jpg',
-			description: 'Low-latency neural audio normalization pipeline for edge deployment developed during research fellowship.',
-			longDescription: 'Edge-optimized neural speech preprocessing pipeline converting noisy acoustic inputs into clean normalized speech features.',
-			liveUrl: 'https://neural-speech.vercel.app',
-			githubUrl: 'https://github.com/p8kaushal/neural-speech-normalizer',
+			description: 'Multimodal audio intelligence pipeline analyzing vocal tone, pitch, and acoustic features for real-time emotion classification.',
+			longDescription: 'Intelligent audio signal processing system that extracts Mel-Frequency Cepstral Coefficients (MFCCs), chroma, and spectral contrast features from raw voice waveforms to classify emotional affect (Happy, Calm, Anxious, Frustrated, Neutral) with an edge-ready FastAPI streaming inference server.',
+			liveUrl: 'https://github.com/p8kaushal/resonant-ai',
+			githubUrl: 'https://github.com/p8kaushal/resonant-ai',
 			highlights: [
-				'Quantized INT8 ONNX Runtime model export',
-				'< 15ms inference latency on ARM CPU',
-				'Automated PyTorch TorchScript JIT tracing'
+				'Acoustic feature extraction of MFCCs, spectral roll-off, and pitch contours',
+				'Multi-class classifier predicting discrete emotional states from voice',
+				'FastAPI REST endpoints for low-latency streaming audio inference'
 			]
 		},
 		{
-			id: 'glass-spatial-studio',
-			title: 'Glass Spatial Studio',
-			year: '2024',
-			category: 'Design Systems',
-			tech: 'CSS Custom Properties • Svelte',
-			tags: ['Svelte', 'CSS Variables', 'Apple Design', 'Backdrop Filter'],
-			thumbnailUrl: '/bg-projects.jpg',
-			description: 'Apple-inspired glassmorphism component library with reactive blur and opacity system controls.',
-			longDescription: 'Design system implementing translucent glass cards, dynamic backdrop blurs, and unified spatial state control.',
-			liveUrl: 'https://glass-spatial-studio.vercel.app',
-			githubUrl: 'https://github.com/p8kaushal/glass-spatial-studio',
+			id: 'digital-metrology',
+			title: 'Digital Metrology & Defect Inspector',
+			year: '2025',
+			category: 'Computer Vision / QC',
+			tech: 'Python • OpenCV • scikit-image • NumPy',
+			tags: ['OpenCV', 'Quality Inspection', 'scikit-image', 'Metrology', 'Python'],
+			thumbnailUrl: '/bg-desk-papers.jpg',
+			description: 'Automated optical inspection and measurement system leveraging computer vision for sub-millimeter component quality control.',
+			longDescription: 'Industrial computer vision pipeline for automated dimensional metrology and defect detection. Uses Canny edge detection, contour approximation, and perspective homography calibration to measure component geometries down to sub-millimeter tolerances and flag surface anomalies.',
+			liveUrl: 'https://github.com/p8kaushal/digital-metrology-inspector',
+			githubUrl: 'https://github.com/p8kaushal/digital-metrology-inspector',
 			highlights: [
-				'Unified CSS custom variable reactive binding',
-				'Zero layout thrashing hardware composite layers',
-				'Automated cross-browser backdrop-filter fallback cascade'
+				'Contour analysis and homography calibration for sub-millimeter geometric measurement',
+				'Automated detection of surface defects, cracks, and machining burrs',
+				'Visual pass/fail diagnostic analytics dashboard with tolerance bands'
+			]
+		},
+		{
+			id: 'skill-swap',
+			title: 'Skill Swap — Knowledge Exchange',
+			year: '2025',
+			category: 'Full-Stack Web',
+			tech: 'TypeScript • Node.js • PostgreSQL • SvelteKit',
+			tags: ['SvelteKit', 'TypeScript', 'Node.js', 'PostgreSQL', 'Tailwind'],
+			thumbnailUrl: '/bg-projects.jpg',
+			description: 'Full-stack web application enabling students and professionals to exchange technical skills through a credit-based matching system.',
+			longDescription: 'Community platform connecting learners and mentors for peer-to-peer technical knowledge transfer. Features normalized PostgreSQL schemas, session-based JWT authentication, peer scheduling calendar, review scoring, and a gamified skill badge economy.',
+			liveUrl: 'https://github.com/p8kaushal/skill-swap-platform',
+			githubUrl: 'https://github.com/p8kaushal/skill-swap-platform',
+			highlights: [
+				'Relational data modeling in PostgreSQL with indexed search and session auth',
+				'Peer-to-peer request matchmaking and mutual credit transaction ledger',
+				'Responsive SvelteKit and Tailwind CSS UI with interactive profile showcases'
+			]
+		},
+		{
+			id: 'hardhit-3d-cricket',
+			title: 'HardHit 3D Cricket',
+			year: '2025',
+			category: 'Game Dev / Spatial',
+			tech: 'WebGL • Babylon.js / Three.js • Canvas API',
+			tags: ['WebGL', 'Babylon.js', 'Three.js', 'Game Development', 'Physics'],
+			thumbnailUrl: '/bg-office-center.jpg',
+			description: 'Immersive browser-based 3D cricket simulation featuring physics-driven batting mechanics and dynamic field positioning.',
+			longDescription: 'Interactive 3D sports simulation running directly in the browser via WebGL. Incorporates dynamic ball trajectory mechanics (spin, seam bounce, friction), gesture-based shot timing and loft controls, dynamic fielding AI, and realistic stadium audio.',
+			liveUrl: 'https://github.com/p8kaushal/hardhit-3d-cricket',
+			githubUrl: 'https://github.com/p8kaushal/hardhit-3d-cricket',
+			highlights: [
+				'Custom ball trajectory physics engine simulating swing, seam, and pitch degradation',
+				'Responsive gesture-driven batting controls translating swipe vectors into shot angles',
+				'Optimized 60 FPS 3D rendering pipeline running directly in web browsers'
 			]
 		}
 	] }: { projects?: any[] } = $props();

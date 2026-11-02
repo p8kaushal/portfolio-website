@@ -43,6 +43,7 @@
 		<div class="flex items-center gap-0.5 sm:gap-1 shrink-0">
 			{#each tabs as tab}
 				<button
+					id="nav-tab-{tab.id}"
 					type="button"
 					onclick={() => handleTabClick(tab.id)}
 					style="color: {$activeTab === tab.id ? '#020617' : '#0f172a'}; font-weight: {$activeTab === tab.id ? '800' : '700'};"

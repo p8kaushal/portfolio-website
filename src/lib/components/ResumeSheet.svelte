@@ -23,21 +23,23 @@
 			<div class="border-b-2 border-slate-900 pb-2 mb-3 flex justify-between items-start">
 				<div>
 					<h2 class="text-xl font-black tracking-tight text-slate-950">PARTH KAUSHAL</h2>
-					<p class="text-[11px] font-bold text-slate-800 uppercase">Senior Systems Architect</p>
+					<p class="text-[11px] font-bold text-slate-800 uppercase">Full-Stack Developer & AI/ML Enthusiast</p>
 				</div>
 				<span class="px-2.5 py-1 bg-slate-900 text-white font-mono text-[10px] font-bold rounded">RESUME_V26</span>
 			</div>
 			<div class="space-y-3 text-xs text-slate-800 leading-snug">
 				<div>
 					<h4 class="font-black text-[11px] uppercase border-b border-slate-900 mb-1">Executive Credentials</h4>
-					<p class="text-[10px] font-medium text-slate-700 leading-relaxed">5+ years leading spatial UI architectures, WebGL canvas pipelines, and high-performance WebM rendering engines.</p>
+					<p class="text-[10px] font-medium text-slate-700 leading-relaxed">B.Tech in CSE at VIT Pune (9.07 CGPA). Avionics Subdivision Engineer at DRDS. Building full-stack web platforms, machine learning pipelines, and interactive 3D simulations.</p>
 				</div>
 				<div>
-					<h4 class="font-black text-[11px] uppercase border-b border-slate-900 mb-1">Career Highlights</h4>
-					<p class="font-bold text-sky-800 text-[11px]">NationState Simulation (2025)</p>
-					<p class="text-[10px] text-slate-600">Full-Stack Web Architect (Supabase & GSAP Canvas Engine)</p>
-					<p class="font-bold text-sky-800 text-[11px] mt-1">Resonant AI (2025–2026)</p>
-					<p class="text-[10px] text-slate-600">Neural Pipeline Architect (ONNX Speech Normalizers @ IIT Bombay)</p>
+					<h4 class="font-black text-[11px] uppercase border-b border-slate-900 mb-1">Experience & Milestones</h4>
+					<p class="font-bold text-sky-800 text-[11px]">DRDS VIT Pune (2026 – Present)</p>
+					<p class="text-[10px] text-slate-600">Avionics Subdivision Engineer (Mission 1 – RescueSwarm)</p>
+					<p class="font-bold text-sky-800 text-[11px] mt-1">Independent Developer (2025 – Present)</p>
+					<p class="text-[10px] text-slate-600">AI/ML, Computer Vision & Web Applications (IPL Predictor, FaceTrack, ResonantAI)</p>
+					<p class="font-bold text-sky-800 text-[11px] mt-1">Smart India Hackathon 2026</p>
+					<p class="text-[10px] text-slate-600">National Finalist (Internal Round 2)</p>
 				</div>
 			</div>
 		</div>

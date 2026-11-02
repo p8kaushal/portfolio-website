@@ -89,22 +89,49 @@
 						<span class="text-xs font-mono font-bold text-slate-400">PARTH KAUSHAL</span>
 					</div>
 					
-					<div class="space-y-4 font-mono text-sm">
+					<div class="space-y-4 font-mono text-xs sm:text-sm">
 						<div>
-							<h3 class="font-bold text-slate-900 border-l-4 border-slate-900 pl-3 mb-2 uppercase">Frontend Architecture</h3>
+							<h3 class="font-bold text-slate-900 border-l-4 border-slate-900 pl-3 mb-2 uppercase">Programming & Core</h3>
 							<div class="flex flex-wrap gap-2">
-								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">SVELTEKIT</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">PYTHON</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">JAVASCRIPT</span>
 								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">TYPESCRIPT</span>
-								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">GSAP 3D</span>
-								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">TAILWIND CSS</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">C / C++</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">C#</span>
 							</div>
 						</div>
 						<div>
-							<h3 class="font-bold text-slate-900 border-l-4 border-slate-900 pl-3 mb-2 uppercase">Systems & Performance</h3>
+							<h3 class="font-bold text-slate-900 border-l-4 border-slate-900 pl-3 mb-2 uppercase">Web & Backend</h3>
 							<div class="flex flex-wrap gap-2">
-								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">PERFORMANCE TUNING</span>
-								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">SPATIAL UI DESIGN</span>
-								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">WEBM TRANSPARENT VIDEO</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">NODE.JS</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">EXPRESS.JS</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">FASTAPI</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">FLASK</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">POSTGRESQL</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">SUPABASE</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">SVELTEKIT</span>
+							</div>
+						</div>
+						<div>
+							<h3 class="font-bold text-slate-900 border-l-4 border-slate-900 pl-3 mb-2 uppercase">AI, Computer Vision & Data</h3>
+							<div class="flex flex-wrap gap-2">
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">OPENCV</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">SCIKIT-LEARN</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">PANDAS</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">PADDLEOCR</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">FACE-API.JS</span>
+							</div>
+						</div>
+						<div>
+							<h3 class="font-bold text-slate-900 border-l-4 border-slate-900 pl-3 mb-2 uppercase">Spatial, Game Dev & Hardware</h3>
+							<div class="flex flex-wrap gap-2">
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">WEBGL</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">BABYLON.JS</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">UNITY</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">UNREAL ENGINE</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">ESP32</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">RISC-V</span>
+								<span class="px-3 py-1.5 bg-slate-200/80 rounded font-bold text-slate-900">ELECTRON</span>
 							</div>
 						</div>
 					</div>
@@ -114,24 +141,26 @@
 				<div class="space-y-6">
 					<div class="border-b-2 border-slate-900 pb-4">
 						<h1 class="text-3xl font-black text-slate-900">PARTH KAUSHAL</h1>
-						<p class="text-sm font-bold text-slate-600 mt-1">Senior Systems Architect • Executive Resume</p>
+						<p class="text-sm font-bold text-slate-600 mt-1">Full-Stack Developer & AI/ML Enthusiast • Pune, India</p>
 					</div>
 
 					<div class="space-y-4 text-sm text-slate-700 font-sans leading-relaxed">
 						<div>
-							<h3 class="font-mono font-bold uppercase text-slate-900 border-b border-slate-300 pb-1 mb-2">Executive Summary</h3>
-							<p>5+ years of experience leading interactive web frontend architectures, high-performance canvas rendering pipelines, and 2D/3D spatial UI engines.</p>
+							<h3 class="font-mono font-bold uppercase text-slate-900 border-b border-slate-300 pb-1 mb-2">Education</h3>
+							<p class="font-bold text-slate-900">Vishwakarma Institute of Technology (VIT), Pune</p>
+							<p class="text-xs text-slate-600">B.Tech in Computer Science and Engineering (IoT and CS, including BCT) • 2025 – 2029 (Expected)</p>
+							<p class="text-xs font-semibold text-emerald-800 mt-1">Current CGPA: 9.07 / 10.0</p>
 						</div>
 						<div>
-							<h3 class="font-mono font-bold uppercase text-slate-900 border-b border-slate-300 pb-1 mb-2">Career Timeline</h3>
+							<h3 class="font-mono font-bold uppercase text-slate-900 border-b border-slate-300 pb-1 mb-2">Experience Highlights</h3>
 							<div class="space-y-2 font-mono text-xs">
 								<div>
-									<p class="font-bold text-sky-800 text-sm">NationState Simulation (2025)</p>
-									<p class="text-slate-600">Full-Stack Web Architect (Supabase & GSAP Canvas Engine)</p>
+									<p class="font-bold text-sky-800 text-sm">Drone Research & Development SIG (DRDS), VIT Pune</p>
+									<p class="text-slate-600 font-sans">Avionics Subdivision Engineer (Mission 1 – RescueSwarm) • Aug 2026 – Present</p>
 								</div>
 								<div>
-									<p class="font-bold text-sky-800 text-sm">Resonant AI (2025–2026)</p>
-									<p class="text-slate-600">Neural Pipeline Architect (ONNX Speech Normalizers @ IIT Bombay)</p>
+									<p class="font-bold text-sky-800 text-sm">Independent Software Developer</p>
+									<p class="text-slate-600 font-sans">Personal Projects & Collaborative Systems (AI/ML, Web, Computer Vision, Game Dev) • 2025 – Present</p>
 								</div>
 							</div>
 						</div>
@@ -261,7 +290,7 @@
 						</span>
 					</div>
 					<h1 class="text-xl font-black text-slate-950 tracking-tight">PARTH KAUSHAL</h1>
-					<p class="text-[11px] font-bold text-sky-700 mb-2">Senior Systems Architect</p>
+					<p class="text-[11px] font-bold text-sky-700 mb-2">Full-Stack Developer & AI/ML Enthusiast</p>
 					<div class="flex gap-2">
 						<button
 							type="button"
@@ -290,9 +319,10 @@
 				>
 					<span class="inline-block px-3 py-1 rounded-full bg-sky-500/10 text-sky-700 text-xs font-mono font-semibold uppercase tracking-wider mb-2">STAGE 01</span>
 					<h1 class="text-2xl font-black text-slate-900 mb-1">PARTH KAUSHAL</h1>
-					<p class="text-xs font-bold text-sky-700 mb-3">Senior Systems Architect</p>
+					<p class="text-xs font-bold text-sky-700 mb-1">Full-Stack Developer & AI/ML Enthusiast</p>
+					<p class="text-[11px] text-slate-600 font-medium mb-3">📍 Pune, Maharashtra, India</p>
 					<div class="flex items-center gap-2 p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-800 text-xs font-semibold">
-						<span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping shrink-0"></span> Available for Architecture Roles
+						<span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping shrink-0"></span> Open to Collaborations & Hackathons
 					</div>
 				</div>
 
@@ -305,7 +335,7 @@
 				>
 					<h3 class="text-sm font-bold uppercase tracking-wider text-slate-600 mb-2">Executive Overview</h3>
 					<p class="text-xs text-slate-700 leading-relaxed mb-4">
-						Building cinematic 2D spatial web experiences with SvelteKit, GSAP camera choreography, and high-performance WebM video avatars.
+						I'm a developer who loves turning ideas into working products. I build full-stack applications, AI-powered tools, interactive games, and intelligent systems, while exploring emerging technologies like Web3 and blockchain.
 					</p>
 					<div class="flex gap-2">
 						<button
@@ -339,14 +369,16 @@
 					id="about-glass-card"
 					class="floating-glass-card apple-glass pointer-events-auto rounded-3xl p-6 sm:p-8 text-slate-900 w-[92vw] sm:w-[480px] lg:max-w-xl lg:mr-[6%] shadow-2xl"
 				>
-					<span class="inline-block px-3.5 py-1 rounded-full bg-purple-500/10 text-purple-700 text-xs font-semibold uppercase tracking-wider mb-3">About Presenter</span>
-					<h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">Architecting Spatial Web</h2>
-					<p class="text-sm text-slate-700 leading-relaxed mb-4">
-						Passionate Frontend Engineer specializing in high-performance WebGL, CSS 3D spatial UI, and SvelteKit applications with Apple-grade polish.
+					<span class="inline-block px-3.5 py-1 rounded-full bg-purple-500/10 text-purple-700 text-xs font-semibold uppercase tracking-wider mb-3">About Parth Kaushal</span>
+					<h2 class="text-2xl sm:text-3xl font-black text-slate-900 mb-2">Curious by Nature. Builder by Choice.</h2>
+					<p class="text-xs sm:text-sm text-slate-700 leading-relaxed mb-4">
+						I'm a Computer Science and Engineering undergraduate at Vishwakarma Institute of Technology, Pune, with a passion for building things that solve problems or create memorable experiences. My interests span full-stack development, artificial intelligence, machine learning, game development, and emerging Web3 technologies. I enjoy experimenting across different domains, learning new tools, and taking projects from early ideas to functional prototypes.
 					</p>
-					<div class="grid grid-cols-2 gap-3 text-xs font-medium text-slate-800 mb-4">
-						<div class="p-2.5 rounded-xl bg-white/40 border border-white/60">📍 San Francisco, CA</div>
-						<div class="p-2.5 rounded-xl bg-white/40 border border-white/60">🚀 5+ Years Experience</div>
+					<div class="grid grid-cols-2 gap-2.5 text-xs font-bold text-slate-800 mb-4">
+						<div class="p-2.5 rounded-xl bg-white/40 border border-white/60">📍 Pune, India</div>
+						<div class="p-2.5 rounded-xl bg-white/40 border border-white/60">🎓 9.07 CGPA (VIT Pune)</div>
+						<div class="p-2.5 rounded-xl bg-white/40 border border-white/60">💻 Full-Stack & AI/ML</div>
+						<div class="p-2.5 rounded-xl bg-white/40 border border-white/60">🎮 Game Dev Enthusiast</div>
 					</div>
 					<button
 						type="button"
