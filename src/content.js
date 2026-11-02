@@ -13,7 +13,7 @@ export const portfolio = {
   projects: [
     { title: 'IPL Predictor', meta: '2026 · Machine Learning / Data Science', description: 'A machine learning application using historical IPL cricket data to explore match predictions through statistical analysis and predictive modeling.', details: 'Python · pandas · scikit-learn · Flask' },
     { title: 'FaceTrack', meta: '2026 · Computer Vision / Full-Stack', description: 'An offline-first biometric attendance application exploring facial recognition as an alternative to traditional attendance workflows.', details: 'JavaScript · face-api.js · Web technologies' },
-    { title: 'ResonantAI', meta: '2026 · Artificial Intelligence / Desktop Applications', description: 'An AI-focused desktop application exploring speech restoration and audio processing through an integrated software interface.', details: 'Electron · Python · Audio processing · AI/ML' }
+    { title: 'ResonantAI', meta: '2026 · Artificial Intelligence / Desktop Applications', description: 'An AI-focused desktop application exploring speech restoration and audio processing through an integrated software interface.', details: 'Electron · Python · Audio processing · AI/ML', githubUrl: 'https://github.com/p8kaushal/ResonantAI' }
   ],
   skills: [
     { title: 'Frontend', details: 'JavaScript, TypeScript, HTML, CSS, web interfaces, Electron' },

@@ -27,6 +27,7 @@
 	"dependencies": {
 		"gsap": "^3.15.0",
 		"lucide-svelte": "^1.0.1",
+		"pdfjs-dist": "^6.5.438",
 		"three": "^0.187.0"
 	}
 }
