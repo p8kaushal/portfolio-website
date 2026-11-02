@@ -2,10 +2,12 @@
 /** Procedural, asset-free house for the first-person portfolio. */
 export function createWorld(THREE) {
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color('#c9d8ca');
+  scene.background = new THREE.Color('#d8a773');
+  // Distance haze and a warm, flat-lit palette evoke early 3D game worlds.
+  scene.fog = new THREE.Fog('#d8a773', 18, 43);
   const colliders = [];
   const materials = {};
-  const mat = (color, roughness = 1) => materials[color] ||= new THREE.MeshStandardMaterial({ color, roughness });
+  const mat = (color, roughness = 1) => materials[color] ||= new THREE.MeshStandardMaterial({ color, roughness, flatShading: true });
   const box = (x, y, z, w, h, d, color, collision = false) => {
     const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat(color));
     mesh.position.set(x, y, z);
@@ -17,7 +19,7 @@ export function createWorld(THREE) {
     const mesh = new THREE.Mesh(new THREE.CylinderGeometry(r1,r2,h,segments),mat(color));
     mesh.position.set(x,y,z);scene.add(mesh);return mesh;
   };
-  const wall = (x,z,w,d,h=3.5) => box(x,h/2,z,w,h,d,'#ede5d2',true);
+  const wall = (x,z,w,d,h=3.5) => box(x,h/2,z,w,h,d,'#bbac8b',true);
   const leg = (x,z) => box(x,.35,z,.13,.7,.13,'#694c3e');
   const table = (x,z,w,d,color='#a77856') => {
     box(x,.77,z,w,.14,d,color,true);
@@ -37,12 +39,12 @@ export function createWorld(THREE) {
 
   // A compact but generous layout: bedroom left, living space middle, studio right.
   // About 28 by 18 units, with wide passages and direct lines between rooms.
-  box(0,-.12,1,28,.24,18,'#ad8c6d');
-  box(-9.2,.008,1,9.5,.025,17.5,'#d8c5a2');
-  box(0,.009,1,8.7,.03,17.5,'#d1b894');
-  box(9.2,.008,1,9.5,.025,17.5,'#c8b394');
+  box(0,-.12,1,28,.24,18,'#8c7357');
+  box(-9.2,.008,1,9.5,.025,17.5,'#bfa47d');
+  box(0,.009,1,8.7,.03,17.5,'#bea47f');
+  box(9.2,.008,1,9.5,.025,17.5,'#aea07d');
   // Wooden floor seams are real geometry, not image textures.
-  for (let z=-7.45;z<9.8;z+=.7) box(0,.026,z,27.4,.008,.013,'#b69d7e');
+  for (let z=-7.45;z<9.8;z+=.7) box(0,.026,z,27.4,.008,.013,'#967e5e');
   wall(0,-8,28.4,.35); wall(0,10,28.4,.35); wall(-14,1,.35,18); wall(14,1,.35,18);
   // Openings in both room dividers, wide enough for accessible movement.
   wall(-4.5,-5.25,.28,5.5); wall(-4.5,5.55,.28,8.9);
@@ -52,20 +54,20 @@ export function createWorld(THREE) {
   // Skirting gives the architecture a crisp, designed edge.
   box(0,.16,-7.79,27.7,.25,.08,'#b39d80'); box(0,.16,9.79,27.7,.25,.08,'#b39d80');
   // Window treatment is procedurally modelled; no textures are loaded.
-  const windowBack=(x,z=-7.77)=>{box(x,2.2,z,2.5,1.65,.07,'#9b765e');box(x,2.2,z+.05,2.27,1.42,.06,'#a9cfc9');box(x,2.2,z+.09,.07,1.42,.03,'#f1e7d0');box(x,2.2,z+.09,2.27,.07,.03,'#f1e7d0');};
+  const windowBack=(x,z=-7.77)=>{box(x,2.2,z,2.5,1.65,.07,'#9b765e');box(x,2.2,z+.05,2.27,1.42,.06,'#cfab79');box(x,2.2,z+.09,.07,1.42,.03,'#e1c59c');box(x,2.2,z+.09,2.27,.07,.03,'#e1c59c');};
   windowBack(-8.3); windowBack(0); windowBack(8.4);
 
   // BEDROOM: bed, nightstand, wardrobe and mirror.
-  rug(-8.1,-2.2,5.8,4.6,'#bb8878');
+  rug(-8.1,-2.2,5.8,4.6,'#a36d5b');
   box(-9,-3.0+3.42,-4.15,3.35,.55,4.4,'#805d4b',true);
-  box(-9,.78,-4.15,3.12,.34,4.15,'#f3edda');
-  box(-9,.99,-3.4,3.12,.16,2.55,'#bf8979');
-  box(-9.75,1.02,-5.55,1.15,.18,.72,'#fff9e8'); box(-8.3,1.02,-5.55,1.15,.18,.72,'#fff9e8');
+  box(-9,.78,-4.15,3.12,.34,4.15,'#d9ccb0');
+  box(-9,.99,-3.4,3.12,.16,2.55,'#a96853');
+  box(-9.75,1.02,-5.55,1.15,.18,.72,'#e1d4b8'); box(-8.3,1.02,-5.55,1.15,.18,.72,'#e1d4b8');
   box(-10.86,.7,-5.1,.8,1.35,1.2,'#ad8a68',true); box(-10.86,1.41,-5.1,.86,.1,1.25,'#d0aa7b');
   cylinder(-10.86,1.65,-5.1,.17,.23,.4,'#e5c88f');
   box(-10.93,1.45,3.2,1.75,2.9,3.7,'#aa886b',true);
   box(-9.99,1.55,3.2,.12,2.35,1.15,'#aac6bb');
-  box(-9.9,1.55,3.2,.06,2.18,.98,'#c7ded0');
+  box(-9.9,1.55,3.2,.06,2.18,.98,'#aabcb0');
   box(-9.9,.55,4.34,.08,.07,.25,'#e6ce91');
   art(-7.6,2,-7.74,1.0,.7,'#d5a27e'); plant(-5.5,7.6,1.25);
   // A low reading bench and wall accents give the larger bedroom a useful edge.
@@ -73,10 +75,10 @@ export function createWorld(THREE) {
   box(-13.78,2.2,2.7,.08,1.15,1.5,'#bca286'); box(-13.72,2.2,2.7,.04,.95,1.3,'#d6b8a0');
   
   // STUDIO: long desk, monitor, keyboard, paper file and chair.
-  rug(8,-3.35,5.9,4.8,'#a6ae95');
+  rug(8,-3.35,5.9,4.8,'#7d8569');
   table(8,-5.25,5.6,1.65);
   box(7.55,1.72,-5.55,1.9,1.12,.16,'#343f3b');
-  box(7.55,1.73,-5.44,1.68,.89,.04,'#829f90');
+  box(7.55,1.73,-5.44,1.68,.89,.04,'#718c7a');
   // Desktop icons are small geometric marks on the screen.
   box(6.95,1.97,-5.41,.18,.18,.015,'#e4c795'); box(6.95,1.68,-5.41,.18,.18,.015,'#d7e2ca');
   box(7.55,1.04,-5.53,.14,.34,.14,'#3d4940'); box(7.55,.91,-5.5,.65,.08,.35,'#3d4940');
@@ -96,9 +98,9 @@ export function createWorld(THREE) {
   box(13.76,2.2,1.5,.08,1.15,2.2,'#8f715a'); box(13.7,2.2,1.5,.04,.95,2,'#b8c9a8');
 
   // LIVING ROOM: sofa, low table, TV and a small trophy display.
-  rug(0,2.3,6.1,4.6,'#9cac91');
-  box(0,.43,4.35,4.25,.7,1.25,'#718971',true); box(0,1.0,4.88,4.25,1.1,.32,'#718971');
-  box(-1.25,.85,4.2,1,.22,.75,'#a8b69a'); box(0,.85,4.2,1,.22,.75,'#a8b69a'); box(1.25,.85,4.2,1,.22,.75,'#a8b69a');
+  rug(0,2.3,6.1,4.6,'#777c5e');
+  box(0,.43,4.35,4.25,.7,1.25,'#5f7355',true); box(0,1.0,4.88,4.25,1.1,.32,'#5f7355');
+  box(-1.25,.85,4.2,1,.22,.75,'#8c9970'); box(0,.85,4.2,1,.22,.75,'#8c9970'); box(1.25,.85,4.2,1,.22,.75,'#8c9970');
   table(0,1.7,2.5,1.15,'#af8866'); box(.15,.89,1.7,.5,.09,.4,'#eee1bd');
   box(0,.48,-6.8,4.2,.85,1.0,'#a47e5d',true); box(0,1.85,-7.13,3.45,1.9,.2,'#384942'); box(0,1.85,-7.0,3.1,1.55,.03,'#638275');
   box(0,1.3,-6.97,1.9,.035,.015,'#b0c6aa'); box(-.72,2.03,-6.97,.13,.48,.015,'#d1bb86'); box(-.4,1.88,-6.97,.13,.78,.015,'#d1bb86');box(-.08,2.12,-6.97,.13,.3,.015,'#d1bb86');
@@ -110,8 +112,20 @@ export function createWorld(THREE) {
   box(-.6,.48,9.25,3.2,.9,.65,'#a17d60',true); box(-.6,.96,9.25,3.3,.08,.7,'#ceb28e');
   cylinder(-1.6,1.13,9.25,.16,.2,.3,'#c58268');
 
-  scene.add(new THREE.HemisphereLight('#fff4dc','#9aa993',2.1));
-  const sun = new THREE.DirectionalLight('#ffe8c3',1.45);sun.position.set(-3,8,4);scene.add(sun);
+  // Geometric streaks on the floor suggest late-afternoon light without
+  // expensive realtime shadows. They are translucent and don't affect collision.
+  const lightPatch = (x,z,w,d) => {
+    const patch = new THREE.Mesh(new THREE.PlaneGeometry(w,d), new THREE.MeshBasicMaterial({color:'#edc184',transparent:true,opacity:.16,depthWrite:false,side:THREE.DoubleSide}));
+    patch.rotation.x=-Math.PI/2; patch.rotation.z=-.18; patch.position.set(x,.081,z); scene.add(patch);
+  };
+  lightPatch(-8.3,-5.7,2.1,3.4); lightPatch(0,-5.8,2.1,3.4); lightPatch(8.4,-5.8,2.1,3.4);
+  // A simple retro rug motif, composed entirely of geometry.
+  for(let i=-2;i<=2;i++) box(i*.62,.082,3.05,.28,.014,.28,'#c69e6c');
+  // Flat graphic picture details are generated in scene, not imported textures.
+  box(2.8,1.85,-7.68,1.04,.07,.02,'#855e4b');
+  box(2.48,2.0,-7.67,.13,.27,.02,'#885f4b'); box(2.78,2.06,-7.67,.14,.39,.02,'#885f4b'); box(3.08,1.98,-7.67,.14,.23,.02,'#885f4b');
+  scene.add(new THREE.HemisphereLight('#ffdbab','#5e6150',1.55));
+  const sun = new THREE.DirectionalLight('#ffd092',1.5);sun.position.set(-3,8,4);scene.add(sun);
 
   // Neutral, procedural figure exposed for a separate introductory camera.
   const character = new THREE.Group();
