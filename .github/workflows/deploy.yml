@@ -28,28 +28,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       - name: Install dependencies
-        run: npm ci || npm install
+        run: npm ci
 
       - name: Build project
         run: npm run build
 
       - name: Verify and configure deployment output
         run: |
-          if [ -d "dist" ]; then
-            DEPLOY_DIR="dist"
-          elif [ -d "build" ]; then
-            DEPLOY_DIR="build"
-          else
-            echo "::error::Neither dist nor build directory found after build step!"
-            exit 1
-          fi
-          echo "Detected build output directory: $DEPLOY_DIR"
-          echo "parthkaushal.in" > "$DEPLOY_DIR/CNAME"
-          echo "DEPLOY_DIR=$DEPLOY_DIR" >> "$GITHUB_ENV"
+          test -f build/index.html || { echo "::error::Missing build/index.html"; exit 1; }
+          echo "parthkaushal.in" > build/CNAME
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
@@ -57,7 +48,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ env.DEPLOY_DIR }}
+          path: build
 
       - name: Deploy to GitHub Pages
         id: deployment

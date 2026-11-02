@@ -55,7 +55,17 @@ export function createWorld(THREE) {
   box(0,.16,-7.79,27.7,.25,.08,'#b39d80'); box(0,.16,9.79,27.7,.25,.08,'#b39d80');
   // Window treatment is procedurally modelled; no textures are loaded.
   const windowMaterial = new THREE.MeshBasicMaterial({color:'#c9c0a7'});
-  const windowBack=(x,z=-7.77)=>{box(x,2.2,z,2.5,1.65,.07,'#9b765e');const pane=box(x,2.2,z+.05,2.27,1.42,.06,'#cfab79');pane.material=windowMaterial;box(x,2.2,z+.09,.07,1.42,.03,'#e1c59c');box(x,2.2,z+.09,2.27,.07,.03,'#e1c59c');};
+  const windowBodies=[];
+  const windowBack=(x,z=-7.77)=>{
+    box(x,2.2,z,2.5,1.65,.07,'#9b765e');
+    const pane=box(x,2.2,z+.05,2.27,1.42,.06,'#cfab79');pane.material=windowMaterial;
+    // The sun and moon are drawn within each pane in front of the sky and behind the mullions.
+    const sunDisc=new THREE.Mesh(new THREE.CircleGeometry(.145,16),new THREE.MeshBasicMaterial({color:'#f5dda2',transparent:true,depthWrite:false,fog:false}));
+    const moonDisc=new THREE.Mesh(new THREE.CircleGeometry(.12,16),new THREE.MeshBasicMaterial({color:'#e5e9e4',transparent:true,depthWrite:false,fog:false}));
+    sunDisc.position.set(x-.55,2.45,z+.091);moonDisc.position.set(x+.55,2.45,z+.092);scene.add(sunDisc,moonDisc);
+    windowBodies.push({x,z,sunDisc,moonDisc});
+    box(x,2.2,z+.11,.07,1.42,.03,'#e1c59c');box(x,2.2,z+.11,2.27,.07,.03,'#e1c59c');
+  };
   windowBack(-8.3); windowBack(0); windowBack(8.4);
 
   // BEDROOM: bed, nightstand, wardrobe and mirror.
@@ -154,23 +164,31 @@ export function createWorld(THREE) {
   box(2.48,2.0,-7.67,.13,.27,.02,'#885f4b'); box(2.78,2.06,-7.67,.14,.39,.02,'#885f4b'); box(3.08,1.98,-7.67,.14,.23,.02,'#885f4b');
   const ambient = new THREE.HemisphereLight('#f4e7d4','#74786d',1.35);scene.add(ambient);
   const sun = new THREE.DirectionalLight('#f5e5ce',1.15);sun.position.set(-3,8,4);scene.add(sun);
-  // A few low-cost, code-built ceiling lights keep each room readable at night.
-  // They do not cast realtime shadows and do not affect player collisions.
+  // Grounded floor lamps: a weighted base, slender stem, shade and warm bulb.
+  // They are decorative and do not obstruct the walkable paths.
   const lamps = [];
-  for (const x of [-8.4,0,8.4]) {
-    const fixture=box(x,3.28,1,.7,.12,.7,'#766650');
-    const glow=new THREE.Mesh(new THREE.BoxGeometry(.52,.035,.52),new THREE.MeshBasicMaterial({color:'#e9d4af'}));
-    glow.position.set(x,3.19,1);scene.add(glow);
-    const lamp=new THREE.PointLight('#f6d8ad',0,12,2);lamp.position.set(x,3.02,1);scene.add(lamp);
+  for (const [x,z] of [[-5.8,5.7],[3.25,6.8],[12.8,-2.7]]) {
+    cylinder(x,.045,z,.28,.31,.09,'#5d5548',16);
+    cylinder(x,.80,z,.045,.055,1.48,'#70604c',10);
+    cylinder(x,1.55,z,.11,.08,.12,'#8a765a',10);
+    const shade=new THREE.Mesh(new THREE.CylinderGeometry(.19,.32,.42,14,1,true),mat('#d5c7a8'));
+    shade.position.set(x,1.76,z);scene.add(shade);
+    const glow=new THREE.Mesh(new THREE.SphereGeometry(.09,10,8),new THREE.MeshBasicMaterial({color:'#e9d4af'}));
+    glow.position.set(x,1.59,z);scene.add(glow);
+    const lamp=new THREE.PointLight('#f6d8ad',0,12,2);lamp.position.set(x,1.62,z);scene.add(lamp);
     lamps.push({lamp,glow});
   }
+  // Untextured sky discs are also visible above the open-roof walls when looking up.
+  const skySun=new THREE.Mesh(new THREE.CircleGeometry(2.2,24),new THREE.MeshBasicMaterial({color:'#f2d49a',transparent:true,depthWrite:false,fog:false}));
+  const skyMoon=new THREE.Mesh(new THREE.CircleGeometry(1.65,24),new THREE.MeshBasicMaterial({color:'#e1e8e4',transparent:true,depthWrite:false,fog:false}));
+  skySun.position.set(0,21,-34);skyMoon.position.set(0,21,-34);scene.add(skySun,skyMoon);
   const daySky=new THREE.Color('#c8b49a'),nightSky=new THREE.Color('#384451');
   const dayWindow=new THREE.Color('#c9c0a7'),nightWindow=new THREE.Color('#536476');
   const daySun=new THREE.Color('#f5e5ce'),nightSun=new THREE.Color('#9baec4');
   const dayGlow=new THREE.Color('#e3d3b5'),nightGlow=new THREE.Color('#ffe0ac');
   const lightColor=new THREE.Color();
   let timeMode='cycle', cycleStart=null, lastLighting=-Infinity;
-  function applyDaylight(amount){
+  function applyDaylight(amount, phase=0){
     const daylight=THREE.MathUtils.clamp(amount,0,1),night=1-daylight;
     scene.background.lerpColors(nightSky,daySky,daylight);
     scene.fog.color.copy(scene.background);
@@ -181,12 +199,26 @@ export function createWorld(THREE) {
     lightColor.lerpColors(nightGlow,dayGlow,daylight);
     for(const {lamp,glow} of lamps){lamp.intensity=night*5.5;glow.material.color.copy(lightColor);}
     for(const material of lightPatches)material.opacity=.015+daylight*.095;
+    // Daylight starts at noon. Sun and moon take opposite arcs across the sky;
+    // fade each body near its horizon instead of leaving both visible at once.
+    const angle=phase*Math.PI*2, arc=Math.sin(angle), height=Math.cos(angle);
+    const sunOpacity=THREE.MathUtils.smoothstep(daylight,.34,.64);
+    const moonOpacity=1-THREE.MathUtils.smoothstep(daylight,.36,.66);
+    skySun.position.set(18*arc,13+8*height,-34);skyMoon.position.set(-18*arc,13-8*height,-34);
+    skySun.material.opacity=sunOpacity;skyMoon.material.opacity=moonOpacity;
+    skySun.visible=sunOpacity>.005;skyMoon.visible=moonOpacity>.005;
+    for(const {x,z,sunDisc,moonDisc} of windowBodies){
+      sunDisc.position.set(x+.66*arc,2.18+.30*height,z+.091);
+      moonDisc.position.set(x-.66*arc,2.18-.30*height,z+.092);
+      sunDisc.material.opacity=sunOpacity;moonDisc.material.opacity=moonOpacity;
+      sunDisc.visible=sunOpacity>.005;moonDisc.visible=moonOpacity>.005;
+    }
   }
   function setTimeMode(mode){
     timeMode=['cycle','day','night'].includes(mode)?mode:'cycle';
     cycleStart=null;lastLighting=-Infinity;
     // Deterministic, immediately visible settings; cycling starts in daylight.
-    applyDaylight(timeMode==='night'?0:1);
+    applyDaylight(timeMode==='night'?0:1,timeMode==='night'?.5:0);
   }
   setTimeMode('cycle');
 
@@ -313,7 +345,8 @@ export function createWorld(THREE) {
       // Throttle updates: light changes are gradual and do not need per-frame work.
       if(timeMode==='cycle'&&!reduceMotion&&now-lastLighting>=100){
         if(cycleStart===null)cycleStart=now;
-        applyDaylight(.5+.5*Math.cos((now-cycleStart)*Math.PI*2/180000));
+        const phase=((now-cycleStart)%180000)/180000;
+        applyDaylight(.5+.5*Math.cos(phase*Math.PI*2),phase);
         lastLighting=now;
       }
     }
