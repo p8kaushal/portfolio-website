@@ -94,13 +94,15 @@ export function createWorld(THREE) {
   // Chair is movable in appearance only; keep its footprint collidable.
   box(7.6,.58,-3.45,1.0,.16,1.0,'#788c78',true); box(7.6,1.0,-3.0,1.0,.95,.15,'#788c78');
   for(const dx of [-.38,.38]) for(const dz of [-.38,.38]) box(7.6+dx,.25,-3.45+dz,.1,.5,.1,'#5d6659');
-  box(10.9,1.1,3.6,1.6,2.2,2.7,'#a58266',true);
-  for(let y=.65;y<2.1;y+=.48) box(10.06,y,3.6,.12,.08,2.5,'#d5b48b');
-  for(let i=0;i<7;i++) box(9.98,.8+(i%3)*.48,2.6+i*.32,.16,.35,.22,['#b16e57','#d0ae77','#6d8a76'][i%3]);
+  // Studio storage sits against the east wall rather than floating in the room.
+  // The shelves and their contents share the same offsets as the cabinet.
+  box(13.02,1.1,2.7,1.6,2.2,2.7,'#a58266',true);
+  for(let y=.65;y<2.1;y+=.48) box(12.18,y,2.7,.12,.08,2.5,'#d5b48b');
+  for(let i=0;i<7;i++) box(12.10,.8+(i%3)*.48,1.7+i*.32,.16,.35,.22,['#b16e57','#d0ae77','#6d8a76'][i%3]);
   plant(5.5,7.8,1.4);
-  // A storage cabinet and framed colour blocks add studio detail without assets.
-  box(12.7,.65,5.9,1.5,1.3,2.2,'#98745a',true); box(12.7,1.34,5.9,1.55,.08,2.25,'#c5a37e');
-  box(13.76,2.2,1.5,.08,1.15,2.2,'#8f715a'); box(13.7,2.2,1.5,.04,.95,2,'#b8c9a8');
+  // Keep a gap between the two pieces of furniture, with both backs at the wall.
+  box(13.05,.65,6.0,1.5,1.3,2.2,'#98745a',true); box(13.05,1.34,6.0,1.55,.08,2.25,'#c5a37e');
+  box(13.76,2.2,-.1,.08,1.15,1.6,'#8f715a'); box(13.7,2.2,-.1,.04,.95,1.4,'#b8c9a8');
 
   // LIVING ROOM: sofa, low table, TV and a small trophy display.
   rug(0,2.3,6.1,4.6,'#777c5e');
@@ -151,6 +153,24 @@ export function createWorld(THREE) {
   scene.add(new THREE.HemisphereLight('#f4e7d4','#74786d',1.35));
   const sun = new THREE.DirectionalLight('#f5e5ce',1.15);sun.position.set(-3,8,4);scene.add(sun);
 
+  // High-contrast hovering diamonds mark the objects visitors can use. They are
+  // drawn in the scene, occluded by furniture, and never pulse or flash.
+  const markers = [];
+  const markerGeometry = new THREE.OctahedronGeometry(.16, 0);
+  const markerMaterial = new THREE.MeshBasicMaterial({color:'#f4d79d'});
+  for (const [x,y,z] of [
+    [-11.72,3.18,3.2], // mirror
+    [7.55,2.70,-5.25], // computer
+    [9.5,1.36,-5.13], // file
+    [-3.13,3.13,-6.93], // trophies
+    [0,3.32,-6.9], // TV
+    [0,1.90,4.0], // couch / TV
+  ]) {
+    const gem = new THREE.Mesh(markerGeometry, markerMaterial);
+    gem.position.set(x,y,z); scene.add(gem); markers.push({mesh:gem,base:y});
+  }
+  const reduceMotion = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
   // Neutral, procedural figure exposed for a separate introductory camera.
   const character = new THREE.Group();
   const charBox=(x,y,z,w,h,d,color)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(color));m.position.set(x,y,z);character.add(m);};
@@ -182,6 +202,6 @@ export function createWorld(THREE) {
       { id: 'tv', label: 'Watch the TV', position: new THREE.Vector3(0, 2.0, -7.0), radius: 2.25 },
       { id: 'tv', label: 'Sit and watch TV', position: new THREE.Vector3(0, 1.0, 3.95), radius: 1.7 },
     ],
-    update() {}
+    update(now = 0) { if (!reduceMotion) for (const {mesh,base} of markers) { mesh.position.y = base + Math.sin(now * .0015) * .065; mesh.rotation.y = now * .00035; } }
   };
 }
