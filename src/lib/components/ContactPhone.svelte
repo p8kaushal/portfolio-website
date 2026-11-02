@@ -68,7 +68,7 @@
 
 		<div class="grid grid-cols-2 gap-3 mb-2">
 			<a
-				href="mailto:hello@example.com"
+				href="mailto:parthkaushal1008@gmail.com"
 				onmouseenter={() => playSound('click')}
 				onclick={() => playSound('click')}
 				class="bg-white/10 backdrop-blur-xl border border-white/15 hover:bg-white/20 text-white font-semibold rounded-2xl p-4 flex flex-col items-center justify-center gap-2 transition-all cursor-pointer"
@@ -77,7 +77,7 @@
 				<span class="text-xs font-bold">Email</span>
 			</a>
 			<a
-				href="https://github.com"
+				href="https://github.com/p8kaushal"
 				target="_blank"
 				rel="noreferrer"
 				onmouseenter={() => playSound('click')}
@@ -88,7 +88,7 @@
 				<span class="text-xs font-bold">GitHub</span>
 			</a>
 			<a
-				href="https://linkedin.com"
+				href="https://www.linkedin.com/in/parth-kaushal-0b3518386/"
 				target="_blank"
 				rel="noreferrer"
 				onmouseenter={() => playSound('click')}
@@ -99,7 +99,7 @@
 				<span class="text-xs font-bold">LinkedIn</span>
 			</a>
 			<a
-				href="https://x.com"
+				href="https://x.com/_ParthKaushal"
 				target="_blank"
 				rel="noreferrer"
 				onmouseenter={() => playSound('click')}
