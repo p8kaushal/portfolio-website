@@ -114,20 +114,42 @@ for name, x, y in test_pts:
         print(f"ERROR: Detected opaque artifact at ({x}, {y})!")
         sys.exit(1)
 
-# Check edge halo on the presenter (x: 800-1120, y: 300-800)
+# Check edge halo and person color fidelity on the presenter (x: 850-1070, y: 350-750)
 green_halos = 0
+magenta_glitches = 0
+person_samples = 0
 total_samples = 0
-for y in range(300, 800, 4):
-    for x in range(800, 1120, 4):
+
+for y in range(350, 750, 4):
+    for x in range(850, 1070, 4):
         r, g, b = im.getpixel((x, y))
         total_samples += 1
+        # Edge halo
         if g > 150 and g > r * 1.5 and g > b * 1.5:
             green_halos += 1
+        # Magenta silhouette corruption check
+        if r > 180 and b > 180 and abs(r - b) < 30 and g < 150:
+            magenta_glitches += 1
+        # Natural human skin/clothing check
+        if r > 80 and r > b and g > 40:
+            person_samples += 1
 
 halo_pct = (green_halos / max(1, total_samples)) * 100
+magenta_pct = (magenta_glitches / max(1, total_samples)) * 100
 print(f"🌿 Edge Green Halo percentage: {halo_pct:.2f}% ({green_halos}/{total_samples})")
+print(f"🟣 Magenta corruption percentage: {magenta_pct:.2f}% ({magenta_glitches}/{total_samples})")
+print(f"👤 Person natural pixels detected: {person_samples} pixels")
+
 if halo_pct > 1.0:
     print(f"ERROR: Excessive green halo detected: {halo_pct:.2f}%")
+    sys.exit(1)
+
+if magenta_pct > 0.5:
+    print(f"ERROR: Corrupted magenta silhouette detected on presenter: {magenta_pct:.2f}%")
+    sys.exit(1)
+
+if person_samples < 200:
+    print(f"ERROR: Presenter person not visible or transparent: only {person_samples} pixels found")
     sys.exit(1)
 
 print("SUCCESS_PIXELS")

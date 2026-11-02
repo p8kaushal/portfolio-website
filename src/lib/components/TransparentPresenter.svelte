@@ -58,14 +58,14 @@
 				const b = data[i + 2];
 
 				// Chroma Key #00FF00 green spill & matte removal
-				const isGreen = chromaKeyGreen && (g > 60 && g > r * 1.2 && g > b * 1.2);
+				const isGreen = chromaKeyGreen && (g > 70 && g > r * 1.35 && g > b * 1.35);
 				// Chroma Key black matte removal if applicable
-				const isBlack = chromaKeyBlack && (r < 18 && g < 18 && b < 18);
+				const isBlack = chromaKeyBlack && (r < 14 && g < 14 && b < 14);
 
 				if (isGreen || isBlack) {
 					data[i + 3] = 0; // Transparent alpha
-				} else if (chromaKeyGreen && g > 70 && g > r && g > b) {
-					// Soft edge despill
+				} else if (chromaKeyGreen && g > 90 && g > r * 1.25 && g > b * 1.25) {
+					// Soft edge despill only on true green spill
 					data[i + 1] = Math.max(r, b);
 				}
 			}
