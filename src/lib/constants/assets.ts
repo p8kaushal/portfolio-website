@@ -6,8 +6,8 @@ export interface SectionConfig {
 }
 
 export const SECTIONS: Record<string, SectionConfig> = {
-	about: { index: 0, label: 'About', image: '/bg-office-left.jpg', presenter: '/presenter-about.webm' },
-	home: { index: 1, label: 'Home', image: '/bg-office-center.jpg', presenter: '/presenter-home.webm' },
+	about: { index: 0, label: 'About', image: '/bg-office-left.jpg', presenter: '/videos/presenter-about-transparent.webm' },
+	home: { index: 1, label: 'Home', image: '/bg-office-center.jpg', presenter: '/videos/presenter-transparent.webm' },
 	experience: { index: 2, label: 'Experience', image: '/bg-experience-macro.jpg', presenter: null },
 	projects: { index: 3, label: 'Projects', image: '/bg-projects-macro.jpg', presenter: null },
 	skills: { index: 4, label: 'Skills', image: '/bg-desk-macro.jpg', presenter: null },
@@ -26,6 +26,6 @@ export const ASSETS = {
 	MACRO_PROJECTS: '/bg-projects-macro.jpg',
 	MACRO_DESK: '/bg-desk-macro.jpg',
 	MACRO_AWARDS: '/bg-wall-awards-macro.jpg',
-	PRESENTER_HOME: '/presenter-home.webm',
-	PRESENTER_ABOUT: '/presenter-about.webm'
+	PRESENTER_HOME: '/videos/presenter-transparent.webm',
+	PRESENTER_ABOUT: '/videos/presenter-about-transparent.webm'
 } as const;

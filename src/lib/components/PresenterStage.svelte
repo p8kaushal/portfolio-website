@@ -4,6 +4,7 @@
 	import { animateSpatialTransition, playExperienceTransition } from '$lib/animations/cameraChoreography';
 	import { playSound } from '$lib/utils/soundEngine';
 	import ExperienceTv from '$lib/components/ExperienceTV.svelte';
+	import TransparentPresenter from '$lib/components/TransparentPresenter.svelte';
 	import { SPATIAL_FLOOR_PLAN } from '$lib/constants/assets';
 	import { Mail, ExternalLink, Download, Award, CheckCircle, Monitor, Tv, Layers, X, ChevronLeft, ChevronRight, ArrowRight, FolderGit2, Terminal, Code2 } from 'lucide-svelte';
 
@@ -230,27 +231,23 @@
 	<!-- STAGE 2: Restored Presenter Video Loop Tags -->
 	{#if $activeTab === 'home'}
 		<div class="presenter-layer absolute inset-0 z-30 flex items-end justify-center pointer-events-none transition-transform duration-700 ease-out">
-			<video
+			<TransparentPresenter
 				id="presenter-video"
-				src="/presenter-home.webm"
-				autoplay
-				loop
-				muted
-				playsinline
-				class="h-[82vh] w-auto object-contain drop-shadow-2xl z-20"
-			></video>
+				webmSrc="/videos/presenter-transparent.webm"
+				movSrc="/videos/presenter-transparent.mov"
+				class="h-[82vh] w-auto object-contain drop-shadow-2xl z-20 pointer-events-none select-none"
+				alt="Parth Kaushal - Home Stage Presenter"
+			/>
 		</div>
 	{:else if $activeTab === 'about'}
 		<div class="presenter-layer absolute inset-0 z-30 flex items-end justify-start pl-[10%] pointer-events-none transition-transform duration-700 ease-out">
-			<video
-				id="presenter-video"
-				src="/presenter-about.webm"
-				autoplay
-				loop
-				muted
-				playsinline
-				class="h-[82vh] w-auto object-contain drop-shadow-2xl z-20"
-			></video>
+			<TransparentPresenter
+				id="presenter-video-about"
+				webmSrc="/videos/presenter-about-transparent.webm"
+				movSrc="/videos/presenter-about-transparent.mov"
+				class="h-[82vh] w-auto object-contain drop-shadow-2xl z-20 pointer-events-none select-none"
+				alt="Parth Kaushal - About Stage Presenter"
+			/>
 		</div>
 	{/if}
 

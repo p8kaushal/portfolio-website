@@ -9,6 +9,7 @@
 	import AchievementsWall from "$lib/components/AchievementsWall.svelte";
 	import ContactPhone from "$lib/components/ContactPhone.svelte";
 	import WelcomeOverlay from "$lib/components/WelcomeOverlay.svelte";
+	import TransparentPresenter from "$lib/components/TransparentPresenter.svelte";
 	import { playVerticalCraneDrop } from "$lib/animations/introChoreography";
 	import { SECTIONS } from "$lib/constants/assets";
 	import { ArrowRight } from "lucide-svelte";
@@ -240,17 +241,15 @@
 			/>
 		</div>
 
-		<!-- Presenter Videos (Raw Black Background at z-index: 30) -->
+		<!-- Presenter Videos (Transparent Dual-Source WebM & MOV with Fallback) -->
 		{#if $activeSection === "home"}
-			<video
+			<TransparentPresenter
 				id="presenter-avatar-home"
-				src="/presenter-home.webm"
-				autoplay
-				loop
-				muted
-				playsinline
-				class="absolute left-1/2 bottom-0 -translate-x-1/2 h-[82vh] w-auto object-contain z-30 pointer-events-none"
-			></video>
+				webmSrc="/videos/presenter-transparent.webm"
+				movSrc="/videos/presenter-transparent.mov"
+				class="absolute left-1/2 bottom-0 -translate-x-1/2 h-[82vh] w-auto object-contain z-30 pointer-events-none select-none"
+				alt="Parth Kaushal - Home Stage Presenter"
+			/>
 
 			<div id="home-stage-root" class="absolute inset-0 z-30 flex items-center justify-between px-10 md:px-16 pointer-events-none hidden sm:flex">
 				<!-- Left Glass Card -->
@@ -296,14 +295,13 @@
 				</div>
 			</div>
 		{:else if $activeSection === "about"}
-			<video
-				src="/presenter-about.webm"
-				autoplay
-				loop
-				muted
-				playsinline
-				class="absolute left-[12%] bottom-0 h-[82vh] w-auto object-contain z-30 pointer-events-none"
-			></video>
+			<TransparentPresenter
+				id="presenter-avatar-about"
+				webmSrc="/videos/presenter-about-transparent.webm"
+				movSrc="/videos/presenter-about-transparent.mov"
+				class="absolute left-[12%] bottom-0 h-[82vh] w-auto object-contain z-30 pointer-events-none select-none"
+				alt="Parth Kaushal - About Stage Presenter"
+			/>
 
 			<div class="card-overlay absolute inset-0 z-30 flex items-center justify-end p-6 pointer-events-auto">
 				<div
