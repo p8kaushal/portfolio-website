@@ -82,6 +82,22 @@ export function mountPortfolioUI(host, options = {}) {
         if (entry.meta) card.append(textElement('div', entry.meta, 'pq-meta'));
         if (entry.description) card.append(textElement('p', entry.description));
         if (entry.details) card.append(textElement('p', entry.details));
+        if (key === 'achievements') {
+          if (entry.context) card.append(textElement('p', entry.context));
+          if (entry.role) card.append(textElement('p', `My Role: ${entry.role}`));
+          if (entry.contribution) card.append(textElement('p', `${entry.contributionLabel}: ${entry.contribution}`));
+          if (entry.contributions?.length) {
+            card.append(textElement('p', 'My Contributions:'));
+            const list = document.createElement('ul');
+            for (const contribution of entry.contributions) list.append(textElement('li', contribution));
+            card.append(list);
+          }
+          if (entry.outcome) card.append(textElement('p', `${entry.outcomeLabel}: ${entry.outcome}`));
+          if (entry.repositoryUrl) {
+            const link = textElement('a', 'View repository ↗');
+            link.href = entry.repositoryUrl; link.target = '_blank'; link.rel = 'noopener noreferrer'; card.append(link);
+          } else if (entry.repositoryNote) card.append(textElement('p', `Repository: ${entry.repositoryNote}`));
+        }
         if (entry.label) {
           if (entry.href) {
             const link = textElement('a', entry.label);

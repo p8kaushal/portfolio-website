@@ -33,9 +33,35 @@ export const portfolio = {
     { title: 'B.Tech — Computer Science & Engineering', period: 'September 2025 – June 2029 (expected)', organization: 'Vishwakarma Institute of Technology, Pune', meta: 'September 2025 – June 2029 (expected) · Vishwakarma Institute of Technology, Pune', description: 'Specialization in IoT, Cybersecurity and Blockchain Technology. CGPA: 9.07/10.0.' }
   ],
   achievements: [
-    { title: '1st Place — Stock Market Simulation', meta: '2026 · Chapters by IIT Bombay, Pune Chapter', description: 'First place in a competitive stock market simulation event.' },
-    { title: '3rd Place — Case Competition', meta: '2026 · Chapters by IIT Bombay, Pune Chapter', description: 'Third place in a competition focused on structured problem-solving, analytical reasoning and strategy.' },
-    { title: 'Smart India Hackathon 2026 — Internal Selection', meta: '2026 · Second internal round', description: 'Advanced to the second internal selection round with a computer-vision-based Digital Metrology Inspector project.' }
+    {
+      title: '1st Place — Stock Market Simulation', badge: '1ST PLACE',
+      meta: 'Chapters by IIT Bombay — Pune Chapter',
+      description: 'Secured 1st place in a competitive stock market simulation organized by Chapters by IIT Bombay, Pune Chapter.',
+      context: 'The competition challenged participants to make investment decisions in a simulated market environment, applying analytical reasoning, risk assessment, and strategic decision-making.',
+      contributionLabel: 'My Contribution', contribution: 'Participated in the simulation, evaluating market scenarios and making trading decisions as part of the competition.',
+      outcomeLabel: 'Result', outcome: '1st Place', repositoryNote: 'Not applicable — competition-based event.'
+    },
+    {
+      title: '3rd Place — Case Competition', badge: '3RD PLACE',
+      meta: 'Chapters by IIT Bombay — Pune Chapter · 8 August 2026',
+      description: 'Secured 3rd place in a case competition organized by Chapters by IIT Bombay, Pune Chapter.',
+      context: 'The competition focused on analyzing a problem, evaluating possible approaches, and developing a structured solution under competitive conditions.',
+      contributionLabel: 'My Contribution', contribution: 'Worked on analyzing the case, identifying key challenges, and developing a reasoned approach to the problem.',
+      outcomeLabel: 'Result', outcome: '3rd Place', repositoryNote: 'Not applicable — case-based competition.'
+    },
+    {
+      title: 'Smart India Hackathon 2026', badge: 'INTERNAL SELECTION',
+      meta: 'Institutional Selection · September 2026',
+      description: 'Advanced to the second internal selection round of Smart India Hackathon 2026 with Digital Metrology Inspector, a computer vision-based system designed to automate the inspection of product packaging for legal metrology compliance.',
+      role: 'Lead Computer Vision & Pipeline Engineer', contributions: [
+        'Developed an image preprocessing pipeline using OpenCV, CLAHE, and bilateral filtering to improve text extraction from packaging images.',
+        'Integrated PaddleOCR for text detection and bounding-box extraction.',
+        'Worked on geometric font-dimension estimation using image calibration techniques.',
+        'Built rule-based validation logic to check mandatory package declarations against legal metrology requirements.'
+      ],
+      outcomeLabel: 'Outcome', outcome: 'Reached the second internal selection round of SIH 2026.',
+      repositoryUrl: 'https://github.com/p8kaushal/digital-metrology-inspector'
+    }
   ],
   contact: [
     { title: 'Email', label: 'parth.kaushal.007@gmail.com', href: 'mailto:parth.kaushal.007@gmail.com' },
