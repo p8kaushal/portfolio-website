@@ -171,26 +171,89 @@ export function createWorld(THREE) {
   }
   const reduceMotion = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
-  // Neutral, procedural figure exposed for a separate introductory camera.
+  // A procedural likeness based on Parth's reference photographs. The low-poly
+  // materials and geometry are generated at runtime; no photographs are used as textures.
   const character = new THREE.Group();
-  const charBox=(x,y,z,w,h,d,color)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(color));m.position.set(x,y,z);character.add(m);};
-  charBox(0,1.37,0,.65,.72,.35,'#667d69'); charBox(0,2.02,0,.48,.5,.42,'#c99170'); charBox(0,2.27,0,.5,.13,.44,'#353a33');
-  charBox(-.4,1.35,0,.16,.7,.2,'#c99170');charBox(.4,1.35,0,.16,.7,.2,'#c99170');
-  charBox(-.18,.66,0,.24,.72,.26,'#46524b');charBox(.18,.66,0,.24,.72,.26,'#46524b');
-  charBox(-.18,.25,.04,.25,.14,.36,'#323c36');charBox(.18,.25,.04,.25,.14,.36,'#323c36');
-  // Front-facing details are placed on +Z, toward the introduction camera.
-  // Small, low-poly features keep the code-built figure readable at a distance.
-  charBox(-.11,2.05,.218,.055,.065,.025,'#303932');
-  charBox(.11,2.05,.218,.055,.065,.025,'#303932');
-  charBox(0,1.92,.224,.11,.025,.025,'#8e5d4e');
-  charBox(0,2.21,.19,.48,.16,.1,'#353a33');
-  charBox(-.22,2.1,.08,.08,.25,.3,'#353a33');
-  charBox(.22,2.1,.08,.08,.25,.3,'#353a33');
-  charBox(0,1.55,.18,.18,.18,.03,'#d5c7a5');
-  charBox(0,1.47,.203,.06,.03,.015,'#60715f');
+  const mediumDetail = new THREE.Group(), highDetail = new THREE.Group();
+  character.add(mediumDetail, highDetail);
+  const part=(group,x,y,z,w,h,d,color,rotationZ=0)=>{
+    const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(color));
+    mesh.position.set(x,y,z);mesh.rotation.z=rotationZ;group.add(mesh);return mesh;
+  };
+  const ellipsoid=(group,x,y,z,rx,ry,rz,color,segments=12)=>{
+    const mesh=new THREE.Mesh(new THREE.SphereGeometry(1,segments,Math.max(6,Math.floor(segments*.7))),mat(color));
+    mesh.position.set(x,y,z);mesh.scale.set(rx,ry,rz);group.add(mesh);return mesh;
+  };
+  const skin='#b77d5d', skinLight='#c79372', hair='#252321', frame='#343230';
+  // Head, ears and hair silhouette: dark curls, warm skin and dark glasses.
+  ellipsoid(character,0,1.99,0,.245,.295,.205,skinLight,14);
+  ellipsoid(character,-.246,1.99,.005,.045,.08,.06,skin,10);
+  ellipsoid(character,.246,1.99,.005,.045,.08,.06,skin,10);
+  ellipsoid(character,0,2.245,-.035,.265,.16,.22,hair,12);
+  ellipsoid(character,-.208,2.16,-.04,.075,.18,.14,hair,10);
+  ellipsoid(character,.208,2.16,-.04,.075,.18,.14,hair,10);
+  // The close-fitting dark rectangular frames are part of the core likeness.
+  for(const x of [-.115,.115]) {
+    part(character,x,2.035,.194,.205,.022,.025,frame);
+    part(character,x,1.925,.194,.205,.021,.025,frame);
+    part(character,x-.096,1.98,.194,.019,.105,.025,frame);
+    part(character,x+.096,1.98,.194,.019,.105,.025,frame);
+    ellipsoid(character,x,1.985,.205,.023,.021,.012,'#282725',8);
+  }
+  part(character,0,1.996,.211,.04,.016,.022,frame);
+  ellipsoid(character,0,1.942,.207,.03,.045,.028,skin,8);
+  part(character,0,1.88,.197,.105,.013,.018,'#724b41');
+  // Red jersey, pale sleeve bands and understated cream numeral.
+  part(character,0,1.39,0,.69,.78,.39,'#9e2435');
+  ellipsoid(character,0,1.765,0,.12,.065,.12,skin,10);
+  part(character,-.39,1.53,0,.19,.36,.34,'#9e2435',-.12);
+  part(character,.39,1.53,0,.19,.36,.34,'#9e2435',.12);
+  part(character,-.4,1.46,.015,.2,.055,.35,'#e4d9c8',-.12);
+  part(character,.4,1.46,.015,.2,.055,.35,'#e4d9c8',.12);
+  part(character,-.44,1.14,0,.14,.50,.19,skin,-.08);
+  part(character,.44,1.14,0,.14,.50,.19,skin,.08);
+  ellipsoid(character,-.46,.86,.01,.085,.105,.085,skin,10);
+  ellipsoid(character,.46,.86,.01,.085,.105,.085,skin,10);
+  // Relaxed dark cargo pants and light, brown-trimmed sneakers.
+  part(character,-.17,.73,0,.29,.66,.29,'#292e2b');
+  part(character,.17,.73,0,.29,.66,.29,'#292e2b');
+  part(character,-.17,.32,0,.25,.25,.26,'#292e2b');
+  part(character,.17,.32,0,.25,.25,.26,'#292e2b');
+  for(const x of [-.17,.17]){
+    part(character,x,.14,.065,.28,.13,.43,'#e4dacb');
+    part(character,x,.22,.035,.27,.09,.34,'#695448');
+    part(character,x,.135,.24,.19,.075,.08,'#e8ded0');
+  }
+  // The jersey number is built from mesh strips and stays legible at lower quality.
+  for(const [x,y,w,h] of [[0,1.65,.22,.035],[.095,1.58,.035,.12],[0,1.51,.22,.035],[-.095,1.44,.035,.12],[0,1.37,.22,.035]]) part(character,x,y,.205,w,h,.016,'#e8ddca');
+  // Additional detail can be toggled without changing the character's appearance identity.
+  for(const x of [-.17,.17]){
+    part(mediumDetail,x,.67,.151,.19,.20,.025,'#3c4039');
+    part(mediumDetail,x,.78,.17,.16,.022,.025,'#57594d');
+    part(mediumDetail,x,.22,.217,.18,.017,.014,'#efe8dd');
+    part(mediumDetail,x,.25,.21,.18,.017,.014,'#efe8dd');
+  }
+  part(mediumDetail,-.45,1.02,.108,.145,.075,.025,'#252a29');
+  // Curls are individual low-poly locks instead of a flat hair cap.
+  const curls=[[-.19,2.27,.11,.085],[-.13,2.32,.12,.09],[-.06,2.34,.15,.09],[.02,2.35,.15,.09],[.10,2.33,.13,.09],[.18,2.29,.10,.085],[-.23,2.23,.025,.075],[.23,2.23,.02,.075],[-.16,2.30,-.09,.09],[-.05,2.36,-.08,.09],[.07,2.36,-.08,.09],[.18,2.30,-.08,.09]];
+  for(const [x,y,z,r] of curls)ellipsoid(mediumDetail,x,y,z,r,r*.82,r,hair,8);
+  for(const x of [-.115,.115]){
+    part(highDetail,x,2.06,.215,.12,.017,.012,'#292723');
+    part(highDetail,x-.035,2.008,.222,.012,.012,.008,'#f0e3cc');
+  }
+  for(const [x,y] of [[-.10,1.875],[-.07,1.855],[-.04,1.847],[0,1.842],[.04,1.847],[.07,1.855],[.10,1.875]])ellipsoid(highDetail,x,y,.195,.007,.009,.006,'#655043',6);
+  for(const x of [-.17,.17]){
+    part(highDetail,x,.55,.155,.16,.015,.018,'#5e6057');
+    part(highDetail,x,.46,.15,.16,.015,.018,'#5e6057');
+  }
+  function setQuality(level='high'){
+    mediumDetail.visible=level!=='low';
+    highDetail.visible=level==='high';
+  }
+  setQuality('high');
   character.visible=false;scene.add(character);
   return {
-    scene, colliders, character,
+    scene, colliders, character, setQuality,
     spawn: { x: 0, y: 1.65, z: -.2, yaw: 0 },
     computer: { id: 'projects', label: 'Use the computer', position: new THREE.Vector3(7.55,1.2,-4.2), radius: 2.3 },
     // Points sit on their objects; radii extend into the walkable approach.

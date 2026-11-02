@@ -37,15 +37,21 @@ export function mountTouchControls(container, callbacks) {
     knob.style.transform = `translate(${x * radius}px, ${y * radius}px)`;
     callbacks.onMove(x, -y);
   }
+  function releaseCapture(element, pointerId) {
+    if (typeof pointerId !== 'number') return;
+    try { if (element.hasPointerCapture?.(pointerId)) element.releasePointerCapture(pointerId); } catch { /* Pointer already ended. */ }
+  }
   function resetStick() {
+    const oldPointer = stickPointer;
     stickPointer = null;
+    releaseCapture(stick, oldPointer);
     knob.style.transform = '';
     callbacks.onMove(0, 0);
   }
   stick.addEventListener('pointerdown', e => {
     if (stickPointer !== null) return;
     e.preventDefault(); stickPointer = e.pointerId;
-    stick.setPointerCapture(e.pointerId); setStick(e);
+    try { stick.setPointerCapture(e.pointerId); } catch { /* Window pointer listeners handle release. */ } setStick(e);
   });
   stick.addEventListener('pointermove', e => { if (e.pointerId === stickPointer) { e.preventDefault(); setStick(e); } });
   for (const event of ['pointerup','pointercancel','lostpointercapture']) stick.addEventListener(event, e => { if (e.pointerId === stickPointer) resetStick(); });
@@ -54,11 +60,13 @@ export function mountTouchControls(container, callbacks) {
     const change = name === 'sprint' ? callbacks.onSprint : callbacks.onCrouch;
     function release() {
       if (!held.has(name)) return;
-      held.delete(name); button.setAttribute('aria-pressed','false'); change(false);
+      const oldPointer = held.get(name);
+      held.delete(name); releaseCapture(button, oldPointer);
+      button.setAttribute('aria-pressed','false'); change(false);
     }
     button.addEventListener('pointerdown', e => {
       if (held.has(name)) return;
-      e.preventDefault(); held.set(name, e.pointerId); button.setPointerCapture(e.pointerId);
+      e.preventDefault(); held.set(name, e.pointerId); try { button.setPointerCapture(e.pointerId); } catch { /* Window pointer listeners handle release. */ }
       button.setAttribute('aria-pressed','true'); change(true);
     });
     for (const event of ['pointerup','pointercancel','lostpointercapture']) button.addEventListener(event, e => { if (held.get(name) === e.pointerId) release(); });
@@ -77,15 +85,34 @@ export function mountTouchControls(container, callbacks) {
     resetStick();
     for (const [name] of held) {
       const button = root.querySelector(`[data-hold=${name}]`);
+      const pointerId = held.get(name);
+      held.delete(name); releaseCapture(button, pointerId);
       button.setAttribute('aria-pressed','false');
       (name === 'sprint' ? callbacks.onSprint : callbacks.onCrouch)(false);
     }
     held.clear();
   }
+  // Browsers can lose capture when a dialog opens, the page is backgrounded,
+  // or another finger takes focus. Global end listeners avoid stale movement.
+  function endPointer(event) {
+    if (event.pointerId === stickPointer) resetStick();
+    for (const [name, pointerId] of held) {
+      if (pointerId !== event.pointerId) continue;
+      const button = root.querySelector(`[data-hold=${name}]`);
+      held.delete(name); releaseCapture(button, pointerId);
+      button.setAttribute('aria-pressed','false');
+      (name === 'sprint' ? callbacks.onSprint : callbacks.onCrouch)(false);
+    }
+  }
+  function onVisibilityChange() { if (document.hidden) reset(); }
+  window.addEventListener('pointerup', endPointer, true);
+  window.addEventListener('pointercancel', endPointer, true);
   window.addEventListener('blur', reset);
+  window.addEventListener('pagehide', reset);
+  document.addEventListener('visibilitychange', onVisibilityChange);
   return {
     setVisible(visible) { if (root.hidden === !visible) return; if (!visible) reset(); root.hidden = !visible; },
     reset,
-    destroy() { reset(); window.removeEventListener('blur', reset); root.remove(); }
+    destroy() { reset(); window.removeEventListener('pointerup', endPointer, true); window.removeEventListener('pointercancel', endPointer, true); window.removeEventListener('blur', reset); window.removeEventListener('pagehide', reset); document.removeEventListener('visibilitychange', onVisibilityChange); root.remove(); }
   };
 }

@@ -1,19 +1,19 @@
 // @ts-nocheck
 /** Mount the circular, player-centred radar and announce room changes. */
-export function mountHouseMap(container) {
+export function mountHouseMap(container, { onOpenMap = () => {} } = {}) {
   const root = document.createElement('div');
   root.className = 'house-hud';
   root.innerHTML = `<style>
     .house-hud{position:absolute;z-index:2;right:16px;top:16px;pointer-events:none;color:#f5f1df;font-family:Impact,"Arial Narrow",sans-serif;text-shadow:2px 2px #171917,-1px -1px #171917,1px -1px #171917,-1px 1px #171917}
     .house-hud[hidden]{display:none}
-    .house-hud .radar{width:160px;height:160px;border-radius:50%;border:4px solid #181b18;outline:2px solid #d9d5c2;background:#aaac9e;box-shadow:3px 4px 0 #0009;overflow:hidden}
-    .house-hud svg{display:block;width:100%;height:100%}
+    .house-hud .radar{display:block;pointer-events:auto;cursor:pointer;padding:0;color:inherit;width:160px;height:160px;border-radius:50%;border:4px solid #181b18;outline:2px solid #d9d5c2;background:#aaac9e;box-shadow:3px 4px 0 #0009;overflow:hidden}
+    .house-hud .radar:focus-visible{outline:3px solid #f1be73;outline-offset:4px}.house-hud svg{display:block;width:100%;height:100%}
     .house-hud .house-map-head{font:900 13px Impact,"Arial Narrow",sans-serif;letter-spacing:.07em;text-transform:uppercase;text-align:center;margin:9px 0 0}
     .house-hud .house-room-toast{position:absolute;right:0;top:195px;text-align:right;white-space:nowrap;color:#f6f0d9;font:italic 900 24px Impact,"Arial Narrow",sans-serif;letter-spacing:.02em;text-transform:uppercase;opacity:0;transform:translateY(-4px);transition:opacity .2s,transform .2s;text-shadow:3px 3px #10110e,-2px -2px #10110e,2px -2px #10110e,-2px 2px #10110e}
     .house-hud .house-room-toast.visible{opacity:1;transform:none}
     @media(max-width:600px){.house-hud{right:8px;top:8px}.house-hud .radar{width:116px;height:116px;border-width:3px}.house-hud .house-map-head{font-size:11px;margin-top:6px}.house-hud .house-room-toast{top:145px;font-size:18px}}
     @media(prefers-reduced-motion:reduce){.house-hud .house-room-toast{transition:none}}
-  </style><div class="house-map"><div class="radar"><svg viewBox="0 0 180 180" aria-hidden="true" focusable="false">
+  </style><div class="house-map"><button type="button" class="radar" aria-label="Open house map"><svg viewBox="0 0 180 180" aria-hidden="true" focusable="false">
     <rect width="180" height="180" fill="#777d70"/>
     <g data-map>
       <rect x="0" y="0" width="280" height="180" fill="#aaa78e" stroke="#474d42" stroke-width="5"/>
@@ -24,8 +24,10 @@ export function mountHouseMap(container) {
     </g>
     <g data-player transform="translate(90 90)"><circle r="9" fill="#f5f0dc" stroke="#171a17" stroke-width="2"/><path data-arrow d="M0 -8 L5 6 L0 3 L-5 6 Z" fill="#253b30"/></g>
     <text x="90" y="15" text-anchor="middle" fill="#f8f4e4" stroke="#171a17" stroke-width="2" paint-order="stroke" font-size="12" font-family="sans-serif" font-weight="bold">N</text>
-  </svg></div><div class="house-map-head" data-room>Living room</div></div><div class="house-room-toast" aria-hidden="true"></div><div data-announcement aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)"></div>`;
+  </svg></button><div class="house-map-head" data-room>Living room</div></div><div class="house-room-toast" aria-hidden="true"></div><div data-announcement aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)"></div>`;
   container.appendChild(root);
+  const radar = root.querySelector('.radar');
+  radar.addEventListener('click', onOpenMap);
   const map = root.querySelector('[data-map]');
   const arrow = root.querySelector('[data-arrow]');
   const label = root.querySelector('[data-room]');
@@ -43,7 +45,7 @@ export function mountHouseMap(container) {
         const initial = !room;
         room = next;
         label.textContent = room;
-        root.setAttribute('aria-label', `House radar. Current room: ${room}.`);
+        radar.setAttribute('aria-label', `Open house map. Current room: ${room}.`);
         if (!initial) {
           announcement.textContent = `Entering ${room}`;
           toast.textContent = `Entering ${room}`;
@@ -53,7 +55,7 @@ export function mountHouseMap(container) {
         }
       }
     },
-    setVisible(visible) { root.hidden = !visible; },
-    destroy() { clearTimeout(timer); root.remove(); }
+    setVisible(visible) { if (root.hidden !== !visible) root.hidden = !visible; },
+    destroy() { clearTimeout(timer); radar.removeEventListener('click', onOpenMap); root.remove(); }
   };
 }
