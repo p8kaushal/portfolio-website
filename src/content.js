@@ -10,10 +10,14 @@ export const portfolio = {
     'My interests span full-stack development, artificial intelligence, machine learning, game development and emerging Web3 technologies. I enjoy experimenting across domains, learning new tools and taking projects from early ideas to functional prototypes.',
     '9.07 CGPA · Building and exploring since 2025 · Pune, India'
   ],
+  // Snapshot of the public repositories pinned on Parth’s GitHub profile.
   projects: [
-    { title: 'IPL Predictor', meta: '2026 · Machine Learning / Data Science', description: 'A machine learning application using historical IPL cricket data to explore match predictions through statistical analysis and predictive modeling.', details: 'Python · pandas · scikit-learn · Flask' },
-    { title: 'FaceTrack', meta: '2026 · Computer Vision / Full-Stack', description: 'An offline-first biometric attendance application exploring facial recognition as an alternative to traditional attendance workflows.', details: 'JavaScript · face-api.js · Web technologies' },
-    { title: 'ResonantAI', meta: '2026 · Artificial Intelligence / Desktop Applications', description: 'An AI-focused desktop application exploring speech restoration and audio processing through an integrated software interface.', details: 'Electron · Python · Audio processing · AI/ML', githubUrl: 'https://github.com/p8kaushal/ResonantAI' }
+    { title: 'Digital Metrology Inspector', meta: 'Computer Vision · Compliance', description: 'Automated compliance verification for packaged commodities, using reference coin calibration, OCR and real-world font-size measurement.', details: 'Python · PaddleOCR · Computer Vision', githubUrl: 'https://github.com/p8kaushal/digital-metrology-inspector' },
+    { title: 'Face Attendance', meta: 'Computer Vision · Full-Stack', description: 'A real-time face recognition and geofenced attendance management system.', details: 'SvelteKit 5 · MediaPipe · ONNX ArcFace · PostgreSQL', githubUrl: 'https://github.com/p8kaushal/face-attendance' },
+    { title: 'Nation-State', meta: 'Strategy Game · Simulation', description: 'A turn-based executive political and macroeconomic strategy simulation game.', details: 'TypeScript · Vite · Supabase', githubUrl: 'https://github.com/p8kaushal/Nation-State' },
+    { title: 'Python Scraper', meta: 'Finance · Browser Automation', description: 'A financial web scraper and browser automation toolkit for extracting stock market metrics.', details: 'Python · Playwright · BeautifulSoup', githubUrl: 'https://github.com/p8kaushal/python_scraper' },
+    { title: 'Python YouTube Pipeline', meta: 'Automation · AI', description: 'A YouTube pipeline for scraping, audio downloading, transcription, summarization and persistence.', details: 'Python · yt-dlp · Whisper · Ollama · Prisma', githubUrl: 'https://github.com/p8kaushal/python_yt' },
+    { title: 'ResonantAI', meta: 'AI · Assistive Communication', description: 'An edge-native real-time speech restoration and assistive communication engine for motor-speech impairments.', details: 'Python · Speech Restoration · AI/ML', githubUrl: 'https://github.com/p8kaushal/ResonantAI' }
   ],
   skills: [
     { title: 'Frontend', details: 'JavaScript, TypeScript, HTML, CSS, web interfaces, Electron' },
@@ -25,8 +29,8 @@ export const portfolio = {
     { title: 'Currently exploring', details: 'Web3, blockchain applications, smart contracts, decentralized applications' }
   ],
   experience: [
-    { title: 'B.Tech — Computer Science & Engineering', period: 'September 2025 – June 2029 (expected)', organization: 'Vishwakarma Institute of Technology, Pune', meta: 'September 2025 – June 2029 (expected) · Vishwakarma Institute of Technology, Pune', description: 'Specialization in IoT, Cybersecurity and Blockchain Technology. CGPA: 9.07/10.0.' },
-    { title: 'Avionics Subdivision Engineer', period: '2026 – Present', organization: 'Drone Research & Development SIG, VIT Pune', meta: '2026 – Present · Drone Research & Development SIG, VIT Pune', description: 'Contributing to embedded systems research and hardware-software integration, including low-level programming and microcontrollers.' }
+    { title: 'Avionics Subdivision Engineer', period: '2026 – Present', organization: 'Drone Research & Development SIG, VIT Pune', meta: '2026 – Present · Drone Research & Development SIG, VIT Pune', description: 'Contributing to embedded systems research and hardware-software integration, including low-level programming and microcontrollers.' },
+    { title: 'B.Tech — Computer Science & Engineering', period: 'September 2025 – June 2029 (expected)', organization: 'Vishwakarma Institute of Technology, Pune', meta: 'September 2025 – June 2029 (expected) · Vishwakarma Institute of Technology, Pune', description: 'Specialization in IoT, Cybersecurity and Blockchain Technology. CGPA: 9.07/10.0.' }
   ],
   achievements: [
     { title: '1st Place — Stock Market Simulation', meta: '2026 · Chapters by IIT Bombay, Pune Chapter', description: 'First place in a competitive stock market simulation event.' },

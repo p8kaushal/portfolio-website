@@ -29,7 +29,7 @@ export function mountPC(host, { onExit = () => {} } = {}) {
   let z = 5, previouslyFocused = null, dragCleanup = null;
   const escapeText = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const labels = {projects:'Projects', resume:'Résumé.pdf', browser:'Internet'};
-  const pinnedRepositories=['digital-metrology-inspector','face-attendance','Nation-State','python_scraper','python_yt','ResonantAI'];
+  const pinnedRepositories=portfolio.projects.map(project => project.githubUrl?.split('/').pop()).filter(Boolean);
   const allLinks = portfolio.contact.filter(item => item.href && /^https?:/.test(item.href));
   function setTime(){clock.textContent = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});}
   function updateTasks(){
@@ -61,7 +61,7 @@ export function mountPC(host, { onExit = () => {} } = {}) {
     record.view='folder';record.body.scrollTop=0;
     const github=portfolio.contact.find(item=>item.title==='GitHub'&&item.href)?.href;
     record.body.classList.add('pc-library');
-    record.body.innerHTML=toolbar('This PC / Projects')+`<div class="pc-content"><div class="pc-library-header"><div><div class="pc-kicker">PARTH OS / PROJECT LIBRARY</div><h2>Built &amp; explored.</h2><p>Choose a project to see the story and technologies.</p>${github?`<a class="pc-library-intro-link" href="${escapeText(github)}" target="_blank" rel="noopener noreferrer">Visit GitHub profile ↗</a><button type="button" class="pc-github-trigger" data-github>Browse GitHub repositories →</button>`:''}</div><span class="pc-library-count">${portfolio.projects.length} PROJECTS</span></div><div class="pc-gallery">${portfolio.projects.map((project,i)=>`<button class="pc-game" type="button" data-project="${i}"><span class="pc-game-art">${projectArt(i,project.title)}</span><span class="pc-game-info"><strong>${escapeText(project.title)}</strong><span class="pc-game-meta">${escapeText(project.meta)}</span><span class="pc-game-desc">${escapeText(project.description)}</span><span class="pc-game-more">View project →</span></span></button>`).join('')}</div></div>`;
+    record.body.innerHTML=toolbar('This PC / Projects')+`<div class="pc-content"><div class="pc-library-header"><div><div class="pc-kicker">PARTH OS / PINNED PROJECTS</div><h2>Built &amp; explored.</h2><p>A snapshot of my pinned GitHub projects. Choose one to explore.</p>${github?`<a class="pc-library-intro-link" href="${escapeText(github)}" target="_blank" rel="noopener noreferrer">Visit GitHub profile ↗</a><button type="button" class="pc-github-trigger" data-github>Browse GitHub repositories →</button>`:''}</div><span class="pc-library-count">${portfolio.projects.length} PROJECTS</span></div><div class="pc-gallery">${portfolio.projects.map((project,i)=>`<button class="pc-game" type="button" data-project="${i}"><span class="pc-game-art">${projectArt(i,project.title)}</span><span class="pc-game-info"><strong>${escapeText(project.title)}</strong><span class="pc-game-meta">${escapeText(project.meta)}</span><span class="pc-game-desc">${escapeText(project.description)}</span><span class="pc-game-more">View project →</span></span></button>`).join('')}</div></div>`;
     record.body.querySelectorAll('[data-project]').forEach(button=>button.onclick=()=>showProject(record,Number(button.dataset.project)));
     const githubButton=record.body.querySelector('[data-github]');if(githubButton)githubButton.onclick=()=>showGithub(record);
   }
