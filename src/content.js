@@ -25,9 +25,8 @@ export const portfolio = {
     { title: 'Currently exploring', details: 'Web3, blockchain applications, smart contracts, decentralized applications' }
   ],
   experience: [
-    { title: 'Independent Software Developer', meta: '2025 – Present · Personal Projects & Collaborative Development', description: 'Building and experimenting across web development, machine learning, computer vision, game development and desktop applications.' },
-    { title: 'B.Tech — Computer Science & Engineering', meta: 'September 2025 – June 2029 (expected) · Vishwakarma Institute of Technology, Pune', description: 'Specialization in IoT, Cybersecurity and Blockchain Technology. CGPA: 9.07/10.0.' },
-    { title: 'Avionics Subdivision Engineer', meta: '2026 – Present · Drone Research & Development SIG, VIT Pune', description: 'Contributing to embedded systems research and hardware-software integration, including low-level programming and microcontrollers.' }
+    { title: 'B.Tech — Computer Science & Engineering', period: 'September 2025 – June 2029 (expected)', organization: 'Vishwakarma Institute of Technology, Pune', meta: 'September 2025 – June 2029 (expected) · Vishwakarma Institute of Technology, Pune', description: 'Specialization in IoT, Cybersecurity and Blockchain Technology. CGPA: 9.07/10.0.' },
+    { title: 'Avionics Subdivision Engineer', period: '2026 – Present', organization: 'Drone Research & Development SIG, VIT Pune', meta: '2026 – Present · Drone Research & Development SIG, VIT Pune', description: 'Contributing to embedded systems research and hardware-software integration, including low-level programming and microcontrollers.' }
   ],
   achievements: [
     { title: '1st Place — Stock Market Simulation', meta: '2026 · Chapters by IIT Bombay, Pune Chapter', description: 'First place in a competitive stock market simulation event.' },
