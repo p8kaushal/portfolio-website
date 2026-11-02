@@ -66,8 +66,13 @@ export function mountTouchControls(container, callbacks) {
     button.addEventListener('keyup', e => { if ((e.key === ' ' || e.key === 'Enter') && held.get(name) === 'keyboard') { e.preventDefault(); release(); } });
     button.addEventListener('blur', () => { if (held.get(name) === 'keyboard') release(); });
   }
-  root.querySelector('[data-action=jump]').addEventListener('click', callbacks.onJump);
-  root.querySelector('[data-action=interact]').addEventListener('click', callbacks.onInteract);
+  // Trigger on pointer down so a second finger can jump while the joystick is held.
+  // Keyboard and assistive-technology clicks have detail 0 and remain supported.
+  for (const [action, callback] of [['jump', callbacks.onJump], ['interact', callbacks.onInteract]]) {
+    const button = root.querySelector(`[data-action=${action}]`);
+    button.addEventListener('pointerdown', e => { e.preventDefault(); callback(); });
+    button.addEventListener('click', e => { if (e.detail === 0) callback(); });
+  }
   function reset() {
     resetStick();
     for (const [name] of held) {
@@ -79,7 +84,7 @@ export function mountTouchControls(container, callbacks) {
   }
   window.addEventListener('blur', reset);
   return {
-    setVisible(visible) { if (!visible && !root.hidden) reset(); root.hidden = !visible; },
+    setVisible(visible) { if (root.hidden === !visible) return; if (!visible) reset(); root.hidden = !visible; },
     reset,
     destroy() { reset(); window.removeEventListener('blur', reset); root.remove(); }
   };
