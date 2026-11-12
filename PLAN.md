@@ -10,6 +10,7 @@
 
 | Branch | Recorded commit | Purpose / relationship |
 | --- | --- | --- |
+| `feat/phase-1-art-direction` | `148c47e` (verified deliverables; later documentation records may follow) | Phase 1 specification, original concept board, browser baseline/evidence and warning-free build configuration. Awaiting user phase acceptance. |
 | `v1-3d-space`, `origin/v1-3d-space` | `c1e47f6` | Preserved v1 3D space version; diverged from v2 (5 commits unique to v1, 28 unique to v2). |
 | `v2-keynote`, `origin/v2-keynote` | `649e5bb` | Preserved v2 keynote version; ancestor of v3. |
 | `v3-portfolio-house`, `origin/v3-portfolio-house` | `b867cfd` | Current v3 portfolio house, 14 commits ahead of v2. |
@@ -74,6 +75,7 @@ Each implementation phase begins on a descriptive feature branch based on the la
 
 ## Verification log
 
+- Saved verified Phase 1 deliverables in commit `148c47e` on `feat/phase-1-art-direction`. No merge, push or deployment performed. User acceptance remains the next required action; the full seven-phase goal remains active. Read `docs/phase-1-spec.md` and open `docs/phase-1-board.svg` for review, then branch Phase 2 from this branch only after approval.
 - Final mobile coverage check passed: explicit visible `.touch-controls` and coarse-pointer media assertions before capture. Repeated production baseline exited 0; latest tracked navigation load events 42.6/8.6 ms, stationary p95 intervals 33.4/16.8 ms, desktop traversal p95 50 ms. No page errors or overflow. Screenshot review raised a touch-control visibility concern; harness now waits explicitly and asserts coarse-pointer media before capture. Latest reports/screenshots copied to `docs/phase-1-baseline/`. SVG XML, both script syntax checks and whitespace validation passed.
 - Phase 1 final verification: `npm run check` exit 0, 0 errors/0 warnings; `npm run build` exit 0, no warnings after separating Three core/WebGL at module boundaries in `vite.config.ts`. Page entry 145.49 kB (45.08 kB gzip), Three chunks 365.20/383.44 kB; warning threshold unchanged. `git diff --check`, `node --check` on both new baseline scripts and `xmllint --noout docs/phase-1-board.svg` passed.
 - Production baseline at port 4173 passed desktop/mobile direct-menu and 2D checks with no overflow/page errors. Navigation load events 40.1/11.4 ms on local unthrottled host; stationary p95 frame intervals 33.4/16.7 ms. Ten-second D/A/S/W traversal p95 50 ms: baseline misses proposed 33.4 ms target; do not claim budget achieved. First movement harness attempt failed because events targeted Window rather than the focused element; corrected bubbling event target and intermediate position sampling; retest passed. No application input changes.
