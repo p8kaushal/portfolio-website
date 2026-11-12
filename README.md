@@ -35,6 +35,8 @@ The saved style and graphics choices stay in the browser. Failed enhanced loadin
 
 Classic defaults live in `src/world.js`. Enhanced room builders, procedural surfaces and scoped presentation styles live in `src/enhanced/`, composed by `src/enhanced-world.js`. No downloaded game artwork, paid assets or external texture service is used. `PLAN.md` and phase verification documents record the current implementation and test evidence.
 
+In the enhanced house, approach the bedroom wardrobe and use the mirror to open the character view and About information. Drag the portrait to pan, or use its labelled buttons to pan, zoom and reset. The portrait stays visible while the About text scrolls. It is an on-demand 3D view against a fixed backdrop rather than a live reflection of the house. Classic uses the illustrated mirror, which is also the fallback if the portrait renderer cannot start or loses its graphics context. The existing character is awaiting likeness review.
+
 ## Deployment
 
 The GitHub Pages workflow builds with Node 24 and uploads `build/`. It is configured for the existing `parthkaushal.in` root domain and runs on `main` or manual dispatch; work on another branch does not deploy automatically. Review the destination and changes before merging or deploying. Root-relative URLs assume the site is hosted at the domain root.
