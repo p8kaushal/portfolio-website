@@ -8,6 +8,8 @@ Phase 4 prototype now displays the existing 3D character in a framed, static-bac
 
 Latest Phase 4 regression additionally passed emulated touch drag, initialization failure and both classic/enhanced source interactions. Save a prototype checkpoint commit; it is not Phase 4 completion. Likeness review is still pending, and release integration checks remain.
 
+Checkpoint `7553611` saved the prototype. A follow-up keeps the character visible while About scrolls independently; fresh check/build and desktop, emulated mobile portrait/landscape and classic mobile production checks passed. Record and commit that follow-up before continuing. Likeness review remains pending.
+
 Phase 2 is verified and committed at `b89cd23`. Current branch `feat/phase-3-stylized-house`; building the full enhanced interior and scoped visual presentation next. Classic and enhanced spatial regressions, unit tests, recovery/storage suite, warning-free build/type check and enforced 33.4 ms traversal budget passed. See `docs/phase-2-verification.md` and `docs/phase-2-evidence/`. Proceed automatically through visual phases; no further user approval needed for stage transitions.
 
 Latest instruction supersedes the old review blocker: user approved continuation and waived all intermediate visual-phase approvals when testing/verification succeeds; ensure commits. Scope narrowed to visual/aesthetic work only. Phase 2 active on `feat/phase-2-visual-slice` from `341aa1a`; proceed through visual house/changing-room work and integration verification. Defer standalone accessibility and content-expansion phases; keep regression coverage. Do not merge/deploy without separate explicit authorization. The original goal text predates this scope update; latest user direction governs.

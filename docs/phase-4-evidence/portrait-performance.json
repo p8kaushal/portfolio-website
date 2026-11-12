@@ -6,7 +6,11 @@
     },
     {
       "profile": "mobile",
-      "frameIntervalP95": 16.799999999999727
+      "frameIntervalP95": 16.700000000000273
+    },
+    {
+      "profile": "mobile-landscape",
+      "frameIntervalP95": 16.700000000000273
     }
   ],
   "errors": [],

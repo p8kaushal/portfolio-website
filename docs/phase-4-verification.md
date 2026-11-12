@@ -8,4 +8,6 @@ A separate feasibility prototype rendered the enhanced house through Three.js `R
 
 Fresh sequential `npm run check` (zero errors and warnings) and `npm run build` passed. The production browser test exercised desktop keyboard and pointer, emulated touch drag and controls, reset, About, exit, forced portrait context loss and reopening, and denied portrait context initialization. It reported no page errors. With the dialog open, local stationary p95 frame intervals were 33.4 ms desktop and 16.8 ms emulated mobile; these do not establish physical-device performance. Existing production scene switching/recovery and classic and enhanced source interaction suites passed. Captures and reports are in `phase-4-evidence/`.
 
+The mirror dialog now keeps the character visible while About scrolls independently. A fresh production test verified the visible frame after scrolling in desktop, emulated mobile portrait and landscape, plus the classic mobile mirror. The latest open-dialog p95 intervals were 33.4 ms desktop and 16.7 ms in both emulated mobile orientations. These remain local headless measurements.
+
 Pending: user likeness review, any resulting character changes, and final visual integration and release checks. Manual screen-reader and physical mobile/browser verification are not claimed. Separate merge/deployment approval remains required.
