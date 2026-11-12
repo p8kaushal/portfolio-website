@@ -88,7 +88,20 @@ Each implementation phase begins on a descriptive feature branch based on the la
 - Full implementation and phase order authorized on 2026-11-12. Phase 1 palette/layout and performance proposals still need acceptance; automatic and explicit classic fallback are already agreed. The historical linked example was inaccessible to the research tool; its implementation has not been assessed.
 - Choose case studies and supply project evidence when content work becomes the active phase.
 
+## Direct portfolio menu — user-directed revision
+
+- [x] Build a cohesive, readable single portfolio view with visible About, Projects, Skills, Experience, Achievements and Contact, direct navigation, résumé and existing repository/contact links. Use established content only and avoid game framing or filler in this view.
+- [x] Preserve the existing menu API, direct section opening, dialog close/focus behavior and fallback availability; verify desktop/mobile, keyboard, content and links in production. Sequential check/build passed; production checks passed. Commit pending on `feat/direct-portfolio-menu`.
+- [ ] Audit all house interfaces (computer, mirror, file, awards, TV, phone, map, controls and settings) and unify their visual language with the portfolio house through shared palette, typography, surface treatments, spacing and controls, while preserving all content, interactions, accessibility and classic/2D routes. Implement on a descriptive follow-on branch; verify interactions, responsive layout and production visuals, then commit.
+- [ ] Return to the outstanding likeness and branch-cleanup decisions after this change.
+
 ## Verification log
+
+- Direct portfolio final retest: sequential check/build passed; production desktop and emulated mobile checks passed six sections, six project links, résumé, focus, Escape and focus restoration, no horizontal overflow, and close visibility after scrolling. Earlier production baseline passed menu navigation and 2D availability without page errors. The direct section API remains in place.
+
+- Direct portfolio production baseline passed desktop and emulated mobile; targeted checks passed six sections, six project links, résumé, section focus, Escape and focus restoration with no horizontal overflow. Visual inspection found the close control disappeared after scrolling, especially on mobile; moved it into the sticky navigation. Fresh `npm run check` passed 0 errors/0 warnings; sequential build passed; browser verification required.
+
+- Direct portfolio menu implementation: created continuous About, Projects, Skills, Experience, Achievements and Contact sections with direct section navigation and existing résumé, project and contact links. Initial `npm run check` passed 0 errors/0 warnings; added résumé access inside the dialog afterward, fresh `npm run check` passed 0 errors/0 warnings. Sequential `npm run build` passed; production browser verification pending.
 
 - User requested the 2D fallback title link to return home. Created `fix/2d-home-title` from `214b38d`; implementing a semantic home link with visible keyboard focus. `npm run check` passed with 0 errors and 0 warnings; sequential build passed; production Chromium keyboard activation navigated from `/2d/index.html` to `/`. The original likeness and branch-cleanup decisions remain pending.
 
