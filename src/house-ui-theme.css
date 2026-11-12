@@ -58,3 +58,7 @@
 .house-ui.house-ui .phone-app i {background:#f1eadb;color:#405442;border-color:#d1b88d}
 .house-ui.house-ui .phone-incoming {background:linear-gradient(#526b52,#29392e)}
 .house-ui.house-ui :is(.phone-link,.phone-item,.phone-message) {background:#faf6eb;color:#24372d;border-color:#c8bca7}
+
+/* Dossier text sits on a light paper surface. */
+.house-ui.house-ui .hi-file .hi-kicker { color: #8c4b2d; }
+.house-ui.house-ui .hi-file .hi-dossier-id { color: #665a48; }

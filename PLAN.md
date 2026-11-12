@@ -154,6 +154,10 @@ Each implementation phase begins on a descriptive feature branch based on the la
 
 ## Verification log
 
+- Axe scans of enhanced dossier, awards, TV and computer found dossier contrast and a prohibited ARIA label on the computer task group. Fixed those findings; fresh sequential check (0 errors/0 warnings), build and production axe reruns report zero detected violations for dossier and computer. Some automated checks remain incomplete and require manual review.
+
+- Production enhanced mirror axe scan: zero detected violations, with aria-prohibited-attr, contrast and label-name checks marked incomplete for manual review. Main and 2D routes had no document overflow at 320px and 640px reflow widths; this is not equivalent to complete browser-zoom or screen-reader testing.
+
 - Temporary axe-core WCAG 2/2.1 A/AA checks identified and verified fixes for 2D text/phone contrast, résumé button contrast and home-link name. Fresh sequential check (0 errors/0 warnings) and build passed. Axe reported zero detected violations on desktop home welcome/menu and 2D welcome/content/phone; contrast and phone name checks include incomplete items requiring manual review. Not a WCAG compliance claim.
 
 - User requested project case studies be deferred until all other priorities are complete and expressed uncertainty about including the feature. Do not implement without a later affirmative decision.
