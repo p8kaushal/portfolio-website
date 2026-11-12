@@ -14,10 +14,14 @@ npm run dev
 The predev and prebuild scripts prepare a minimal `.generated-static` directory from the résumé and 2D source. They also generate the 2D portfolio content from `src/content.js`, so the two experiences use the same projects, experience, skills and achievements.
 
 ```sh
+npm run lint
+npm test
 npm run check
 npm run build
 npm run preview
 ```
+
+For the browser regression, start a fresh production preview after building and run `PORTFOLIO_URL=http://127.0.0.1:4173 npm run test:browser` with the actual preview URL. The ESLint configuration covers the active JavaScript house runtime and maintained `.mjs` scripts; legacy Svelte/TypeScript components are not yet linted, and unused-variable checks remain deferred. The scoped minimatch overrides address a lint-tool advisory and should be revisited when upstream dependencies update.
 
 The static production output is `build/`. Only the files required for v3 are copied into that output; legacy media in `static/` is not included.
 

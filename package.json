@@ -11,14 +11,20 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"predev": "node scripts/prepare-v3-assets.mjs",
-		"prebuild": "node scripts/prepare-v3-assets.mjs"
+		"prebuild": "node scripts/prepare-v3-assets.mjs",
+		"lint": "eslint src/*.js src/enhanced/*.js scripts/*.mjs",
+		"test": "node --test scripts/scene-mode.test.mjs",
+		"test:browser": "node --test scripts/2d-accessibility.test.mjs"
 	},
 	"devDependencies": {
+		"@eslint/js": "^10.0.1",
 		"@sveltejs/adapter-auto": "^7.0.1",
 		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.63.0",
 		"@sveltejs/vite-plugin-svelte": "^7.1.2",
 		"@tailwindcss/vite": "^4.3.3",
+		"eslint": "^10.14.0",
+		"globals": "^17.14.0",
 		"playwright": "^1.63.0",
 		"svelte": "^5.56.1",
 		"svelte-check": "^4.6.0",
@@ -31,5 +37,13 @@
 		"lucide-svelte": "^1.0.1",
 		"pdfjs-dist": "^6.5.438",
 		"three": "^0.187.0"
+	},
+	"overrides": {
+		"eslint": {
+			"minimatch": "^11.0.1"
+		},
+		"@eslint/config-array": {
+			"minimatch": "^11.0.1"
+		}
 	}
 }
