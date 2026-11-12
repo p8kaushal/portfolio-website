@@ -2,7 +2,7 @@
 
 ## Continuation verification — latest
 
-- Current branch `feat/character-reference-refinement`. Restored handoff and verified saved batching: check 0 errors/0 warnings, production build passed, scene-mode 7/7 passed, quality-layer smoke passed. Production locker desktop and emulated mobile portrait/landscape controls and recovery passed without page errors. Enforced automatic-enhanced traversal passed at 33.4 ms p95; prior failed runs remain in PLAN.md.
+- Current branch `feat/character-reference-refinement`; verified character checkpoint `a06b8b5`. Restored handoff and verified saved batching: check 0 errors/0 warnings, production build passed, scene-mode 7/7 passed, quality-layer smoke passed. Production locker desktop and emulated mobile portrait/landscape controls and recovery passed without page errors. Enforced automatic-enhanced traversal passed at 33.4 ms p95; prior failed runs remain in PLAN.md.
 - Fresh inspected likeness capture and reports: `docs/character-refinement-evidence/`. Stationary desktop locker p95 was 33.5 ms; emulated mobile 16.7/16.8 ms. Procedural quality remains an approximation; user likeness acceptance is required before finalizing. Physical-device and screen-reader testing are unclaimed.
 - Next: obtain likeness feedback, refine if requested, then integration regression on a dedicated branch. Preserve historical/version refs; exact branch deletions and merge/deployment need separate approval. Owned production preview session runs at port 4173.
 
