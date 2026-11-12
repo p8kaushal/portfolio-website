@@ -1,5 +1,10 @@
 # Account-swap handoff
 
+## Active audit remediation
+
+User approved goal-based execution, accepted the current character, and chose to retain current menu, house dialog styling and home links. Project case studies are deferred and optional pending a later affirmative decision. On `fix/2d-accessibility-remediation`, completed and committed multiple verified 2D focus/contrast and interface accessibility fixes through `854eecc`. Production preview is at port 4191. Axe checks found no detected violations in tested states; some checks remain incomplete and physical screen-reader/device testing is unverified. Continue the approved plan, preserving separate merge/deployment approval.
+
+
 ## Branch cleanup
 
 Current branch `fix/preview-asset-consistency`. User authorized deleting obsolete local branches; 14 phase/intermediate refs fully contained in the current branch were deleted. Their commits remain in history; main, named version branches, and all remote refs are preserved.

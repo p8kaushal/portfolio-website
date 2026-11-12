@@ -154,6 +154,8 @@ Each implementation phase begins on a descriptive feature branch based on the la
 
 ## Verification log
 
+- Accessibility implementation checkpoint `854eecc`: 2D dialogs, contrast and accessible names, mirror description, dossier, computer and settings fixes committed on `fix/2d-accessibility-remediation`. Automated scans and keyboard/regression checks passed for tested states; screen-reader, physical-device, real browser zoom and axe incomplete items remain unverified. Continue independent work and retain these as final release limitations, not a certification.
+
 - Added durable production browser regression `scripts/2d-accessibility.test.mjs`: passed welcome focus, focus trap, dialog semantics, Escape/focus return, overflow and no page errors at mobile and desktop. `node --test scripts/scene-mode.test.mjs` passed 7/7 again.
 
 - Reviewed axe incomplete items: 2D close button uses a visible × with accessible name Close; tool requests manual label review. Portfolio menu items reported overlapping-background contrast as incomplete; sampled declared color pairs range 5.05:1–9.33:1. This does not cover every state. Screen-reader and physical-device testing remain unverified.
