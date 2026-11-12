@@ -1,7 +1,10 @@
 // @ts-nocheck
-/** Procedural, asset-free house for the first-person portfolio. */
-export function createWorld(THREE) {
-  const scene = new THREE.Scene();
+/** Procedural, asset-free house for the first-person portfolio.
+ * The default path is the preserved classic scene; room builders share its interaction contract.
+ * @param {any} THREE
+ * @param {{scene?:any,localLights?:boolean,buildStudio?:(context:{scene:any,colliders:{minX:number,maxX:number,minZ:number,maxZ:number}[]})=>void}} [options]
+ */
+export function createWorld(THREE, { scene = new THREE.Scene(), buildStudio, localLights = true } = {}) {
   scene.background = new THREE.Color('#c8b49a');
   // Distance haze and a warm, flat-lit palette evoke early 3D game worlds.
   scene.fog = new THREE.Fog('#c8b49a', 18, 43);
@@ -91,6 +94,9 @@ export function createWorld(THREE) {
   box(-13.78,2.2,2.7,.08,1.15,1.5,'#bca286'); box(-13.72,2.2,2.7,.04,.95,1.3,'#d6b8a0');
   
   // STUDIO: long desk, monitor, keyboard, paper file and chair.
+  if (buildStudio) {
+    buildStudio({ scene, colliders });
+  } else {
   rug(8,-3.35,5.9,4.8,'#7d8569');
   table(8,-5.25,5.6,1.65);
   box(7.55,1.72,-5.55,1.9,1.12,.16,'#343f3b');
@@ -114,6 +120,7 @@ export function createWorld(THREE) {
   // Keep a gap between the two pieces of furniture, with both backs at the wall.
   box(13.05,.65,6.0,1.5,1.3,2.2,'#98745a',true); box(13.05,1.34,6.0,1.55,.08,2.25,'#c5a37e');
   box(13.76,2.2,-.1,.08,1.15,1.6,'#8f715a'); box(13.7,2.2,-.1,.04,.95,1.4,'#b8c9a8');
+  }
 
   // LIVING ROOM: sofa, low table, TV and a small trophy display.
   rug(0,2.3,6.1,4.6,'#777c5e');
@@ -175,7 +182,7 @@ export function createWorld(THREE) {
     shade.position.set(x,1.76,z);scene.add(shade);
     const glow=new THREE.Mesh(new THREE.SphereGeometry(.09,10,8),new THREE.MeshBasicMaterial({color:'#e9d4af'}));
     glow.position.set(x,1.59,z);scene.add(glow);
-    const lamp=new THREE.PointLight('#f6d8ad',0,12,2);lamp.position.set(x,1.62,z);scene.add(lamp);
+    const lamp=new THREE.PointLight('#f6d8ad',0,12,2);lamp.position.set(x,1.62,z);if(localLights)scene.add(lamp);
     lamps.push({lamp,glow});
   }
   // Untextured sky discs are also visible above the open-roof walls when looking up.

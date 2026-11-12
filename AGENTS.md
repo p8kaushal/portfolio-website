@@ -9,7 +9,7 @@
 
 ### 2. Planning First & Phased Execution
 - Inspect the directory, then propose a complete step-by-step implementation plan in `PLAN.md`. Do not write feature code until the user reviews and approves the plan.
-- Work on one phase at a time. Do not begin the next phase until the current one is built, tested, verified, and approved by the user.
+- Work on one phase at a time. Latest user authorization allows the visual/aesthetic revamp to advance automatically after each phase is built, tested, verified and committed. Intermediate user approvals are waived for visual work. Preserve existing behavior and accessible routes; standalone accessibility/content features are deferred. Separate merge approval remains required.
 
 ### 3. Testing & Verification Standards
 - Verify every phase with automated unit or integration tests, linters, or CLI verification scripts; do not assume code works because it compiles.
@@ -31,5 +31,5 @@
 - Node.js 24 and npm: `npm ci`, `npm run dev`. Verification commands: `npm run check` and `npm run build`; preview with `npm run preview`.
 - `predev` and `prebuild` prepare `.generated-static`; production output is `build/`. GitHub Pages deploys on `main` or manual dispatch; review deployment implications before any merge or deployment.
 - Follow existing project conventions and keep changes scoped to the approved phase. Architecture changes require an explicit decision when trade-offs are material.
-- Project handoff: consult `PLAN.md`, `todo.md`, and `handoff.md` at the start of a new session. Full implementation was authorized on 2026-11-12; Phase 1 is active on `feat/phase-1-art-direction`. Phase acceptance and separate merge gates remain; see the plan for scope and evidence.
+- Project handoff: consult `PLAN.md`, `todo.md`, and `handoff.md` at session start. Phase 1 is approved; Phase 2 is active on `feat/phase-2-visual-slice`. Latest user narrowed scope to visual/aesthetic revamp only and waived intermediate approvals when checks pass; commit verified phases. Separate merge/deployment approval remains required.
 - These describe the existing project, not approval of future feature requirements or architecture changes.

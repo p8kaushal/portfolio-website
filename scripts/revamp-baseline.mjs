@@ -3,7 +3,8 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 
 const baseURL = process.env.PORTFOLIO_URL || 'http://127.0.0.1:5173';
-const output = 'test-results/revamp-baseline';
+const mode = process.env.PORTFOLIO_MODE;
+const output = mode ? `test-results/revamp-${mode}` : 'test-results/revamp-baseline';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ headless: true });
 const report = { baseURL, capturedAt: new Date().toISOString(), profiles: [] };
@@ -14,6 +15,7 @@ try {
   ]) {
     const { name, ...contextOptions } = profile;
     const context = await browser.newContext(contextOptions);
+    if (mode) await context.addInitScript(mode => localStorage.setItem('portfolio-house-scene-v1', JSON.stringify({ mode })), mode);
     const page = await context.newPage();
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
@@ -22,6 +24,11 @@ try {
     await page.locator('#skip').click();
     if (profile.isMobile) await page.locator('#rotate-continue').click();
     await page.locator('#game-hud').waitFor({ state: 'visible' });
+    const sceneMode = await page.locator('[data-scene-mode]').getAttribute('data-scene-mode');
+    if (mode) assert.equal(sceneMode, mode);
+    const initialResources = await page.evaluate(() => performance.getEntriesByType('resource').map(entry => ({ name: entry.name.split('/').pop(), encodedBytes: entry.encodedBodySize, transferBytes: entry.transferSize })));
+    const initialEncodedBytes = initialResources.reduce((total,entry) => total+entry.encodedBytes,0);
+    assert.ok(initialEncodedBytes < 3_000_000, 'Initial local response bodies must stay below the 3 MB ceiling');
     if (profile.isMobile) {
       await page.locator('.touch-controls').waitFor({ state: 'visible' });
       assert.equal(await page.evaluate(() => matchMedia('(any-pointer:coarse)').matches), true);
@@ -85,8 +92,9 @@ try {
         requestAnimationFrame(frame);
       }));
       assert.ok(movement.positions.some(position => Math.hypot(position.x,position.z+.2)>.1), 'Movement should update the saved camera');
+      if(process.env.PORTFOLIO_ENFORCE_BUDGET==='1')assert.ok(Math.round(movement.frameIntervalP95*10)/10<=33.4,`Desktop traversal p95 ${movement.frameIntervalP95} ms exceeds 33.4 ms`);
     }
-    report.profiles.push({ name, errors, overflow, navigation, frameIntervalP50: intervals[90], frameIntervalP95: intervals[171], samples: intervals.length, movement, note: 'Headless local Chromium; frame samples and synthetic keyboard traversal do not establish physical-device performance. Navigation is a local uncached context, without network throttling.' });
+    report.profiles.push({ name, sceneMode, errors, overflow, navigation, initialEncodedBytes, initialResources, frameIntervalP50: intervals[90], frameIntervalP95: intervals[171], samples: intervals.length, movement, note: 'Headless local Chromium; frame samples and synthetic keyboard traversal do not establish physical-device performance. Navigation is a local uncached context, without network throttling. Encoded resource sizes reflect server responses, without assuming gzip.' });
     await context.close();
   }
   await writeFile(`${output}/report.json`, JSON.stringify(report, null, 2));

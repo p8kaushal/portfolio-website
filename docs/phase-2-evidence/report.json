@@ -1,0 +1,14 @@
+{
+  "baseURL": "http://127.0.0.1:4175",
+  "checks": [
+    "classic: studio/day/night captures and live style switch",
+    "enhanced: studio/day/night captures and live style switch",
+    "Enhanced module failure automatically recovers to classic",
+    "WebGL context loss in enhanced automatically remounts classic",
+    "Unsupported WebGL keeps direct portfolio and 2D usable",
+    "Automatic coarse-pointer choice starts classic",
+    "Corrupt saved preference recovers to automatic",
+    "Denied storage still permits an explicit in-memory style choice"
+  ],
+  "pageErrors": []
+}

@@ -1,6 +1,6 @@
 # Phase 1 — visual specification and acceptance proposal
 
-Status: draft for review, 2026-11-12. Implementation authorized by the user; phase acceptance is still required by the project workflow.
+Status: accepted by user on 2026-11-12. Proceed through visual phases without intermediate approvals after successful verification and commits. Standalone accessibility/content features are deferred by latest user direction.
 
 Visual review: [original concept board](phase-1-board.svg). This schematic illustrates palette, material relationships, window depth, day/night contrast and room circulation; it is not a production render or a claim of achieved fidelity.
 
