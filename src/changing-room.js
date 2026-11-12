@@ -86,6 +86,14 @@ export function mountChangingRoom(THREE, stage, source, onContextLost) {
   }
   /** @param {PointerEvent} event */
   function up(event) { if (pointer?.id === event.pointerId) pointer = null; }
+  /** @param {WheelEvent} event */
+  function wheel(event) {
+    event.preventDefault();
+    const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? stage.clientHeight : 1);
+    zoom = clamp(zoom * Math.exp(-delta * .0015), 1, 1.8);
+    render();
+  }
+  stage.addEventListener('wheel', wheel, { passive: false });
   stage.addEventListener('pointerdown', down);
   stage.addEventListener('pointermove', move);
   stage.addEventListener('pointerup', up);
@@ -98,6 +106,7 @@ export function mountChangingRoom(THREE, stage, source, onContextLost) {
   render();
   return { change, destroy() {
     observer.disconnect();
+    stage.removeEventListener('wheel', wheel);
     stage.removeEventListener('pointerdown', down); stage.removeEventListener('pointermove', move);
     stage.removeEventListener('pointerup', up); stage.removeEventListener('pointercancel', up);
     renderer.domElement.removeEventListener('webglcontextlost', contextLost);

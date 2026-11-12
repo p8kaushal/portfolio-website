@@ -66,6 +66,11 @@ try {
     } else {
       const box = await stage.boundingBox();
       await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+      await page.mouse.wheel(0, -180);
+      assert.notDeepEqual(await stage.screenshot(), initial, 'mouse wheel zooms the view');
+      await dialog.getByRole('button', { name: 'Reset view' }).click();
+      assert.deepEqual(await stage.screenshot(), initial, 'reset restores view after wheel zoom');
+      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
       await page.mouse.down(); await page.mouse.move(box.x + box.width / 2 + 40, box.y + box.height / 2 + 20, { steps: 4 }); await page.mouse.up();
       assert.notDeepEqual(await stage.screenshot(), initial, 'pointer drag pans the view');
       await dialog.getByRole('button', { name: 'Reset view' }).click();

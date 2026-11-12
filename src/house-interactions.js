@@ -90,7 +90,7 @@ export function mountHouseInteractions(host, { onExit = () => {}, getCharacter =
     }
     try {
       changingRoom=mountChangingRoom(three,stage,character,fallback);
-      note.outerHTML='<p class="hi-mirror-help">Drag the mirror to pan, or use the buttons to pan and zoom.</p><div class="hi-mirror-controls" aria-label="Character view controls"><button type="button" data-view="in" aria-label="Zoom in">+</button><button type="button" data-view="out" aria-label="Zoom out">−</button><button type="button" data-view="left" aria-label="Pan left">←</button><button type="button" data-view="right" aria-label="Pan right">→</button><button type="button" data-view="up" aria-label="Pan up">↑</button><button type="button" data-view="down" aria-label="Pan down">↓</button><button type="button" data-view="reset">Reset view</button></div>';
+      note.outerHTML='<p class="hi-mirror-help">Drag to pan · Scroll or pinch on a trackpad to zoom · Use buttons to adjust or reset.</p><div class="hi-mirror-controls" aria-label="Character view controls"><button type="button" data-view="in" aria-label="Zoom in">+</button><button type="button" data-view="out" aria-label="Zoom out">−</button><button type="button" data-view="left" aria-label="Pan left">←</button><button type="button" data-view="right" aria-label="Pan right">→</button><button type="button" data-view="up" aria-label="Pan up">↑</button><button type="button" data-view="down" aria-label="Pan down">↓</button><button type="button" data-view="reset">Reset view</button></div>';
       inner.querySelectorAll('[data-view]').forEach(button=>button.onclick=()=>changingRoom?.change(button.dataset.view));
     } catch(error) {
       console.warn('Character view unavailable; using the illustrated mirror.',error);
