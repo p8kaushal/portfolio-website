@@ -1,0 +1,223 @@
+{
+  "baseURL": "http://127.0.0.1:4173",
+  "capturedAt": "2026-11-12T12:38:40.749Z",
+  "profiles": [
+    {
+      "name": "desktop",
+      "sceneMode": "enhanced",
+      "errors": [],
+      "overflow": false,
+      "navigation": {
+        "domContentLoadedMs": 11.900000005960464,
+        "loadMs": 11.900000005960464
+      },
+      "initialEncodedBytes": 278247,
+      "documentEncodedBytes": 1111,
+      "initialResources": [
+        {
+          "name": "start.D4hFHVpx.js",
+          "encodedBytes": 60,
+          "transferBytes": 360
+        },
+        {
+          "name": "CGHPbvJM.js",
+          "encodedBytes": 10201,
+          "transferBytes": 10501
+        },
+        {
+          "name": "wcc-bYEw.js",
+          "encodedBytes": 14252,
+          "transferBytes": 14552
+        },
+        {
+          "name": "DK3Fl9T5.js",
+          "encodedBytes": 158,
+          "transferBytes": 458
+        },
+        {
+          "name": "xihTtKlq.js",
+          "encodedBytes": 65,
+          "transferBytes": 365
+        },
+        {
+          "name": "app.DvSxp5SM.js",
+          "encodedBytes": 1342,
+          "transferBytes": 1642
+        },
+        {
+          "name": "0.-QTPnx6N.js",
+          "encodedBytes": 272,
+          "transferBytes": 572
+        },
+        {
+          "name": "CRzLMJPS.js",
+          "encodedBytes": 798,
+          "transferBytes": 1098
+        },
+        {
+          "name": "2.Cxdjlx6w.css",
+          "encodedBytes": 1448,
+          "transferBytes": 1748
+        },
+        {
+          "name": "BJzfPrCN.js",
+          "encodedBytes": 7227,
+          "transferBytes": 7527
+        },
+        {
+          "name": "2.zwMhe1qH.js",
+          "encodedBytes": 43405,
+          "transferBytes": 43705
+        },
+        {
+          "name": "DSTW21sj.js",
+          "encodedBytes": 88313,
+          "transferBytes": 88613
+        },
+        {
+          "name": "BF58tRDi.js",
+          "encodedBytes": 101124,
+          "transferBytes": 101424
+        },
+        {
+          "name": "1.BsyzdDNh.js",
+          "encodedBytes": 576,
+          "transferBytes": 876
+        },
+        {
+          "name": "1kigPT0H.js",
+          "encodedBytes": 7895,
+          "transferBytes": 8195
+        }
+      ],
+      "frameIntervalP50": 16.699999999999818,
+      "frameIntervalP95": 33.40000000000009,
+      "samples": 180,
+      "movement": {
+        "durationMs": 10033,
+        "samples": 345,
+        "frameIntervalP95": 33.400000000001455,
+        "positions": [
+          {
+            "x": 0,
+            "z": -0.2
+          },
+          {
+            "x": 10.56972,
+            "z": -0.2
+          },
+          {
+            "x": 0.1402799999999884,
+            "z": -0.2
+          },
+          {
+            "x": 0.1402799999999884,
+            "z": 0.8495799999999987
+          },
+          {
+            "x": 0.1402799999999884,
+            "z": -6.360560000000003
+          }
+        ],
+        "finalSession": {
+          "x": 0.1402799999999884,
+          "z": -6.360560000000003,
+          "yaw": 0,
+          "pitch": 0,
+          "noticeShown": false,
+          "playableSeconds": 14.84939999999997
+        },
+        "path": "D/A/S/W, 2.5 seconds each; collision handling remains enabled."
+      },
+      "note": "Headless local Chromium; frame samples and synthetic keyboard traversal do not establish physical-device performance. Navigation is a local uncached context, without network throttling. Encoded resource sizes include the document and resource responses, without assuming gzip."
+    },
+    {
+      "name": "mobile",
+      "sceneMode": "classic",
+      "errors": [],
+      "overflow": false,
+      "navigation": {
+        "domContentLoadedMs": 17.400000005960464,
+        "loadMs": 17.5
+      },
+      "initialEncodedBytes": 270352,
+      "documentEncodedBytes": 1111,
+      "initialResources": [
+        {
+          "name": "start.D4hFHVpx.js",
+          "encodedBytes": 60,
+          "transferBytes": 360
+        },
+        {
+          "name": "CGHPbvJM.js",
+          "encodedBytes": 10201,
+          "transferBytes": 10501
+        },
+        {
+          "name": "wcc-bYEw.js",
+          "encodedBytes": 14252,
+          "transferBytes": 14552
+        },
+        {
+          "name": "DK3Fl9T5.js",
+          "encodedBytes": 158,
+          "transferBytes": 458
+        },
+        {
+          "name": "app.DvSxp5SM.js",
+          "encodedBytes": 1342,
+          "transferBytes": 1642
+        },
+        {
+          "name": "xihTtKlq.js",
+          "encodedBytes": 65,
+          "transferBytes": 365
+        },
+        {
+          "name": "0.-QTPnx6N.js",
+          "encodedBytes": 272,
+          "transferBytes": 572
+        },
+        {
+          "name": "CRzLMJPS.js",
+          "encodedBytes": 798,
+          "transferBytes": 1098
+        },
+        {
+          "name": "2.Cxdjlx6w.css",
+          "encodedBytes": 1448,
+          "transferBytes": 1748
+        },
+        {
+          "name": "BJzfPrCN.js",
+          "encodedBytes": 7227,
+          "transferBytes": 7527
+        },
+        {
+          "name": "2.zwMhe1qH.js",
+          "encodedBytes": 43405,
+          "transferBytes": 43705
+        },
+        {
+          "name": "DSTW21sj.js",
+          "encodedBytes": 88313,
+          "transferBytes": 88613
+        },
+        {
+          "name": "BF58tRDi.js",
+          "encodedBytes": 101124,
+          "transferBytes": 101424
+        },
+        {
+          "name": "1.BsyzdDNh.js",
+          "encodedBytes": 576,
+          "transferBytes": 876
+        }
+      ],
+      "frameIntervalP50": 16.699999999999818,
+      "frameIntervalP95": 16.799999999999727,
+      "samples": 180,
+      "note": "Headless local Chromium; frame samples and synthetic keyboard traversal do not establish physical-device performance. Navigation is a local uncached context, without network throttling. Encoded resource sizes include the document and resource responses, without assuming gzip."
+    }
+  ]
+}

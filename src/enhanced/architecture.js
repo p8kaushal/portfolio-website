@@ -24,7 +24,10 @@ export function buildArchitecture(THREE,context,tools) {
     for(const z of [-2.55,1.15])box(x,1.55,z,.4,3.1,.16,'oak');
     box(x,.067,-.7,.48,.025,3.55,'brass',false,.005);
   }
-  box(0,3.55,1,27.8,.1,17.7,'plaster',false,0);
+  // Open central ceiling with a shallow perimeter canopy and exposed cross beams.
+  for (const z of [-7.15,9.15]) box(0,3.55,z,27.8,.12,1.35,'plaster',false,0);
+  for (const x of [-13.1,13.1]) box(x,3.55,1,1.35,.12,15.1,'plaster',false,0);
+  for (const x of [-9,0,9]) box(x,3.62,1,.18,.18,15.1,'oak',false,0);
   // Cove trim and skirting give the rooms a crafted edge without heavy ornament.
   for(const y of [.14,3.34]) {
     box(0,y,-7.78,27.7,.12,.09,'oak');box(0,y,9.78,27.7,.12,.09,'oak');

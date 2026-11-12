@@ -1,11 +1,12 @@
 // @ts-nocheck
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 /** @typedef {{scene:any,colliders:{minX:number,maxX:number,minZ:number,maxZ:number}[]}} RoomContext */
 /** Procedural, asset-free house for the first-person portfolio.
  * The default path is the preserved classic scene; room builders share its interaction contract.
  * @param {any} THREE
- * @param {{scene?:any,localLights?:boolean,flatShading?:boolean,legacyAccents?:boolean,buildArchitecture?:(context:RoomContext)=>void,buildBedroom?:(context:RoomContext)=>void,buildStudio?:(context:RoomContext)=>void,buildLivingRoom?:(context:RoomContext)=>void}} [options]
+ * @param {{scene?:any,localLights?:boolean,flatShading?:boolean,legacyAccents?:boolean,buildArchitecture?:(context:RoomContext)=>void,buildBedroom?:(context:RoomContext)=>void,buildStudio?:(context:RoomContext)=>void,buildLivingRoom?:(context:RoomContext)=>void,daySkyColor?:string,nightSkyColor?:string}} [options]
  */
-export function createWorld(THREE, { scene = new THREE.Scene(), buildArchitecture, buildBedroom, buildStudio, buildLivingRoom, localLights = true, flatShading = true, legacyAccents = true } = {}) {
+export function createWorld(THREE, { scene = new THREE.Scene(), buildArchitecture, buildBedroom, buildStudio, buildLivingRoom, localLights = true, flatShading = true, legacyAccents = true, daySkyColor = '#c8b49a', nightSkyColor = '#384451' } = {}) {
   scene.background = new THREE.Color('#c8b49a');
   // Distance haze and a warm, flat-lit palette evoke early 3D game worlds.
   scene.fog = new THREE.Fog('#c8b49a', 18, 43);
@@ -204,7 +205,7 @@ export function createWorld(THREE, { scene = new THREE.Scene(), buildArchitectur
   const skySun=new THREE.Mesh(new THREE.CircleGeometry(2.2,24),new THREE.MeshBasicMaterial({color:'#f2d49a',transparent:true,depthWrite:false,fog:false}));
   const skyMoon=new THREE.Mesh(new THREE.CircleGeometry(1.65,24),new THREE.MeshBasicMaterial({color:'#e1e8e4',transparent:true,depthWrite:false,fog:false}));
   skySun.position.set(0,21,-34);skyMoon.position.set(0,21,-34);scene.add(skySun,skyMoon);
-  const daySky=new THREE.Color('#c8b49a'),nightSky=new THREE.Color('#384451');
+  const daySky=new THREE.Color(daySkyColor),nightSky=new THREE.Color(nightSkyColor);
   const dayWindow=new THREE.Color('#c9c0a7'),nightWindow=new THREE.Color('#536476');
   const daySun=new THREE.Color('#f5e5ce'),nightSun=new THREE.Color('#9baec4');
   const dayGlow=new THREE.Color('#e3d3b5'),nightGlow=new THREE.Color('#ffe0ac');
@@ -272,6 +273,11 @@ export function createWorld(THREE, { scene = new THREE.Scene(), buildArchitectur
     const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(color));
     mesh.position.set(x,y,z);mesh.rotation.z=rotationZ;group.add(mesh);return mesh;
   };
+  // Rounded, tailored silhouettes keep the character readable at a distance.
+  const rounded=(group,x,y,z,w,h,d,color,r=.06,rotationZ=0)=>{
+    const mesh=new THREE.Mesh(new RoundedBoxGeometry(w,h,d,3,r),mat(color));
+    mesh.position.set(x,y,z);mesh.rotation.z=rotationZ;group.add(mesh);return mesh;
+  };
   const ellipsoid=(group,x,y,z,rx,ry,rz,color,segments=12)=>{
     const mesh=new THREE.Mesh(new THREE.SphereGeometry(1,segments,Math.max(6,Math.floor(segments*.7))),mat(color));
     mesh.position.set(x,y,z);mesh.scale.set(rx,ry,rz);group.add(mesh);return mesh;
@@ -296,39 +302,50 @@ export function createWorld(THREE, { scene = new THREE.Scene(), buildArchitectur
   ellipsoid(character,0,1.942,.207,.03,.045,.028,skin,8);
   part(character,0,1.88,.197,.105,.013,.018,'#724b41');
   // Red jersey, pale sleeve bands and understated cream numeral.
-  part(character,0,1.39,0,.69,.78,.39,'#9e2435');
+  rounded(character,0,1.39,0,.69,.78,.39,'#9e2435',.105);
   ellipsoid(character,0,1.765,0,.12,.065,.12,skin,10);
-  part(character,-.39,1.53,0,.19,.36,.34,'#9e2435',-.12);
-  part(character,.39,1.53,0,.19,.36,.34,'#9e2435',.12);
+  rounded(character,-.39,1.53,0,.23,.36,.34,'#9e2435',.07,-.12);
+  rounded(character,.39,1.53,0,.23,.36,.34,'#9e2435',.07,.12);
   part(character,-.4,1.46,.015,.2,.055,.35,'#e4d9c8',-.12);
   part(character,.4,1.46,.015,.2,.055,.35,'#e4d9c8',.12);
-  part(character,-.44,1.14,0,.14,.50,.19,skin,-.08);
-  part(character,.44,1.14,0,.14,.50,.19,skin,.08);
+  rounded(character,-.44,1.14,0,.16,.50,.18,skin,.07,-.08);
+  rounded(character,.44,1.14,0,.16,.50,.18,skin,.07,.08);
   ellipsoid(character,-.46,.86,.01,.085,.105,.085,skin,10);
   ellipsoid(character,.46,.86,.01,.085,.105,.085,skin,10);
   // Relaxed dark cargo pants and light, brown-trimmed sneakers.
-  part(character,-.17,.73,0,.29,.66,.29,'#292e2b');
-  part(character,.17,.73,0,.29,.66,.29,'#292e2b');
-  part(character,-.17,.32,0,.25,.25,.26,'#292e2b');
-  part(character,.17,.32,0,.25,.25,.26,'#292e2b');
+  rounded(character,-.17,.73,0,.30,.68,.31,'#292e2b',.09);
+  rounded(character,.17,.73,0,.30,.68,.31,'#292e2b',.09);
+  rounded(character,-.17,.32,0,.26,.28,.27,'#292e2b',.07);
+  rounded(character,.17,.32,0,.26,.28,.27,'#292e2b',.07);
   for(const x of [-.17,.17]){
-    part(character,x,.14,.065,.28,.13,.43,'#e4dacb');
-    part(character,x,.22,.035,.27,.09,.34,'#695448');
-    part(character,x,.135,.24,.19,.075,.08,'#e8ded0');
+    rounded(character,x,.14,.065,.28,.13,.43,'#e4dacb',.055);
+    rounded(character,x,.22,.035,.27,.12,.34,'#695448',.055);
+    rounded(character,x,.145,.24,.19,.075,.08,'#e8ded0',.025);
   }
   // The jersey number is built from mesh strips and stays legible at lower quality.
   for(const [x,y,w,h] of [[0,1.65,.22,.035],[.095,1.58,.035,.12],[0,1.51,.22,.035],[-.095,1.44,.035,.12],[0,1.37,.22,.035]]) part(character,x,y,.205,w,h,.016,'#e8ddca');
+  // Rounded shoulders and layered tailoring soften the silhouette while retaining the jersey.
+  for (const x of [-.32,.32]) ellipsoid(character,x,1.68,0,.16,.14,.19,'#9e2435',16);
+  part(character,0,1.73,.197,.28,.025,.018,'#6e1827');
+  for (const x of [-.17,.17]) rounded(character,x,.48,.16,.22,.22,.045,'#242925',.02);
   // Additional detail can be toggled without changing the character's appearance identity.
   for(const x of [-.17,.17]){
-    part(mediumDetail,x,.67,.151,.19,.20,.025,'#3c4039');
+    rounded(mediumDetail,x,.67,.157,.19,.20,.025,'#3c4039',.012);
     part(mediumDetail,x,.78,.17,.16,.022,.025,'#57594d');
     part(mediumDetail,x,.22,.217,.18,.017,.014,'#efe8dd');
     part(mediumDetail,x,.25,.21,.18,.017,.014,'#efe8dd');
   }
   part(mediumDetail,-.45,1.02,.108,.145,.075,.025,'#252a29');
+  for (const x of [-.31,.31]) {
+    rounded(mediumDetail,x,.63,.02,.085,.22,.24,'#333732',.025);
+    part(mediumDetail,x,.71,.15,.08,.025,.025,'#51524a');
+  }
+  for (const x of [-.10,.10]) part(mediumDetail,x,2.07,.198,.13,.024,.018,'#302723',x<0?-.08:.08);
+  part(mediumDetail,0,1.862,.201,.085,.012,.016,'#b77869');
   // Curls are individual low-poly locks instead of a flat hair cap.
   const curls=[[-.19,2.27,.11,.085],[-.13,2.32,.12,.09],[-.06,2.34,.15,.09],[.02,2.35,.15,.09],[.10,2.33,.13,.09],[.18,2.29,.10,.085],[-.23,2.23,.025,.075],[.23,2.23,.02,.075],[-.16,2.30,-.09,.09],[-.05,2.36,-.08,.09],[.07,2.36,-.08,.09],[.18,2.30,-.08,.09]];
-  for(const [x,y,z,r] of curls)ellipsoid(mediumDetail,x,y,z,r,r*.82,r,hair,8);
+  for(const [x,y,z,r] of curls)ellipsoid(mediumDetail,x,y,z,r*1.08,r*1.03,r,hair,10);
+  for(const [x,y,z] of [[-.22,2.29,.08],[-.14,2.37,.04],[-.04,2.40,.08],[.07,2.40,.06],[.18,2.35,.04],[.24,2.28,.03]]) ellipsoid(mediumDetail,x,y,z,.075,.07,.08,hair,10);
   for(const x of [-.115,.115]){
     part(highDetail,x,2.06,.215,.12,.017,.012,'#292723');
     part(highDetail,x-.035,2.008,.222,.012,.012,.008,'#f0e3cc');

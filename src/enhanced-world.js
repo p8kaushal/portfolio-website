@@ -51,6 +51,7 @@ export function createEnhancedWorld(THREE) {
   try {
     const world=createWorld(THREE,{
       scene,localLights:false,flatShading:false,legacyAccents:false,
+      daySkyColor:'#aecbd6',nightSkyColor:'#2d4059',
       buildArchitecture:context=>{tools=createPrimitives(THREE,scene,context.colliders);buildArchitecture(THREE,context,tools);},
       buildBedroom:context=>{rooms.push(buildBedroom(THREE,context,tools));},
       buildStudio:context=>{rooms.push(buildStudio(THREE,context,tools));},
