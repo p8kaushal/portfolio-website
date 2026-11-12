@@ -154,6 +154,8 @@ Each implementation phase begins on a descriptive feature branch based on the la
 
 ## Verification log
 
+- Final review branch `chore/final-release-review` based on `4a2aa2b`: clean npm ci, lint, 7 unit tests, sequential check (0 errors/0 warnings), build, 3 production browser tests and 8 scene/fallback checks passed. Final enforced traversal passed 33.3 ms p95 with 282,023 encoded bytes; mobile emulation 275,172 bytes. Remote main read-only lookup was `b867cfd779900e47184de7e310836ca6ed7615e2`; pushes to main trigger GitHub Pages. Scope, limits and deployment consequences recorded in `docs/audit-remediation/release-review.md`. Optional case studies remain deferred; physical screen-reader/device checks and external share preview remain unverified; six low development-tree audit findings remain.
+
 - Clean `npm ci` initially exposed deprecated `lucide-svelte` in retained legacy components. Migrated their imports to maintained `@lucide/svelte`; fresh `npm ci` completed without that deprecation warning (six low audit advisories remain). Lint passed, 7 unit tests passed, check 0 errors/0 warnings, build passed and production browser suite 3/3 passed. Legacy components are not active in the current route; no separate legacy visual regression claimed.
 
 - Incremental type-checking: removed `@ts-nocheck` from `src/scene-chooser.js`, documented callback and mode types, and guarded required DOM elements. First check exposed 12 typing errors; fixed them. Fresh check 0 errors/0 warnings, lint, 7 unit tests, build and 8 production scene/fallback checks passed. Other runtime suppressions remain for later incremental work.

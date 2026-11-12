@@ -1,5 +1,10 @@
 # Account-swap handoff
 
+## Current remediation review
+
+Current branch `chore/final-release-review`, based on `4a2aa2b`, contains the accepted character, accessibility fixes, check tooling, no-JavaScript fallback, share metadata, security review and dependency cleanup. Final checks and limitations are in `docs/audit-remediation/release-review.md`. User opted to defer case studies; screen-reader/physical-device coverage and external social preview remain unverified. Remote main was read-only checked at `b867cfd`; pushing a merge to main triggers GitHub Pages. Separate user approval is required before any merge or deployment.
+
+
 ## Active audit remediation
 
 User approved goal-based execution, accepted the current character, and chose to retain current menu, house dialog styling and home links. Project case studies are deferred and optional pending a later affirmative decision. On `fix/2d-accessibility-remediation`, completed and committed multiple verified 2D focus/contrast and interface accessibility fixes through `854eecc`. Production preview is at port 4191. Axe checks found no detected violations in tested states; some checks remain incomplete and physical screen-reader/device testing is unverified. Continue the approved plan, preserving separate merge/deployment approval.
