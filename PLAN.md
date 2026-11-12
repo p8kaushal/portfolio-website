@@ -102,6 +102,10 @@ Each implementation phase begins on a descriptive feature branch based on the la
 
 ## Verification log
 
+- Preview consistency fix verified: `npm run check` 0 errors/0 warnings and `npm run build` passed; fresh preview on port 4181 served byte-identical build favicon, résumé and 2D assets. All five stale dist-only assets returned non-200; initial one-off audit assertion had a double-slash path bug and was corrected before the passing run. Production scene-switch/failure/recovery suite passed eight checks with no page errors. No physical device testing.
+
+- User reported the preview favicon differed. Found stale ignored `dist/` from another Vite application: `vite preview` served its favicon before the SvelteKit preview handler, despite the correct `build/` favicon. On `fix/preview-asset-consistency`, point preview explicitly to `build/`; inspect other served assets and verify both page routes and PDFs.
+
 - Character realism refinement: sequential check (0 errors, 0 warnings) and production build passed; production locker controls and context-loss recovery passed desktop and emulated mobile with no page errors. Desktop stationary p95 33.4 ms, mobile 16.8 ms. Capture: `docs/character-realism-evidence/desktop.png`. Model remains stylized; likeness and degree of realism await user review.
 
 - User accepted the simpler professional direction and requested more realism. On `feat/character-realism`, refining facial feature scale, arms, shirt and continuous trouser silhouette while retaining glasses, curls and the professional outfit. Verification and user review pending.

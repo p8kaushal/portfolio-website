@@ -1,5 +1,10 @@
 # Account-swap handoff
 
+## Preview consistency fix
+
+On `fix/preview-asset-consistency`, preview explicitly serves `build/`: stale ignored `dist/` previously overrode the favicon and could expose unrelated assets. Check/build, byte comparisons, stale asset checks and production scene/fallback suite passed. Preview port 4181 serves the corrected output.
+
+
 ## Latest character realism revision
 
 Branch `feat/character-realism`: user requested more realism after accepting the simpler professional direction. Refined facial details, arm and clothing proportions and trouser silhouette; still a stylized procedural model. Check, build, production locker controls and recovery passed. Capture: `docs/character-realism-evidence/desktop.png`; user review pending. Merge/deployment remain separately gated.
