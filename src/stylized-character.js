@@ -10,7 +10,7 @@ export function createStylizedCharacter(THREE, material) {
   const fine = new THREE.Group();
   character.add(detail, fine);
   const skin = '#bd896d', skinShade = '#9f6f59', hair = '#242423', hairHighlight = '#393837';
-  const jersey = '#a32e3c', jerseyDark = '#732630', dark = '#25292a', trim = '#535957';
+  const jersey = '#455b68', jerseyDark = '#344752', dark = '#25292a';
   function rounded(parent, x, y, z, w, h, d, color, radius = .025, angle = 0) {
     const mesh = new THREE.Mesh(new RoundedBoxGeometry(w, h, d, 3, radius), material(color));
     mesh.position.set(x, y, z); mesh.rotation.z = angle; parent.add(mesh); return mesh;
@@ -64,40 +64,23 @@ export function createStylizedCharacter(THREE, material) {
     tube(detail, [[x-side*.027,y+.07,.148],[x+side*.015,y+.065,.169],[x+side*.028,y+.02,.18],[x+side*.005,y-.012,.176]], .009, hairHighlight, 14);
   }
 
-  // A tailored red jersey with a cream outlined number and two sleeve bands.
-  rounded(character,0,1.48,0,.62,.67,.31,jersey,.085);
-  rounded(detail,0,1.785,.136,.23,.035,.03,jerseyDark,.012);
+  // A simple collared shirt and tailored trousers give the portrait a quieter,
+  // professional appearance while retaining the original likeness and pose.
+  rounded(character,0,1.48,0,.60,.67,.30,jersey,.065);
   for (const side of [-1,1]) {
-    const sleeve=rounded(character,side*.35,1.62,0,.22,.29,.30,jersey,.065,side*.32);
-    rounded(detail,side*.378,1.51,.02,.22,.035,.31,'#e4d8c2',.012,side*.32);
-    rounded(detail,side*.386,1.47,.02,.22,.025,.31,'#e4d8c2',.009,side*.32);
-    limb(character,[side*.40,1.45,0],[side*.56,1.17,.005],.075,.065,skin);
-    oval(character,side*.57,1.13,.005,.072,.10,.052,skin,18);
-    rounded(detail,side*.52,1.21,.01,.13,.055,.13,side<0?'#353e3d':'#756b5d',.018,side*.4);
-    // Individual fingers make the relaxed pose less mannequin-like.
-    for(let i=0;i<3;i++) oval(fine,side*(.54+i*.027),1.072,.035,.018,.052,.019,skin,12);
+    rounded(character,side*.34,1.62,0,.21,.29,.29,jersey,.055,side*.25);
+    limb(character,[side*.39,1.45,0],[side*.53,1.17,.005],.070,.060,skin);
+    oval(character,side*.54,1.13,.005,.065,.09,.050,skin,18);
+    for(let i=0;i<3;i++) oval(fine,side*(.51+i*.026),1.072,.035,.017,.045,.018,skin,12);
+    rounded(detail,side*.075,1.755,.158,.14,.075,.018,'#d4ddd9',.012,side*.35);
   }
-  // Number is a layered outline and fill, keeping it legible from the mirror.
-  const numeral=[[0,1.70,.21,.035],[.088,1.625,.035,.13],[0,1.55,.21,.035],[-.088,1.475,.035,.13],[0,1.40,.21,.035]];
-  for(const [x,y,w,h] of numeral){rounded(character,x,y,.16,w+.018,h+.018,.015,'#e8dfcc',.004);rounded(character,x,y,.172,w,h,.012,jerseyDark,.003);}
-  // Lightweight straps, shoulder pads and buckles echo the reference without copying assets.
-  for (const side of [-1,1]) {
-    rounded(detail,side*.28,1.70,.12,.115,.30,.055,'#454b4a',.025,side*.2);
-    const pad=oval(detail,side*.34,1.76,0,.14,.08,.16,'#42494a',18);pad.rotation.z=-side*.2;
-    rounded(detail,side*.27,1.65,.155,.10,.045,.025,'#858a80',.008,side*.2);
-    oval(fine,side*.35,1.785,.13,.012,.012,.008,'#c8c5b2',10);
-  }
-  rounded(detail,0,1.265,.07,.64,.09,.32,'#383d3a',.025);
-  rounded(detail,0,1.27,.239,.10,.075,.025,'#85877c',.008);
-  rounded(detail,.245,1.20,.18,.15,.18,.12,'#5b5749',.025);
-  rounded(fine,.245,1.23,.247,.11,.025,.012,'#a19882',.005);
+  rounded(detail,0,1.58,.157,.018,.30,.012,jerseyDark,.004);
+  for (let i=0;i<3;i++) oval(fine,0,1.69-i*.09,.168,.008,.008,.004,'#d4ddd9',10);
+  rounded(detail,0,1.255,.04,.60,.045,.30,'#303b3c',.012);
   // Cargo trousers: tapered limbs, pockets, knee pads and layered sneakers.
   for(const side of [-1,1]) {
     rounded(character,side*.16,.96,0,.27,.52,.29,'#292e2c',.08,side*.035);
     rounded(character,side*.17,.48,0,.25,.51,.27,'#292e2c',.075,-side*.025);
-    rounded(detail,side*.28,.91,0,.105,.23,.25,'#343b37',.025);
-    rounded(detail,side*.17,.69,.15,.20,.18,.06,'#515954',.035);
-    rounded(fine,side*.17,.69,.185,.14,.12,.014,'#69716b',.022);
     rounded(detail,side*.17,.245,.04,.25,.12,.28,'#4b3d35',.035);
     rounded(character,side*.17,.135,.065,.27,.14,.42,'#665246',.055);
     rounded(character,side*.17,.075,.09,.28,.055,.45,'#e4dccb',.022);

@@ -1,5 +1,10 @@
 # Account-swap handoff
 
+## Latest professional character revision
+
+Branch `feat/professional-character`: user requested a simpler professional character. Replaced jersey and tactical gear with a collared shirt and simplified trousers while retaining likeness. Check/build and production locker controls/recovery passed; capture at `docs/professional-character-evidence/desktop.png`. Await visual feedback; merge/deployment require separate approval.
+
+
 ## Continuation verification — latest
 
 - Current branch `feat/character-reference-refinement`; verified character checkpoint `a06b8b5`. Restored handoff and verified saved batching: check 0 errors/0 warnings, production build passed, scene-mode 7/7 passed, quality-layer smoke passed. Production locker desktop and emulated mobile portrait/landscape controls and recovery passed without page errors. Enforced automatic-enhanced traversal passed at 33.4 ms p95; prior failed runs remain in PLAN.md.

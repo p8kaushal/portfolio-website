@@ -102,6 +102,10 @@ Each implementation phase begins on a descriptive feature branch based on the la
 
 ## Verification log
 
+- Professional character: `npm run check` passed (0 errors, 0 warnings); `npm run build` passed; production locker desktop and emulated mobile controls and recovery passed with no page errors. Desktop stationary p95 33.4 ms, mobile 16.8 ms. Fresh capture in `docs/professional-character-evidence/desktop.png`; likeness review pending.
+
+- User requested a simpler, professional character. On `feat/professional-character`, replace the sports jersey and tactical accessories with a subdued collared shirt and simplified trousers, preserving likeness and interaction controls. Verification and likeness review pending.
+
 - Verified character review checkpoint committed at `a06b8b5` on `feat/character-reference-refinement`. Likeness acceptance remains pending; no merge, deployment or branch deletion performed.
 
 - Continuation locker suite passed desktop and emulated mobile portrait/landscape zoom, pan, reset, About, exit, initialization/context-loss recovery and classic portrait visibility, with no page errors. Stationary locker p95: desktop 33.5 ms; mobile 16.7 ms; landscape 16.8 ms (separate from the enforced traversal result of 33.4 ms). Fresh inspected capture and reports retained in `docs/character-refinement-evidence/`. Character is ready for a review checkpoint, not final likeness acceptance.
