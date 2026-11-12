@@ -1,5 +1,55 @@
 # Project roadmap and handoff
 
+## Approved audit remediation plan — active
+
+**Status:** User approved implementation and goal continuation. Current branch `fix/2d-accessibility-remediation` based on `fix/preview-asset-consistency` at `2ec41fb`. User chose to keep current portfolio menu, house dialog styling and home links; accepted the latest character. Proceed through phases with verification and commits. Preserve content, routes, favicon and historical refs; merge/deployment require separate approval. Content claims and material architectural decisions still require appropriate evidence or user input.
+
+### Priority 0 — Confirm scope and establish reproducible baseline
+- [x] User selected keeping the current direct portfolio menu, house dialog styling and home links; user accepted the latest character.
+- [ ] Inventory routes, production assets, links, keyboard flows, actual forms and feature availability; record baseline screenshots and viewport/device/browser matrix. Distinguish active site from legacy source. Verify current remote state before any release-related operation; do not assume local `main` is current.
+- [ ] Define measurable acceptance criteria: WCAG 2.2 AA as a target, representative viewport/zoom matrix, zero application console errors, explicit handling of environment-only WebGL warnings, and budgets based on measured current production. Document unavailable physical devices and screen-reader tooling.
+- [ ] Verify plan and baseline with a read-only CLI inventory and production browser checks; record results. No application changes before approval.
+
+### Priority 1 — Fix confirmed accessibility failures
+- [ ] Repair 2D welcome, phone and content overlays: correct dialog semantics, initial focus, containment, Escape/close behavior and focus restoration; keep keyboard/touch/game interactions usable.
+- [ ] Fix measured low contrast on the 2D fallback, then check the main site and all states for text, focus and control contrast. Retain intended visual style.
+- [ ] Audit and fix keyboard navigation, focus order/visibility, labels, announcements, landmarks, alt text for active media, reduced motion, and 200%/400% zoom/reflow throughout enhanced, classic, portfolio menu, house interactions and 2D. Test with a screen reader where available; record limitations, not a compliance claim.
+- [ ] Verify with automated accessibility tooling, contrast checks, manual keyboard and responsive browser flows plus sequential `npm run check` and `npm run build`. Resolve regressions and commit verified work.
+
+### Priority 2 — Resolve visible scope and first-impression friction
+- [ ] Implement the approved disposition of non-playground changes from Priority 0. Compare rendered outer page, menu and 2D header to the agreed baseline across screen sizes; retain favicon and avoid unrelated changes.
+- [ ] Improve discoverability of direct project access and make the next action obvious without obscuring the playable experience. Verify copy, hierarchy, mobile layout, menu behavior, focus, and no horizontal overflow. Obtain design feedback for material changes.
+- [ ] Check all links, buttons, modals, project cards, phone and résumé paths in production across enhanced, classic and 2D, including external link response limitations. Verify and commit.
+
+### Priority 3 — Strengthen verified portfolio evidence
+- [ ] Agree on audience and 2–3 priority projects. Collect confirmed role, problem, constraints, decisions, outcomes, screenshots, demo URLs and permissions from the user; use only facts supplied or independently verified.
+- [ ] Present concise project evidence and clear links in the direct portfolio and relevant house/2D views, preserving content parity and the existing résumé. Do not invent metrics, claims or project assets.
+- [ ] Verify facts with the user, check repository/demo links and media licensing, responsiveness, accessible names/alt text, keyboard navigation and fallback; run project checks and commit.
+
+### Priority 4 — Reliability, test tooling and maintainability
+- [ ] Add a suitable lint configuration and standard `npm run lint`/`npm test` entry points; integrate existing scene-mode tests and meaningful interaction tests. Fix the interaction suite's development-only module assumptions or explicitly separate dev and production suites.
+- [ ] Add focused regression coverage for preview asset identity, 2D focus/overlays, direct-menu links, scene switching and recovery, and representative visual layouts. Avoid tests that only mirror implementation.
+- [ ] Reduce `@ts-nocheck` in high-value runtime modules incrementally; split large inline UI templates/styles only where it materially improves maintainability without changing behavior. Review unused dependencies and legacy components by tracing imports before removal; preserve historical branches and required assets.
+- [ ] Run lint, unit/integration suites, sequential check/build and production browser regression; document failures, warnings, coverage and commit.
+
+### Priority 5 — Search, sharing and no-JavaScript access
+- [ ] Agree on the desired canonical URL, social preview image and share copy; create or use authorized, appropriately licensed assets and add Open Graph/Twitter metadata. Preserve favicon and site identity.
+- [ ] Design a server-rendered or static content route for essential portfolio/project information and a useful no-JavaScript experience. Evaluate SvelteKit architecture and trade-offs before material changes, retaining existing interaction and fallback routes.
+- [ ] Verify output HTML without JavaScript, metadata and image URLs, mobile/desktop appearance, link paths, accessible content and production build. Validate social previews where available; document external-platform limits and commit.
+
+### Priority 6 — Security, performance and repository hygiene
+- [ ] Triage all six low-severity full dependency audit findings for actual exposure and compatible fixes; rerun both full and production-only audits. Document deferred upgrades and breaking-change trade-offs instead of claiming zero risk.
+- [ ] Scan tracked files and history for secrets with an appropriate scanner without exposing findings; check ignore rules and asset rights. If a credential is found, stop and arrange safe rotation rather than merely removing the file.
+- [ ] Profile production loading, PDF worker, WebGL warnings, memory/disposal, assets and frame time on available representative devices. Optimize confirmed bottlenecks, measure before/after and maintain visual quality and fallback; distinguish local headless timing from physical-device results.
+- [ ] Inventory large legacy assets and dead code, trace actual use, and propose any destructive cleanup separately. Verify full regression and commit only safe approved changes.
+
+### Priority 7 — Final integration and release review
+- [ ] Run all configured lint/tests, sequential check/build and end-to-end browser regression across enhanced, classic, 2D, desktop/mobile and failure recovery. Test links, résumé, favicon, metadata, keyboard, responsive layout and production asset identity. Record exact outputs and unresolved limits.
+- [ ] Review user-approved project facts, visual scope, asset rights, dependency results and current remote/deployment state. Commit verified work on its feature branch and prepare a reviewable comparison and release notes.
+- [ ] Ask for separate explicit merge/deployment approval only after all authorized preparation is complete. Do not deploy, merge, push or delete preserved refs without appropriate authorization.
+
+**Handoff:** The detailed audit was read-only on `fix/preview-asset-consistency`; last verified production preview was port 4190. The latest character was accepted. User requests this plan for review and will specify the branch to create; no remediation has started.
+
 ## Approved revision — 2026-11-12
 
 User supplied full-body and face photographs as likeness references and requested retaining the original page appearance outside the playzone, richer themed portfolio-menu UI, improved mouse/trackpad locker pan and zoom, and a Fortnite-inspired stylized character. Existing automatic enhanced selection stays in place. No reference photographs will be committed without a separate decision.
@@ -103,6 +153,8 @@ Each implementation phase begins on a descriptive feature branch based on the la
 - [ ] Return to the outstanding likeness and branch-cleanup decisions after this change.
 
 ## Verification log
+
+- `fix/2d-accessibility-remediation`: user accepted current non-playground menu, dialogs and home links and approved latest character. Added 2D dialog semantics, focus containment/restoration and initial focus; darkened three measured low-contrast text colors. Sequential check passed 0 errors/0 warnings, build passed; production Chromium keyboard/dialog/overflow checks passed at 390×844, 768×1024 and 1440×900 with no page errors. Wider accessibility audit remains open.
 
 - Preview consistency fix verified: `npm run check` 0 errors/0 warnings and `npm run build` passed; fresh preview on port 4181 served byte-identical build favicon, résumé and 2D assets. All five stale dist-only assets returned non-200; initial one-off audit assertion had a double-slash path bug and was corrected before the passing run. Production scene-switch/failure/recovery suite passed eight checks with no page errors. No physical device testing.
 
