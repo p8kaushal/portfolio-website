@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 
-const baseURL = process.env.PORTFOLIO_URL || 'http://127.0.0.1:4191';
+const baseURL = process.env.PORTFOLIO_URL || 'http://127.0.0.1:4173';
 
 test('2D dialogs contain keyboard focus and restore it when dismissed', async () => {
   const browser = await chromium.launch();

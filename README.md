@@ -21,7 +21,7 @@ npm run build
 npm run preview
 ```
 
-For the browser regression, start a fresh production preview after building and run `PORTFOLIO_URL=http://127.0.0.1:4173 npm run test:browser` with the actual preview URL. The ESLint configuration covers the active JavaScript house runtime and maintained `.mjs` scripts; legacy Svelte/TypeScript components are not yet linted, and unused-variable checks remain deferred. The scoped minimatch overrides address a lint-tool advisory and should be revisited when upstream dependencies update.
+For the browser regression, start a fresh production preview after building and run `PORTFOLIO_URL=http://127.0.0.1:4173 npm run test:browser` with the actual preview URL. The interaction inventory script `scripts/revamp-interactions.mjs` imports Vite development modules and must be run against `npm run dev`; it is not a production browser test. The ESLint configuration covers the active JavaScript house runtime and maintained `.mjs` scripts; legacy Svelte/TypeScript components are not yet linted, and unused-variable checks remain deferred. The scoped minimatch overrides address a lint-tool advisory and should be revisited when upstream dependencies update.
 
 The static production output is `build/`. Only the files required for v3 are copied into that output; legacy media in `static/` is not included.
 

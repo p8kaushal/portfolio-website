@@ -154,6 +154,8 @@ Each implementation phase begins on a descriptive feature branch based on the la
 
 ## Verification log
 
+- Added production preview asset identity regression for favicon, résumé and 2D files, alongside the keyboard dialog test; `npm run lint` passed and `npm run test:browser` passed 2/2. Documented the separate development-only interaction inventory and conventional preview URL.
+
 - On `chore/reliable-project-checks`, added ESLint and npm lint/unit/browser test commands. Initial ESLint 10 installation introduced four moderate minimatch advisories; the supported ESLint tree now uses scoped minimatch 11 overrides and reports the original six low advisories, zero moderate, with production audit zero. ESLint checks active JS runtime/maintained mjs with recommended rules except unused variables; legacy Svelte/TS coverage is deferred. `npm run lint` passed, `npm test` 7/7, fresh sequential check 0 errors/0 warnings and build passed, production `npm run test:browser` 1/1, production audit zero. Override crosses a transitive major version and is a maintenance trade-off; revisit upstream compatibility.
 
 - Interface regression branch `chore/portfolio-interface-regression`: user chose existing external menu/dialog/home-link presentation. Production browser navigation through all six direct portfolio sections, seven repository link instances, local résumé and 2D responses, Escape and no page errors passed on enhanced and classic desktop plus classic mobile emulation. No UI redesign was imposed while user requested preserving the current outer presentation. External LinkedIn remains blocked to automated verification.

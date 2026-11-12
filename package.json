@@ -14,7 +14,7 @@
 		"prebuild": "node scripts/prepare-v3-assets.mjs",
 		"lint": "eslint src/*.js src/enhanced/*.js scripts/*.mjs",
 		"test": "node --test scripts/scene-mode.test.mjs",
-		"test:browser": "node --test scripts/2d-accessibility.test.mjs"
+		"test:browser": "node --test scripts/2d-accessibility.test.mjs scripts/preview-assets.test.mjs"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
