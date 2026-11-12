@@ -154,6 +154,8 @@ Each implementation phase begins on a descriptive feature branch based on the la
 
 ## Verification log
 
+- Keyboard portfolio menu open/Escape/focus restoration passed in classic and enhanced modes. Automated scans of five 2D content dialogs exposed low-contrast entry text; corrected it and reran axe with zero detected violations across all five, with label-name and one contrast check incomplete. Fresh sequential check (0 errors/0 warnings) and build passed.
+
 - Settings/help/map/phone axe scans found two settings chooser contrast failures on a light surface; adjusted only the compact settings chooser. Fresh check (0 errors/0 warnings), build and production axe reruns in classic and enhanced settings passed with zero violations and zero incomplete checks. Help/map/phone had no detected violations, with some checks incomplete.
 
 - Post-accessibility regression: production scene switching and fallback suite passed 8 checks with no page errors; locker zoom/pan/reset/About/exit/context-loss suite passed desktop and emulated mobile. Stationary locker p95 was 50 ms desktop and 16.8/16.7 ms mobile; suites overlapped and this is not an isolated performance result. Mobile menu axe scan found zero detected violations with contrast incomplete.
