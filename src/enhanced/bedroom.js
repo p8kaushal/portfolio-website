@@ -32,6 +32,14 @@ export function buildBedroom(THREE,context,tools) {
   for(const y of [.3,2.76])box(-11.93,y,3.2,.06,.065,1.44,'brass');
   for(const z of [1.97,4.43])box(-12.01,1.47,z,.06,2.45,.08,'ink');
   for(const z of [1.87,4.53])box(-11.97,1.35,z,.05,.24,.05,'brass');
+  // A woven runner and warm vertical lights give the mirror its own dressing
+  // area without adding obstacles to the original approach or changing bounds.
+  box(-10.55,.083,3.2,2.35,.025,3.55,'textile',false,.025).receiveShadow=true;
+  for(const z of [1.55,4.85]){
+    box(-11.95,2.05,z,.08,.78,.12,'brass',false,.02);
+    box(-11.89,2.05,z,.04,.65,.065,'paper',false,.02);
+  }
+  box(-11.95,2.88,3.2,.10,.08,3.52,'brass',false,.015);
   contact(-12.65,6.3,2.6,3.5,.23);
   box(-12.65,.43,6.3,1.5,.65,2.5,'oak',true);
   box(-12.65,.8,6.3,1.4,.16,2.35,'indigo',false,.07);

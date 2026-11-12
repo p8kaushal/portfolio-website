@@ -10,4 +10,6 @@ Fresh sequential `npm run check` (zero errors and warnings) and `npm run build` 
 
 The mirror dialog now keeps the character visible while About scrolls independently. A fresh production test verified the visible frame after scrolling in desktop, emulated mobile portrait and landscape, plus the classic mobile mirror. The latest open-dialog p95 intervals were 33.4 ms desktop and 16.7 ms in both emulated mobile orientations. These remain local headless measurements.
 
+The wardrobe approach now has a woven runner, vertical light details and brass trim, with no additional collision bounds. A fresh check/build, production four-room day/night suite and changing-room interaction/recovery suite passed. The inspected wardrobe capture is retained in `phase-4-evidence/wardrobe-day.png`.
+
 Pending: user likeness review, any resulting character changes, and final visual integration and release checks. Manual screen-reader and physical mobile/browser verification are not claimed. Separate merge/deployment approval remains required.
