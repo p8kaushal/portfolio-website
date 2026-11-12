@@ -16,7 +16,7 @@ Each phase uses a descriptive feature branch based on the preceding verified wor
 
 - Latest user direction: Phase 1 approved (“yeah continue”). Continue the Fortnite-inspired visual/aesthetic revamp without intermediate phase approvals when tests and verification pass; commit every verified phase. Scope is visual work only: Phases 2–4 and visual integration/release verification from Phase 7. Defer standalone Phase 5 accessibility features and Phase 6 content expansion; preserve existing accessibility, content and behavior. Separate explicit merge/deployment approval remains required. This overrides earlier per-phase approval wording below.
 - Status: revised presentation and locker phases committed at `bea987f` and `97ac23c`; cutaway and character review checkpoint `e42d46e`, integration evidence commit `38ade4b`. The likeness decision remains pending; do not infer acceptance. The goal is active. Standalone accessibility and content expansion remain deferred; separate merge/deployment approval remains required.
-- Current branch: `feat/phase-c-cutaway-character`. Remote refs have not been fetched. Seven ancestor branch refs are proposed for cleanup, pending approval of the exact list; see the verification log.
+- Current branch: `fix/2d-home-title`, based on `feat/phase-c-cutaway-character` at `214b38d`. Remote refs have not been fetched. Seven ancestor branch refs are proposed for cleanup, pending approval of the exact list; see the verification log.
 - Current changes include restored page presentation, improved menu and home link, locker wheel zoom, cutaway roof and character refinement. See `handoff.md` and `docs/revision-evidence/` for current review and verification details.
 
 ## Version and branch inventory
@@ -89,6 +89,8 @@ Each implementation phase begins on a descriptive feature branch based on the la
 - Choose case studies and supply project evidence when content work becomes the active phase.
 
 ## Verification log
+
+- User requested the 2D fallback title link to return home. Created `fix/2d-home-title` from `214b38d`; implementing a semantic home link with visible keyboard focus. `npm run check` passed with 0 errors and 0 warnings; sequential build passed; production Chromium keyboard activation navigated from `/2d/index.html` to `/`. The original likeness and branch-cleanup decisions remain pending.
 
 - Documentation maintenance: updated README with cutaway and wheel/trackpad controls, corrected current branch/goal state and Phase A/B checklist, and refreshed to-do and handoff so account swaps point to the current character review. `git diff --check` and four documentation consistency assertions passed; no application code changed.
 
