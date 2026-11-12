@@ -8,11 +8,13 @@ User supplied full-body and face photographs as likeness references and requeste
 - [x] Phase B: refine the locker interaction for mouse and trackpad (drag pan, wheel/trackpad zoom, reset and existing keyboard/touch controls), maintain character visibility, and verify input, recovery and responsiveness.
 - [ ] Phase C: refine the procedural 3D character from the supplied references toward a polished game character; verify visuals, performance, resource handling and fallback. Present the result for likeness review before finalizing.
 - [ ] Phase D: run sequential check/build and production browser regression for enhanced, classic and 2D; document evidence and limitations; commit verified phases and prepare release review. Merge and deployment remain separately gated.
-- [ ] Branch cleanup: inventory local/remote refs and ancestry, propose exact candidates and preservation implications; delete only after the user identifies or approves the specific branches. Existing historical version references are protected by project workflow.
+- [x] Branch cleanup: user authorized removal of obsolete phase/intermediate local refs. Deleted 14 ancestor refs after confirming each is merged into the current branch; their commits remain reachable. Preserved current branch, main, named version branches and remote refs.
 
 Each phase uses a descriptive feature branch based on the preceding verified work. User approved the revised plan and selected a cutaway roof with partial edges and beams. Visual phases advance after verification and commits. Preserve all existing features and accessible routes.
 
 ## Current state
+
+- Current branch: `fix/preview-asset-consistency`. User authorized cleanup of obsolete branches; 14 local ancestor phase/intermediate refs were removed. Named version refs and all remote refs were preserved. Historical branch inventories below describe earlier checkpoints, not current refs.
 
 - Latest user direction: Phase 1 approved (“yeah continue”). Continue the Fortnite-inspired visual/aesthetic revamp without intermediate phase approvals when tests and verification pass; commit every verified phase. Scope is visual work only: Phases 2–4 and visual integration/release verification from Phase 7. Defer standalone Phase 5 accessibility features and Phase 6 content expansion; preserve existing accessibility, content and behavior. Separate explicit merge/deployment approval remains required. This overrides earlier per-phase approval wording below.
 - Status: revised presentation and locker phases committed at `bea987f` and `97ac23c`; cutaway and character review checkpoint `e42d46e`, integration evidence commit `38ade4b`. The likeness decision remains pending; do not infer acceptance. The goal is active. Standalone accessibility and content expansion remain deferred; separate merge/deployment approval remains required.

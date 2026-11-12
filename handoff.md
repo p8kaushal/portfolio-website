@@ -1,5 +1,10 @@
 # Account-swap handoff
 
+## Branch cleanup
+
+Current branch `fix/preview-asset-consistency`. User authorized deleting obsolete local branches; 14 phase/intermediate refs fully contained in the current branch were deleted. Their commits remain in history; main, named version branches, and all remote refs are preserved.
+
+
 ## Preview consistency fix
 
 On `fix/preview-asset-consistency`, preview explicitly serves `build/`: stale ignored `dist/` previously overrode the favicon and could expose unrelated assets. Check/build, byte comparisons, stale asset checks and production scene/fallback suite passed. Preview port 4181 serves the corrected output.
