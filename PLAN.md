@@ -154,6 +154,8 @@ Each implementation phase begins on a descriptive feature branch based on the la
 
 ## Verification log
 
+- Incremental type-checking: removed `@ts-nocheck` from `src/scene-chooser.js`, documented callback and mode types, and guarded required DOM elements. First check exposed 12 typing errors; fixed them. Fresh check 0 errors/0 warnings, lint, 7 unit tests, build and 8 production scene/fallback checks passed. Other runtime suppressions remain for later incremental work.
+
 - Security/performance phase: production npm audit zero; full audit six low, no moderate/high/critical. Targeted review and major-upgrade trade-offs recorded in `docs/audit-remediation/security-performance.md`. Temporary detect-secrets 1.5.0 scan reported zero candidates in tracked files and in a text patch of all locally reachable refs; binary and unreachable/remote-only history excluded. Enforced production traversal passed 16.8 ms p95 desktop, 281,990 initial encoded bytes; emulated mobile classic 275,139 bytes. One local headless run only. Legacy assets preserved.
 
 - `feat/search-and-nojs-portfolio`: enabled SvelteKit prerendered SSR for existing content in a no-script fallback, retaining the client-mounted interactive house; added canonical/Open Graph/Twitter metadata and original 1200×630, 33 KB typography card based on existing identity. No user photos used. Fresh lint, sequential check (0 errors/0 warnings), build, 3 browser tests and 8 production scene/recovery checks passed. Verified JS-enabled page had no application/hydration errors (headless WebGL driver stall warnings remain), JS-disabled mobile view displays existing portfolio data without horizontal overflow; inspected screenshot. Social platforms and indexing are not verified until deployment.
