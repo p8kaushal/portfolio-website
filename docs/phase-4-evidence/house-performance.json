@@ -1,0 +1,228 @@
+{
+  "baseURL": "http://127.0.0.1:4175",
+  "capturedAt": "2026-11-12T11:03:08.054Z",
+  "profiles": [
+    {
+      "name": "desktop",
+      "sceneMode": "enhanced",
+      "errors": [],
+      "overflow": false,
+      "navigation": {
+        "domContentLoadedMs": 13.700000002980232,
+        "loadMs": 13.700000002980232
+      },
+      "initialEncodedBytes": 278143,
+      "documentEncodedBytes": 1109,
+      "initialResources": [
+        {
+          "name": "start.Bp1N1ftw.js",
+          "encodedBytes": 60,
+          "transferBytes": 360
+        },
+        {
+          "name": "DVI0Ekp9.js",
+          "encodedBytes": 10201,
+          "transferBytes": 10501
+        },
+        {
+          "name": "wcc-bYEw.js",
+          "encodedBytes": 14252,
+          "transferBytes": 14552
+        },
+        {
+          "name": "DK3Fl9T5.js",
+          "encodedBytes": 158,
+          "transferBytes": 458
+        },
+        {
+          "name": "xihTtKlq.js",
+          "encodedBytes": 65,
+          "transferBytes": 365
+        },
+        {
+          "name": "app.B1cuAfpS.js",
+          "encodedBytes": 1344,
+          "transferBytes": 1644
+        },
+        {
+          "name": "2.C9Rs0M04.css",
+          "encodedBytes": 2074,
+          "transferBytes": 2374
+        },
+        {
+          "name": "0.-QTPnx6N.js",
+          "encodedBytes": 272,
+          "transferBytes": 572
+        },
+        {
+          "name": "CRzLMJPS.js",
+          "encodedBytes": 798,
+          "transferBytes": 1098
+        },
+        {
+          "name": "D9fzwd74.js",
+          "encodedBytes": 6259,
+          "transferBytes": 6559
+        },
+        {
+          "name": "2.CCoRm2lZ.js",
+          "encodedBytes": 43098,
+          "transferBytes": 43398
+        },
+        {
+          "name": "DSTW21sj.js",
+          "encodedBytes": 88313,
+          "transferBytes": 88613
+        },
+        {
+          "name": "BF58tRDi.js",
+          "encodedBytes": 101124,
+          "transferBytes": 101424
+        },
+        {
+          "name": "1.CUQHZgDb.js",
+          "encodedBytes": 576,
+          "transferBytes": 876
+        },
+        {
+          "name": "ChzBse5m.js",
+          "encodedBytes": 8440,
+          "transferBytes": 8740
+        }
+      ],
+      "frameIntervalP50": 16.699999999999818,
+      "frameIntervalP95": 16.800000000000182,
+      "samples": 180,
+      "movement": {
+        "durationMs": 10016.3,
+        "samples": 524,
+        "frameIntervalP95": 33.399999999999636,
+        "positions": [
+          {
+            "x": 0,
+            "z": -0.2
+          },
+          {
+            "x": 10.569300000000009,
+            "z": -0.2
+          },
+          {
+            "x": 0.0697200000000065,
+            "z": -0.2
+          },
+          {
+            "x": 0.0697200000000065,
+            "z": 0.8500000000000002
+          },
+          {
+            "x": 0.0697200000000065,
+            "z": -6.359719999999999
+          }
+        ],
+        "finalSession": {
+          "x": 0.0697200000000065,
+          "z": -6.359719999999999,
+          "yaw": 0,
+          "pitch": 0,
+          "noticeShown": false,
+          "playableSeconds": 13.69959999999995
+        },
+        "path": "D/A/S/W, 2.5 seconds each; collision handling remains enabled."
+      },
+      "note": "Headless local Chromium; frame samples and synthetic keyboard traversal do not establish physical-device performance. Navigation is a local uncached context, without network throttling. Encoded resource sizes include the document and resource responses, without assuming gzip."
+    },
+    {
+      "name": "mobile",
+      "sceneMode": "enhanced",
+      "errors": [],
+      "overflow": false,
+      "navigation": {
+        "domContentLoadedMs": 9.400000005960464,
+        "loadMs": 9.400000005960464
+      },
+      "initialEncodedBytes": 278143,
+      "documentEncodedBytes": 1109,
+      "initialResources": [
+        {
+          "name": "start.Bp1N1ftw.js",
+          "encodedBytes": 60,
+          "transferBytes": 360
+        },
+        {
+          "name": "DVI0Ekp9.js",
+          "encodedBytes": 10201,
+          "transferBytes": 10501
+        },
+        {
+          "name": "wcc-bYEw.js",
+          "encodedBytes": 14252,
+          "transferBytes": 14552
+        },
+        {
+          "name": "DK3Fl9T5.js",
+          "encodedBytes": 158,
+          "transferBytes": 458
+        },
+        {
+          "name": "xihTtKlq.js",
+          "encodedBytes": 65,
+          "transferBytes": 365
+        },
+        {
+          "name": "app.B1cuAfpS.js",
+          "encodedBytes": 1344,
+          "transferBytes": 1644
+        },
+        {
+          "name": "CRzLMJPS.js",
+          "encodedBytes": 798,
+          "transferBytes": 1098
+        },
+        {
+          "name": "0.-QTPnx6N.js",
+          "encodedBytes": 272,
+          "transferBytes": 572
+        },
+        {
+          "name": "2.CCoRm2lZ.js",
+          "encodedBytes": 43098,
+          "transferBytes": 43398
+        },
+        {
+          "name": "2.C9Rs0M04.css",
+          "encodedBytes": 2074,
+          "transferBytes": 2374
+        },
+        {
+          "name": "D9fzwd74.js",
+          "encodedBytes": 6259,
+          "transferBytes": 6559
+        },
+        {
+          "name": "DSTW21sj.js",
+          "encodedBytes": 88313,
+          "transferBytes": 88613
+        },
+        {
+          "name": "BF58tRDi.js",
+          "encodedBytes": 101124,
+          "transferBytes": 101424
+        },
+        {
+          "name": "1.CUQHZgDb.js",
+          "encodedBytes": 576,
+          "transferBytes": 876
+        },
+        {
+          "name": "ChzBse5m.js",
+          "encodedBytes": 8440,
+          "transferBytes": 8740
+        }
+      ],
+      "frameIntervalP50": 16.699999999999818,
+      "frameIntervalP95": 16.799999999999727,
+      "samples": 180,
+      "note": "Headless local Chromium; frame samples and synthetic keyboard traversal do not establish physical-device performance. Navigation is a local uncached context, without network throttling. Encoded resource sizes include the document and resource responses, without assuming gzip."
+    }
+  ]
+}

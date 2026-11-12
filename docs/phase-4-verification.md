@@ -12,4 +12,6 @@ The mirror dialog now keeps the character visible while About scrolls independen
 
 The wardrobe approach now has a woven runner, vertical light details and brass trim, with no additional collision bounds. A fresh check/build, production four-room day/night suite and changing-room interaction/recovery suite passed. The inspected wardrobe capture is retained in `phase-4-evidence/wardrobe-day.png`.
 
+After that refinement, the production automatic-enhanced traversal test met its enforced 33.4 ms desktop p95 target; initial encoded document/resources were 278,143 bytes. Desktop and emulated mobile had no page errors or overflow. The local headless report is `phase-4-evidence/house-performance.json` and does not establish physical-device performance.
+
 Pending: user likeness review, any resulting character changes, and final visual integration and release checks. Manual screen-reader and physical mobile/browser verification are not claimed. Separate merge/deployment approval remains required.

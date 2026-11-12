@@ -14,6 +14,8 @@ Visibility follow-up was committed at `7b46d65`. README now describes the mirror
 
 The wardrobe approach was refined with a runner, vertical light details and brass trim; no collision bounds were added. Fresh check/build and production room and changing-room suites passed. Commit this verified refinement; user likeness review remains pending.
 
+Wardrobe refinement was committed at `bce8656`. Its subsequent production automatic-enhanced traversal retest met the 33.4 ms p95 budget and is recorded in `docs/phase-4-evidence/house-performance.json`. Likeness review remains pending.
+
 Phase 2 is verified and committed at `b89cd23`. Current branch `feat/phase-3-stylized-house`; building the full enhanced interior and scoped visual presentation next. Classic and enhanced spatial regressions, unit tests, recovery/storage suite, warning-free build/type check and enforced 33.4 ms traversal budget passed. See `docs/phase-2-verification.md` and `docs/phase-2-evidence/`. Proceed automatically through visual phases; no further user approval needed for stage transitions.
 
 Latest instruction supersedes the old review blocker: user approved continuation and waived all intermediate visual-phase approvals when testing/verification succeeds; ensure commits. Scope narrowed to visual/aesthetic work only. Phase 2 active on `feat/phase-2-visual-slice` from `341aa1a`; proceed through visual house/changing-room work and integration verification. Defer standalone accessibility and content-expansion phases; keep regression coverage. Do not merge/deploy without separate explicit authorization. The original goal text predates this scope update; latest user direction governs.
