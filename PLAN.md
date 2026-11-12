@@ -16,7 +16,7 @@ Each phase uses a descriptive feature branch based on the preceding verified wor
 
 - Latest user direction: Phase 1 approved (“yeah continue”). Continue the Fortnite-inspired visual/aesthetic revamp without intermediate phase approvals when tests and verification pass; commit every verified phase. Scope is visual work only: Phases 2–4 and visual integration/release verification from Phase 7. Defer standalone Phase 5 accessibility features and Phase 6 content expansion; preserve existing accessibility, content and behavior. Separate explicit merge/deployment approval remains required. This overrides earlier per-phase approval wording below.
 - Status: revised presentation and locker phases committed at `bea987f` and `97ac23c`; cutaway and character review checkpoint `e42d46e`, integration evidence commit `38ade4b`. The likeness decision remains pending; do not infer acceptance. The goal is active. Standalone accessibility and content expansion remain deferred; separate merge/deployment approval remains required.
-- Current branch: `fix/2d-home-title`, based on `feat/phase-c-cutaway-character` at `214b38d`. Remote refs have not been fetched. Seven ancestor branch refs are proposed for cleanup, pending approval of the exact list; see the verification log.
+- Current branch: `feat/character-reference-refinement`, based on `feat/unified-house-interfaces` at `a09dddb`; character batching passed fresh check/build, quality smoke, scene-mode, locker and enforced traversal checks; likeness review remains pending. Remote refs have not been fetched. Seven ancestor branch refs are proposed for cleanup, pending approval of the exact list; see the verification log.
 - Current changes include restored page presentation, improved menu and home link, locker wheel zoom, cutaway roof and character refinement. See `handoff.md` and `docs/revision-evidence/` for current review and verification details.
 
 ## Version and branch inventory
@@ -101,6 +101,30 @@ Each implementation phase begins on a descriptive feature branch based on the la
 - [ ] Return to the outstanding likeness and branch-cleanup decisions after this change.
 
 ## Verification log
+
+- Continuation locker suite passed desktop and emulated mobile portrait/landscape zoom, pan, reset, About, exit, initialization/context-loss recovery and classic portrait visibility, with no page errors. Stationary locker p95: desktop 33.5 ms; mobile 16.7 ms; landscape 16.8 ms (separate from the enforced traversal result of 33.4 ms). Fresh inspected capture and reports retained in `docs/character-refinement-evidence/`. Character is ready for a review checkpoint, not final likeness acceptance.
+
+- Scene-mode unit suite passed all 7 tests (0 failures), including shared-resource disposal and load recovery. Inspected fresh batched desktop locker capture: full character, numeral, glasses, hair and clothing details render visibly; it remains a procedural approximation pending likeness review. Locker suite still running.
+
+- Batched-character production baseline passed enforced automatic-enhanced desktop traversal: p95 33.4 ms against 33.4 ms target; initial response bodies 280,145 bytes. Emulated mobile selected classic; menu sections, 2D response, overflow and page-error checks passed. Prior failures remain recorded. CLI geometry/quality smoke check passed finite positions and increasing visible mesh counts (low 13, medium 31, high 37); 37 unique geometries and 32 shared materials were explicitly disposed. Browser launch and local preview required sandbox escalation. Locker visual/recovery checks are running.
+
+- Continuation production build passed with static output written to `build/` and no warnings. Starting fresh owned preview on port 4173 for runtime checks.
+
+- Account continuation: restored authoritative handoff on `feat/character-reference-refinement` at `a09dddb`, preserved all uncommitted work. Fresh `npm run check` passed: 0 errors and 0 warnings. Production build and batching runtime/performance verification next.
+
+- Account-swap request: preserved uncommitted character/batching work, updated `todo.md` and `handoff.md` with exact branch, reference files, three failed traversal measurements, latest passing type check, pending checks and approvals. `git diff --check` and four handoff consistency assertions passed; no build or runtime verification has been run after batching.
+
+- A third enforced traversal attempt measured 50 ms p95 and failed. Reduced the new character's scene and portrait overhead by batching its meshes by material within each quality layer; quality toggles and shared-material ownership are retained. Fresh check/build, visual comparison, resource and performance retests are required.
+
+- Traversal retry after stopping the owned development server still missed the enforced budget: desktop p95 33.5 ms versus 33.4 ms. The one-tenth millisecond miss is recorded as a failure, not rounded down; investigating variability and runtime cost.
+
+- Corrected-character production traversal with enforced target failed: desktop p95 50 ms exceeds 33.4 ms. An owned development server was still running during the measurement; stopped it and will retest in isolation. Failure is not considered a pass.
+
+- Corrected-character locker retest passed desktop and emulated mobile/landscape controls, About and context-loss recovery with no page errors; local p95 was 50.1 ms desktop and 16.7/33.4 ms emulated. Inspected the updated capture; the model is a procedural stylized approximation of the supplied high-detail illustration, so likeness and quality remain subject to user review. Independent traversal and quality/resource checks pending.
+
+- New character first production locker run passed zoom, pan, reset, About, exit and context-loss recovery with no page errors; local stationary p95 was 33.4 ms desktop and 16.7/33.3 ms emulated mobile. First capture showed an overly prominent jaw; removed the overlapping jaw mesh and refined the mouth placement. Fresh `npm run check` passed 0 errors/0 warnings; sequential build passed; production capture pending.
+
+- Character reference refinement started on `feat/character-reference-refinement`, based on unified interface commit `a09dddb`. Built a separate original procedural model with facial features, glasses, sculpted curls, human-proportioned limbs, jersey, straps, cargo details and shoes; user images are reference-only. `npm run check` passed 0 errors/0 warnings; sequential build passed; capture, quality and performance tests pending.
 
 - Unified interface and restored outer page: fresh sequential check/build passed; production scene-switch/recovery suite passed eight groups without errors, and mobile welcome heading plus style selector were verified accessible after fixing scroll clipping. Production locker regression passed desktop and emulated mobile/landscape controls and graphics recovery without page errors. Classic and Enhanced interaction suites passed all nine groups; PC, TV, mirror, file and awards captures were inspected. Local locker p95 samples varied (desktop 66.8 ms) and are not used as a performance claim. Live site comparison was read-only.
 
