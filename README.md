@@ -29,13 +29,13 @@ The 3D world, character, furniture and visual effects are generated in code. Tim
 
 ## House styles
 
-Choose **Enhanced house**, **Classic house** or **Automatic** above the view or in graphics settings, then select **Apply view**. The enhanced house uses original procedural wood and textiles, rounded furniture, warm lighting and Mumbai-inspired day/night window views. The classic house preserves the previous retro scene. Automatic conservatively starts classic on touch devices and devices reporting low memory or CPU capacity; you can override that choice.
+Choose **Enhanced house**, **Classic house** or **Automatic** above the view or in graphics settings, then select **Apply view**. The enhanced house uses original procedural wood and textiles, rounded furniture, warm lighting, a cutaway ceiling with an open sky, and Mumbai-inspired day/night window views. The classic house preserves the previous retro scene. Automatic conservatively starts classic on touch devices and devices reporting low memory or CPU capacity; you can override that choice.
 
 The saved style and graphics choices stay in the browser. Failed enhanced loading or context loss recovers to classic where rendering is available; the portfolio menu and `/2d/index.html` remain available when 3D cannot start. Enhanced preset scales are 100%/80%/60% for high/balanced/low, with manual resolution overrides. Automatic starts enhanced at Balanced (or Low for limited capability hints). High adds furniture shadow mapping; Balanced and Low use softer generated contact shading and fewer rendering costs.
 
 Classic defaults live in `src/world.js`. Enhanced room builders, procedural surfaces and scoped presentation styles live in `src/enhanced/`, composed by `src/enhanced-world.js`. No downloaded game artwork, paid assets or external texture service is used. `PLAN.md` and phase verification documents record the current implementation and test evidence.
 
-In the enhanced house, approach the bedroom wardrobe and use the mirror to open the character view and About information. Drag the portrait to pan, or use its labelled buttons to pan, zoom and reset. The portrait stays visible while the About text scrolls. It is an on-demand 3D view against a fixed backdrop rather than a live reflection of the house. Classic uses the illustrated mirror, which is also the fallback if the portrait renderer cannot start or loses its graphics context. The existing character is awaiting likeness review.
+In the enhanced house, approach the bedroom wardrobe and use the mirror to open the character view and About information. Drag the portrait to pan; scroll over it with a mouse wheel or trackpad to zoom. Labelled buttons also pan, zoom and reset the view. The portrait stays visible while the About text scrolls. It is an on-demand 3D view against a fixed backdrop rather than a live reflection of the house. Classic uses the illustrated mirror, which is also the fallback if the portrait renderer cannot start or loses its graphics context. The existing character is awaiting likeness review.
 
 ## Deployment
 

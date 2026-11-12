@@ -4,8 +4,8 @@
 
 User supplied full-body and face photographs as likeness references and requested retaining the original page appearance outside the playzone, richer themed portfolio-menu UI, improved mouse/trackpad locker pan and zoom, and a Fortnite-inspired stylized character. Existing automatic enhanced selection stays in place. No reference photographs will be committed without a separate decision.
 
-- [ ] Phase A: inventory page/game style boundaries and menu behavior; restore the original outside-playzone appearance for enhanced mode and design the portfolio menu to complement the existing theme; make the top name/title a home-page link. Verify classic/enhanced page parity, menu actions, responsive layout, and fallback.
-- [ ] Phase B: refine the locker interaction for mouse and trackpad (drag pan, wheel/trackpad zoom, reset and existing keyboard/touch controls), maintain character visibility, and verify input, recovery and responsiveness.
+- [x] Phase A: inventory page/game style boundaries and menu behavior; restore the original outside-playzone appearance for enhanced mode and design the portfolio menu to complement the existing theme; make the top name/title a home-page link. Verify classic/enhanced page parity, menu actions, responsive layout, and fallback.
+- [x] Phase B: refine the locker interaction for mouse and trackpad (drag pan, wheel/trackpad zoom, reset and existing keyboard/touch controls), maintain character visibility, and verify input, recovery and responsiveness.
 - [ ] Phase C: refine the procedural 3D character from the supplied references toward a polished game character; verify visuals, performance, resource handling and fallback. Present the result for likeness review before finalizing.
 - [ ] Phase D: run sequential check/build and production browser regression for enhanced, classic and 2D; document evidence and limitations; commit verified phases and prepare release review. Merge and deployment remain separately gated.
 - [ ] Branch cleanup: inventory local/remote refs and ancestry, propose exact candidates and preservation implications; delete only after the user identifies or approves the specific branches. Existing historical version references are protected by project workflow.
@@ -15,9 +15,9 @@ Each phase uses a descriptive feature branch based on the preceding verified wor
 ## Current state
 
 - Latest user direction: Phase 1 approved (“yeah continue”). Continue the Fortnite-inspired visual/aesthetic revamp without intermediate phase approvals when tests and verification pass; commit every verified phase. Scope is visual work only: Phases 2–4 and visual integration/release verification from Phase 7. Defer standalone Phase 5 accessibility features and Phase 6 content expansion; preserve existing accessibility, content and behavior. Separate explicit merge/deployment approval remains required. This overrides earlier per-phase approval wording below.
-- Status: Phase 3 verified and committed at `7857de1`; Phase 4 prototype and subsequent verified refinements committed through `9b04f38`. The persistent goal is blocked pending the user's required likeness review; do not finalize Phase 4 or infer approval. Continue automatically through verified visual phases after the decision. Preserve all existing features; no unrelated feature work.
-- Current branch: `feat/phase-4-changing-room`, created from Phase 3 `7857de1`. Remote refs have not been fetched.
-- Current changes: enhanced house and wardrobe, scene selection/loading/recovery, on-demand character view, GPU resource cleanup, static surface batching and verification evidence. Classic world defaults remain intact. See `handoff.md` for current account-swap instructions.
+- Status: revised presentation and locker phases committed at `bea987f` and `97ac23c`; cutaway and character review checkpoint `e42d46e`, integration evidence commit `38ade4b`. The likeness decision remains pending; do not infer acceptance. The goal is active. Standalone accessibility and content expansion remain deferred; separate merge/deployment approval remains required.
+- Current branch: `feat/phase-c-cutaway-character`. Remote refs have not been fetched. Seven ancestor branch refs are proposed for cleanup, pending approval of the exact list; see the verification log.
+- Current changes include restored page presentation, improved menu and home link, locker wheel zoom, cutaway roof and character refinement. See `handoff.md` and `docs/revision-evidence/` for current review and verification details.
 
 ## Version and branch inventory
 
@@ -89,6 +89,8 @@ Each implementation phase begins on a descriptive feature branch based on the la
 - Choose case studies and supply project evidence when content work becomes the active phase.
 
 ## Verification log
+
+- Documentation maintenance: updated README with cutaway and wheel/trackpad controls, corrected current branch/goal state and Phase A/B checklist, and refreshed to-do and handoff so account swaps point to the current character review. `git diff --check` and four documentation consistency assertions passed; no application code changed.
 
 - Classic source interaction regression passed computer, mirror, file, trophies, both TV approaches, settings, map and phone with no page errors; classic/enhanced collider and target parity passed. Production switching/recovery and scene-mode unit checks also passed. Remaining: user likeness decision, apply feedback as necessary, final phase commit/integration branch and approval of exact branch cleanup candidates.
 

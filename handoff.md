@@ -7,7 +7,7 @@
 - Latest checks: 0-error/0-warning type check, production build, four-room day/night, changing-room controls/recovery, scene switch/fallback, both classic/enhanced source interaction regressions and 7 scene-mode tests passed. Desktop automatic-enhanced traversal p95 33.4 ms and 278,247 initial encoded bytes locally; no claim of physical-device or screen-reader testing. See `PLAN.md` and `docs/revision-evidence/`.
 - Cleanup proposal in `PLAN.md` lists seven local ancestor refs as candidates; user must approve exact deletion list. Keep named version refs, current branch and remote refs. No merge or deployment without separate approval.
 
-## Current account-swap handoff — 2026-11-12
+## Historical account-swap handoff — 2026-11-12 (superseded above)
 
 - **Branch and goal:** `feat/phase-4-changing-room`, HEAD `9b04f38` before this documentation handoff. The tree was clean before these handoff edits. The persistent goal is **blocked** pending the user's likeness review; a new account should restore/resume it only after the user answers or otherwise provides the missing decision. Do not infer approval from elapsed time. No merge, push or deployment has been performed.
 - **Completed:** Phase 2 was committed at `b89cd23` and Phase 3 at `7857de1`. Phase 4 has a committed prototype (`7553611`), continuous-visibility fix (`7b46d65`), usage documentation (`7f88ec7`), wardrobe refinement (`bce8656`) and performance evidence (`9b04f38`). Enhanced mirror opens a pan/zoom/reset character view with shared About content; classic and graphics-failure fallback use the illustrated mirror. Its backdrop is static, not a live house reflection.
