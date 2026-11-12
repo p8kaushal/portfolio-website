@@ -1,5 +1,12 @@
 # Account-swap handoff
 
+## Current continuation — revised visual plan
+
+- Current branch `feat/phase-c-cutaway-character`, checkpoint `e42d46e`. Presentation phase `bea987f` restores outer styling, adds the home link and menu treatment; locker phase `97ac23c` adds wheel zoom. The checkpoint opens the enhanced ceiling with beams and day/night sky and refines the procedural character using supplied photos. Photos stay outside the repository.
+- User likeness review is pending: `docs/revision-evidence/character.png`. Phase C is a review checkpoint, not final acceptance. Apply feedback and reverify as needed; then complete visual integration on a dedicated branch.
+- Latest checks: 0-error/0-warning type check, production build, four-room day/night, changing-room controls/recovery, scene switch/fallback, both classic/enhanced source interaction regressions and 7 scene-mode tests passed. Desktop automatic-enhanced traversal p95 33.4 ms and 278,247 initial encoded bytes locally; no claim of physical-device or screen-reader testing. See `PLAN.md` and `docs/revision-evidence/`.
+- Cleanup proposal in `PLAN.md` lists seven local ancestor refs as candidates; user must approve exact deletion list. Keep named version refs, current branch and remote refs. No merge or deployment without separate approval.
+
 ## Current account-swap handoff — 2026-11-12
 
 - **Branch and goal:** `feat/phase-4-changing-room`, HEAD `9b04f38` before this documentation handoff. The tree was clean before these handoff edits. The persistent goal is **blocked** pending the user's likeness review; a new account should restore/resume it only after the user answers or otherwise provides the missing decision. Do not infer approval from elapsed time. No merge, push or deployment has been performed.

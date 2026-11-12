@@ -90,6 +90,14 @@ Each implementation phase begins on a descriptive feature branch based on the la
 
 ## Verification log
 
+- Classic source interaction regression passed computer, mirror, file, trophies, both TV approaches, settings, map and phone with no page errors; classic/enhanced collider and target parity passed. Production switching/recovery and scene-mode unit checks also passed. Remaining: user likeness decision, apply feedback as necessary, final phase commit/integration branch and approval of exact branch cleanup candidates.
+
+- Enhanced source interaction regression passed computer, mirror, file, trophies, both TV approaches, settings, map and phone with no page errors; collider and target parity with classic passed. The script lighting values report classic defaults. Classic source interaction run pending.
+
+- Production scene-switch/recovery suite passed eight checks, including classic/enhanced switching, module failure, context loss, unavailable WebGL, coarse-pointer automatic selection, malformed preference and denied storage; no page errors.
+
+- Integration preparation: `node --test scripts/scene-mode.test.mjs` passed 7/7 tests, 0 failures, covering scene selection and disposal. Phase C checkpoint committed at `e42d46e`; likeness review remains pending.
+
 - Revised Phase C review checkpoint: production four-room day/night regression passed, and independent enforced traversal passed desktop p95 33.4 ms with 278,247 initial encoded bytes; desktop and emulated mobile reported no page errors or overflow. Local headless data is not physical-device certification. Retained captures and report in `docs/revision-evidence/`. User likeness review requested; character remains a procedural stylized interpretation, and final acceptance is pending. Preserve supplied photos outside the repository.
 - Branch cleanup inventory: local `docs/project-handoff`, `feat/phase-1-art-direction`, `feat/phase-2-visual-slice`, `feat/phase-3-stylized-house`, `feat/phase-4-changing-room`, `feat/phase-a-portfolio-presentation`, and `feat/phase-b-locker-controls` are ancestors of the current branch, so their commits remain reachable through it. These seven local refs are candidates for deletion only after the user approves the exact list and after the current branch is committed; removing them loses named checkpoints. Retain `main`, `v1-3d-space`, `v2-keynote`, `v3-portfolio-house`, current branch and all remote refs. No fetch or deletion performed.
 
