@@ -2,7 +2,7 @@
 
 ## Approved audit remediation plan — active
 
-**Status:** User approved implementation and goal continuation. Current branch `fix/2d-accessibility-remediation` based on `fix/preview-asset-consistency` at `2ec41fb`. User chose to keep current portfolio menu, house dialog styling and home links; accepted the latest character. Proceed through phases with verification and commits. Preserve content, routes, favicon and historical refs; merge/deployment require separate approval. Content claims and material architectural decisions still require appropriate evidence or user input.
+**Status:** User approved implementation and goal continuation. User requested project case studies be considered last and is unsure whether to include them; treat that work as optional and do not implement without a later affirmative decision. Current branch `fix/2d-accessibility-remediation` based on `fix/preview-asset-consistency` at `2ec41fb`. User chose to keep current portfolio menu, house dialog styling and home links; accepted the latest character. Proceed through phases with verification and commits. Preserve content, routes, favicon and historical refs; merge/deployment require separate approval. Content claims and material architectural decisions still require appropriate evidence or user input.
 
 ### Priority 0 — Confirm scope and establish reproducible baseline
 - [x] User selected keeping the current direct portfolio menu, house dialog styling and home links; user accepted the latest character.
@@ -21,7 +21,7 @@
 - [ ] Improve discoverability of direct project access and make the next action obvious without obscuring the playable experience. Verify copy, hierarchy, mobile layout, menu behavior, focus, and no horizontal overflow. Obtain design feedback for material changes.
 - [ ] Check all links, buttons, modals, project cards, phone and résumé paths in production across enhanced, classic and 2D, including external link response limitations. Verify and commit.
 
-### Priority 3 — Strengthen verified portfolio evidence
+### Deferred optional work — project case studies (after other priorities; user decision required)
 - [ ] Agree on audience and 2–3 priority projects. Collect confirmed role, problem, constraints, decisions, outcomes, screenshots, demo URLs and permissions from the user; use only facts supplied or independently verified.
 - [ ] Present concise project evidence and clear links in the direct portfolio and relevant house/2D views, preserving content parity and the existing résumé. Do not invent metrics, claims or project assets.
 - [ ] Verify facts with the user, check repository/demo links and media licensing, responsiveness, accessible names/alt text, keyboard navigation and fallback; run project checks and commit.
@@ -153,6 +153,10 @@ Each implementation phase begins on a descriptive feature branch based on the la
 - [ ] Return to the outstanding likeness and branch-cleanup decisions after this change.
 
 ## Verification log
+
+- Temporary axe-core WCAG 2/2.1 A/AA checks identified and verified fixes for 2D text/phone contrast, résumé button contrast and home-link name. Fresh sequential check (0 errors/0 warnings) and build passed. Axe reported zero detected violations on desktop home welcome/menu and 2D welcome/content/phone; contrast and phone name checks include incomplete items requiring manual review. Not a WCAG compliance claim.
+
+- User requested project case studies be deferred until all other priorities are complete and expressed uncertainty about including the feature. Do not implement without a later affirmative decision.
 
 - Wider accessibility audit found and fixed the enhanced mirror description referring to the old red jersey. Fresh sequential check (0 errors/0 warnings), build and production Chromium assertion confirmed the new collared-shirt description. Scene-mode suite also passed 7/7.
 
