@@ -1,0 +1,18 @@
+{
+  "measurements": [
+    {
+      "profile": "desktop",
+      "frameIntervalP95": 33.40000000000009
+    },
+    {
+      "profile": "mobile",
+      "frameIntervalP95": 16.799999999999727
+    },
+    {
+      "profile": "mobile-landscape",
+      "frameIntervalP95": 16.799999999999727
+    }
+  ],
+  "errors": [],
+  "note": "Local headless Chromium; stationary open dialog, emulated touch is not a physical device measurement."
+}

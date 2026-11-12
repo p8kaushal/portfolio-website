@@ -10,7 +10,7 @@ export function createStylizedCharacter(THREE, material) {
   const fine = new THREE.Group();
   character.add(detail, fine);
   const skin = '#bd896d', skinShade = '#9f6f59', hair = '#242423', hairHighlight = '#393837';
-  const jersey = '#455b68', jerseyDark = '#344752', dark = '#25292a';
+  const shirt = '#455b68', shirtDark = '#344752', dark = '#25292a';
   function rounded(parent, x, y, z, w, h, d, color, radius = .025, angle = 0) {
     const mesh = new THREE.Mesh(new RoundedBoxGeometry(w, h, d, 3, radius), material(color));
     mesh.position.set(x, y, z); mesh.rotation.z = angle; parent.add(mesh); return mesh;
@@ -38,13 +38,13 @@ export function createStylizedCharacter(THREE, material) {
   for (const side of [-1,1]) {
     oval(character, side*.218, 2.04, 0, .043, .072, .04, skinShade, 16);
     oval(detail, side*.222, 2.045, .03, .022, .041, .012, skin, 12);
-    oval(character, side*.092, 2.085, .163, .057, .035, .014, '#e7dbca', 18);
-    oval(character, side*.092, 2.083, .178, .021, .023, .01, '#3b2b25', 16);
-    oval(fine, side*.087, 2.091, .188, .006, .006, .004, '#f8f1e3', 10);
-    tube(character, [[side*.035,2.137,.167],[side*.08,2.15,.174],[side*.14,2.14,.15]], .012, hair, 12);
+    oval(character, side*.092, 2.085, .163, .047, .020, .012, '#e7dbca', 18);
+    oval(character, side*.092, 2.083, .178, .014, .016, .008, '#3b2b25', 16);
+    oval(fine, side*.087, 2.091, .188, .004, .004, .003, '#f8f1e3', 10);
+    tube(character, [[side*.035,2.137,.167],[side*.08,2.15,.174],[side*.14,2.14,.15]], .008, hair, 12);
     // Rounded, slightly upswept spectacle rims.
     const cx=side*.096;
-    tube(character, [[cx-.073,2.113,.181],[cx-.075,2.065,.184],[cx-.055,2.039,.18],[cx+.055,2.039,.18],[cx+.075,2.065,.184],[cx+.073,2.113,.181],[cx-.073,2.113,.181]], .009, dark, 28);
+    tube(character, [[cx-.073,2.113,.181],[cx-.075,2.065,.184],[cx-.055,2.039,.18],[cx+.055,2.039,.18],[cx+.075,2.065,.184],[cx+.073,2.113,.181],[cx-.073,2.113,.181]], .006, dark, 28);
     tube(detail, [[side*.17,2.105,.17],[side*.22,2.11,.06]], .008, dark, 8);
   }
   tube(character, [[-.026,2.104,.19],[0,2.11,.198],[.026,2.104,.19]], .008, dark, 10);
@@ -66,21 +66,20 @@ export function createStylizedCharacter(THREE, material) {
 
   // A simple collared shirt and tailored trousers give the portrait a quieter,
   // professional appearance while retaining the original likeness and pose.
-  rounded(character,0,1.48,0,.60,.67,.30,jersey,.065);
+  rounded(character,0,1.48,0,.56,.67,.28,shirt,.10);
   for (const side of [-1,1]) {
-    rounded(character,side*.34,1.62,0,.21,.29,.29,jersey,.055,side*.25);
-    limb(character,[side*.39,1.45,0],[side*.53,1.17,.005],.070,.060,skin);
-    oval(character,side*.54,1.13,.005,.065,.09,.050,skin,18);
-    for(let i=0;i<3;i++) oval(fine,side*(.51+i*.026),1.072,.035,.017,.045,.018,skin,12);
+    rounded(character,side*.315,1.62,0,.19,.27,.27,shirt,.085,side*.18);
+    limb(character,[side*.35,1.49,0],[side*.48,1.19,.005],.065,.053,skin);
+    oval(character,side*.49,1.14,.005,.052,.075,.038,skin,18);
+    for(let i=0;i<3;i++) oval(fine,side*(.47+i*.019),1.09,.032,.012,.035,.012,skin,12);
     rounded(detail,side*.075,1.755,.158,.14,.075,.018,'#d4ddd9',.012,side*.35);
   }
-  rounded(detail,0,1.58,.157,.018,.30,.012,jerseyDark,.004);
+  rounded(detail,0,1.58,.157,.018,.30,.012,shirtDark,.004);
   for (let i=0;i<3;i++) oval(fine,0,1.69-i*.09,.168,.008,.008,.004,'#d4ddd9',10);
   rounded(detail,0,1.255,.04,.60,.045,.30,'#303b3c',.012);
-  // Cargo trousers: tapered limbs, pockets, knee pads and layered sneakers.
+  // Tailored trousers and understated shoes.
   for(const side of [-1,1]) {
-    rounded(character,side*.16,.96,0,.27,.52,.29,'#292e2c',.08,side*.035);
-    rounded(character,side*.17,.48,0,.25,.51,.27,'#292e2c',.075,-side*.025);
+    rounded(character,side*.15,.72,0,.245,.98,.26,'#292e2c',.08,side*.015);
     rounded(detail,side*.17,.245,.04,.25,.12,.28,'#4b3d35',.035);
     rounded(character,side*.17,.135,.065,.27,.14,.42,'#665246',.055);
     rounded(character,side*.17,.075,.09,.28,.055,.45,'#e4dccb',.022);

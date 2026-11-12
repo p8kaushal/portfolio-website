@@ -102,6 +102,10 @@ Each implementation phase begins on a descriptive feature branch based on the la
 
 ## Verification log
 
+- Character realism refinement: sequential check (0 errors, 0 warnings) and production build passed; production locker controls and context-loss recovery passed desktop and emulated mobile with no page errors. Desktop stationary p95 33.4 ms, mobile 16.8 ms. Capture: `docs/character-realism-evidence/desktop.png`. Model remains stylized; likeness and degree of realism await user review.
+
+- User accepted the simpler professional direction and requested more realism. On `feat/character-realism`, refining facial feature scale, arms, shirt and continuous trouser silhouette while retaining glasses, curls and the professional outfit. Verification and user review pending.
+
 - Professional character: `npm run check` passed (0 errors, 0 warnings); `npm run build` passed; production locker desktop and emulated mobile controls and recovery passed with no page errors. Desktop stationary p95 33.4 ms, mobile 16.8 ms. Fresh capture in `docs/professional-character-evidence/desktop.png`; likeness review pending.
 
 - User requested a simpler, professional character. On `feat/professional-character`, replace the sports jersey and tactical accessories with a subdued collared shirt and simplified trousers, preserving likeness and interaction controls. Verification and likeness review pending.

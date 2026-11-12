@@ -1,5 +1,10 @@
 # Account-swap handoff
 
+## Latest character realism revision
+
+Branch `feat/character-realism`: user requested more realism after accepting the simpler professional direction. Refined facial details, arm and clothing proportions and trouser silhouette; still a stylized procedural model. Check, build, production locker controls and recovery passed. Capture: `docs/character-realism-evidence/desktop.png`; user review pending. Merge/deployment remain separately gated.
+
+
 ## Latest professional character revision
 
 Branch `feat/professional-character`: user requested a simpler professional character. Replaced jersey and tactical gear with a collared shirt and simplified trousers while retaining likeness. Check/build and production locker controls/recovery passed; capture at `docs/professional-character-evidence/desktop.png`. Await visual feedback; merge/deployment require separate approval.
