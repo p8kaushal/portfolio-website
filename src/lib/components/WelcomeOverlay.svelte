@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
-	import { ArrowDown, Sparkles } from 'lucide-svelte';
+	import { ArrowDown, Sparkles } from '@lucide/svelte';
 	import { playSound } from '$lib/utils/soundEngine';
 	import { gsap } from 'gsap';
 

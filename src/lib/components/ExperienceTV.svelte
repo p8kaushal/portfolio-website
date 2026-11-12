@@ -4,7 +4,7 @@
 	import { fade, fly } from 'svelte/transition';
 	import { playSound } from '$lib/utils/soundEngine';
 	import { calculateHardwareBounds, TV_ANCHOR } from '$lib/utils/tvAnchor';
-	import { Cpu, Terminal, X, ChevronRight } from 'lucide-svelte';
+	import { Cpu, Terminal, X, ChevronRight } from '@lucide/svelte';
 
 	let { isActive } = $props<{ isActive: boolean }>();
 

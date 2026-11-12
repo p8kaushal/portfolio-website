@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { activeTab, isMuted, setTab, toggleMute, isWelcomeCompleted, type TabType } from '$lib/stores/navStore';
 	import { systemSettings } from '$lib/stores/glassSettings';
-	import { Volume2, VolumeX, Settings } from 'lucide-svelte';
+	import { Volume2, VolumeX, Settings } from '@lucide/svelte';
 	import { handleSectionTransition } from '$lib/animations/cameraChoreography';
 	import SettingsPanel from '$lib/components/SettingsPanel.svelte';
 

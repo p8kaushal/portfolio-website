@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import { playSound } from '$lib/utils/soundEngine';
-	import { Mail, Send, CheckCircle2, MessageSquare } from 'lucide-svelte';
+	import { Mail, Send, CheckCircle2, MessageSquare } from '@lucide/svelte';
 
 	let isFormView = $state(false);
 	let name = $state('');

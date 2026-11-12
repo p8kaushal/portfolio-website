@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { systemSettings, resetSystemDefaults } from "$lib/stores/glassSettings";
 	import { playSound } from "$lib/utils/soundEngine";
-	import { RotateCcw, Sliders, X, Gauge, Eye, Volume2 } from "lucide-svelte";
+	import { RotateCcw, Sliders, X, Gauge, Eye, Volume2 } from "@lucide/svelte";
 
 	let { onClose = () => {} } = $props<{ onClose?: () => void }>();
 

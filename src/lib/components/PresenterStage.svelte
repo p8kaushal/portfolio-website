@@ -6,7 +6,7 @@
 	import ExperienceTv from '$lib/components/ExperienceTV.svelte';
 	import TransparentPresenter from '$lib/components/TransparentPresenter.svelte';
 	import { SPATIAL_FLOOR_PLAN } from '$lib/constants/assets';
-	import { Mail, ExternalLink, Download, Award, CheckCircle, Monitor, Tv, Layers, X, ChevronLeft, ChevronRight, ArrowRight, FolderGit2, Terminal, Code2 } from 'lucide-svelte';
+	import { Mail, ExternalLink, Download, Award, CheckCircle, Monitor, Tv, Layers, X, ChevronLeft, ChevronRight, ArrowRight, FolderGit2, Terminal, Code2 } from '@lucide/svelte';
 
 	let stageContainer = $state<HTMLElement | null>(null);
 	let carouselRef = $state<HTMLElement | null>(null);

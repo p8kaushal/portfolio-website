@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { activeTab, isMuted, setTab, toggleMute, type TabType } from '$lib/stores/navStore';
 	import { playSound } from '$lib/utils/soundEngine';
-	import { Volume2, VolumeX, Briefcase, User, Home, Code, FileText, Trophy, Mail, Layers } from 'lucide-svelte';
+	import { Volume2, VolumeX, Briefcase, User, Home, Code, FileText, Trophy, Mail, Layers } from '@lucide/svelte';
 
 	const tabs: { id: TabType; label: string; icon: any }[] = [
 		{ id: 'home', label: 'Home', icon: Home },
