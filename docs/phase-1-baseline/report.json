@@ -1,0 +1,68 @@
+{
+  "baseURL": "http://127.0.0.1:4173",
+  "capturedAt": "2026-11-12T07:17:58.155Z",
+  "profiles": [
+    {
+      "name": "desktop",
+      "errors": [],
+      "overflow": false,
+      "navigation": {
+        "domContentLoadedMs": 42.100000001490116,
+        "loadMs": 42.600000001490116
+      },
+      "frameIntervalP50": 16.700000000000273,
+      "frameIntervalP95": 33.40000000000009,
+      "samples": 180,
+      "movement": {
+        "durationMs": 10032.9,
+        "samples": 368,
+        "frameIntervalP95": 50,
+        "positions": [
+          {
+            "x": 0,
+            "z": -0.2
+          },
+          {
+            "x": 10.569300000000007,
+            "z": -0.2
+          },
+          {
+            "x": 0.06972000000000433,
+            "z": -0.2
+          },
+          {
+            "x": 0.06972000000000433,
+            "z": 0.8495800000000063
+          },
+          {
+            "x": 0.06972000000000433,
+            "z": -6.289159999999988
+          }
+        ],
+        "finalSession": {
+          "x": 0.06972000000000433,
+          "z": -6.289159999999988,
+          "yaw": 0,
+          "pitch": 0,
+          "noticeShown": false,
+          "playableSeconds": 15.265799999999977
+        },
+        "path": "D/A/S/W, 2.5 seconds each; collision handling remains enabled."
+      },
+      "note": "Headless local Chromium; frame samples and synthetic keyboard traversal do not establish physical-device performance. Navigation is a local uncached context, without network throttling."
+    },
+    {
+      "name": "mobile",
+      "errors": [],
+      "overflow": false,
+      "navigation": {
+        "domContentLoadedMs": 8.5,
+        "loadMs": 8.600000001490116
+      },
+      "frameIntervalP50": 16.699999999999818,
+      "frameIntervalP95": 16.799999999999727,
+      "samples": 180,
+      "note": "Headless local Chromium; frame samples and synthetic keyboard traversal do not establish physical-device performance. Navigation is a local uncached context, without network throttling."
+    }
+  ]
+}

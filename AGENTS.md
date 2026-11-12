@@ -31,5 +31,5 @@
 - Node.js 24 and npm: `npm ci`, `npm run dev`. Verification commands: `npm run check` and `npm run build`; preview with `npm run preview`.
 - `predev` and `prebuild` prepare `.generated-static`; production output is `build/`. GitHub Pages deploys on `main` or manual dispatch; review deployment implications before any merge or deployment.
 - Follow existing project conventions and keep changes scoped to the approved phase. Architecture changes require an explicit decision when trade-offs are material.
-- Project handoff: consult `PLAN.md`, `todo.md`, and `handoff.md` at the start of a new session. The visual revamp plan is not yet approved; see those files for current scope and gates.
+- Project handoff: consult `PLAN.md`, `todo.md`, and `handoff.md` at the start of a new session. Full implementation was authorized on 2026-11-12; Phase 1 is active on `feat/phase-1-art-direction`. Phase acceptance and separate merge gates remain; see the plan for scope and evidence.
 - These describe the existing project, not approval of future feature requirements or architecture changes.

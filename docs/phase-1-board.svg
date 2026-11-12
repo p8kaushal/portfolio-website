@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="920" viewBox="0 0 1280 920" role="img" aria-labelledby="title desc">
+<title id="title">Mumbai creative studio — proposed art direction</title>
+<desc id="desc">Original schematic concept board showing warm plaster and oak, indigo seating, layered city windows, amber evening light and the three-room circulation plan. This is a concept illustration, not a screenshot or a finished render.</desc>
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#8ba6b5"/><stop offset="1" stop-color="#e4cfad"/></linearGradient>
+ <linearGradient id="night" x2="1" y2="1"><stop stop-color="#273e59"/><stop offset="1" stop-color="#647c9e"/></linearGradient>
+ <linearGradient id="floor" x2="0" y2="1"><stop stop-color="#b88453"/><stop offset="1" stop-color="#ddbb8f"/></linearGradient>
+ <radialGradient id="lamp"><stop stop-color="#ffe0a1" stop-opacity=".8"/><stop offset="1" stop-color="#d4ad69" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1280" height="920" fill="#f3eee4"/>
+<g font-family="Arial,sans-serif" fill="#283b3c">
+<text x="48" y="49" font-size="12" letter-spacing="3">PARTH KAUSHAL / PORTFOLIO HOUSE / PHASE 01</text>
+<text x="48" y="100" font-size="38" font-weight="700">A studio above the city.</text>
+<text x="48" y="130" font-size="16">Cinematic stylized realism · original Mumbai-inspired setting · warm, lived-in, creative</text>
+<!-- Original perspective study, not a production rendering. -->
+<rect x="48" y="163" width="760" height="380" rx="8" fill="#e9dfcf"/>
+<path d="M48 163L160 214V405L48 543Z" fill="#c8baa6"/>
+<path d="M808 163L735 214V405L808 543Z" fill="#d7cbbb"/>
+<path d="M48 543L160 405H735L808 543Z" fill="url(#floor)"/>
+<g stroke="#97754f" opacity=".45"><path d="M102 475H772M130 439H753M162 405L101 543M285 405L264 543M410 405L430 543M540 405L595 543M670 405L754 543"/></g>
+<rect x="240" y="203" width="390" height="192" rx="3" fill="#9b7959"/>
+<rect x="249" y="212" width="372" height="174" fill="url(#sky)"/>
+<!-- Hazy towers, balcony bands and rooftop tanks. -->
+<g fill="#a7aaa4"><path d="M253 294H294V386H253ZM310 254H350V386H310ZM361 279H406V386H361ZM420 239H458V386H420ZM472 266H518V386H472ZM534 247H575V386H534ZM587 299H621V386H587Z"/></g>
+<g fill="#7f9193"><path d="M264 322H323V386H264ZM345 307H389V386H345ZM468 315H532V386H468ZM556 294H606V386H556Z"/></g>
+<g stroke="#c5c1b2" stroke-width="3"><path d="M268 334H320M268 347H320M268 360H320M472 329H529M472 344H529M472 359H529M559 311H603M559 327H603M559 343H603"/></g>
+<g fill="#65797a"><rect x="281" y="312" width="16" height="10" rx="2"/><rect x="570" y="284" width="19" height="10" rx="2"/></g>
+<path d="M373 211V387M497 211V387" stroke="#dfcfb5" stroke-width="7"/>
+<path d="M249 290H621" stroke="#dfcfb5" stroke-width="5"/>
+<path d="M249 386L368 386L482 503L307 503Z" fill="#fff2c7" opacity=".3"/>
+<ellipse cx="430" cy="464" rx="181" ry="30" fill="#52646e" opacity=".18"/>
+<rect x="298" y="438" width="288" height="55" rx="12" fill="#344e68"/>
+<rect x="305" y="412" width="273" height="52" rx="15" fill="#49657d"/>
+<path d="M388 416V457M487 416V457" stroke="#344e68" stroke-width="3"/>
+<rect x="287" y="447" width="29" height="50" rx="9" fill="#344e68"/>
+<rect x="568" y="447" width="29" height="50" rx="9" fill="#344e68"/>
+<rect x="317" y="491" width="10" height="13" fill="#4d483f"/><rect x="556" y="491" width="10" height="13" fill="#4d483f"/>
+<rect x="342" y="421" width="42" height="32" rx="6" fill="#ba7058"/>
+<rect x="499" y="423" width="42" height="30" rx="6" fill="#d3b783"/>
+<ellipse cx="223" cy="467" rx="44" ry="13" fill="#b88453"/><path d="M222 468V500" stroke="#4d483f" stroke-width="7"/>
+<path d="M190 395H240L232 450H200Z" fill="#ba7058"/>
+<g fill="#617d67"><ellipse cx="203" cy="376" rx="13" ry="30" transform="rotate(-25 203 376)"/><ellipse cx="225" cy="367" rx="12" ry="34" transform="rotate(24 225 367)"/><ellipse cx="216" cy="347" rx="11" ry="28"/></g>
+<path d="M668 339V488M644 488H692" stroke="#43463f" stroke-width="5"/><path d="M646 317H690L702 348H634Z" fill="#d4ad69"/>
+<text x="66" y="525" font-size="11" letter-spacing="1">01 / DAYLIGHT STUDY — SOFT MATERIALS, BROAD SILHOUETTES, CITY DEPTH</text>
+<!-- Night-light study -->
+<rect x="832" y="163" width="400" height="220" rx="8" fill="#33434a"/>
+<rect x="863" y="185" width="192" height="125" fill="url(#night)"/>
+<g fill="#293b4b"><path d="M867 239H903V307H867ZM912 213H950V307H912ZM961 232H1001V307H961ZM1012 221H1050V307H1012Z"/></g>
+<g fill="#e2bc7a"><path d="M879 250H886V256H879ZM925 237H932V243H925ZM979 262H986V268H979ZM1025 241H1032V247H1025Z"/></g>
+<path d="M958 185V310" stroke="#a9987e" stroke-width="6"/>
+<ellipse cx="1121" cy="279" rx="106" ry="96" fill="url(#lamp)"/>
+<path d="M1122 264V330" stroke="#d4ad69" stroke-width="4"/><path d="M1100 239H1144L1153 266H1091Z" fill="#e9c78c"/>
+<text x="851" y="361" font-size="12" fill="#eee4ce">02 / NIGHT — BLUE CITY, AMBER PRACTICALS</text>
+<text x="832" y="415" font-size="18" font-weight="700">Material language</text>
+<text x="832" y="443" font-size="14">Plaster: soft, matte, warm variation</text><text x="832" y="468" font-size="14">Oak: readable grain, rounded edges</text><text x="832" y="493" font-size="14">Textile: woven, indigo, tactile</text><text x="832" y="518" font-size="14">Metal: restrained brass highlights</text>
+<!-- Palette -->
+<g transform="translate(48 580)">
+<rect width="150" height="62" rx="6" fill="#e9dfcf" stroke="#c9bda9"/><rect x="170" width="150" height="62" rx="6" fill="#b88453"/><rect x="340" width="150" height="62" rx="6" fill="#344e68"/><rect x="510" width="150" height="62" rx="6" fill="#ba7058"/><rect x="680" width="150" height="62" rx="6" fill="#617d67"/><rect x="850" width="150" height="62" rx="6" fill="#d4ad69"/><rect x="1020" width="164" height="62" rx="6" fill="#647c9e"/>
+<g font-size="12"><text y="84">PLASTER / E9DFCF</text><text x="170" y="84">OAK / B88453</text><text x="340" y="84">INDIGO / 344E68</text><text x="510" y="84">CLAY / BA7058</text><text x="680" y="84">LEAF / 617D67</text><text x="850" y="84">BRASS / D4AD69</text><text x="1020" y="84">DUSK / 647C9E</text></g>
+</g>
+<!-- Layout study -->
+<text x="48" y="716" font-size="18" font-weight="700">03 / Circulation and focal points</text>
+<rect x="48" y="738" width="720" height="127" rx="5" fill="#e0d5c2" stroke="#a69a87"/>
+<path d="M288 738V780M288 823V865M528 738V780M528 823V865" stroke="#a69a87" stroke-width="5"/>
+<g font-size="14"><text x="70" y="766" font-weight="700">BEDROOM + CHANGING</text><text x="70" y="791">Mirror / visible character</text><text x="70" y="848">Bed / reading nook</text><text x="309" y="766" font-weight="700">LIVING GALLERY</text><text x="309" y="791">TV / trophies / sofa</text><text x="309" y="848">Arrival / first-person navigation</text><text x="549" y="766" font-weight="700">CREATIVE STUDIO</text><text x="549" y="791">PC / résumé / skills</text><text x="549" y="848">Desk / shelving / city window</text></g>
+<path d="M147 810H669" stroke="#ba7058" stroke-width="3" stroke-dasharray="8 6"/>
+<text x="832" y="751" font-size="18" font-weight="700">Review proposal</text><text x="832" y="780" font-size="14">Keep classic + 2D available.</text><text x="832" y="805" font-size="14">First person; third person for changing.</text><text x="832" y="830" font-size="14">No outdoor traversal or weather changes.</text><text x="832" y="855" font-size="14">All existing interactions retained.</text>
+<text x="48" y="900" font-size="11" letter-spacing="1">ORIGINAL SCHEMATIC CONCEPT / NOT A PRODUCTION RENDER / PALETTE, LAYOUT AND BUDGETS AWAIT PHASE REVIEW</text>
+</g></svg>

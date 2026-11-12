@@ -1,0 +1,7 @@
+{
+  "node": "v24.6.0",
+  "platform": "darwin",
+  "architecture": "arm64",
+  "cpu": "Apple M4",
+  "verification": "Local headless Chromium; desktop and emulated touch mobile. No physical mobile or manual screen-reader result."
+}

@@ -1,6 +1,10 @@
 # Account-swap handoff
 
-## Current state
+## Live continuation — 2026-11-12
+
+The user authorized full implementation, requested a persistent goal through completion/testing/verification, and reiterated use of a new branch and all Markdown instructions. Goal is active. Branch `feat/phase-1-art-direction` was created from `docs/project-handoff` at `fc86538`. Phase 1 specification, concept board, asset/tooling inventory and baseline reports/screenshots are in `docs/`. `npm run check` passed with zero errors/warnings; build now passes without warnings after Three.js chunk splitting in `vite.config.ts` (page entry 888→145 kB). Application logic and scene are unchanged. Browser direct-menu, spatial interactions, PDF, settings, phone, map and reduced-motion lighting checks passed. Production traversal p95 50 ms misses the proposed 33.4 ms target; this is recorded as baseline, not acceptance. Final mobile coarse-pointer and touch-control visibility assertions passed; latest production evidence is tracked in docs/phase-1-baseline/. Obtain Phase 1 palette/layout/budget acceptance before Phase 2; asynchronous review question already sent. Preserve phase review gates and separate explicit merge approval. The historical handoff below describes the pre-authorization state and is retained as history, not the current approval status.
+
+## Historical state before implementation authorization
 
 This is a documentation-only handoff. No application code has been changed and no implementation phase has started. The user requested planning before implementation; the phased plan in `PLAN.md` has **not received explicit approval**. The user's request to commit and switch accounts is not approval of the plan. Ask for plan approval before feature code.
 
@@ -16,7 +20,7 @@ Current branch: `docs/project-handoff`, based on `v3-portfolio-house` commit `b8
 - Accessibility, especially keyboard and screen-reader access to projects and the computer, and richer portfolio content beyond the résumé remain explicit follow-up phases. Avoid accessibility regressions throughout.
 - Existing character is procedural (`src/world.js`) and comments say it was based on photos previously supplied by the user. Original photos and a standalone 3D model were not found in the inspected source/image inventory; check availability before asking for more.
 
-## Next session
+## Historical next-session instructions (superseded by live continuation above)
 
 1. Read `AGENTS.md`, `PLAN.md`, and `todo.md`; check `git status --short --branch` and `git log -1`.
 2. Ask the user to approve or revise the full plan before writing feature code. Do not infer approval from the account-swap request.
