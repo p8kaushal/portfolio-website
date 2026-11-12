@@ -32,5 +32,5 @@
 - `predev` and `prebuild` prepare `.generated-static`; production output is `build/`. GitHub Pages deploys on `main` or manual dispatch; review deployment implications before any merge or deployment.
 - Run `npm run check` and `npm run build` sequentially: both synchronize SvelteKit-generated state. Restart an owned Vite preview after rebuilding so its server/client manifest matches the new hashed assets; production browser verification is required.
 - Follow existing project conventions and keep changes scoped to the approved phase. Architecture changes require an explicit decision when trade-offs are material.
-- Project handoff: consult `PLAN.md`, `todo.md`, and `handoff.md` at session start. Phase 2 is verified/committed at `b89cd23`; Phase 3 is active on `feat/phase-3-stylized-house`. Scope is visual/aesthetic revamp only, with automatic advancement after checks and commits. Separate merge/deployment approval remains required.
+- Project handoff: consult `PLAN.md`, `todo.md`, and `handoff.md` at session start. Phase 3 is verified/committed at `7857de1`; Phase 4 is active on `feat/phase-4-changing-room`. Scope is visual/aesthetic revamp only, with automatic advancement after checks and commits. Separate merge/deployment approval remains required.
 - These describe the existing project, not approval of future feature requirements or architecture changes.

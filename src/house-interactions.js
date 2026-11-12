@@ -1,8 +1,9 @@
 // @ts-nocheck
 import { portfolio } from './content.js';
+import { mountChangingRoom } from './changing-room.js';
 
 /** The house's close-up interactions, all backed by the shared portfolio data. */
-export function mountHouseInteractions(host, { onExit = () => {} } = {}) {
+export function mountHouseInteractions(host, { onExit = () => {}, getCharacter = () => null, three = null } = {}) {
   const root = document.createElement('dialog');
   root.className = 'house-interaction';
   root.setAttribute('aria-label', 'House interaction');
@@ -45,6 +46,7 @@ export function mountHouseInteractions(host, { onExit = () => {} } = {}) {
     .house-interaction[data-mode="awards"] .hi-shell{height:100%;min-height:0;overflow:hidden}.house-interaction[data-mode="awards"] .hi-header{flex:none}.house-interaction[data-mode="awards"] .hi-content{display:flex;align-items:stretch;justify-content:center;min-height:0;overflow:hidden;padding:clamp(10px,2vw,24px)}.house-interaction[data-mode="awards"] .hi-inner{height:100%;min-height:0;display:flex;flex-direction:column;width:min(100%,1100px)}.house-interaction[data-mode="awards"] .hi-title{flex:none;margin:5px 0 12px}.house-interaction[data-mode="awards"] .hi-award-stage{flex:1;min-height:0}.house-interaction[data-mode="awards"] .hi-award-art{min-height:0}.house-interaction[data-mode="awards"] .hi-award-copy{min-height:0;overflow:hidden;padding:0}.hi-award-scroll{min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:4px 10px 10px 0}.hi-award-scroll:focus-visible{outline:3px solid #f3bc75;outline-offset:-3px}.hi-award-scroll p{margin:10px 0;font-size:14px;line-height:1.55}.hi-award-scroll h3{margin:9px 0 10px}.hi-award-scroll ul{padding-left:20px;margin:8px 0 12px;color:#e0d3b9;line-height:1.55;font-size:14px}.hi-award-scroll li{margin:6px 0}.hi-award-label{font-size:12px;color:#f1d19e;font-weight:800}.hi-award-scroll a{color:#f6d494;overflow-wrap:anywhere}.hi-award-nav{flex:none;padding-top:10px;margin-top:4px}.hi-award-nav button{min-height:44px}.hi-award-copy .hi-kicker{line-height:1.5}
     @media(max-width:650px){.house-interaction[data-mode="awards"] .hi-award-stage{grid-template-columns:1fr;grid-template-rows:minmax(100px,24vh) minmax(0,1fr);gap:12px}.house-interaction[data-mode="awards"] .hi-award-art svg{width:min(100px,70%);height:90%;object-fit:contain}.house-interaction[data-mode="awards"] .hi-header{position:static}.house-interaction[data-mode="awards"] .hi-title{font-size:26px;margin:4px 0 8px}}
     @media(max-height:600px) and (min-width:651px){.house-interaction[data-mode="awards"] .hi-header{padding:7px 14px}.house-interaction[data-mode="awards"] .hi-content{padding:8px 14px}.house-interaction[data-mode="awards"] .hi-title{font-size:23px;margin:3px 0 7px}.house-interaction[data-mode="awards"] .hi-award-art svg{height:min(90%,200px);width:auto}.hi-award-nav{padding-top:5px}.hi-award-nav button{padding:6px 12px}}
+    .hi-mirror-stage{position:relative;width:100%;height:min(62vh,570px);min-height:300px;overflow:hidden;border:14px solid #80603e;box-shadow:inset 0 0 0 3px #e0c69c,8px 10px 0 #151912;background:#71877d;touch-action:none}.hi-mirror-stage canvas{display:block;width:100%;height:100%}.hi-mirror-controls{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}.hi-mirror-controls button{min-width:44px;min-height:44px;background:#e2cfaa;color:#22291e;border:2px solid #171912;font-weight:800}.hi-mirror-controls button:last-child{padding:0 14px}.hi-mirror-help{color:#ddd0b7;font-size:12px;line-height:1.5}.hi-mirror-stage:after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,#ffffff24,transparent 38%);pointer-events:none}@media(max-width:650px){.hi-mirror-stage{height:48vh;min-height:280px}}
   </style><div class="hi-shell"><header class="hi-header"><span class="hi-label"></span><button type="button" class="hi-exit">← Back to the house <kbd>Esc</kbd></button></header><main class="hi-content"><div class="hi-inner"></div></main><div class="hi-announcement" aria-live="polite"></div></div>`;
   host.append(root);
   const inner = root.querySelector('.hi-inner');
@@ -52,7 +54,7 @@ export function mountHouseInteractions(host, { onExit = () => {} } = {}) {
   const announcement = root.querySelector('.hi-announcement');
   const exit = root.querySelector('.hi-exit');
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  let timer = null, focused = null, current = null, tvIndex = 0, playing = false;
+  let timer = null, focused = null, current = null, tvIndex = 0, playing = false, changingRoom = null;
   function clearTimer(){ if(timer !== null){clearInterval(timer);timer=null;} }
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   function followHead(event){
@@ -67,6 +69,29 @@ export function mountHouseInteractions(host, { onExit = () => {} } = {}) {
   root.addEventListener('pointermove',followHead);
   function renderMirror(){
     inner.innerHTML = `<div class="hi-mirror"><div><div class="hi-glass" aria-label="A code-drawn character reflected in the mirror"><div class="hi-person" aria-hidden="true"><span class="hi-head"><span class="hi-hair"></span><span class="hi-glasses"></span></span><span class="hi-body"></span><span class="hi-arm left"></span><span class="hi-arm right"></span><span class="hi-leg left"></span><span class="hi-leg right"></span></div></div><p class="hi-mirror-note">Move your pointer to look around</p></div><div class="hi-copy"><div class="hi-kicker">Character profile / about</div><h2 class="hi-title">${esc(portfolio.name)}</h2><strong>${esc(portfolio.title)}</strong>${portfolio.about.map(p=>`<p>${esc(p)}</p>`).join('')}<p>${esc(portfolio.availability)}</p></div></div>`;
+  }
+  function startChangingRoom(){
+    const character=getCharacter();
+    if(host.dataset.sceneMode!=='enhanced'||!character)return;
+    const glass=inner.querySelector('.hi-glass'), note=inner.querySelector('.hi-mirror-note');
+    const stage=document.createElement('div');stage.className='hi-mirror-stage';stage.setAttribute('role','img');stage.setAttribute('aria-label','Stylized full-body character with dark hair and glasses, a red jersey, dark trousers and light shoes, shown in a large mirror.');
+    glass.replaceWith(stage);
+    function fallback(){
+      changingRoom?.destroy();changingRoom=null;
+      stage.replaceWith(glass);
+      inner.querySelector('.hi-mirror-controls')?.remove();
+      const help=inner.querySelector('.hi-mirror-help');
+      if(help)help.replaceWith(note);
+      announcement.textContent='Character view unavailable; showing the illustrated mirror.';
+    }
+    try {
+      changingRoom=mountChangingRoom(three,stage,character,fallback);
+      note.outerHTML='<p class="hi-mirror-help">Drag the mirror to pan, or use the buttons to pan and zoom.</p><div class="hi-mirror-controls" aria-label="Character view controls"><button type="button" data-view="in" aria-label="Zoom in">+</button><button type="button" data-view="out" aria-label="Zoom out">−</button><button type="button" data-view="left" aria-label="Pan left">←</button><button type="button" data-view="right" aria-label="Pan right">→</button><button type="button" data-view="up" aria-label="Pan up">↑</button><button type="button" data-view="down" aria-label="Pan down">↓</button><button type="button" data-view="reset">Reset view</button></div>';
+      inner.querySelectorAll('[data-view]').forEach(button=>button.onclick=()=>changingRoom?.change(button.dataset.view));
+    } catch(error) {
+      console.warn('Character view unavailable; using the illustrated mirror.',error);
+      fallback();
+    }
   }
   function renderFile(page='resume'){
     const resumePage=`<div class="hi-paper-actions"><a class="hi-btn" href="${esc(portfolio.resumeUrl)}" download="Parth_Kaushal_CV.pdf">Download résumé ↓</a><a href="${esc(portfolio.resumeUrl)}" target="_blank" rel="noopener noreferrer">Open full résumé ↗</a></div><div class="hi-paper-preview" tabindex="0" aria-label="Scroll résumé preview"><div class="hi-pdf-pages" aria-label="Parth Kaushal résumé PDF preview" aria-busy="true"><p class="hi-paper-loading">Loading résumé preview…</p></div></div>`;
@@ -116,13 +141,13 @@ export function mountHouseInteractions(host, { onExit = () => {} } = {}) {
     if(focusControl)inner.querySelector(`[data-${focusControl}]`)?.focus();
   }
   function syncTimer(){clearTimer();if(playing)timer=setInterval(()=>{const active=root.contains(document.activeElement)?document.activeElement:null;const focus=active?.matches('[data-prev]')?'prev':active?.matches('[data-play]')?'play':active?.matches('[data-next]')?'next':active?.matches('[data-chapter]')?`chapter="${active.dataset.chapter}"`:null;tvIndex=(tvIndex+1)%portfolio.experience.length;renderTV(focus)},9000)}
-  function close(){if(!root.open)return;clearTimer();playing=false;current=null;delete root.dataset.mode;root.close();onExit();if(focused?.isConnected)focused.focus()}
+  function close(){if(!root.open)return;clearTimer();changingRoom?.destroy();changingRoom=null;playing=false;current=null;delete root.dataset.mode;root.close();onExit();if(focused?.isConnected)focused.focus()}
   exit.onclick=close;
   root.addEventListener('cancel',event=>{event.preventDefault();close()});
   return {
-    open(id){if(root.open)return;const titles={mirror:'Bedroom / Mirror',file:'Studio / File',awards:'Living room / Trophy cabinet',tv:'Living room / Television'};if(!titles[id])return;focused=document.activeElement;current=id;label.textContent=titles[id];root.setAttribute('aria-label',titles[id]);root.dataset.mode=id;announcement.textContent=titles[id];if(id==='mirror')renderMirror();else if(id==='file')renderFile();else if(id==='awards')renderAwards();else{tvIndex=0;playing=true;renderTV();syncTimer()}root.showModal();exit.focus()},
+    open(id){if(root.open)return;const titles={mirror:'Bedroom / Mirror',file:'Studio / File',awards:'Living room / Trophy cabinet',tv:'Living room / Television'};if(!titles[id])return;focused=document.activeElement;current=id;label.textContent=titles[id];root.setAttribute('aria-label',titles[id]);root.dataset.mode=id;announcement.textContent=titles[id];if(id==='mirror')renderMirror();else if(id==='file')renderFile();else if(id==='awards')renderAwards();else{tvIndex=0;playing=true;renderTV();syncTimer()}root.showModal();if(id==='mirror')startChangingRoom();exit.focus()},
     close,
     setQuality(value){root.dataset.quality=['high','balanced','low'].includes(value)?value:'balanced'},
-    destroy(){clearTimer();root.removeEventListener('pointermove',followHead);if(root.open)root.close();root.remove()}
+    destroy(){clearTimer();changingRoom?.destroy();changingRoom=null;root.removeEventListener('pointermove',followHead);if(root.open)root.close();root.remove()}
   };
 }

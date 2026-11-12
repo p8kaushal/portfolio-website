@@ -39,7 +39,7 @@ export async function mountApp(host, override) {
  const pc=mountPC(host,{onExit:()=>{pcActive=false;transitionTo(pcReturn.position,pcReturn.yaw,pcReturn.pitch,{exit:true})}});
  let pcReturn=null;
  const touch=mountTouchControls(container,{onMove:(x,y)=>{touchMove={x,y}},onSprint:value=>{keys.shift=value},onCrouch:value=>{keys.c=value},onJump:()=>jump(),onInteract:()=>interact()});touch.setVisible(false);
- const house=mountHouseInteractions(host,{onExit:()=>{houseActive=false;if(houseReturn)transitionTo(houseReturn.position,houseReturn.yaw,houseReturn.pitch,{exit:true})}});let houseReturn=null;
+ const house=mountHouseInteractions(host,{three:THREE,getCharacter:()=>world?.character,onExit:()=>{houseActive=false;if(houseReturn)transitionTo(houseReturn.position,houseReturn.yaw,houseReturn.pitch,{exit:true})}});let houseReturn=null;
  const phone=mountPhone(container,{onOpen:()=>{noticeShown=true;phoneActive=true;Object.keys(keys).forEach(k=>keys[k]=false);if(document.pointerLockElement)document.exitPointerLock()},onClose:()=>{phoneActive=false}});
  function openPhone(){if(running&&!intro&&!pcActive&&!houseActive&&!helpActive&&!pcTransition){setMenu(false);phone.open()}}
  const help=mountGameHelp(host,{onOpen:()=>{helpActive=true;resetInput();if(document.pointerLockElement)document.exitPointerLock()},onClose:()=>{helpActive=false}});
