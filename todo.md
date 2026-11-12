@@ -8,7 +8,10 @@
 - [x] Prepare and verify Phase 1 inventory, art direction/concept board, layout proposal, feasibility assessment, baseline measurements and acceptance criteria. See `docs/phase-1-spec.md`; desktop/mobile, spatial interactions, lighting, touch visibility, type checks and warning-free build passed.
 - [x] Phase 1 accepted; Phase 2 branch created from `341aa1a`. Latest user waived intermediate visual-phase approval gates after verification and commits.
 - [x] Finish enhanced studio/fallback proof, verify, document and commit Phase 2 at `b89cd23`.
-- [x] Build and verify the Phase 3 enhanced house; commit the verified work before branching Phase 4.
-- [ ] Verify and commit each visual phase on its branch. Obtain separate explicit approval before merging/deploying.
-- [ ] Visual integration and release verification. Standalone accessibility and content-expansion feature phases deferred by latest user scope; preserve existing behavior and accessibility.
+- [x] Build, verify and commit the Phase 3 enhanced house at `7857de1`; branch Phase 4 from it.
+- [x] Implement and checkpoint the Phase 4 mirror/character view, visibility fix and wardrobe refinement; latest implementation/evidence commits end at `9b04f38` on `feat/phase-4-changing-room`.
+- [ ] Obtain the user's likeness review of `docs/phase-4-evidence/desktop.png`: accept the current procedural character or supply references for changes. The goal is currently blocked on this decision; do not claim Phase 4 complete before review.
+- [ ] Apply any requested character changes, verify Phase 4 and commit final verified work. Review `docs/phase-4-verification.md` and latest `PLAN.md` log for existing test coverage and limitations.
+- [ ] After Phase 4 is complete, perform visual integration/release verification on its own branch, document evidence and commit. Preserve classic/2D routes, interactions and existing accessibility. Standalone accessibility and content-expansion phases remain deferred.
+- [ ] Obtain separate explicit approval before any merge or deployment; review GitHub Pages consequences and current remote state first.
 - [ ] Future ideas, outside current visual release: outdoor exploration, changing weather, character poses and extra animations.

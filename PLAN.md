@@ -3,9 +3,9 @@
 ## Current state
 
 - Latest user direction: Phase 1 approved (“yeah continue”). Continue the Fortnite-inspired visual/aesthetic revamp without intermediate phase approvals when tests and verification pass; commit every verified phase. Scope is visual work only: Phases 2–4 and visual integration/release verification from Phase 7. Defer standalone Phase 5 accessibility features and Phase 6 content expansion; preserve existing accessibility, content and behavior. Separate explicit merge/deployment approval remains required. This overrides earlier per-phase approval wording below.
-- Status: Phase 3 verified and committed at `7857de1`; Phase 4 changing-room work is active. Continue automatically through verified visual phases. Preserve all existing features; no unrelated feature work.
+- Status: Phase 3 verified and committed at `7857de1`; Phase 4 prototype and subsequent verified refinements committed through `9b04f38`. The persistent goal is blocked pending the user's required likeness review; do not finalize Phase 4 or infer approval. Continue automatically through verified visual phases after the decision. Preserve all existing features; no unrelated feature work.
 - Current branch: `feat/phase-4-changing-room`, created from Phase 3 `7857de1`. Remote refs have not been fetched.
-- Current changes: enhanced studio, scene selection/loading/recovery, GPU resource cleanup, static surface batching and verified regression evidence. Classic world defaults remain intact.
+- Current changes: enhanced house and wardrobe, scene selection/loading/recovery, on-demand character view, GPU resource cleanup, static surface batching and verification evidence. Classic world defaults remain intact. See `handoff.md` for current account-swap instructions.
 
 ## Version and branch inventory
 
@@ -78,6 +78,7 @@ Each implementation phase begins on a descriptive feature branch based on the la
 
 ## Verification log
 
+- Account-swap handoff: updated `todo.md` and the current section of `handoff.md` with branch/commit inventory, blocked likeness decision, verification evidence and next tasks; marked earlier continuation notes historical. Documentation consistency CLI passed 7 assertions and `git diff --check` passed. No application code changed or application tests run for this handoff.
 - Phase 4 post-wardrobe production traversal retest passed the enforced automatic-enhanced budget: desktop ten-second traversal p95 33.4 ms, stationary p95 16.8 ms, and initial encoded document/resources 278,143 bytes. Emulated mobile stationary p95 16.8 ms; both profiles reported no page errors or overflow. This is local headless evidence, not physical-device certification. Report retained in `docs/phase-4-evidence/house-performance.json`; likeness review remains pending.
 - Phase 4 wardrobe refinement: added an original woven runner, vertical light details and brass trim around the existing wardrobe, without adding collision bounds. Sequential `npm run check` passed 0 errors/0 warnings and `npm run build` passed. Production room suite passed four day/night pairs with no overflow, page errors or application warnings/errors; the refreshed wardrobe capture was inspected and retained. Production changing-room suite passed controls, desktop/emulated touch layouts and failure recovery with no page errors; open-dialog p95 was 33.4 ms desktop, 16.8 ms emulated portrait and 16.7 ms emulated landscape. Likeness review remains pending.
 - Phase 4 documentation follow-up: documented how to use the changing-room view, its static-backdrop limitation and its illustrated recovery in `README.md`. A CLI check passed five assertions for usage/limitations and `git diff --check` passed. The feature remains a checkpoint pending user likeness review and final acceptance; no new runtime behavior was introduced.
