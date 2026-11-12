@@ -1,0 +1,28 @@
+# Account-swap handoff
+
+## Current state
+
+This is a documentation-only handoff. No application code has been changed and no implementation phase has started. The user requested planning before implementation; the phased plan in `PLAN.md` has **not received explicit approval**. The user's request to commit and switch accounts is not approval of the plan. Ask for plan approval before feature code.
+
+Current branch: `docs/project-handoff`, based on `v3-portfolio-house` commit `b867cfd`. This branch contains the handoff commit; use `git log -1` to see its hash. The existing `v1-3d-space`, `v2-keynote`, and `v3-portfolio-house` branches remain preserved. Local `main` is at `649e5bb`, 14 commits behind the locally recorded `origin/main` at `b867cfd`; no remote fetch was performed. Do not base the new work on stale local `main`, and do not rename, reset, delete, merge or push existing refs without appropriate authorization. The user wants implementation on a new branch; once the plan is approved, branch from this documentation branch so the handoff is retained.
+
+## Agreed product direction
+
+- Audience includes everyone interested in Parth, especially recruiters and collaborators.
+- Prioritize a cinematic, realistic-leaning stylized aesthetic inspired by Fortnite, with an original cozy creative studio and Mumbai-inspired views through windows. Redesign the interior if useful. No outdoor exploration for now.
+- Keep every current feature and interaction intact. Preserve day/night cycling and pleasant weather; weather changes are future work.
+- Desktop first. First-person navigation by default; third-person for the new GTA-inspired changing room or other interactions when needed. The character remains visible in the changing room, with zoom/pan and a large mirror; extra poses and animations are deferred.
+- Use only free assets and open-source tools; verify asset licenses and attribution. Preserve classic v3 as both a selectable and automatic fallback, plus the existing 2D route.
+- Accessibility, especially keyboard and screen-reader access to projects and the computer, and richer portfolio content beyond the résumé remain explicit follow-up phases. Avoid accessibility regressions throughout.
+- Existing character is procedural (`src/world.js`) and comments say it was based on photos previously supplied by the user. Original photos and a standalone 3D model were not found in the inspected source/image inventory; check availability before asking for more.
+
+## Next session
+
+1. Read `AGENTS.md`, `PLAN.md`, and `todo.md`; check `git status --short --branch` and `git log -1`.
+2. Ask the user to approve or revise the full plan before writing feature code. Do not infer approval from the account-swap request.
+3. After approval, create a dedicated Phase 1 branch from `docs/project-handoff` and carry out only Phase 1. Capture the complete interaction baseline, visual specification, asset/license and tooling options, and measurable performance targets. Ask about major unresolved trade-offs.
+4. Run phase-appropriate automated and manual verification, record actual output in `PLAN.md`, commit verified work, and wait for user approval before the next phase. Never merge to main/master without separate explicit approval.
+
+## Verification
+
+The documentation handoff is checked with a CLI assertion of the required files and key plan gates, plus `git diff --check --cached` before committing. No application tests or builds were run: this handoff contains documentation only. The linked example site mentioned by the user could not be accessed through the research tool, so its implementation was not assessed.
