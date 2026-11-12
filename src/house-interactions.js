@@ -78,7 +78,7 @@ export function mountHouseInteractions(host, { onExit = () => {}, getCharacter =
     const character=getCharacter();
     if(host.dataset.sceneMode!=='enhanced'||!character)return;
     const glass=inner.querySelector('.hi-glass'), note=inner.querySelector('.hi-mirror-note');
-    const stage=document.createElement('div');stage.className='hi-mirror-stage';stage.setAttribute('role','img');stage.setAttribute('aria-label','Stylized full-body character with dark hair and glasses, a red jersey, dark trousers and light shoes, shown in a large mirror.');
+    const stage=document.createElement('div');stage.className='hi-mirror-stage';stage.setAttribute('role','img');stage.setAttribute('aria-label','Stylized full-body character with dark hair and glasses, a dark collared shirt, dark trousers and light-soled shoes, shown in a large mirror.');
     glass.replaceWith(stage);
     function fallback(){
       changingRoom?.destroy();changingRoom=null;

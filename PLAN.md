@@ -154,6 +154,8 @@ Each implementation phase begins on a descriptive feature branch based on the la
 
 ## Verification log
 
+- Wider accessibility audit found and fixed the enhanced mirror description referring to the old red jersey. Fresh sequential check (0 errors/0 warnings), build and production Chromium assertion confirmed the new collared-shirt description. Scene-mode suite also passed 7/7.
+
 - `fix/2d-accessibility-remediation`: user accepted current non-playground menu, dialogs and home links and approved latest character. Added 2D dialog semantics, focus containment/restoration and initial focus; darkened three measured low-contrast text colors. Sequential check passed 0 errors/0 warnings, build passed; production Chromium keyboard/dialog/overflow checks passed at 390×844, 768×1024 and 1440×900 with no page errors. Wider accessibility audit remains open.
 
 - Preview consistency fix verified: `npm run check` 0 errors/0 warnings and `npm run build` passed; fresh preview on port 4181 served byte-identical build favicon, résumé and 2D assets. All five stale dist-only assets returned non-200; initial one-off audit assertion had a double-slash path bug and was corrected before the passing run. Production scene-switch/failure/recovery suite passed eight checks with no page errors. No physical device testing.
