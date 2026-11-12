@@ -154,6 +154,10 @@ Each implementation phase begins on a descriptive feature branch based on the la
 
 ## Verification log
 
+- Added durable production browser regression `scripts/2d-accessibility.test.mjs`: passed welcome focus, focus trap, dialog semantics, Escape/focus return, overflow and no page errors at mobile and desktop. `node --test scripts/scene-mode.test.mjs` passed 7/7 again.
+
+- Reviewed axe incomplete items: 2D close button uses a visible × with accessible name Close; tool requests manual label review. Portfolio menu items reported overlapping-background contrast as incomplete; sampled declared color pairs range 5.05:1–9.33:1. This does not cover every state. Screen-reader and physical-device testing remain unverified.
+
 - Keyboard portfolio menu open/Escape/focus restoration passed in classic and enhanced modes. Automated scans of five 2D content dialogs exposed low-contrast entry text; corrected it and reran axe with zero detected violations across all five, with label-name and one contrast check incomplete. Fresh sequential check (0 errors/0 warnings) and build passed.
 
 - Settings/help/map/phone axe scans found two settings chooser contrast failures on a light surface; adjusted only the compact settings chooser. Fresh check (0 errors/0 warnings), build and production axe reruns in classic and enhanced settings passed with zero violations and zero incomplete checks. Help/map/phone had no detected violations, with some checks incomplete.
