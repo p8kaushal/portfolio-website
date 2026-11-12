@@ -10,6 +10,7 @@ await mkdir(resolve(root, '2d'), { recursive: true });
 await Promise.all([
   copyFile('static/resume.pdf', resolve(root, 'resume.pdf')),
   copyFile('static/favicon.svg', resolve(root, 'favicon.svg')),
+  copyFile('static/social-preview.png', resolve(root, 'social-preview.png')),
   copyFile('static/resume.pdf', resolve(root, '2d/resume.pdf'))
 ]);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
