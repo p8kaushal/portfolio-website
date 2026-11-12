@@ -2,6 +2,7 @@
 
 ## Current state
 
+- Goal continuation is blocked pending explicit Phase 1 acceptance. The same gate was confirmed across three consecutive goal turns; all authorized Phase 1 deliverables are saved. Resume implementation when the user approves or revises the concept, layout and budgets. Do not interpret automatic goal continuations as phase approval.
 - Status: user authorized full implementation and explicitly requested a persistent goal on 2026-11-12. Phase 1 deliverables and verification are complete, awaiting user acceptance of art direction, layout and proposed budgets. Phase acceptance gates and separate merge approval remain in force. No enhanced-scene code has been written.
 - Current branch: `feat/phase-1-art-direction`, created from `docs/project-handoff` at `fc86538`, retaining the v3 baseline and handoff. Remote refs have not been fetched.
 - Current changes: continuation notes, Phase 1 specification/concept board, tracked baseline evidence, repeatable browser scripts and Vite chunk splitting to resolve the existing build warning; application logic and classic scene unchanged.
