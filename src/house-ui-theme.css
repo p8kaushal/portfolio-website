@@ -62,3 +62,7 @@
 /* Dossier text sits on a light paper surface. */
 .house-ui.house-ui .hi-file .hi-kicker { color: #8c4b2d; }
 .house-ui.house-ui .hi-file .hi-dossier-id { color: #665a48; }
+
+/* The settings chooser is on a light surface, unlike the welcome chooser. */
+.house-ui.house-ui .scene-choice-compact a { color: #315d43; }
+.house-ui.house-ui .scene-choice-compact [role="status"] { color: #46564a; }

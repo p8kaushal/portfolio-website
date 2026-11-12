@@ -154,6 +154,10 @@ Each implementation phase begins on a descriptive feature branch based on the la
 
 ## Verification log
 
+- Settings/help/map/phone axe scans found two settings chooser contrast failures on a light surface; adjusted only the compact settings chooser. Fresh check (0 errors/0 warnings), build and production axe reruns in classic and enhanced settings passed with zero violations and zero incomplete checks. Help/map/phone had no detected violations, with some checks incomplete.
+
+- Post-accessibility regression: production scene switching and fallback suite passed 8 checks with no page errors; locker zoom/pan/reset/About/exit/context-loss suite passed desktop and emulated mobile. Stationary locker p95 was 50 ms desktop and 16.8/16.7 ms mobile; suites overlapped and this is not an isolated performance result. Mobile menu axe scan found zero detected violations with contrast incomplete.
+
 - Axe scans of enhanced dossier, awards, TV and computer found dossier contrast and a prohibited ARIA label on the computer task group. Fixed those findings; fresh sequential check (0 errors/0 warnings), build and production axe reruns report zero detected violations for dossier and computer. Some automated checks remain incomplete and require manual review.
 
 - Production enhanced mirror axe scan: zero detected violations, with aria-prohibited-attr, contrast and label-name checks marked incomplete for manual review. Main and 2D routes had no document overflow at 320px and 640px reflow widths; this is not equivalent to complete browser-zoom or screen-reader testing.
