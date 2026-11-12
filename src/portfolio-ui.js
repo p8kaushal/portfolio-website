@@ -38,6 +38,12 @@ export function mountPortfolioUI(host, options = {}) {
     .portfolio-quick .pq-meta{font-size:.75rem;color:#a26c4f;font-weight:700}
     .portfolio-quick .pq-body a{color:#385f49;overflow-wrap:anywhere}
     @media(max-width:600px){.portfolio-quick .pq-top{padding:1.2rem}.portfolio-quick nav{padding:0 1.2rem .8rem}.portfolio-quick .pq-body{padding:.7rem 1.2rem 1.5rem}}
+    .portfolio-quick dialog{border:3px solid #171a15;background:#eee5ce;box-shadow:8px 8px 0 #171a15,0 24px 80px #18251f88}
+    .portfolio-quick .pq-top{background:#343d2d;color:#f7e7c5;border-bottom:3px solid #171a15}
+    .portfolio-quick .pq-kicker{color:#e5ab74}.portfolio-quick nav{background:#d8c6a2;padding-top:.8rem;border-color:#a99570}
+    .portfolio-quick nav button{border:2px solid transparent;color:#35412f}.portfolio-quick nav button[aria-current="page"]{background:#394c37;color:#fff0d0;border-color:#171a15}
+    .portfolio-quick .pq-item{background:#f9f2df;border:1px solid #c9b99a;border-left:4px solid #a65a30;padding:1rem;margin:.6rem 0}
+    .portfolio-quick button:hover{filter:brightness(1.12)}
   </style><div class="pq-bar"><button type="button" class="pq-launch">Portfolio menu</button><a class="pq-resume" target="_blank" rel="noopener">Résumé ↗</a></div>
   <dialog aria-labelledby="pq-heading"><div class="pq-top"><div><p class="pq-kicker">Parth Kaushal · Portfolio</p><h2 id="pq-heading" tabindex="-1"></h2></div><button class="pq-close" type="button" aria-label="Close portfolio menu">×</button></div><nav aria-label="Portfolio sections"></nav><div class="pq-body"></div></dialog>`;
   host.appendChild(wrapper);
