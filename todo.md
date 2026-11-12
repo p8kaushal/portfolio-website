@@ -7,7 +7,8 @@
 - [x] Created `feat/phase-1-art-direction` from `docs/project-handoff` at `fc86538`, retaining v3 and handoff documents. Work only on Phase 1 until verified and approved.
 - [x] Prepare and verify Phase 1 inventory, art direction/concept board, layout proposal, feasibility assessment, baseline measurements and acceptance criteria. See `docs/phase-1-spec.md`; desktop/mobile, spatial interactions, lighting, touch visibility, type checks and warning-free build passed.
 - [x] Phase 1 accepted; Phase 2 branch created from `341aa1a`. Latest user waived intermediate visual-phase approval gates after verification and commits.
-- [ ] Finish enhanced studio/fallback proof, verify, document and commit Phase 2; then proceed automatically to the full-house and changing-room visual phases.
+- [x] Finish enhanced studio/fallback proof, verify, document and commit Phase 2 at `b89cd23`.
+- [x] Build and verify the Phase 3 enhanced house; commit the verified work before branching Phase 4.
 - [ ] Verify and commit each visual phase on its branch. Obtain separate explicit approval before merging/deploying.
 - [ ] Visual integration and release verification. Standalone accessibility and content-expansion feature phases deferred by latest user scope; preserve existing behavior and accessibility.
 - [ ] Future ideas, outside current visual release: outdoor exploration, changing weather, character poses and extra animations.

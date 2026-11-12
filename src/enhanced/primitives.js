@@ -5,24 +5,37 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
  */
 export function createSurface(THREE, kind, base, accent) {
   const canvas = document.createElement('canvas');
-  canvas.width = canvas.height = 128;
+  const size=kind==='wood'?512:kind==='plaster'?256:128;
+  canvas.width = canvas.height = size;
   const context = canvas.getContext('2d');
   if (!context) throw new Error('Surface canvas unavailable');
-  context.fillStyle = base; context.fillRect(0, 0, 128, 128);
-  context.fillStyle = accent;
-  for (let i = 0; i < 900; i++) {
-    const x = (i*73 + (i%7)*13)%128, y = (i*41 + (i%11)*7)%128;
-    context.globalAlpha = kind === 'wood' ? .16 : .12;
-    context.fillRect(x, y, kind === 'wood' ? 1 : 2, kind === 'wood' ? 8+(i%29) : 1);
+  context.fillStyle = base; context.fillRect(0, 0, size, size);
+  if(kind==='wood') {
+    // Long, low-contrast fibres read as wood rather than scattered coarse noise.
+    for(let i=0;i<170;i++) {
+      context.strokeStyle=i%4===0?'#e6c99f':accent;
+      context.globalAlpha=.035+(i%7)*.007;context.lineWidth=.6+(i%3)*.3;
+      context.beginPath();
+      for(let y=0;y<=size;y+=8) {
+        const x=i*3.07+Math.sin(y*.021+i)*.8+Math.sin(y*.008+i*.4)*2;
+        if(y===0)context.moveTo(x,y);else context.lineTo(x,y);
+      }
+      context.stroke();
+    }
+  } else {
+    let seed=37;
+    const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
+    context.fillStyle=accent;context.globalAlpha=kind==='plaster'?.035:.08;
+    for(let i=0;i<1800;i++)context.fillRect(random()*size,random()*size,1,1);
   }
   if (kind === 'fabric') {
-    context.globalAlpha = .12;
+    context.globalAlpha = .065;
     for (let i=0;i<128;i+=4) { context.fillRect(i,0,1,128); context.fillRect(0,i,128,1); }
   }
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(kind === 'wood' ? 2 : 3, 3);
+  texture.repeat.set(kind === 'fabric' ? 3 : 1, kind === 'fabric' ? 3 : 1);
   texture.anisotropy = 4;
   return texture;
 }
@@ -30,13 +43,13 @@ export function createSurface(THREE, kind, base, accent) {
 /** @param {any} THREE @param {any} scene @param {{minX:number,maxX:number,minZ:number,maxZ:number}[]} colliders */
 export function createPrimitives(THREE, scene, colliders) {
   const palette = {
-    plaster: new THREE.MeshStandardMaterial({ color: '#e9dfcf', roughness: .94 }),
-    oak: new THREE.MeshStandardMaterial({ map: createSurface(THREE,'wood','#b88453','#694625'), roughness: .66 }),
+    plaster: new THREE.MeshStandardMaterial({ map: createSurface(THREE,'plaster','#e9dfcf','#a8a092'), roughness: .94 }),
+    oak: new THREE.MeshStandardMaterial({ map: createSurface(THREE,'wood','#b88e65','#715339'), roughness: .66 }),
     indigo: new THREE.MeshStandardMaterial({ map: createSurface(THREE,'fabric','#344e68','#8294a3'), roughness: .97 }),
     textile: new THREE.MeshStandardMaterial({ map: createSurface(THREE,'fabric','#d2c3a5','#9d8a69'), roughness: 1 }),
     clay: new THREE.MeshStandardMaterial({ color: '#ba7058', roughness: .88 }),
     leaf: new THREE.MeshStandardMaterial({ color: '#617d67', roughness: .85 }),
-    brass: new THREE.MeshStandardMaterial({ color: '#d4ad69', metalness: .55, roughness: .35 }),
+    brass: new THREE.MeshStandardMaterial({ color: '#dfb869', metalness: .25, roughness: .4 }),
     ink: new THREE.MeshStandardMaterial({ color: '#26353e', roughness: .54 }),
     paper: new THREE.MeshStandardMaterial({ color: '#f4ead9', roughness: .94 }),
   };
@@ -44,6 +57,8 @@ export function createPrimitives(THREE, scene, colliders) {
   /** @param {any} geometry @param {any} material @param {number} x @param {number} y @param {number} z */
   function mesh(geometry, material, x,y,z) {
     const object = new THREE.Mesh(geometry, typeof material === 'string' ? palette[/** @type {keyof typeof palette} */(material)] : material);
+    object.castShadow=!!object.material.isMeshStandardMaterial&&!object.material.transparent;
+    object.receiveShadow=false;
     object.position.set(x,y,z); group.add(object); return object;
   }
   /** @param {number} x @param {number} y @param {number} z @param {number} w @param {number} h @param {number} d @param {any} [material] */

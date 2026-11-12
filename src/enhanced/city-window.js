@@ -11,7 +11,7 @@ function drawCity(night) {
   for(let layer=0;layer<4;layer++) {
     const width=38+layer*21, base=370+layer*45;
     for(let i=-1;i<1024/width+1;i++) {
-      const x=i*width+((i*19+layer*11)%17),h=60+((i*47+layer*67+201)%141)+layer*12;
+      const x=i*width+((i*19+layer*11)%17),h=60+((i*73+layer*97+401)%173)+layer*12;
       c.fillStyle=night?['#637d91','#4f687e','#3f5667','#33464f'][layer]:['#bac9c8','#a7b6b7','#94a4a5','#7d9193'][layer];
       c.fillRect(x,base-h,width-5,h);
       if(layer>0) {
@@ -39,7 +39,7 @@ export function buildCityWindow(THREE, tools, {x=8.7,y=2.3,z=-7.61,width=6.7,hei
   day.colorSpace=night.colorSpace=THREE.SRGBColorSpace;
   mesh(new THREE.PlaneGeometry(width,height),new THREE.MeshBasicMaterial({map:day}),x,y,z);
   const overlayMaterial=new THREE.MeshBasicMaterial({map:night,transparent:true,opacity:0,depthWrite:false});
-  mesh(new THREE.PlaneGeometry(width,height),overlayMaterial,x,y,z+.008);
+  const nightLayer=mesh(new THREE.PlaneGeometry(width,height),overlayMaterial,x,y,z+.008);nightLayer.name='city-night-layer';
   const edge=.11;
   box(x,y-height/2,z+.12,width+.23,.17,.36,'oak');
   box(x,y+height/2,z+.07,width+.23,edge,.2,'oak');

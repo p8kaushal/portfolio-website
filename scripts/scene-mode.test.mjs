@@ -47,3 +47,8 @@ test('Disposal releases shared resources once',()=>{
   const world=fakeWorld();disposeWorld(world);
   assert.deepEqual(world.counts,{geometry:1,material:1,texture:1,clear:1});
 });
+test('Disposal releases shadow render targets once',()=>{
+  let count=0;const map={dispose(){count++;}};
+  disposeWorld({scene:{traverse(visitor){visitor({shadow:{map,mapPass:map}});},clear(){}}});
+  assert.equal(count,1);
+});

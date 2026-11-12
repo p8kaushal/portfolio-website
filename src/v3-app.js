@@ -12,6 +12,7 @@ import { mountGameMap } from './game-map.js';
 import { mountGameSettings } from './game-settings.js';
 import { browserSceneChoice, loadScene, disposeWorld, recoveryKey } from './scene-mode.js';
 import { mountSceneChooser } from './scene-chooser.js';
+import './enhanced/presentation.css';
 
 export async function mountApp(host, override) {
  host.innerHTML = `<style>
@@ -31,7 +32,6 @@ export async function mountApp(host, override) {
  const chooserHost=document.createElement('div');host.querySelector('.intro').after(chooserHost);
  const applyScene=mode=>{saveSession();host.dispatchEvent(new CustomEvent('house-style-apply',{detail:{mode}}));};
  const sceneChooser=mountSceneChooser(chooserHost,{onApply:applyScene});
- const enhancedStyle=document.createElement('style');enhancedStyle.textContent='.enhanced-mode .scene canvas{image-rendering:auto}.enhanced-mode .scene{border:1px solid #bdb3a1;box-shadow:0 16px 48px #1114}.enhanced-mode .loading{background:linear-gradient(135deg,#253d4bed,#3e5345ed)}';host.append(enhancedStyle);
  for(const button of loading.querySelectorAll('button'))button.disabled=true;
  const map=mountHouseMap(container,{onOpenMap:()=>{if(running&&!intro&&!pcActive&&!houseActive&&!phoneActive&&!helpActive&&!settingsActive&&!portfolioActive&&!pcTransition){setMenu(false);houseMap.open()}}});map.setVisible(false);
  let renderer, world, camera, frame, appliedTimeMode=null, running=false, locked=false, active=false, intro=false, yaw=0,pitch=0,old=performance.now(), lastPointer=null, introStart=0, introReduced=false, pcActive=false, houseActive=false, phoneActive=false, helpActive=false, mapActive=false, settingsActive=false, portfolioActive=false, menuOpen=false, orientationDismissed=false, pcTransition=null, jumpHeight=0, jumpVelocity=0, crouchAmount=0, touchMove={x:0,y:0}, playableSeconds=0, noticeShown=false, lastSaveAt=0;
@@ -48,7 +48,7 @@ export async function mountApp(host, override) {
  const houseMap=mountGameMap(host,{onOpen:()=>{mapActive=true;resetInput();if(document.pointerLockElement)document.exitPointerLock()},onClose:()=>{mapActive=false},onSelect:id=>ui.open(id)});
  const settings=mountGameSettings(host,{onOpen:()=>{settingsActive=true;resetInput();if(document.pointerLockElement)document.exitPointerLock()},onClose:()=>{settingsActive=false},onChange:applyGraphics,onSceneApply:applyScene,renderStyle:requested});
  if(override?.mode){sceneChooser.setPreference(override.mode);settings.setScenePreference(override.mode);}
- function applyGraphics(value){if(world){world.setQuality?.(value.effectiveQuality);if(value.timeMode!==appliedTimeMode){world.setTimeMode?.(value.timeMode);appliedTimeMode=value.timeMode}house.setQuality?.(value.effectiveQuality)}if(renderer){renderer.setPixelRatio(value.resolutionScale);resize()}}
+ function applyGraphics(value){if(world){world.setQuality?.(value.effectiveQuality);if(value.timeMode!==appliedTimeMode){world.setTimeMode?.(value.timeMode);appliedTimeMode=value.timeMode}house.setQuality?.(value.effectiveQuality)}if(renderer){world?.configureRenderer?.(renderer,value.effectiveQuality);renderer.setPixelRatio(value.resolutionScale);resize()}}
  function fail(){loading.classList.add('hidden');const el=document.createElement('div');el.className='error';el.innerHTML='<div><h2>The 3D house couldn’t start.</h2><p>You can still explore the portfolio from the menu above.</p><a href="/2d/index.html" data-sveltekit-reload>Open the 2D house →</a></div>';container.appendChild(el)}
  function destroyPanels(){pc.destroy();ui.destroy();map.destroy();touch.destroy();house.destroy();phone.destroy();help.destroy();houseMap.destroy();settings.destroy();sceneChooser.destroy();host.classList.remove('enhanced-mode');}
  try {
@@ -64,6 +64,7 @@ export async function mountApp(host, override) {
    renderer.toneMapping=result.mode==='enhanced'?THREE.ACESFilmicToneMapping:THREE.NoToneMapping;
    renderer.toneMappingExposure=1.15;
    world.setQuality?.(settings.getSettings().effectiveQuality);world.setTimeMode?.(settings.getSettings().timeMode);
+   world.configureRenderer?.(renderer,settings.getSettings().effectiveQuality);
    appliedTimeMode=settings.getSettings().timeMode;house.setQuality?.(settings.getSettings().effectiveQuality);
    camera=new THREE.PerspectiveCamera(65,1,.1,80);camera.position.set(world.spawn.x,world.spawn.y,world.spawn.z);
    camera.rotation.order='YXZ';yaw=world.spawn.yaw;resize();

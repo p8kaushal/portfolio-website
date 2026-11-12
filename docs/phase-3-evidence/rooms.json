@@ -1,0 +1,27 @@
+{
+  "rooms": [
+    {
+      "name": "living",
+      "dayNightDifferent": true,
+      "overflow": false
+    },
+    {
+      "name": "bedroom",
+      "dayNightDifferent": true,
+      "overflow": false
+    },
+    {
+      "name": "studio",
+      "dayNightDifferent": true,
+      "overflow": false
+    },
+    {
+      "name": "wardrobe",
+      "dayNightDifferent": true,
+      "overflow": false
+    }
+  ],
+  "pageErrors": [],
+  "consoleWarnings": [],
+  "consoleErrors": []
+}

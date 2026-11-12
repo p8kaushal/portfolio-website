@@ -27,7 +27,8 @@ try {
     const sceneMode = await page.locator('[data-scene-mode]').getAttribute('data-scene-mode');
     if (mode) assert.equal(sceneMode, mode);
     const initialResources = await page.evaluate(() => performance.getEntriesByType('resource').map(entry => ({ name: entry.name.split('/').pop(), encodedBytes: entry.encodedBodySize, transferBytes: entry.transferSize })));
-    const initialEncodedBytes = initialResources.reduce((total,entry) => total+entry.encodedBytes,0);
+    const documentEncodedBytes = await page.evaluate(() => performance.getEntriesByType('navigation')[0].encodedBodySize);
+    const initialEncodedBytes = documentEncodedBytes + initialResources.reduce((total,entry) => total+entry.encodedBytes,0);
     assert.ok(initialEncodedBytes < 3_000_000, 'Initial local response bodies must stay below the 3 MB ceiling');
     if (profile.isMobile) {
       await page.locator('.touch-controls').waitFor({ state: 'visible' });
@@ -92,13 +93,17 @@ try {
         requestAnimationFrame(frame);
       }));
       assert.ok(movement.positions.some(position => Math.hypot(position.x,position.z+.2)>.1), 'Movement should update the saved camera');
-      if(process.env.PORTFOLIO_ENFORCE_BUDGET==='1')assert.ok(Math.round(movement.frameIntervalP95*10)/10<=33.4,`Desktop traversal p95 ${movement.frameIntervalP95} ms exceeds 33.4 ms`);
     }
-    report.profiles.push({ name, sceneMode, errors, overflow, navigation, initialEncodedBytes, initialResources, frameIntervalP50: intervals[90], frameIntervalP95: intervals[171], samples: intervals.length, movement, note: 'Headless local Chromium; frame samples and synthetic keyboard traversal do not establish physical-device performance. Navigation is a local uncached context, without network throttling. Encoded resource sizes reflect server responses, without assuming gzip.' });
+    report.profiles.push({ name, sceneMode, errors, overflow, navigation, initialEncodedBytes, documentEncodedBytes, initialResources, frameIntervalP50: intervals[90], frameIntervalP95: intervals[171], samples: intervals.length, movement, note: 'Headless local Chromium; frame samples and synthetic keyboard traversal do not establish physical-device performance. Navigation is a local uncached context, without network throttling. Encoded resource sizes include the document and resource responses, without assuming gzip.' });
+    if(movement&&process.env.PORTFOLIO_ENFORCE_BUDGET==='1')assert.ok(Math.round(movement.frameIntervalP95*10)/10<=33.4,`Desktop traversal p95 ${movement.frameIntervalP95} ms exceeds 33.4 ms`);
     await context.close();
   }
   await writeFile(`${output}/report.json`, JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
+} catch(error) {
+  report.failure=String(error);
+  await writeFile(`${output}/failure.json`,JSON.stringify(report,null,2));
+  throw error;
 } finally {
   await browser.close();
 }

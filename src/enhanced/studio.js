@@ -3,23 +3,18 @@ import { buildCityWindow } from './city-window.js';
 
 /** Representative room, retaining original desk/chair/storage collision footprints.
  * @param {any} THREE @param {{scene:any,colliders:{minX:number,maxX:number,minZ:number,maxZ:number}[]}} context
+ * @param {ReturnType<typeof createPrimitives>} [sharedTools]
  */
-export function buildStudio(THREE, {scene,colliders}) {
-  const tools=createPrimitives(THREE,scene,colliders);
+export function buildStudio(THREE, {scene,colliders},sharedTools) {
+  const tools=sharedTools||createPrimitives(THREE,scene,colliders);
   const {box,cylinder,plant,contact,mesh,palette}=tools;
-  // Architectural lining and a continuous oak floor. Keep doorway openings clear.
-  box(9.25,.045,1,9.25,.05,17.5,'oak',false,0);
-  box(9.2,1.76,-7.72,9.2,3.5,.075,'plaster',false,0);
-  box(13.75,1.76,1,.075,3.5,17.5,'plaster',false,0);
-  box(9.2,3.53,1,9.2,.08,17.5,'plaster',false,0);
-  for(let x=4.8;x<13.6;x+=.7) box(x,.074,1,.012,.005,17.4,'ink',false,0);
   const city=buildCityWindow(THREE,tools);
   // Quiet wall treatments and tactile textile break up the large floor plane.
-  box(8,.084,-3.35,5.9,.018,4.8,'textile',false,.006);
+  box(8,.084,-3.35,5.9,.018,4.8,'textile',false,.006).receiveShadow=true;
   for(let i=0;i<11;i++)box(12.1+i*.12,1.75,-7.64,.045,3.2,.06,'oak',false,.008);
   contact(8,-4.8,7.4,4.4,.35,.112);
   // Oak desktop with chamfered edges, brass feet and inset drawers.
-  box(8,.77,-5.25,5.6,.16,1.65,'oak',true,.065);
+  box(8,.77,-5.25,5.6,.16,1.65,'oak',true,.065).receiveShadow=true;
   for(const x of [5.5,10.5])for(const z of [-5.9,-4.6])cylinder(x,.35,z,.045,.045,.7,'brass');
   box(10.12,.48,-5.4,.94,.53,1.15,'oak');
   for(const y of [.35,.6])box(10.12,y,-4.81,.72,.016,.018,'brass',false,.005);

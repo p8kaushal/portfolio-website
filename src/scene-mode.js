@@ -37,15 +37,18 @@ export function browserSceneChoice() {
  */
 export function disposeWorld(world) {
   if (!world?.scene) return;
-  const geometries = new Set(), materials = new Set(), textures = new Set();
+  const geometries = new Set(), materials = new Set(), textures = new Set(), targets = new Set();
   world.scene.traverse((/** @type {any} */ object) => {
     if (object.geometry) geometries.add(object.geometry);
+    if(object.shadow?.map)targets.add(object.shadow.map);
+    if(object.shadow?.mapPass)targets.add(object.shadow.mapPass);
     for (const material of [object.material].flat().filter(Boolean)) {
       materials.add(material);
       for (const value of Object.values(material)) if (value?.isTexture) textures.add(value);
     }
   });
   for (const texture of textures) texture.dispose();
+  for (const target of targets) target.dispose();
   for (const geometry of geometries) geometry.dispose();
   for (const material of materials) material.dispose();
   world.scene.clear();

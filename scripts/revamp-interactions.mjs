@@ -16,7 +16,7 @@ try {
   page.on('pageerror', error => report.errors.push(error.message));
   await page.goto(baseURL, { waitUntil: 'networkidle' });
   const inventory = await page.evaluate(async () => {
-    const THREE = await import('/node_modules/three/build/three.module.js');
+    const THREE = await import('/node_modules/.vite/deps/three.js');
     const { createWorld } = await import('/src/world.js');
     const world = createWorld(THREE);
     const { createEnhancedWorld } = await import('/src/enhanced-world.js');
@@ -26,6 +26,22 @@ try {
     if(JSON.stringify(serializeTargets(world))!==JSON.stringify(serializeTargets(enhanced)))throw Error('Enhanced interaction targets must match classic');
     const { disposeWorld } = await import('/src/scene-mode.js');
     disposeWorld(enhanced);
+    // Exercise live preference changes against the actual enhanced lighting loop.
+    const originalMatchMedia=window.matchMedia;
+    const preference={matches:false};
+    try {
+      window.matchMedia=query=>query.includes('prefers-reduced-motion')?preference:originalMatchMedia.call(window,query);
+      const cycling=createEnhancedWorld(THREE);
+      try {
+        cycling.update(0);cycling.update(90000);
+        const layers=cycling.scene.getObjectsByProperty('name','city-night-layer');
+        if(!layers.length||layers.some(layer=>layer.material.opacity<.99))throw Error('Enhanced windows must follow cycle night');
+        preference.matches=true;cycling.update(90016);
+        if(layers.some(layer=>layer.material.opacity!==0))throw Error('Reduced motion must settle city windows in daylight');
+        preference.matches=false;cycling.update(90032);
+        if(layers.some(layer=>layer.material.opacity!==0))throw Error('Resuming motion must restart window/room cycle together');
+      } finally {disposeWorld(cycling);}
+    } finally {window.matchMedia=originalMatchMedia;}
     const targets = [world.computer, ...world.targets];
     const blocked = (x,z) => world.colliders.some(c => x > c.minX-.24 && x < c.maxX+.24 && z > c.minZ-.24 && z < c.maxZ+.24);
     const approaches = targets.map(target => {

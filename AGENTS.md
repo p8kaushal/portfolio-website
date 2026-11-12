@@ -30,6 +30,7 @@
 - Current version: interactive 3D portfolio house with a 2D fallback, built with SvelteKit 2, Svelte 5, Vite, TypeScript/JavaScript, Three.js and GSAP. Portfolio data is centralized in `src/content.js`.
 - Node.js 24 and npm: `npm ci`, `npm run dev`. Verification commands: `npm run check` and `npm run build`; preview with `npm run preview`.
 - `predev` and `prebuild` prepare `.generated-static`; production output is `build/`. GitHub Pages deploys on `main` or manual dispatch; review deployment implications before any merge or deployment.
+- Run `npm run check` and `npm run build` sequentially: both synchronize SvelteKit-generated state. Restart an owned Vite preview after rebuilding so its server/client manifest matches the new hashed assets; production browser verification is required.
 - Follow existing project conventions and keep changes scoped to the approved phase. Architecture changes require an explicit decision when trade-offs are material.
-- Project handoff: consult `PLAN.md`, `todo.md`, and `handoff.md` at session start. Phase 1 is approved; Phase 2 is active on `feat/phase-2-visual-slice`. Latest user narrowed scope to visual/aesthetic revamp only and waived intermediate approvals when checks pass; commit verified phases. Separate merge/deployment approval remains required.
+- Project handoff: consult `PLAN.md`, `todo.md`, and `handoff.md` at session start. Phase 2 is verified/committed at `b89cd23`; Phase 3 is active on `feat/phase-3-stylized-house`. Scope is visual/aesthetic revamp only, with automatic advancement after checks and commits. Separate merge/deployment approval remains required.
 - These describe the existing project, not approval of future feature requirements or architecture changes.

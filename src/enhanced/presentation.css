@@ -1,0 +1,63 @@
+/* Visual treatment only. Existing navigation, content and interaction semantics are retained. */
+.enhanced-mode .app{background:#f3eee4;color:#263e38;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-top:28px}
+.enhanced-mode .top{border-color:#d5cdbf;padding-bottom:20px}
+.enhanced-mode .brand{color:#2c443b;font:800 13px/1.4 ui-sans-serif,system-ui,sans-serif;text-shadow:none;letter-spacing:.055em}
+.enhanced-mode .brand span{background:#536f5b;color:#f4e9d5;border:0;border-radius:9px;box-shadow:none;width:32px;height:32px}
+.enhanced-mode .eyebrow{color:#966346;font:700 10px/1.5 ui-monospace,monospace;letter-spacing:.12em}
+.enhanced-mode .intro{padding:30px 0 24px}
+.enhanced-mode .intro h1{font:800 clamp(36px,4.2vw,60px)/1.12 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.055em;text-transform:none;text-shadow:none;color:#263e38;margin:8px 0 12px}
+.enhanced-mode .intro p{color:#52665b;font-size:14px;line-height:1.65}
+.enhanced-mode .scene{border:1px solid #c8c0ad;border-radius:16px;background:#c4c9bf;box-shadow:0 18px 45px #233d3020}
+.enhanced-mode .scene canvas{image-rendering:auto}
+.enhanced-mode .sidebar{gap:16px}
+.enhanced-mode .card{background:#fcf9f1;border:1px solid #dcd4c4;border-radius:14px;box-shadow:0 4px 20px #233d3007;padding:22px;color:#2c443b}
+.enhanced-mode .card h2{font:750 21px/1.25 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.035em;text-transform:none;margin:10px 0 12px}
+.enhanced-mode .card p{color:#58685a;font-size:12px;line-height:1.7}
+.enhanced-mode .room{border-color:#e0d8c8;padding:13px 0;font-weight:700}
+.enhanced-mode .room span{color:#946746}.enhanced-mode .room small{color:#687569;line-height:1.55}
+.enhanced-mode .card a{color:#385d48!important}
+.enhanced-mode .foot{color:#647266;padding-top:20px;line-height:1.6}
+.enhanced-mode .scene-choice{color:#3d5145;gap:10px;margin-bottom:22px}
+.enhanced-mode .scene-choice select,.enhanced-mode .scene-choice button{border:1px solid #c6beac;border-radius:8px;background:#fcf9f1;color:#2b4538;padding:9px 13px;min-height:42px}
+.enhanced-mode .scene-choice button{background:#3b5b48;color:#fff6df;border-color:#3b5b48}
+.enhanced-mode .scene-choice a{color:#48634f}.enhanced-mode .scene-choice [role=status]{color:#617160;font-size:11px}
+.enhanced-mode .pq-launch,.enhanced-mode .pq-resume{border-radius:8px;border-color:#cfc7b6;padding:11px 15px}
+.enhanced-mode .pq-resume{background:#4d7056;border-color:#4d7056}
+.enhanced-mode .menu-toggle{border:1px solid #f4ecd37a;background:#243d36eb;color:#fff0d3;border-radius:10px;box-shadow:0 3px 12px #182c3038}
+.enhanced-mode .game-menu{background:#243d36f5;border:1px solid #d8c8a4;border-radius:12px;padding:7px;box-shadow:0 10px 30px #15292a55;min-width:190px}
+.enhanced-mode .game-menu button{border-radius:6px;background:#3b5448;color:#fff1d7;padding:13px}
+.enhanced-mode .game-prompt{border:1px solid #e8d7b4;background:#243d36ed;border-radius:24px;color:#fff1d6;box-shadow:0 4px 18px #172c2840;font:650 12px/1.5 ui-sans-serif,system-ui,sans-serif;text-transform:none;white-space:normal;max-width:calc(100% - 28px);text-align:center}
+.enhanced-mode .loading{background:linear-gradient(145deg,#263e4ee8,#375745f2);color:#fff0d2}
+.enhanced-mode .loading h2{font:800 clamp(36px,5vw,66px)/1.1 ui-sans-serif,system-ui,sans-serif;text-shadow:none;text-transform:none;letter-spacing:-.055em}
+.enhanced-mode .loading .eyebrow{color:#e3bc85}.enhanced-mode .loading p{color:#e8e4d1;line-height:1.7}
+.enhanced-mode .action,.enhanced-mode .subtle{font:700 12px/1.5 ui-sans-serif,system-ui,sans-serif;letter-spacing:0;text-transform:none;border-radius:8px;border:1px solid #e2d1ac;box-shadow:none;padding:12px 16px}
+.enhanced-mode .action{background:#e7d2a6;color:#243d36}.enhanced-mode .subtle{background:#3f594b;color:#fff0d2}
+.enhanced-mode .touch-controls button{border:1px solid #e2d4b1b3;border-radius:10px;background:#243d36e8;box-shadow:0 3px 10px #14292140;font-weight:700}
+.enhanced-mode .touch-stick{border-color:#f3e4bdad;background:#243d36a8}.enhanced-mode .touch-knob{background:#e2cf9f8a}
+.enhanced-mode .house-map-head,.enhanced-mode .house-room-toast{font-family:ui-sans-serif,system-ui,sans-serif;letter-spacing:.02em;text-shadow:0 2px 4px #182c30}
+.enhanced-mode .error{background:#fcf9f1;color:#2b4538}.enhanced-mode .error a{color:#385d48}
+/* Existing dialogs inherit the house's soft architectural palette. */
+.enhanced-mode :is(.game-settings,.game-help,.game-map-dialog){background:#f7f0e2;color:#2c443b;border:1px solid #bfb5a0;border-radius:16px;box-shadow:0 24px 90px #162d3055}
+.enhanced-mode :is(.gs-head,.gh-head,.gm-head){background:#e6dfcf;color:#294339;border-color:#cfc5af;padding:20px 24px}
+.enhanced-mode :is(.gs-head h2,.gh-head h2,.gm-head h2){font:800 28px/1.2 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.035em;text-transform:none}
+.enhanced-mode :is(.gs-kicker,.gh-kicker,.gm-kicker){color:#85613e}
+.enhanced-mode :is(.gs-content>p,.gh-content p,.gm-content>p,.gs-row p,.gs-note){color:#566650}
+.enhanced-mode .gs-row{background:#fffaf0;border-color:#d4c8b0;border-radius:10px}
+.enhanced-mode .gs-row select{background:#f6eddc;border:1px solid #c7b99d;border-radius:7px;color:#294339}
+.enhanced-mode :is(.gs-close,.gh-close,.gm-close,.gs-reset){background:#3e5d48;color:#fff0d2;border:0;border-radius:7px;box-shadow:none}
+.enhanced-mode .gs-status{background:#e8e1ce;color:#3b5140;border-color:#ae8652;border-radius:6px}
+.enhanced-mode .scene-choice-compact{border-color:#c6b99e;border-radius:10px;background:#ede5d4}
+.enhanced-mode .gm-plan{border:1px solid #b8ac91;border-radius:12px;overflow:hidden}
+.enhanced-mode .gm-room{border:1px solid #cec2a8;background:#efe6d3;color:#354d3f;border-radius:9px}
+.enhanced-mode .gm-room h3{color:#805d39}.enhanced-mode .gm-room p,.enhanced-mode .gm-footer{color:#566650!important}
+.enhanced-mode .pc-environment{background:radial-gradient(ellipse at 25% 30%,#69887b,#314e51 55%,#233e4a)}
+.enhanced-mode .pc-top{background:#243e3a;color:#f4ead1;border-bottom:1px solid #a4b19c}
+.enhanced-mode .pc-window{border:1px solid #8ba18e;border-radius:10px;box-shadow:0 20px 60px #102e3560;overflow:hidden}
+.enhanced-mode .pc-titlebar{background:#3b594d;color:#fff4d9}.enhanced-mode .pc-titlebar button{border-radius:5px;border-color:#a3b29a;background:#506c5a;color:#fff4d9}
+.enhanced-mode .house-interaction .hi-shell{background:radial-gradient(ellipse at 30% 10%,#4b6961,#243d40 80%)}
+.enhanced-mode .hi-header{background:#203b35;border-color:#77917b}.enhanced-mode .hi-title{font:800 clamp(28px,4vw,48px)/1.12 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.04em;text-transform:none}
+.enhanced-mode :is(.hi-exit,.hi-btn){border:1px solid #ceb78c;border-radius:8px;box-shadow:none;background:#e6d3ac;color:#243d35}
+.enhanced-mode .hi-file{border:1px solid #c9b994;border-radius:14px;box-shadow:0 20px 60px #102d3040;background:#eee3cc}
+.enhanced-mode .hi-skill-card{border-radius:8px}.enhanced-mode .hi-tabs button{border-radius:6px 6px 0 0}
+.enhanced-mode .hi-tv{border-radius:12px;box-shadow:0 18px 50px #102d3055}
+@media(max-width:520px){.enhanced-mode .app{padding:16px}.enhanced-mode .intro{padding-top:23px}.enhanced-mode .brand{font-size:11px;letter-spacing:.02em}.enhanced-mode .scene{border-radius:12px}.enhanced-mode .card{padding:20px}.enhanced-mode .scene-choice{gap:8px}.enhanced-mode .scene-choice [role=status]{line-height:1.6}}

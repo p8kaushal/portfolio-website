@@ -27,6 +27,14 @@ Edit `src/content.js` for the portfolio, and replace `static/resume.pdf` when th
 
 The 3D world, character, furniture and visual effects are generated in code. Time of day and graphics settings are available from the in-game menu. The experience includes keyboard and touch controls, a quick portfolio menu, a house map and a 2D fallback.
 
+## House styles
+
+Choose **Enhanced house**, **Classic house** or **Automatic** above the view or in graphics settings, then select **Apply view**. The enhanced house uses original procedural wood and textiles, rounded furniture, warm lighting and Mumbai-inspired day/night window views. The classic house preserves the previous retro scene. Automatic conservatively starts classic on touch devices and devices reporting low memory or CPU capacity; you can override that choice.
+
+The saved style and graphics choices stay in the browser. Failed enhanced loading or context loss recovers to classic where rendering is available; the portfolio menu and `/2d/index.html` remain available when 3D cannot start. Enhanced preset scales are 100%/80%/60% for high/balanced/low, with manual resolution overrides. Automatic starts enhanced at Balanced (or Low for limited capability hints). High adds furniture shadow mapping; Balanced and Low use softer generated contact shading and fewer rendering costs.
+
+Classic defaults live in `src/world.js`. Enhanced room builders, procedural surfaces and scoped presentation styles live in `src/enhanced/`, composed by `src/enhanced-world.js`. No downloaded game artwork, paid assets or external texture service is used. `PLAN.md` and phase verification documents record the current implementation and test evidence.
+
 ## Deployment
 
 The GitHub Pages workflow builds with Node 24 and uploads `build/`. It is configured for the existing `parthkaushal.in` root domain and runs on `main` or manual dispatch; work on another branch does not deploy automatically. Review the destination and changes before merging or deploying. Root-relative URLs assume the site is hosted at the domain root.

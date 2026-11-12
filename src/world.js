@@ -1,16 +1,17 @@
 // @ts-nocheck
+/** @typedef {{scene:any,colliders:{minX:number,maxX:number,minZ:number,maxZ:number}[]}} RoomContext */
 /** Procedural, asset-free house for the first-person portfolio.
  * The default path is the preserved classic scene; room builders share its interaction contract.
  * @param {any} THREE
- * @param {{scene?:any,localLights?:boolean,buildStudio?:(context:{scene:any,colliders:{minX:number,maxX:number,minZ:number,maxZ:number}[]})=>void}} [options]
+ * @param {{scene?:any,localLights?:boolean,flatShading?:boolean,legacyAccents?:boolean,buildArchitecture?:(context:RoomContext)=>void,buildBedroom?:(context:RoomContext)=>void,buildStudio?:(context:RoomContext)=>void,buildLivingRoom?:(context:RoomContext)=>void}} [options]
  */
-export function createWorld(THREE, { scene = new THREE.Scene(), buildStudio, localLights = true } = {}) {
+export function createWorld(THREE, { scene = new THREE.Scene(), buildArchitecture, buildBedroom, buildStudio, buildLivingRoom, localLights = true, flatShading = true, legacyAccents = true } = {}) {
   scene.background = new THREE.Color('#c8b49a');
   // Distance haze and a warm, flat-lit palette evoke early 3D game worlds.
   scene.fog = new THREE.Fog('#c8b49a', 18, 43);
   const colliders = [];
   const materials = {};
-  const mat = (color, roughness = 1) => { if (!materials[color]) { const softened = new THREE.Color(color); const hsl = {}; softened.getHSL(hsl); softened.setHSL(hsl.h, hsl.s * .78, hsl.l); materials[color] = new THREE.MeshStandardMaterial({ color: softened, roughness, flatShading: true }); } return materials[color]; };
+  const mat = (color, roughness = 1) => { if (!materials[color]) { const softened = new THREE.Color(color); const hsl = {}; softened.getHSL(hsl); softened.setHSL(hsl.h, hsl.s * .78, hsl.l); materials[color] = new THREE.MeshStandardMaterial({ color: softened, roughness, flatShading }); } return materials[color]; };
   const box = (x, y, z, w, h, d, color, collision = false) => {
     const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat(color));
     mesh.position.set(x, y, z);
@@ -42,6 +43,11 @@ export function createWorld(THREE, { scene = new THREE.Scene(), buildStudio, loc
 
   // A compact but generous layout: bedroom left, living space middle, studio right.
   // About 28 by 18 units, with wide passages and direct lines between rooms.
+  const windowMaterial = new THREE.MeshBasicMaterial({color:'#c9c0a7'});
+  const windowBodies=[];
+  if(buildArchitecture) {
+    buildArchitecture({scene,colliders});
+  } else {
   box(0,-.12,1,28,.24,18,'#8c7357');
   box(-9.2,.008,1,9.5,.025,17.5,'#bfa47d');
   box(0,.009,1,8.7,.03,17.5,'#bea47f');
@@ -57,8 +63,6 @@ export function createWorld(THREE, { scene = new THREE.Scene(), buildStudio, loc
   // Skirting gives the architecture a crisp, designed edge.
   box(0,.16,-7.79,27.7,.25,.08,'#b39d80'); box(0,.16,9.79,27.7,.25,.08,'#b39d80');
   // Window treatment is procedurally modelled; no textures are loaded.
-  const windowMaterial = new THREE.MeshBasicMaterial({color:'#c9c0a7'});
-  const windowBodies=[];
   const windowBack=(x,z=-7.77)=>{
     box(x,2.2,z,2.5,1.65,.07,'#9b765e');
     const pane=box(x,2.2,z+.05,2.27,1.42,.06,'#cfab79');pane.material=windowMaterial;
@@ -70,8 +74,12 @@ export function createWorld(THREE, { scene = new THREE.Scene(), buildStudio, loc
     box(x,2.2,z+.11,.07,1.42,.03,'#e1c59c');box(x,2.2,z+.11,2.27,.07,.03,'#e1c59c');
   };
   windowBack(-8.3); windowBack(0); windowBack(8.4);
+  }
 
   // BEDROOM: bed, nightstand, wardrobe and mirror.
+  if(buildBedroom) {
+    buildBedroom({scene,colliders});
+  } else {
   rug(-8.1,-2.2,5.8,4.6,'#a36d5b');
   box(-9,-3.0+3.42,-4.15,3.35,.55,4.4,'#805d4b',true);
   box(-9,.78,-4.15,3.12,.34,4.15,'#d9ccb0');
@@ -92,6 +100,7 @@ export function createWorld(THREE, { scene = new THREE.Scene(), buildStudio, loc
   // A low reading bench and wall accents give the larger bedroom a useful edge.
   box(-12.65,.43,6.3,1.5,.65,2.5,'#b88f74',true); box(-12.65,.8,6.3,1.4,.12,2.35,'#dfc7a7');
   box(-13.78,2.2,2.7,.08,1.15,1.5,'#bca286'); box(-13.72,2.2,2.7,.04,.95,1.3,'#d6b8a0');
+  }
   
   // STUDIO: long desk, monitor, keyboard, paper file and chair.
   if (buildStudio) {
@@ -123,6 +132,9 @@ export function createWorld(THREE, { scene = new THREE.Scene(), buildStudio, loc
   }
 
   // LIVING ROOM: sofa, low table, TV and a small trophy display.
+  if(buildLivingRoom) {
+    buildLivingRoom({scene,colliders});
+  } else {
   rug(0,2.3,6.1,4.6,'#777c5e');
   box(0,.43,4.35,4.25,.7,1.25,'#5f7355',true); box(0,1.0,4.88,4.25,1.1,.32,'#5f7355');
   box(-1.25,.85,4.2,1,.22,.75,'#8c9970'); box(0,.85,4.2,1,.22,.75,'#8c9970'); box(1.25,.85,4.2,1,.22,.75,'#8c9970');
@@ -155,6 +167,7 @@ export function createWorld(THREE, { scene = new THREE.Scene(), buildStudio, loc
   // A console behind the seating defines the larger living room.
   box(-.6,.48,9.25,3.2,.9,.65,'#a17d60',true); box(-.6,.96,9.25,3.3,.08,.7,'#ceb28e');
   cylinder(-1.6,1.13,9.25,.16,.2,.3,'#c58268');
+  }
 
   // Geometric streaks on the floor suggest late-afternoon light without
   // expensive realtime shadows. They are translucent and don't affect collision.
@@ -163,12 +176,14 @@ export function createWorld(THREE, { scene = new THREE.Scene(), buildStudio, loc
     const patch = new THREE.Mesh(new THREE.PlaneGeometry(w,d), new THREE.MeshBasicMaterial({color:'#ddd0b5',transparent:true,opacity:.11,depthWrite:false,side:THREE.DoubleSide}));
     patch.rotation.x=-Math.PI/2; patch.rotation.z=-.18; patch.position.set(x,.081,z); scene.add(patch); lightPatches.push(patch.material);
   };
+  if(legacyAccents) {
   lightPatch(-8.3,-5.7,2.1,3.4); lightPatch(0,-5.8,2.1,3.4); lightPatch(8.4,-5.8,2.1,3.4);
   // A simple retro rug motif, composed entirely of geometry.
   for(let i=-2;i<=2;i++) box(i*.62,.082,3.05,.28,.014,.28,'#c69e6c');
   // Flat graphic picture details are generated in scene, not imported textures.
   box(2.8,1.85,-7.68,1.04,.07,.02,'#855e4b');
   box(2.48,2.0,-7.67,.13,.27,.02,'#885f4b'); box(2.78,2.06,-7.67,.14,.39,.02,'#885f4b'); box(3.08,1.98,-7.67,.14,.23,.02,'#885f4b');
+  }
   const ambient = new THREE.HemisphereLight('#f4e7d4','#74786d',1.35);scene.add(ambient);
   const sun = new THREE.DirectionalLight('#f5e5ce',1.15);sun.position.set(-3,8,4);scene.add(sun);
   // Grounded floor lamps: a weighted base, slender stem, shade and warm bulb.
