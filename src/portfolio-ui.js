@@ -18,8 +18,8 @@ export function mountPortfolioUI(host, options = {}) {
     .portfolio-quick *{box-sizing:border-box}
     .portfolio-quick .pq-bar{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
     .portfolio-quick button,.portfolio-quick a{font:inherit}
-    .portfolio-quick .pq-launch,.portfolio-quick .pq-resume{border:2px solid #171a15;background:#eee5ce;color:#28382e;padding:.7rem 1rem;font-size:.8rem;font-weight:700;text-decoration:none;cursor:pointer}
-    .portfolio-quick .pq-resume{background:#687c5d;color:#fff;border-color:#171a15}
+    .portfolio-quick .pq-launch,.portfolio-quick .pq-resume{border:1px solid #d2d8c8;border-radius:3px;background:#f8f7ec;color:#25382f;padding:.7rem 1rem;font-size:.8rem;font-weight:700;text-decoration:none;cursor:pointer}
+    .portfolio-quick .pq-resume{background:#647e67;color:#fff;border-color:#647e67}
     .portfolio-quick :focus-visible{outline:3px solid #d97742;outline-offset:3px}
     .portfolio-quick dialog{width:min(1040px,calc(100vw - 2rem));height:min(850px,calc(100dvh - 2rem));max-width:none;max-height:none;padding:0;border:3px solid #171a15;background:#f1eadb;color:#26362c;box-shadow:8px 8px #171a15,0 24px 80px #10181199;overflow:auto;scroll-behavior:auto}
     .portfolio-quick dialog::backdrop{background:#151b16d9}

@@ -31,9 +31,8 @@ try {
       await page.screenshot({path:`${output}/${mode}-${time}.png`,fullPage:true});
       await page.locator('#menu-toggle').click();await page.locator('#settings').click();
     }
-    await page.getByRole('button',{name:'Close settings',exact:true}).click();
-    await page.locator('#house-style').selectOption(mode==='enhanced'?'classic':'enhanced');
-    await page.locator('.scene-choice:not(.scene-choice-compact) button').click();
+    await page.locator('#settings-house-style').selectOption(mode==='enhanced'?'classic':'enhanced');
+    await page.locator('.scene-choice-compact button').click();
     await ready(page,mode==='enhanced'?'classic':'enhanced');
     assert.equal(await page.locator('#scene > canvas').count(),1);
     await page.reload({waitUntil:'networkidle'});await ready(page,mode==='enhanced'?'classic':'enhanced');

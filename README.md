@@ -29,7 +29,7 @@ The 3D world, character, furniture and visual effects are generated in code. Tim
 
 ## House styles
 
-Choose **Enhanced house**, **Classic house** or **Automatic** above the view or in graphics settings, then select **Apply view**. The enhanced house uses original procedural wood and textiles, rounded furniture, warm lighting, a cutaway ceiling with an open sky, and Mumbai-inspired day/night window views. The classic house preserves the previous retro scene. Automatic conservatively starts classic on touch devices and devices reporting low memory or CPU capacity; you can override that choice.
+Choose **Enhanced house**, **Classic house** or **Automatic** on the welcome screen or in graphics settings, then select **Apply view**. The enhanced house uses original procedural wood and textiles, rounded furniture, warm lighting, a cutaway ceiling with an open sky, and Mumbai-inspired day/night window views. The classic house preserves the previous retro scene. Automatic conservatively starts classic on touch devices and devices reporting low memory or CPU capacity; you can override that choice.
 
 The saved style and graphics choices stay in the browser. Failed enhanced loading or context loss recovers to classic where rendering is available; the portfolio menu and `/2d/index.html` remain available when 3D cannot start. Enhanced preset scales are 100%/80%/60% for high/balanced/low, with manual resolution overrides. Automatic starts enhanced at Balanced (or Low for limited capability hints). High adds furniture shadow mapping; Balanced and Low use softer generated contact shading and fewer rendering costs.
 

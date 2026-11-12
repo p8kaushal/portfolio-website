@@ -1,0 +1,60 @@
+/* Shared palette and framing for in-house interfaces. Geometry and behavior
+   remain owned by the individual panels. The double host class intentionally
+   outranks the legacy and enhanced-mode presentation rules. */
+.house-ui.house-ui {
+  --house-ink: #24372d;
+  --house-deep: #29392e;
+  --house-panel: #f1eadb;
+  --house-paper: #faf6eb;
+  --house-line: #c8bca7;
+  --house-accent: #b57643;
+  --house-light: #f5e8ca;
+}
+.house-ui.house-ui :is(.game-settings,.game-help,.game-map-dialog) {
+  background:var(--house-panel);color:var(--house-ink);border:3px solid #171a15;
+  border-radius:0;box-shadow:8px 8px #171a15,0 24px 80px #10181199;
+}
+.house-ui.house-ui :is(.gs-head,.gh-head,.gm-head,.hi-header,.pc-top) {
+  background:var(--house-deep);color:var(--house-light);border-color:var(--house-accent);
+}
+.house-ui.house-ui :is(.gs-head h2,.gh-head h2,.gm-head h2,.hi-title,.pc-content h2) {
+  font-family:Impact,'Arial Narrow',sans-serif;font-weight:900;letter-spacing:.025em;text-transform:uppercase;
+}
+.house-ui.house-ui :is(.gs-kicker,.gh-kicker,.gm-kicker,.hi-label,.hi-kicker,.pc-kicker) {color:#be7c4d}
+.house-ui.house-ui :is(.gs-head .gs-kicker,.gh-head .gh-kicker,.gm-head .gm-kicker,.hi-header .hi-label) {color:#e0ae79}
+.house-ui.house-ui :is(.gs-content>p,.gs-row p,.gs-note,.gh-content>p,.gm-content>p) {color:#46564a}
+.house-ui.house-ui :is(.gs-row,.gh-section,.gm-room) {background:var(--house-paper);color:var(--house-ink);border:1px solid var(--house-line);border-radius:0}
+.house-ui.house-ui :is(.gh-row,.gh-touch,.gm-room p) {color:#46564a}
+.house-ui.house-ui :is(.gh-section h3,.gm-room h3) {color:#985a36}
+.house-ui.house-ui :is(.gs-row select,.scene-choice-compact) {background:#faf6eb;color:var(--house-ink);border:1px solid #ad9e86;border-radius:0}
+.house-ui.house-ui :is(.gs-close,.gs-reset,.gh-close,.gm-close,.gm-shortcuts button,.gm-shortcuts a,.hi-exit,.hi-btn,.pc-exit) {
+  background:#ded2bb;color:var(--house-ink);border:2px solid #171a15;border-radius:0;box-shadow:2px 2px #171a15;font-weight:700;
+}
+.house-ui.house-ui :is(.gs-status,.gh-tip) {background:#ded2bb;color:var(--house-ink);border-color:var(--house-accent);border-radius:0}
+.house-ui.house-ui .gm-footer {color:#46564a!important}
+.house-ui.house-ui .house-interaction .hi-shell {background:linear-gradient(145deg,#465642,#25372f)}
+.house-ui.house-ui .hi-title {color:var(--house-light)}
+.house-ui.house-ui :is(.hi-mirror-stage,.hi-glass) {border-color:#806348;outline-color:#171a15;box-shadow:inset 0 0 0 3px #d1b687,8px 10px #171a1580}
+.house-ui.house-ui .hi-file {background:var(--house-panel);color:var(--house-ink);border:2px solid #171a15;border-radius:0;box-shadow:8px 10px #171a1580}
+.house-ui.house-ui .hi-file .hi-title {color:var(--house-ink)}
+.house-ui.house-ui :is(.hi-skill-card,.hi-award-detail) {border-radius:0}
+.house-ui.house-ui .hi-tv {background:#192720;border:10px solid #5d4d39;outline:2px solid #171a15;border-radius:0}
+.house-ui.house-ui .hi-tv-top,.house-ui.house-ui .hi-tv-footer {background:#29392e;color:var(--house-light)}
+.house-ui.house-ui .hi-tv-screen {background:linear-gradient(115deg,#25372f,#536c52 75%,#a29571)}
+.house-ui.house-ui .hi-tv-controls button {background:#ded2bb;color:#24372d;border:1px solid #171a15}
+.house-ui.house-ui .pc-environment {background:#26372d;color:var(--house-light)}
+.house-ui.house-ui .pc-workspace {background:linear-gradient(145deg,#7d8a6f,#526951 55%,#354b3b)}
+.house-ui.house-ui .pc-window {border:2px solid #171a15;border-radius:0;background:var(--house-panel);box-shadow:7px 7px #171a1580}
+.house-ui.house-ui .pc-titlebar,.house-ui.house-ui .pc-taskbar {background:#29392e;color:var(--house-light);border-color:#b57643}
+.house-ui.house-ui .pc-titlebar button {color:var(--house-light)}
+.house-ui.house-ui .pc-titlebar button:hover {background:#566d55}
+.house-ui.house-ui .pc-library {background:#304237;color:var(--house-light)}
+.house-ui.house-ui .pc-library .pc-toolbar {background:#3c5140;border-color:#9b8b6c}
+.house-ui.house-ui :is(.pc-game,.pc-repo,.pc-library .pc-card) {background:#405442;border-color:#938568}
+.house-ui.house-ui .pc-library .pc-kicker {color:#e0ae79}
+.house-ui.house-ui .phone-status,.house-ui.house-ui .phone-bar {background:#29392e;color:var(--house-light);border-color:#b57643}
+.house-ui.house-ui .phone-bar button {background:#405442;color:var(--house-light);border-color:#c5b18c}
+.house-ui.house-ui .phone-body {background:linear-gradient(155deg,#81947b,#536e58 55%,#344d3d)}
+.house-ui.house-ui .phone-app i {background:#f1eadb;color:#405442;border-color:#d1b88d}
+.house-ui.house-ui .phone-incoming {background:linear-gradient(#526b52,#29392e)}
+.house-ui.house-ui :is(.phone-link,.phone-item,.phone-message) {background:#faf6eb;color:#24372d;border-color:#c8bca7}

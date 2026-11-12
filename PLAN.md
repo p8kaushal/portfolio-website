@@ -88,14 +88,31 @@ Each implementation phase begins on a descriptive feature branch based on the la
 - Full implementation and phase order authorized on 2026-11-12. Phase 1 palette/layout and performance proposals still need acceptance; automatic and explicit classic fallback are already agreed. The historical linked example was inaccessible to the research tool; its implementation has not been assessed.
 - Choose case studies and supply project evidence when content work becomes the active phase.
 
+## Character reference refinement — user-directed revision
+
+- [ ] Use the supplied stylized character image alongside the user's photos as a reference for more natural proportions, expressive facial features, textured curls, a red number-two jersey, and restrained tactical clothing details. Build an original, maintainable 3D model with available open tools and retain existing controls, performance and fallbacks. Do not commit the reference photos or image.
+- [ ] Verify the character in production on desktop and emulated mobile, capture it for likeness review, record performance and commit a review checkpoint. User review remains required before finalizing.
+
 ## Direct portfolio menu — user-directed revision
 
 - [x] Build a cohesive, readable single portfolio view with visible About, Projects, Skills, Experience, Achievements and Contact, direct navigation, résumé and existing repository/contact links. Use established content only and avoid game framing or filler in this view.
 - [x] Preserve the existing menu API, direct section opening, dialog close/focus behavior and fallback availability; verify desktop/mobile, keyboard, content and links in production. Sequential check/build passed; production checks passed. Commit pending on `feat/direct-portfolio-menu`.
-- [ ] Audit all house interfaces (computer, mirror, file, awards, TV, phone, map, controls and settings) and unify their visual language with the portfolio house through shared palette, typography, surface treatments, spacing and controls, while preserving all content, interactions, accessibility and classic/2D routes. Implement on a descriptive follow-on branch; verify interactions, responsive layout and production visuals, then commit.
+- [x] Audit all house interfaces (computer, mirror, file, awards, TV, phone, map, controls and settings) and unify their visual language with the portfolio house through shared palette, typography, surface treatments, spacing and controls, while preserving all content, interactions, accessibility and classic/2D routes. Implement on a descriptive follow-on branch; verify interactions, responsive layout and production visuals, then commit.
 - [ ] Return to the outstanding likeness and branch-cleanup decisions after this change.
 
 ## Verification log
+
+- Unified interface and restored outer page: fresh sequential check/build passed; production scene-switch/recovery suite passed eight groups without errors, and mobile welcome heading plus style selector were verified accessible after fixing scroll clipping. Production locker regression passed desktop and emulated mobile/landscape controls and graphics recovery without page errors. Classic and Enhanced interaction suites passed all nine groups; PC, TV, mirror, file and awards captures were inspected. Local locker p95 samples varied (desktop 66.8 ms) and are not used as a performance claim. Live site comparison was read-only.
+
+- Live domain capture confirmed the original dark outer style; restored the original header buttons and moved house style selection into the playzone welcome screen (and graphics settings). Production scene-switch/recovery suite passed all eight groups with no page errors. Mobile capture exposed welcome content clipping after adding the selector; adjusted welcome overflow and alignment. Fresh `npm run check` passed 0 errors/0 warnings; sequential build passed; mobile verification pending.
+
+- User clarified that the desired outer-page baseline is the live domain/main. Live capture and recorded `origin/main` show the original dark styling; current outer palette/layout already matches except the added house-style selector above the playzone and revised header buttons. Moved style selection into the welcome view (and fallback error) while retaining Graphics settings, restored the live header button treatment, and updated the switching regression. `npm run check` passed 0 errors/0 warnings; sequential build passed; browser verification pending. Live URL was read only; no deployment performed.
+
+- Unified interface Classic source interaction regression also passed all nine interaction groups with no page errors. User requested restoring an earlier outer-page look; the Enhanced light theme and original dark theme are both plausible references, so requested clarification before altering the outside page. Production mobile/recovery testing continues independently.
+
+- Unified interface Enhanced source interaction suite passed computer, mirror, file, awards, both TV controls, settings, map and phone with no page errors; collision/target parity passed. Inspected PC, TV, mirror, file and awards captures and confirmed shared palette/typography with readable content. Classic and production mobile/recovery checks pending.
+
+- Unified interface phase started on `feat/unified-house-interfaces` after direct portfolio commit `c02c063`. Audit identified inconsistent PC, phone, TV and dialog palettes and typography. Added a shared host-scoped theme for the PC, mirror, file, awards, TV, phone, map, help and settings; behavior unchanged. `npm run check` passed with 0 errors and 0 warnings; sequential build passed; visual/interaction verification pending.
 
 - Direct portfolio final retest: sequential check/build passed; production desktop and emulated mobile checks passed six sections, six project links, résumé, focus, Escape and focus restoration, no horizontal overflow, and close visibility after scrolling. Earlier production baseline passed menu navigation and 2D availability without page errors. The direct section API remains in place.
 
