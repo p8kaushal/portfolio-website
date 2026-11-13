@@ -1,5 +1,14 @@
 # Active to-do
 
+## Current interaction cohesion
+
+- [x] Restyle all in-house interactions, portfolio panel and 2D interaction overlays; preserve controls and content.
+- [x] Verify lint, unit tests, check/build, production browser, scene recovery, locker and desktop/mobile computer flows; final local traversal passed after prior failed runs under competing workload. See `PLAN.md`.
+- [ ] User visual review of updated interaction screens; physical device, screen-reader, real browser zoom and incomplete axe checks remain unverified.
+- [ ] Six low development-tree audit findings, limited lint/type coverage, external LinkedIn/social preview verification, and optional case studies remain open/deferred as documented in `docs/audit-remediation/release-review.md`.
+- [ ] Separate explicit approval is required before merge or deployment.
+
+
 ## Current integrated review
 
 - [x] Consolidate completed visual and remediation history on `feat/portfolio-integrated-review`; remove 11 obsolete local ancestor branches, preserving named versions and remote refs.

@@ -1,5 +1,15 @@
 # Project roadmap and handoff
 
+## Active user request — cohesive interaction design
+
+User requests every interactable to share the enhanced house aesthetic, preserving content, behavior, routes, the accepted character and the outside-playground presentation; report all remaining work. Work on `feat/cohesive-interactions` based on `feat/portfolio-integrated-review`.
+
+- [x] Inventory and visually inspect computer/projects, mirror/character, file/skills, awards, television, phone, map, controls/help and graphics settings; inspect representative desktop and emulated mobile views, and exercise classic fallback.
+- [x] Unify in-house interactions, direct portfolio panel and 2D interaction overlays with the studio palette; preserve page layout and interaction behavior. Replaced computer emoji icons with vectors and aligned classic mirror outfit.
+- [x] Run lint and unit tests, sequential check/build, production browser interaction, changing-room and recovery regressions, responsive/keyboard checks and visual inspections; correct failures and log actual results.
+- [x] Record verification and prepare the integrated testing branch, preserving named historical/remote refs; summarize remaining plan tasks, verification limits and separate merge/deployment gate.
+
+
 ## Integrated review branch — current handoff
 
 **Status:** The user requested one branch containing all completed visual and remediation work for testing. Current branch `feat/portfolio-integrated-review`, created from `6a0d351`; all prior visual, character, accessibility, reliability, no-JavaScript, metadata and security-review commits remain in its ancestry. Eleven obsolete local phase/intermediate refs were deleted after verifying ancestry; `main`, named version branches and remote refs remain. The accepted character and current portfolio menu, house dialogs and home links are retained. Optional project case studies remain deferred pending the user's affirmative decision. Separate explicit approval is required for any merge or deployment. Historical current-branch and unchecked entries below must be read in light of this handoff and the verification log; unchecked work is not asserted complete.
@@ -155,6 +165,13 @@ Each implementation phase begins on a descriptive feature branch based on the la
 - [ ] Return to the outstanding likeness and branch-cleanup decisions after this change.
 
 ## Verification log
+
+- Cohesive interactions final verification: lint passed; unit tests 7/7; fresh sequential check 0 errors/0 warnings and build passed; production browser tests 3/3; scene switching/recovery 8 checks; locker control and graphics recovery passed desktop/emulated mobile; classic and enhanced dev interaction suites passed all nine checks each with no page errors. Desktop and mobile computer project detail/back, PDF, browser links and exit passed; initial custom test selector was invalid and corrected. Mobile file/awards/TV/computer views showed no document overflow or page errors; screenshots visually inspected. Classic mobile fallback matches accepted outfit.
+- Axe scans found no detected violations in tested mirror, file, awards, TV, settings, map, help, phone, 2D phone and portfolio; some checks incomplete. Initial computer scan found project-card metadata contrast 4.03:1; corrected and reran with no detected violations, though contrast/name checks remain incomplete.
+- Performance: initial redesigned traversal runs failed at 50.1, 50.0, 50.0 and 50.1 ms p95 against 33.4 ms. Unchanged baseline passed once at 33.4 ms but later failed at 50.1 ms; duplicated original stylesheet control also failed. A separate unrelated Chrome-for-Testing GPU process was observed consuming substantial CPU. After that workload ended, final redesigned traversal passed 33.3 ms p95, 283,217 initial encoded bytes; mobile emulation 276,366 bytes. This is local headless evidence, not physical-device certification. Earlier failures remain recorded and are not erased by the later pass.
+
+
+- Cohesive interaction redesign: lint, 7 unit tests, sequential check (0 errors/0 warnings) and build passed; production browser tests 3/3, scene/fallback 8 checks, locker controls/recovery and classic/enhanced dev interaction suites passed. Axe found no detected violations in portfolio, settings, phone and 2D phone (some incomplete). Locker timing ran during other browser suites and is not isolated. Enforced traversal failed twice: 50.1 ms and 50.0 ms against 33.4 ms. Stopped owned old previews; checking unchanged baseline separately. Do not mark performance passed.
 
 - Integrated review handoff: created `feat/portfolio-integrated-review` from `6a0d351`, confirmed visual checkpoint `62aeca0`, preview fix `61f28b6` and final remediation `4a2aa2b` are ancestors, and safely deleted 11 obsolete local phase/intermediate refs with `git branch -d`. Preserved main, named version branches and all remote refs. Fresh lint passed; unit tests 7/7; sequential check 0 errors/0 warnings and build passed; production browser regression 3/3 passed on fresh port 4192.
 

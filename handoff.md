@@ -1,5 +1,10 @@
 # Account-swap handoff
 
+## Current interaction cohesion handoff — authoritative
+
+Branch `feat/cohesive-interactions` contains the full integrated visual/audit history plus the requested shared studio styling for computer/project/PDF/browser, mirror, file/skills, awards, TV, phone, map, help, settings, direct portfolio and 2D interaction overlays. Computer icons are vectors; classic mirror outfit matches the accepted character. Verified lint, 7 unit tests, sequential check/build, 3 browser tests, 8 scene/recovery checks, both dev interaction suites and production desktop/mobile computer flows. Final traversal passed 33.3 ms p95 after several 50 ms failures under a competing unrelated GPU workload; baseline also varied. Axe has incomplete items; no physical-device or screen-reader claim. See `PLAN.md` and `docs/audit-remediation/release-review.md` for remaining work. Preview port 4193 while running. Separate approval required for merge/deployment. Earlier branch statuses below are historical.
+
+
 ## Current integrated review branch — authoritative
 
 Branch `feat/portfolio-integrated-review` contains all completed visual, character and audit-remediation work through `6a0d351`. Eleven obsolete local phase/intermediate branches were removed after ancestry checks; named version branches, main and remote refs remain. Fresh lint, 7 unit tests, sequential check/build and 3 production browser tests passed. Preview: `http://127.0.0.1:4192` while its server remains running. See `docs/audit-remediation/release-review.md` for exact limitations. User accepted the character, chose current outside-playground interfaces, and deferred optional case studies. Screen-reader/physical-device and real zoom verification, incomplete axe checks, six low dev-tree advisories, limited lint coverage and external social verification remain open. Separate approval required for merge/deployment. Earlier handoffs below are historical.
