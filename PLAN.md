@@ -10,7 +10,7 @@ User requests every interactable to share the enhanced house aesthetic, preservi
 - [x] Record verification and prepare the integrated testing branch, preserving named historical/remote refs; summarize remaining plan tasks, verification limits and separate merge/deployment gate.
 
 
-## Integrated review branch — current handoff
+## Integrated review branch — previous handoff (superseded by current interaction cohesion handoff above)
 
 **Status:** The user requested one branch containing all completed visual and remediation work for testing. Current branch `feat/portfolio-integrated-review`, created from `6a0d351`; all prior visual, character, accessibility, reliability, no-JavaScript, metadata and security-review commits remain in its ancestry. Eleven obsolete local phase/intermediate refs were deleted after verifying ancestry; `main`, named version branches and remote refs remain. The accepted character and current portfolio menu, house dialogs and home links are retained. Optional project case studies remain deferred pending the user's affirmative decision. Separate explicit approval is required for any merge or deployment. Historical current-branch and unchecked entries below must be read in light of this handoff and the verification log; unchecked work is not asserted complete.
 
@@ -165,6 +165,8 @@ Each implementation phase begins on a descriptive feature branch based on the la
 - [ ] Return to the outstanding likeness and branch-cleanup decisions after this change.
 
 ## Verification log
+
+- Interaction cohesion committed at `9e80d7a` on `feat/cohesive-interactions`. Removed the prior local `feat/portfolio-integrated-review` ref with `git branch -d`; its history remains contained in current branch. Main, named version refs and remotes remain preserved.
 
 - Cohesive interactions final verification: lint passed; unit tests 7/7; fresh sequential check 0 errors/0 warnings and build passed; production browser tests 3/3; scene switching/recovery 8 checks; locker control and graphics recovery passed desktop/emulated mobile; classic and enhanced dev interaction suites passed all nine checks each with no page errors. Desktop and mobile computer project detail/back, PDF, browser links and exit passed; initial custom test selector was invalid and corrected. Mobile file/awards/TV/computer views showed no document overflow or page errors; screenshots visually inspected. Classic mobile fallback matches accepted outfit.
 - Axe scans found no detected violations in tested mirror, file, awards, TV, settings, map, help, phone, 2D phone and portfolio; some checks incomplete. Initial computer scan found project-card metadata contrast 4.03:1; corrected and reran with no detected violations, though contrast/name checks remain incomplete.
