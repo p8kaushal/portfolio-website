@@ -60,6 +60,31 @@ try {
     await page.locator('#map-toggle').click();
     const map = page.locator('.game-map-dialog');
     await map.waitFor({ state: 'visible' });
+    const mapPanelColor = await map.evaluate(element => getComputedStyle(element).backgroundColor);
+    const introCopy = map.locator('.gm-content > p').first();
+    assert.ok(contrast(await introCopy.evaluate(element => getComputedStyle(element).color), mapPanelColor) >= 4.5, 'map instructions meet readable text contrast');
+    for (const room of await map.locator('.gm-room').all()) {
+      const roomColor = await room.evaluate(element => getComputedStyle(element).backgroundColor);
+      for (const selector of ['h3', 'p']) {
+        const text = room.locator(selector);
+        assert.ok(contrast(await text.evaluate(element => getComputedStyle(element).color), roomColor) >= 4.5, `map room ${selector} meets readable text contrast`);
+      }
+    }
+    const floorPlan = map.locator('.gm-plan svg');
+    const roomColors = await floorPlan.locator('rect').evaluateAll(rects => rects.slice(1, 4).map(rect => getComputedStyle(rect).fill));
+    assert.deepEqual(roomColors, ['rgb(199, 174, 156)', 'rgb(208, 195, 165)', 'rgb(174, 153, 127)'], 'floor plan uses warm, non-green room fills');
+    for (const label of await floorPlan.locator('text').all()) {
+      const { foreground, x } = await label.evaluate(element => ({ foreground: getComputedStyle(element).fill, x: Number(element.getAttribute('x')) }));
+      const roomColor = roomColors[x < 280 ? 0 : x < 560 ? 1 : 2];
+      assert.ok(contrast(foreground, roomColor) >= 4.5, 'floor plan room labels meet readable text contrast');
+    }
+    if (viewport.width <= 640) {
+      assert.ok(await map.locator('.gm-map-scroll-cue').isVisible(), 'mobile map explains horizontal plan scrolling');
+      const planViewport = map.locator('.gm-plan');
+      assert.ok(await planViewport.evaluate(element => element.scrollWidth > element.clientWidth), 'mobile floor plan keeps labels at a readable scale');
+      await planViewport.evaluate(element => { element.scrollLeft = element.scrollWidth; });
+      assert.ok(await planViewport.evaluate(element => element.scrollLeft > 0), 'mobile floor plan can be panned to the studio');
+    }
     await fullyScroll(map, map.locator('.gm-footer'));
     await map.locator('.gm-close').click();
 
@@ -87,6 +112,34 @@ try {
     console.log(checks.at(-1));
   }
 
+  for (const viewport of viewports) {
+    const { page, context, errors } = await visit(viewport, 'enhanced');
+    await page.locator('#map-toggle').click();
+    const map = page.locator('.game-map-dialog');
+    await map.waitFor({ state: 'visible' });
+    const mapPanelColor = await map.evaluate(element => getComputedStyle(element).backgroundColor);
+    for (const room of await map.locator('.gm-room').all()) {
+      const roomColor = await room.evaluate(element => getComputedStyle(element).backgroundColor);
+      for (const selector of ['h3', 'p']) {
+        const text = room.locator(selector);
+        assert.ok(contrast(await text.evaluate(element => getComputedStyle(element).color), roomColor) >= 4.5, `enhanced map room ${selector} meets readable text contrast`);
+      }
+    }
+    const footer = map.locator('.gm-footer');
+    assert.ok(contrast(await footer.evaluate(element => getComputedStyle(element).color), mapPanelColor) >= 4.5, 'enhanced map footer meets readable text contrast');
+    if (viewport.width <= 640) {
+      assert.ok(await map.locator('.gm-map-scroll-cue').isVisible(), 'enhanced mobile map explains horizontal plan scrolling');
+      const planViewport = map.locator('.gm-plan');
+      assert.ok(await planViewport.evaluate(element => element.scrollWidth > element.clientWidth), 'enhanced mobile floor plan keeps labels at a readable scale');
+      await planViewport.evaluate(element => { element.scrollLeft = element.scrollWidth; });
+      assert.ok(await planViewport.evaluate(element => element.scrollLeft > 0), 'enhanced mobile floor plan can be panned to the studio');
+    }
+    assert.deepEqual(errors, []);
+    checks.push(`enhanced map contrast ${viewport.width}x${viewport.height}`);
+    await context.close();
+    console.log(checks.at(-1));
+  }
+
   const targets = [
     ['computer', { x: 7.55, z: -2.1 }, '.pc-environment:not([hidden])'],
     ['tv', { x: 0, z: -5.5 }, '.house-interaction[data-mode="tv"]'],
@@ -104,6 +157,14 @@ try {
         const icons = root.locator('.pc-icon');
         const first = await icons.first().boundingBox();
         assert.ok(first && first.y >= 0 && first.y + first.height <= viewport.height, 'computer desktop icons stay visible');
+        await icons.filter({ hasText: 'Projects' }).click();
+        const projectCard = root.locator('.pc-game').first();
+        await projectCard.waitFor({ state: 'visible' });
+        const cardColor = await projectCard.evaluate(element => getComputedStyle(element).backgroundColor);
+        for (const selector of ['strong', '.pc-game-meta', '.pc-game-desc', '.pc-game-more']) {
+          const text = projectCard.locator(selector);
+          assert.ok(contrast(await text.evaluate(element => getComputedStyle(element).color), cardColor) >= 4.5, `computer project ${selector} meets readable text contrast`);
+        }
       } else if (id === 'tv') {
         const footer = root.locator('.hi-tv-footer');
         const rect = await footer.boundingBox();

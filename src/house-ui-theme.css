@@ -16,6 +16,7 @@
 .house-ui.house-ui :is(.gs-content>p,.gs-row p,.gs-note,.gh-content>p,.gm-content>p,.hi-muted,.gm-footer) {color:#c9bea7}
 .house-ui.house-ui :is(.gs-row,.gh-section,.gm-room,.hi-skill-card,.hi-award-detail) {background:#39362d;color:#e8dcc3;border:1px solid #71634e;border-radius:2px}
 .house-ui.house-ui :is(.gh-row,.gh-touch,.gm-room p) {color:#ddd1b8}
+.house-ui.house-ui.enhanced-mode .gm-room p,.house-ui.house-ui.enhanced-mode .gm-footer {color:#ddd1b8!important}
 .house-ui.house-ui :is(.gh-section h3,.gm-room h3) {color:#dda15f}
 .house-ui.house-ui :is(.gs-row select,.scene-choice-compact) {background:#c7b89b;color:#26231d;border:2px solid #181714;border-radius:1px}
 .house-ui.house-ui .gs-audio-toggle {display:flex;align-items:center;gap:9px;margin-top:9px;color:#e4d6ba;font-size:13px;font-weight:700}
