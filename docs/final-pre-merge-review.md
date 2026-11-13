@@ -48,4 +48,4 @@
 
 ## Merge recommendation
 
-The checked-in functionality and current map/readability fixes are ready for user testing on this branch. I recommend a human pass over the mobile map, 2D fallback and résumé flow, plus a current online dependency audit, before release. No merge or deployment has been performed. The GitHub Pages workflow deploys on pushes to `main`, so separate explicit merge/deployment approval remains required.
+The checked-in functionality and current map/readability fixes passed the listed automated production checks. Physical-device, screen-reader, zoom and external-link checks remain unverified, and the current online dependency audit remains a release follow-up. After this review, the user explicitly approved merging, pushing and deploying on 2026-11-13. The GitHub Pages workflow deploys on pushes to `main`; record the exact push and post-deployment verification outcome in `PLAN.md` and `handoff.md`.

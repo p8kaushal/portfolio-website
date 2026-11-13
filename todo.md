@@ -15,7 +15,8 @@
 - [x] Commit the verified follow-up on this same branch.
 - [x] Fix Skills file readability, add mobile scroll cue, correct direct portfolio dialog text/link contrast, and ensure section titles clear the sticky navigation. Fresh production contrast/visibility regression passed 15 checks; full verification is recorded in `PLAN.md`.
 - [x] Final pre-merge readability pass: neutralize light-green map/computer content, fix enhanced-map contrast override, enlarge and pan-enable mobile map labels, and complete fresh production verification. See `docs/final-pre-merge-review.md`.
-- [ ] User tests on the combined branch. Separate merge/deployment approval remains required.
+- [x] User reviewed the final pre-merge report and explicitly authorized merge, push, and deployment (2026-11-13).
+- [ ] Fast-forward `main` to the tested branch, push to `origin/main`, and verify the deployment completed.
 
 ## Current interaction cohesion
 
