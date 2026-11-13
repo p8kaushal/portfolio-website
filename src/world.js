@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { createStylizedCharacter } from './stylized-character.js';
+import { createRetroTvTexture } from './retro-tv-screen.js';
 /** @typedef {{scene:any,colliders:{minX:number,maxX:number,minZ:number,maxZ:number}[]}} RoomContext */
 /** Procedural, asset-free house for the first-person portfolio.
  * The default path is the preserved classic scene; room builders share its interaction contract.
@@ -158,7 +159,9 @@ export function createWorld(THREE, { scene = new THREE.Scene(), buildArchitectur
   box(0,2.06,-7.13,3.65,2.25,.58,'#292821');
   box(0,2.06,-6.825,3.47,2.08,.045,'#76583a');
   box(-.47,2.06,-6.795,2.54,1.82,.055,'#171816');
-  box(-.47,2.06,-6.762,2.38,1.66,.012,'#364752');
+  const tvTexture=createRetroTvTexture(THREE);
+  const tvScreen=new THREE.Mesh(new THREE.PlaneGeometry(2.38,1.66),new THREE.MeshBasicMaterial({map:tvTexture}));
+  tvScreen.position.set(-.47,2.06,-6.762);scene.add(tvScreen);
   for(let i=0;i<11;i++)box(1.28,1.72+i*.065,-6.77,.36,.018,.012,'#b49a69');
   for(const y of [2.38,2.02]){cylinder(1.28,y,-6.755,.075,.075,.045,'#b49a69',16);cylinder(1.28,y,-6.727,.026,.026,.018,'#292821',12);}
   for(const x of [-1.23,1.17]){const foot=box(x,.91,-7.12,.36,.18,.48,'#6f5034');foot.rotation.x=-.12;}

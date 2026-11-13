@@ -8,7 +8,11 @@
 - [x] Redesign TV, computer, phone, file, mirror and awards display props in enhanced and classic worlds.
 - [x] Add synthesized Web Audio cues for footsteps/sprinting and device use; honor mute/user gesture and clean up correctly.
 - [x] Run lint, unit, check/build, production browser, responsive 2D and enhanced/classic/2D fallback regressions. Details: `PLAN.md`; ignored screenshots: `test-results/gta-era-regression/`.
-- [x] Commit verified changes at `067e4dd` on this unified testing branch.
+- [x] Commit the original redesign on this unified testing branch.
+- [x] Fix settings visibility and audit primary overlays at desktop, portrait phone, and short landscape sizes.
+- [x] Add warm idle CRT channel artwork in enhanced/classic 3D and 2D, and expand the character preview with mouse rotation, pan, and zoom controls.
+- [x] Finish the production content-visibility regression and update handoff results.
+- [x] Commit the verified follow-up on this same branch.
 - [ ] User tests on the combined branch. Separate merge/deployment approval remains required.
 
 ## Current interaction cohesion

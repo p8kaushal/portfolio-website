@@ -1,4 +1,5 @@
 import { buildCityWindow } from './city-window.js';
+import { createRetroTvTexture } from '../retro-tv-screen.js';
 
 /** Living gallery: upholstered forms, oak cabinetry and original display graphics.
  * @param {any} THREE @param {any} context @param {ReturnType<import('./primitives.js').createPrimitives>} tools
@@ -32,15 +33,7 @@ export function buildLivingRoom(THREE,context,tools) {
   box(0,2.06,-7.13,3.65,2.25,.58,'ink',false,.12);
   box(0,2.06,-6.825,3.47,2.08,.045,'oak',false,.08);
   box(-.47,2.06,-6.795,2.54,1.82,.055,'ink',false,.14);
-  const canvas=document.createElement('canvas');canvas.width=480;canvas.height=360;
-  const c=canvas.getContext('2d');if(!c)throw new Error('TV canvas unavailable');
-  const gradient=c.createLinearGradient(0,0,480,360);gradient.addColorStop(0,'#263d4b');gradient.addColorStop(1,'#746c55');c.fillStyle=gradient;c.fillRect(0,0,480,360);
-  c.fillStyle='#d6a15f';c.font='bold 16px monospace';c.fillText('PARTH / EXPERIENCE',28,68);
-  c.fillStyle='#f1e6d0';c.font='bold 34px sans-serif';c.fillText('The story so far.',26,145);
-  c.font='14px sans-serif';c.fillText('Every experience adds a new perspective.',28,180);
-  c.strokeStyle='#c9a56e';c.lineWidth=2;c.beginPath();c.moveTo(30,260);c.lineTo(450,260);c.stroke();
-  for(let i=0;i<5;i++){c.beginPath();c.arc(30+i*105,260,6,0,Math.PI*2);c.fillStyle=i===0?'#e7c285':'#91aca3';c.fill();}
-  const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;
+  const texture=createRetroTvTexture(THREE);
   mesh(new THREE.PlaneGeometry(2.38,1.66),new THREE.MeshBasicMaterial({map:texture}),-.47,2.06,-6.762);
   // Recessed speaker slots and two old-fashioned rotary controls.
   for(let i=0;i<11;i++)box(1.28,1.72+i*.065,-6.77,.36,.018,.012,'brass',false,.004);

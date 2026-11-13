@@ -4,7 +4,7 @@
 
 User rejected the recent green, polished shared interaction theme and asked for an older GTA: San Andreas-era visual direction. Redesign every in-world interactable and its opened interface so it belongs to the same grounded early-2000s game world, and make objects read immediately as their real-life counterparts (especially TV, computer/desk, phone, wardrobe mirror, file and awards cabinet). Add restrained, fitting effects for footsteps/walking, sprinting and opening/using those devices. User is focused on this visual/audio redesign and will test before deciding on merge. Preserve all existing controls, content, routes, fallback modes, character approval, outer portfolio page and favicon; no merge, deployment or publishing.
 
-**Implementation branch:** create `feat/gta-era-interactables` from the verified integrated branch `feat/cohesive-interactions` (`462da7e`). Keep prior work and preserved version branches intact.
+**Implementation branch:** `feat/gta-era-interactables`, created from the verified integrated branch `feat/cohesive-interactions` (`462da7e`). Keep prior work and preserved version branches intact.
 
 - [x] Inspect the current branch, handoff rules, enhanced/classic scene construction, interaction UI, movement loop and existing sound/mute controls.
 - [x] Phase 1 — Establish retro art direction and shared interaction treatment: warm CRT-era neutrals, aged plastics, wood, muted primary accents, compact game-style typography and restrained overlays across the in-game surfaces.
@@ -15,9 +15,25 @@ User rejected the recent green, polished shared interaction theme and asked for 
 
 **Acceptance direction:** warm and slightly worn early-3D game art, solid low-poly physical silhouettes and functional-looking controls, readable interaction panels that feel like early-2000s game UI and stay subordinate to the object/content. Avoid the current glossy green/cody-style finish, modern phone-app visual language in world props, generic floating cards, loud/constant sound, copyrighted GTA assets, copied logos, or changes outside the playable experience. Use authored geometry/CSS and synthesized/local effects; no licensed game assets or remote dependencies.
 
-**Current step:** implementation and verification complete and committed as `067e4dd` on `feat/gta-era-interactables`; user visual review/testing is pending. Do not merge or deploy without separate explicit approval.
+**Current step:** original redesign and requested visibility, TV idle-screen, and character-view follow-up are verified on `feat/gta-era-interactables`; user review/testing is pending. Do not merge or deploy without separate explicit approval.
 
 **Verification log (2026-11-13):** `npm run lint` passed; `npm test` passed 7/7; sequential `npm run check` passed with 0 errors/0 warnings; `npm run build` passed. Production `PORTFOLIO_URL=http://127.0.0.1:4194 npm run test:browser` passed 3/3. `PORTFOLIO_URL=http://127.0.0.1:4194 node scripts/gta-era-regression.mjs` passed enhanced and classic movement/mute checks, five physical props and five interaction cues per mode, phone cue, 2D fallback, and page-overflow checks; page errors `[]`. Walking and sprint oscillator counts were 3/8 enhanced and 3/7 classic. Evidence is in ignored `test-results/gta-era-regression/` for local inspection. Browser run used Chromium desktop and a 1280×820 2D viewport; production browser suite separately tested 390×844 and 1440×900 2D dialogs. Actual speaker listening and physical device testing remain for user review.
+
+## Active follow-up — visibility, idle TV, and character view
+
+The user found that the bottom of game settings was not visible and asked for a whole-branch visibility audit. They also asked that the idle TV screen fit the game aesthetic and that the mirror interaction reserve the whole left side for a full-body, mouse-manipulable character, inspired by high-budget games. Stay on `feat/gta-era-interactables` so all work remains on one test branch.
+
+- [x] Compact settings so every option fits at 1440×900; use an internal scroll region and a visible scroll cue for shorter windows. Improve visibility of the house-style and 2D options.
+- [x] Audit settings, map, help, phone, computer, TV, file, awards, and mirror for clipping and reachability at desktop and mobile sizes. Add `scripts/content-visibility-regression.mjs` for repeatable production checks.
+- [x] Replace idle television output in enhanced, classic, and 2D house views with an original warm sunset-city channel card and restrained CRT scan lines. No copied game artwork or logos.
+- [x] Expand the mirror's 3D character stage to the full left side, change the room lighting to warm neutrals, and support drag rotation, Shift-drag pan, wheel zoom, and accessible on-screen controls.
+- [x] Run final lint, unit, check/build, full production visual/audio and content-visibility browser suites.
+- [x] Commit verified follow-up on this same branch.
+- [ ] User tests the combined branch. Merge/deployment remains separately gated by explicit approval.
+
+**Inspiration research:** the TV is treated as an in-world entertainment object, and the character view follows familiar game-preview conventions for character rotation and camera zoom; the implementation uses original geometry, typography, and graphics. References: [GTA television feature](https://www.grandtheftwiki.com/TV), [GameSpot's 2005 character-camera description](https://www.gamespot.com/articles/champions-return-to-arms-single-player-hands-on/1100-6115977/).
+
+**Follow-up verification log (2026-11-13):** `npm run lint` passed; `npm test` 7/7; sequential `npm run check` passed with 0 errors/0 warnings and `npm run build` passed. `PORTFOLIO_URL=http://127.0.0.1:4194 node scripts/content-visibility-regression.mjs` passed 13 desktop/mobile checks: settings/map/help/phone at 1440×900, 390×844, 667×375; computer/TV/file/awards/mirror at 1440×900 and 390×844; settings bottom controls scroll into view, no page errors/overflow, and mouse rotate, Shift-drag pan and wheel zoom changed the character view. The full `gta-era-regression.mjs` passed all enhanced/classic/2D interaction and sound checks with page errors `[]`. `npm run test:browser` passed 3/3. Idle-screen screenshots for both 3D modes and the 2D fallback were visually inspected. Browser checks use headless Chromium, not physical devices or speaker listening. Evidence remains in ignored `test-results/gta-era-regression/`.
 
 ## Previous active request — cohesive interaction design (completed)
 
