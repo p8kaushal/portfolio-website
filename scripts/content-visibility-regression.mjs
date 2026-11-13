@@ -6,6 +6,17 @@ const viewports = [{ width: 1440, height: 900 }, { width: 390, height: 844 }, { 
 const checks = [];
 const browser = await chromium.launch({ headless: true });
 
+function luminance(color) {
+  const channels = color.match(/[\d.]+/g)?.slice(0, 3).map(Number) || [];
+  const linear = channels.map(value => { const channel = value / 255; return channel <= .04045 ? channel / 12.92 : ((channel + .055) / 1.055) ** 2.4; });
+  return .2126 * linear[0] + .7152 * linear[1] + .0722 * linear[2];
+}
+
+function contrast(first, second) {
+  const [light, dark] = [luminance(first), luminance(second)].sort((a, b) => b - a);
+  return (light + .05) / (dark + .05);
+}
+
 async function visit(viewport, mode = 'classic', position = { x: 0, z: 0 }) {
   const context = await browser.newContext({ viewport });
   await context.addInitScript(({ mode, position }) => {
@@ -104,6 +115,21 @@ try {
         const rect = await tabs.boundingBox();
         assert.ok(rect && rect.y >= 0 && rect.y + rect.height <= viewport.height, 'file tabs stay visible');
         assert.ok(await root.locator('.hi-paper-actions a').count() > 0, 'résumé action exists in the file view');
+        await root.locator('.hi-tabs button[data-page="skills"]').click();
+        const skillPage = root.locator('.hi-page-skills');
+        const firstSkill = root.locator('.hi-skill-card').first();
+        const skillCardColor = await firstSkill.evaluate(element => getComputedStyle(element).backgroundColor);
+        const skillTag = firstSkill.locator('.hi-skill-tags span').first();
+        const textColors = [
+          [await firstSkill.locator('.hi-dossier-id').evaluate(element => getComputedStyle(element).color), skillCardColor],
+          [await firstSkill.locator('h3').evaluate(element => getComputedStyle(element).color), skillCardColor],
+          [await skillTag.evaluate(element => getComputedStyle(element).color), await skillTag.evaluate(element => getComputedStyle(element).backgroundColor)]
+        ];
+        for (const [foreground, background] of textColors) assert.ok(contrast(foreground, background) >= 4.5, `skills text contrast is readable (${contrast(foreground, background).toFixed(2)}:1)`);
+        if (viewport.width <= 650 || viewport.height <= 600) {
+          assert.ok(await root.locator('.hi-skill-scroll-cue').isVisible(), 'skills file signals that more groups are below');
+          await fullyScroll(skillPage, root.locator('.hi-skill-card').last());
+        }
       } else if (id === 'awards') {
         const navigation = root.locator('.hi-award-nav');
         const rect = await navigation.boundingBox();
@@ -144,6 +170,34 @@ try {
       await context.close();
     }
     console.log(`interactions ${viewport.width}x${viewport.height}`);
+  }
+
+  for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
+    const { page, context, errors } = await visit(viewport);
+    await page.locator('.pq-launch').click();
+    const dialog = page.locator('.portfolio-quick dialog');
+    const nav = dialog.locator('nav');
+    for (const name of ['About', 'Projects', 'Skills', 'Experience', 'Achievements', 'Contact']) {
+      await nav.locator('button').filter({ hasText: new RegExp(`^${name}$`, 'i') }).click();
+      const heading = dialog.locator(`#pq-${name.toLowerCase()}`);
+      const headingRect = await heading.boundingBox();
+      const navRect = await nav.boundingBox();
+      assert.ok(headingRect && navRect && headingRect.y >= navRect.y + navRect.height - 1 && headingRect.y < viewport.height, `${name} heading is visible below the sticky menu`);
+      const section = heading.locator('xpath=..');
+      for (const card of await section.locator('.pq-item').all()) {
+        const background = await card.evaluate(element => getComputedStyle(element).backgroundColor);
+        for (const selector of ['h3', 'p', '.pq-meta', 'a']) {
+          for (const textElement of await card.locator(selector).all()) {
+            const foreground = await textElement.evaluate(element => getComputedStyle(element).color);
+            assert.ok(contrast(foreground, background) >= 4.5, `${name} ${selector} text contrast is readable (${contrast(foreground, background).toFixed(2)}:1)`);
+          }
+        }
+      }
+    }
+    assert.deepEqual(errors, []);
+    checks.push(`portfolio headings and text contrast ${viewport.width}x${viewport.height}`);
+    await context.close();
+    console.log(checks.at(-1));
   }
   console.log(JSON.stringify({ checks }, null, 2));
 } finally {

@@ -36,6 +36,15 @@
 .house-ui.house-ui .hi-award-list button {background:#40382d;color:#eadcc0;border-color:#806343}
 .house-ui.house-ui .hi-award-list button[aria-pressed="true"] {background:#624a30;border-color:#daa761}
 .house-ui.house-ui .hi-award-detail {background:#373128}
+.house-ui.house-ui .hi-skill-card {background:#40372b;border-color:#8a704c;border-top-color:#bd8751;box-shadow:3px 4px #19140e}
+.house-ui.house-ui .hi-skill-card .hi-dossier-id {color:#d2ad74;font-size:10px;letter-spacing:.1em}
+.house-ui.house-ui .hi-skill-card h3 {color:#f0e0c2;font-size:16px;line-height:1.35}
+.house-ui.house-ui .hi-skill-card .hi-skill-tags span {background:#ddcba8;color:#272018;border:1px solid #6e5639;font-size:12px;line-height:1.4;padding:5px 8px}
+.house-ui.house-ui .hi-skill-scroll-cue {display:none;color:#f0dfbd;background:#44372b;border-left:3px solid #c6813d;padding:7px 10px;font:700 11px/1.4 monospace}
+.house-ui.house-ui .hi-page.hi-page-skills {scrollbar-width:thin;scrollbar-color:#a67b49 #28241d}
+.house-ui.house-ui .hi-page.hi-page-skills::-webkit-scrollbar {width:10px}
+.house-ui.house-ui .hi-page.hi-page-skills::-webkit-scrollbar-track {background:#28241d}
+.house-ui.house-ui .hi-page.hi-page-skills::-webkit-scrollbar-thumb {background:#a67b49;border:2px solid #28241d}
 .house-ui.house-ui .hi-award-art {border:3px solid #805b37;border-radius:1px;background:radial-gradient(ellipse at 50% 40%,#8b795e,#4d4638 65%,#211f1b);box-shadow:inset 0 0 22px #111a}
 .house-ui.house-ui .hi-tv {position:relative;background:#181816;border:18px solid #5a4834;outline:3px solid #161511;border-radius:12px;box-shadow:inset 0 0 0 3px #94734a,8px 10px #111a;overflow:hidden}
 .house-ui.house-ui .hi-tv:after {content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,#12100d0c 0 1px,transparent 1px 4px);z-index:2}
@@ -81,6 +90,17 @@
 .house-ui.house-ui .portfolio-quick nav button {border-radius:1px;color:#28231c}
 .house-ui.house-ui .portfolio-quick nav .pq-close {border-radius:1px}
 .house-ui.house-ui .portfolio-quick .pq-item {background:#3d382e;border-color:#796344;border-radius:1px;color:#eee1c6}
+.house-ui.house-ui .portfolio-quick .pq-body {color:#eee1c6}
+.house-ui.house-ui .portfolio-quick section {border-color:#796649}
+.house-ui.house-ui .portfolio-quick section h2 {color:#f1dfbf}
+.house-ui.house-ui .portfolio-quick section h2 {scroll-margin-top:7rem}
+.house-ui.house-ui .portfolio-quick section h3 {color:#f2e2c4}
+.house-ui.house-ui .portfolio-quick p,.house-ui.house-ui .portfolio-quick .pq-item ul {color:#ddd0b7}
+.house-ui.house-ui .portfolio-quick .pq-meta {color:#e0b477}
+.house-ui.house-ui .portfolio-quick .pq-body a {color:#f0ca85}
+.house-ui.house-ui .portfolio-quick .pq-body a:hover {color:#ffdda3}
+.house-ui.house-ui .portfolio-quick nav button:hover,.house-ui.house-ui .portfolio-quick nav button:focus-visible {background:#62482f;color:#fff0d2}
+.house-ui.house-ui .portfolio-quick nav .pq-close {background:#62482f;color:#fff0d2;border:2px solid #241b13}
 .house-ui.house-ui :is(.gm-chip,.gm-footer kbd,.gh-key) {background:#c5b18b;color:#29241b;border:1px solid #171613;border-radius:1px;box-shadow:2px 2px #141310}
 .house-ui.house-ui .phone-incoming button {background:#c9b890;color:#29241c;border:1px solid #161512;border-radius:1px}
 .house-ui.house-ui .phone-incoming button:last-child {background:transparent;color:#efe2c6;border-color:#c3ad82}
@@ -91,4 +111,5 @@
 .house-ui.house-ui .hi-body {background:#455b68;box-shadow:inset -10px 0 #344752}
 .house-ui.house-ui .hi-body:before {content:'';position:absolute;left:23px;top:0;width:30px;height:12px;background:#d4ddd9;clip-path:polygon(0 0,50% 55%,100% 0,85% 100%,50% 65%,15% 100%)}
 .house-ui.house-ui .hi-arm {background:linear-gradient(#455b68 0 37%,#b38367 37%)}
+@media(max-width:650px),(max-height:600px){.house-ui.house-ui .hi-skill-scroll-cue{display:block}}
 @media(prefers-reduced-motion:reduce){.house-ui.house-ui :is(.pc-game,.phone-shell){transition:none}}

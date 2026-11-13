@@ -13,6 +13,7 @@
 - [x] Add warm idle CRT channel artwork in enhanced/classic 3D and 2D, and expand the character preview with mouse rotation, pan, and zoom controls.
 - [x] Finish the production content-visibility regression and update handoff results.
 - [x] Commit the verified follow-up on this same branch.
+- [x] Fix Skills file readability, add mobile scroll cue, correct direct portfolio dialog text/link contrast, and ensure section titles clear the sticky navigation. Fresh production contrast/visibility regression passed 15 checks; full verification is recorded in `PLAN.md`.
 - [ ] User tests on the combined branch. Separate merge/deployment approval remains required.
 
 ## Current interaction cohesion
