@@ -1,5 +1,10 @@
 # Account-swap handoff
 
+## Current integrated review branch — authoritative
+
+Branch `feat/portfolio-integrated-review` contains all completed visual, character and audit-remediation work through `6a0d351`. Eleven obsolete local phase/intermediate branches were removed after ancestry checks; named version branches, main and remote refs remain. Fresh lint, 7 unit tests, sequential check/build and 3 production browser tests passed. Preview: `http://127.0.0.1:4192` while its server remains running. See `docs/audit-remediation/release-review.md` for exact limitations. User accepted the character, chose current outside-playground interfaces, and deferred optional case studies. Screen-reader/physical-device and real zoom verification, incomplete axe checks, six low dev-tree advisories, limited lint coverage and external social verification remain open. Separate approval required for merge/deployment. Earlier handoffs below are historical.
+
+
 ## Current remediation review
 
 Current branch `chore/final-release-review`, based on `4a2aa2b`, contains the accepted character, accessibility fixes, check tooling, no-JavaScript fallback, share metadata, security review and dependency cleanup. Final checks and limitations are in `docs/audit-remediation/release-review.md`. User opted to defer case studies; screen-reader/physical-device coverage and external social preview remain unverified. Remote main was read-only checked at `b867cfd`; pushing a merge to main triggers GitHub Pages. Separate user approval is required before any merge or deployment.

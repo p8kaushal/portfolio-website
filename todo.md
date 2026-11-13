@@ -1,5 +1,15 @@
 # Active to-do
 
+## Current integrated review
+
+- [x] Consolidate completed visual and remediation history on `feat/portfolio-integrated-review`; remove 11 obsolete local ancestor branches, preserving named versions and remote refs.
+- [x] Fresh lint, 7 unit tests, sequential type check/build and 3 production browser tests passed; preview on port 4192 while running.
+- [ ] Review and address remaining limitations in `docs/audit-remediation/release-review.md`; physical device/screen-reader, actual browser zoom, incomplete automated checks, external social validation and low-severity dependency findings remain unverified or deferred.
+- [ ] Optional case studies remain deferred until the user decides to include them; obtain separate approval before merging or deploying.
+
+The account-swap entries below are historical.
+
+
 Latest continuation: saved character batching passed fresh check/build, 7 scene-mode tests, quality smoke, production locker/recovery and enforced traversal (33.4 ms p95). Evidence: `docs/character-refinement-evidence/`. Likeness review remains pending. Earlier account-swap verification-pending entries below are historical.
 
 ## Current account-swap priorities (2026-11-12)

@@ -1,8 +1,10 @@
 # Project roadmap and handoff
 
-## Approved audit remediation plan — active
+## Integrated review branch — current handoff
 
-**Status:** User approved implementation and goal continuation. User requested project case studies be considered last and is unsure whether to include them; treat that work as optional and do not implement without a later affirmative decision. Current branch `fix/2d-accessibility-remediation` based on `fix/preview-asset-consistency` at `2ec41fb`. User chose to keep current portfolio menu, house dialog styling and home links; accepted the latest character. Proceed through phases with verification and commits. Preserve content, routes, favicon and historical refs; merge/deployment require separate approval. Content claims and material architectural decisions still require appropriate evidence or user input.
+**Status:** The user requested one branch containing all completed visual and remediation work for testing. Current branch `feat/portfolio-integrated-review`, created from `6a0d351`; all prior visual, character, accessibility, reliability, no-JavaScript, metadata and security-review commits remain in its ancestry. Eleven obsolete local phase/intermediate refs were deleted after verifying ancestry; `main`, named version branches and remote refs remain. The accepted character and current portfolio menu, house dialogs and home links are retained. Optional project case studies remain deferred pending the user's affirmative decision. Separate explicit approval is required for any merge or deployment. Historical current-branch and unchecked entries below must be read in light of this handoff and the verification log; unchecked work is not asserted complete.
+
+Fresh integrated-branch verification: `npm run lint` passed; `npm test` passed 7/7; sequential `npm run check` passed 0 errors and 0 warnings and `npm run build` passed; production `npm run test:browser` passed 3/3. Production preview started at `http://127.0.0.1:4192`. The previous complete review and limitations are in `docs/audit-remediation/release-review.md`. Remaining limitations include physical screen-reader/device and actual browser zoom verification, axe incomplete checks, six low development-tree advisories, limited lint coverage, external LinkedIn/social-share verification, and optional content work. Do not claim all planned tasks are complete.
 
 ### Priority 0 — Confirm scope and establish reproducible baseline
 - [x] User selected keeping the current direct portfolio menu, house dialog styling and home links; user accepted the latest character.
@@ -48,7 +50,7 @@
 - [ ] Review user-approved project facts, visual scope, asset rights, dependency results and current remote/deployment state. Commit verified work on its feature branch and prepare a reviewable comparison and release notes.
 - [ ] Ask for separate explicit merge/deployment approval only after all authorized preparation is complete. Do not deploy, merge, push or delete preserved refs without appropriate authorization.
 
-**Handoff:** The detailed audit was read-only on `fix/preview-asset-consistency`; last verified production preview was port 4190. The latest character was accepted. User requests this plan for review and will specify the branch to create; no remediation has started.
+**Historical handoff:** The earlier audit and implementation notes below describe past branch names and checkpoints; consult the current integrated-branch status above for the active branch and remaining work.
 
 ## Approved revision — 2026-11-12
 
@@ -153,6 +155,8 @@ Each implementation phase begins on a descriptive feature branch based on the la
 - [ ] Return to the outstanding likeness and branch-cleanup decisions after this change.
 
 ## Verification log
+
+- Integrated review handoff: created `feat/portfolio-integrated-review` from `6a0d351`, confirmed visual checkpoint `62aeca0`, preview fix `61f28b6` and final remediation `4a2aa2b` are ancestors, and safely deleted 11 obsolete local phase/intermediate refs with `git branch -d`. Preserved main, named version branches and all remote refs. Fresh lint passed; unit tests 7/7; sequential check 0 errors/0 warnings and build passed; production browser regression 3/3 passed on fresh port 4192.
 
 - Final review branch `chore/final-release-review` based on `4a2aa2b`: clean npm ci, lint, 7 unit tests, sequential check (0 errors/0 warnings), build, 3 production browser tests and 8 scene/fallback checks passed. Final enforced traversal passed 33.3 ms p95 with 282,023 encoded bytes; mobile emulation 275,172 bytes. Remote main read-only lookup was `b867cfd779900e47184de7e310836ca6ed7615e2`; pushes to main trigger GitHub Pages. Scope, limits and deployment consequences recorded in `docs/audit-remediation/release-review.md`. Optional case studies remain deferred; physical screen-reader/device checks and external share preview remain unverified; six low development-tree audit findings remain.
 
