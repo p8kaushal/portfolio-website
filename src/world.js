@@ -88,6 +88,10 @@ export function createWorld(THREE, { scene = new THREE.Scene(), buildArchitectur
   box(-9.75,1.02,-5.55,1.15,.18,.72,'#e1d4b8'); box(-8.3,1.02,-5.55,1.15,.18,.72,'#e1d4b8');
   box(-10.86,.7,-5.1,.8,1.35,1.2,'#ad8a68',true); box(-10.86,1.41,-5.1,.86,.1,1.25,'#d0aa7b');
   cylinder(-10.86,1.65,-5.1,.17,.23,.4,'#e5c88f');
+  // A small early-2000s candybar handset rests beside the bedside lamp.
+  box(-10.28,1.51,-5.13,.31,.055,.56,'#292821');
+  box(-10.28,1.544,-5.16,.23,.012,.16,'#78908a');
+  for(let row=0;row<3;row++)for(let col=0;col<3;col++)box(-10.35+col*.07,1.553,-5.28+row*.065,.042,.012,.035,'#bba67f');
   // Wardrobe sits flush to the bedroom's west wall; its mirror faces the room.
   box(-12.95,1.45,3.2,1.75,2.9,3.7,'#795e4c',true);
   box(-12.035,1.53,3.2,.09,2.52,1.45,'#5d4b3e');
@@ -109,15 +113,20 @@ export function createWorld(THREE, { scene = new THREE.Scene(), buildArchitectur
   } else {
   rug(8,-3.35,5.9,4.8,'#7d8569');
   table(8,-5.25,5.6,1.65);
-  box(7.55,1.72,-5.55,1.9,1.12,.16,'#343f3b');
-  box(7.55,1.73,-5.44,1.68,.89,.04,'#718c7a');
+  box(7.55,1.75,-5.56,1.9,1.34,.62,'#d1c19e');
+  box(7.55,1.75,-5.235,1.64,1.1,.06,'#6b5036');
+  box(7.55,1.75,-5.195,1.49,.84,.018,'#32404a');
   // Desktop icons are small geometric marks on the screen.
   box(6.95,1.97,-5.41,.18,.18,.015,'#e4c795'); box(6.95,1.68,-5.41,.18,.18,.015,'#d7e2ca');
-  box(7.55,1.04,-5.53,.14,.34,.14,'#3d4940'); box(7.55,.91,-5.5,.65,.08,.35,'#3d4940');
+  box(7.55,1.04,-5.53,.2,.34,.36,'#d1c19e'); box(7.55,.91,-5.5,.78,.08,.48,'#725338');
   box(7.55,.9,-4.92,1.2,.08,.37,'#e3d9c0');
   for(let i=0;i<9;i++) box(7.08+i*.12,.95,-4.92,.07,.012,.2,'#827e70');
-  box(9.5,.9,-5.13,.78,.08,.55,'#f4ead1'); box(9.5,.95,-5.13,.64,.035,.43,'#d6aa76');
-  box(10.6,1.25,-5.32,.65,.78,.72,'#59665b'); box(10.6,1.4,-4.94,.25,.06,.02,'#d5b979');
+  box(9.5,.9,-5.13,.82,.075,.62,'#d7c7a5');box(9.5,.943,-5.13,.72,.018,.51,'#a77b50');
+  box(9.5,.956,-5.1,.52,.012,.22,'#e1d3b7');box(9.5,.963,-4.91,.2,.012,.08,'#be985d');
+  box(10.6,1.25,-5.32,.65,.78,.72,'#393832');
+  box(10.6,1.56,-4.94,.28,.055,.018,'#b69a69');box(10.6,1.46,-4.94,.28,.035,.018,'#70553a');
+  for(let i=0;i<6;i++)box(10.6,1.29-i*.028,-4.94,.24,.009,.012,'#a58a61');
+  cylinder(10.72,1.09,-4.93,.025,.025,.016,'#ba7652',10);
   // Chair is movable in appearance only; keep its footprint collidable.
   box(7.6,.58,-3.45,1.0,.16,1.0,'#788c78',true); box(7.6,1.0,-3.0,1.0,.95,.15,'#788c78');
   for(const dx of [-.38,.38]) for(const dz of [-.38,.38]) box(7.6+dx,.25,-3.45+dz,.1,.5,.1,'#5d6659');
@@ -140,22 +149,31 @@ export function createWorld(THREE, { scene = new THREE.Scene(), buildArchitectur
   box(0,.43,4.35,4.25,.7,1.25,'#5f7355',true); box(0,1.0,4.88,4.25,1.1,.32,'#5f7355');
   box(-1.25,.85,4.2,1,.22,.75,'#8c9970'); box(0,.85,4.2,1,.22,.75,'#8c9970'); box(1.25,.85,4.2,1,.22,.75,'#8c9970');
   table(0,1.7,2.5,1.15,'#af8866'); box(.15,.89,1.7,.5,.09,.4,'#eee1bd');
-  // Media console is set against the back wall, with a framed flat screen.
+  // A deep 4:3 CRT set replaces the thin, wall-screen silhouette.
   box(0,.48,-7.14,4.2,.85,1.0,'#745b48',true);
   box(0,.93,-7.14,4.28,.10,1.04,'#a58b6d');
   for (const x of [-1.35,0,1.35]) { box(x,.48,-6.62,1.26,.66,.035,'#886e55'); box(x,.53,-6.59,.28,.035,.025,'#c8b28d'); }
   box(0,1.06,-7.05,.85,.10,.45,'#292f2b');
   box(0,1.22,-7.12,.14,.26,.12,'#292f2b');
-  box(0,2.06,-7.10,3.65,2.05,.16,'#2b302c');
-  box(0,2.08,-7.005,3.39,1.78,.035,'#4b5c50');
+  box(0,2.06,-7.13,3.65,2.25,.58,'#292821');
+  box(0,2.06,-6.825,3.47,2.08,.045,'#76583a');
+  box(-.47,2.06,-6.795,2.54,1.82,.055,'#171816');
+  box(-.47,2.06,-6.762,2.38,1.66,.012,'#364752');
+  for(let i=0;i<11;i++)box(1.28,1.72+i*.065,-6.77,.36,.018,.012,'#b49a69');
+  for(const y of [2.38,2.02]){cylinder(1.28,y,-6.755,.075,.075,.045,'#b49a69',16);cylinder(1.28,y,-6.727,.026,.026,.018,'#292821',12);}
+  for(const x of [-1.23,1.17]){const foot=box(x,.91,-7.12,.36,.18,.48,'#6f5034');foot.rotation.x=-.12;}
   box(0,1.18,-6.98,.09,.035,.02,'#b3b29a');
   // Cabinet backs to the same wall; shelves, frame and trophies use geometry.
   box(-3.13,1.37,-7.46,1.35,2.72,.55,'#795d47',true);
   box(-3.13,2.76,-7.43,1.45,.12,.65,'#b29471');
   box(-3.13,.10,-7.43,1.45,.18,.65,'#5f493b');
-  box(-3.13,1.40,-7.15,1.15,2.47,.03,'#4d5040');
+  box(-3.13,1.40,-7.15,1.15,2.47,.03,'#493b2b');
   for(let y=.75;y<2.5;y+=.76) box(-3.13,y,-7.13,1.23,.07,.56,'#bda081');
   for(const x of [-3.79,-2.47]) box(x,1.4,-7.10,.08,2.7,.08,'#a88b6a');
+  // Narrow front rails and glass panes make the trophies read as a display case.
+  const caseGlass=new THREE.MeshStandardMaterial({color:'#c7d0c5',transparent:true,opacity:.16,roughness:.18,metalness:.12,depthWrite:false});
+  const glassPane=new THREE.Mesh(new THREE.PlaneGeometry(1.12,2.42),caseGlass);glassPane.position.set(-3.13,1.4,-6.98);scene.add(glassPane);
+  for(const x of [-3.7,-2.56])box(x,1.4,-6.97,.025,2.48,.025,'#b0946b');
   // Distinct cups, stems and plinths make awards legible in the cabinet.
   for(const [x,y] of [[-3.43,.98],[-2.85,.98],[-3.13,1.74]]) {
     box(x,y-.16,-6.98,.30,.10,.24,'#4d4132');

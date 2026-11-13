@@ -11,7 +11,8 @@ await Promise.all([
   copyFile('static/resume.pdf', resolve(root, 'resume.pdf')),
   copyFile('static/favicon.svg', resolve(root, 'favicon.svg')),
   copyFile('static/social-preview.png', resolve(root, 'social-preview.png')),
-  copyFile('static/resume.pdf', resolve(root, '2d/resume.pdf'))
+  copyFile('static/resume.pdf', resolve(root, '2d/resume.pdf')),
+  copyFile('static/2d/audio.js', resolve(root, '2d/audio.js'))
 ]);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const entry = (title, body) => `<div class="item"><strong>${esc(title)}</strong><small>${body}</small></div>`;

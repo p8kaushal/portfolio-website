@@ -23,13 +23,20 @@ export function buildBedroom(THREE,context,tools) {
   cylinder(-10.86,1.6,-5.1,.045,.06,.3,'brass');
   cylinder(-10.86,1.84,-5.1,.19,.28,.32,'textile');
   mesh(new THREE.SphereGeometry(.09,12,8),new THREE.MeshBasicMaterial({color:'#ffe5ba'}),-10.86,1.68,-5.1);
+  // Matte candybar mobile with a small reflective display and physical keys.
+  box(-10.28,1.51,-5.13,.31,.055,.56,'ink',false,.055);
+  box(-10.28,1.543,-5.16,.23,.012,.16,'indigo',false,.02);
+  for(let row=0;row<3;row++)for(let col=0;col<3;col++)box(-10.35+col*.07,1.553,-5.28+row*.065,.042,.012,.035,'brass',false,.006);
+  cylinder(-10.28,1.554,-5.08,.026,.026,.014,'brass',10);
   // The wardrobe footprint is retained; the large framed glass faces into the room.
   box(-12.95,1.45,3.2,1.75,2.9,3.7,'oak',true,.075);
   box(-12.035,1.53,3.2,.09,2.52,1.45,'ink');
-  const glass=new THREE.MeshStandardMaterial({color:'#a4b7b5',metalness:.42,roughness:.12});
+  const glass=new THREE.MeshStandardMaterial({color:'#bbc0b1',metalness:.35,roughness:.2});
   box(-11.975,1.53,3.2,.04,2.34,1.26,glass,false,.015);
   for(const z of [2.51,3.89])box(-11.93,1.53,z,.06,2.46,.065,'brass');
   for(const y of [.3,2.76])box(-11.93,y,3.2,.06,.065,1.44,'brass');
+  const sheen=new THREE.Mesh(new THREE.PlaneGeometry(.12,1.8),new THREE.MeshBasicMaterial({color:'#efe5d0',transparent:true,opacity:.18,depthWrite:false}));
+  sheen.position.set(-11.946,1.55,2.72);sheen.rotation.y=.12;tools.group.add(sheen);
   for(const z of [1.97,4.43])box(-12.01,1.47,z,.06,2.45,.08,'ink');
   for(const z of [1.87,4.53])box(-11.97,1.35,z,.05,.24,.05,'brass');
   // A woven runner and warm vertical lights give the mirror its own dressing

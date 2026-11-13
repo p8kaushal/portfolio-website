@@ -1,5 +1,16 @@
 # Active to-do
 
+## Early-3D interactables redesign (current)
+
+- [x] Inspect active branch and document the approved GTA-era direction, scope, sequence and acceptance criteria in `PLAN.md` and `handoff.md`.
+- [x] Create `feat/gta-era-interactables` from `feat/cohesive-interactions`.
+- [x] Replace the glossy green interaction theme with a grounded warm CRT-era game UI across the in-game interaction surfaces.
+- [x] Redesign TV, computer, phone, file, mirror and awards display props in enhanced and classic worlds.
+- [x] Add synthesized Web Audio cues for footsteps/sprinting and device use; honor mute/user gesture and clean up correctly.
+- [x] Run lint, unit, check/build, production browser, responsive 2D and enhanced/classic/2D fallback regressions. Details: `PLAN.md`; ignored screenshots: `test-results/gta-era-regression/`.
+- [x] Commit verified changes at `067e4dd` on this unified testing branch.
+- [ ] User tests on the combined branch. Separate merge/deployment approval remains required.
+
 ## Current interaction cohesion
 
 - [x] Restyle all in-house interactions, portfolio panel and 2D interaction overlays; preserve controls and content.

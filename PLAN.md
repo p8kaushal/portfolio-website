@@ -1,5 +1,26 @@
 # Project roadmap and handoff
 
+## Active user request — grounded early-3D interactables and sound
+
+User rejected the recent green, polished shared interaction theme and asked for an older GTA: San Andreas-era visual direction. Redesign every in-world interactable and its opened interface so it belongs to the same grounded early-2000s game world, and make objects read immediately as their real-life counterparts (especially TV, computer/desk, phone, wardrobe mirror, file and awards cabinet). Add restrained, fitting effects for footsteps/walking, sprinting and opening/using those devices. User is focused on this visual/audio redesign and will test before deciding on merge. Preserve all existing controls, content, routes, fallback modes, character approval, outer portfolio page and favicon; no merge, deployment or publishing.
+
+**Implementation branch:** create `feat/gta-era-interactables` from the verified integrated branch `feat/cohesive-interactions` (`462da7e`). Keep prior work and preserved version branches intact.
+
+- [x] Inspect the current branch, handoff rules, enhanced/classic scene construction, interaction UI, movement loop and existing sound/mute controls.
+- [x] Phase 1 — Establish retro art direction and shared interaction treatment: warm CRT-era neutrals, aged plastics, wood, muted primary accents, compact game-style typography and restrained overlays across the in-game surfaces.
+- [x] Phase 2 — Model recognizable real-world props in enhanced and classic house modes: deep CRT TV, period CRT computer and tower, keypad phone, file/folder, trophy display and mirror; preserve controls, markers, content and function.
+- [x] Phase 3 — Add synthesized local sound cues for walking/sprinting, jump/landing and tactile object opens; provide a visible mute setting and clean up audio/timers on pause, blur and teardown.
+- [x] Phase 4 — Verify production desktop and responsive interaction paths, browser tests, unit/lint/check/build, no overflow or page errors, mute and sound cues; capture ignored browser evidence. Results are recorded below.
+- [ ] User reviews and tests the combined branch. Merge/deployment remains separately gated by explicit approval.
+
+**Acceptance direction:** warm and slightly worn early-3D game art, solid low-poly physical silhouettes and functional-looking controls, readable interaction panels that feel like early-2000s game UI and stay subordinate to the object/content. Avoid the current glossy green/cody-style finish, modern phone-app visual language in world props, generic floating cards, loud/constant sound, copyrighted GTA assets, copied logos, or changes outside the playable experience. Use authored geometry/CSS and synthesized/local effects; no licensed game assets or remote dependencies.
+
+**Current step:** implementation and verification complete and committed as `067e4dd` on `feat/gta-era-interactables`; user visual review/testing is pending. Do not merge or deploy without separate explicit approval.
+
+**Verification log (2026-11-13):** `npm run lint` passed; `npm test` passed 7/7; sequential `npm run check` passed with 0 errors/0 warnings; `npm run build` passed. Production `PORTFOLIO_URL=http://127.0.0.1:4194 npm run test:browser` passed 3/3. `PORTFOLIO_URL=http://127.0.0.1:4194 node scripts/gta-era-regression.mjs` passed enhanced and classic movement/mute checks, five physical props and five interaction cues per mode, phone cue, 2D fallback, and page-overflow checks; page errors `[]`. Walking and sprint oscillator counts were 3/8 enhanced and 3/7 classic. Evidence is in ignored `test-results/gta-era-regression/` for local inspection. Browser run used Chromium desktop and a 1280×820 2D viewport; production browser suite separately tested 390×844 and 1440×900 2D dialogs. Actual speaker listening and physical device testing remain for user review.
+
+## Previous active request — cohesive interaction design (completed)
+
 ## Active user request — cohesive interaction design
 
 User requests every interactable to share the enhanced house aesthetic, preserving content, behavior, routes, the accepted character and the outside-playground presentation; report all remaining work. Work on `feat/cohesive-interactions` based on `feat/portfolio-integrated-review`.

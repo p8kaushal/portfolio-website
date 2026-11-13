@@ -1,211 +1,94 @@
-/* Shared palette and framing for in-house interfaces. Geometry and behavior
-   remain owned by the individual panels. The double host class intentionally
-   outranks the legacy and enhanced-mode presentation rules. */
+/* Grounded turn-of-the-century game UI: charcoal plastic, warm paper, tobacco
+   wood and small amber status accents. Device-specific frames stay distinct. */
 .house-ui.house-ui {
-  --house-ink: #24372d;
-  --house-deep: #29392e;
-  --house-panel: #f1eadb;
-  --house-paper: #faf6eb;
-  --house-line: #c8bca7;
-  --house-accent: #b57643;
-  --house-light: #f5e8ca;
+  --house-ink:#201c17;--house-deep:#25231e;--house-panel:#b9aa8e;
+  --house-paper:#e0d2b7;--house-line:#70624d;--house-accent:#c6813d;
+  --house-light:#f0e3c6;--house-muted:#c7b99e;
 }
-.house-ui.house-ui :is(.game-settings,.game-help,.game-map-dialog) {
-  background:var(--house-panel);color:var(--house-ink);border:3px solid #171a15;
-  border-radius:0;box-shadow:8px 8px #171a15,0 24px 80px #10181199;
+.house-ui.house-ui :is(.game-settings,.game-help,.game-map-dialog,.house-interaction) {
+  background:#292720;color:#e8dcc3;border:3px solid #171612;border-radius:2px;
+  box-shadow:7px 7px #0d0d0caa,0 24px 80px #090909a8;
 }
-.house-ui.house-ui :is(.gs-head,.gh-head,.gm-head,.hi-header,.pc-top) {
-  background:var(--house-deep);color:var(--house-light);border-color:var(--house-accent);
-}
-.house-ui.house-ui :is(.gs-head h2,.gh-head h2,.gm-head h2,.hi-title,.pc-content h2) {
-  font-family:Impact,'Arial Narrow',sans-serif;font-weight:900;letter-spacing:.025em;text-transform:uppercase;
-}
-.house-ui.house-ui :is(.gs-kicker,.gh-kicker,.gm-kicker,.hi-label,.hi-kicker,.pc-kicker) {color:#be7c4d}
-.house-ui.house-ui :is(.gs-head .gs-kicker,.gh-head .gh-kicker,.gm-head .gm-kicker,.hi-header .hi-label) {color:#e0ae79}
-.house-ui.house-ui :is(.gs-content>p,.gs-row p,.gs-note,.gh-content>p,.gm-content>p) {color:#46564a}
-.house-ui.house-ui :is(.gs-row,.gh-section,.gm-room) {background:var(--house-paper);color:var(--house-ink);border:1px solid var(--house-line);border-radius:0}
-.house-ui.house-ui :is(.gh-row,.gh-touch,.gm-room p) {color:#46564a}
-.house-ui.house-ui :is(.gh-section h3,.gm-room h3) {color:#985a36}
-.house-ui.house-ui :is(.gs-row select,.scene-choice-compact) {background:#faf6eb;color:var(--house-ink);border:1px solid #ad9e86;border-radius:0}
-.house-ui.house-ui :is(.gs-close,.gs-reset,.gh-close,.gm-close,.gm-shortcuts button,.gm-shortcuts a,.hi-exit,.hi-btn,.pc-exit) {
-  background:#ded2bb;color:var(--house-ink);border:2px solid #171a15;border-radius:0;box-shadow:2px 2px #171a15;font-weight:700;
-}
-.house-ui.house-ui :is(.gs-status,.gh-tip) {background:#ded2bb;color:var(--house-ink);border-color:var(--house-accent);border-radius:0}
-.house-ui.house-ui .gm-footer {color:#46564a!important}
-.house-ui.house-ui .house-interaction .hi-shell {background:linear-gradient(145deg,#465642,#25372f)}
-.house-ui.house-ui .hi-title {color:var(--house-light)}
-.house-ui.house-ui :is(.hi-mirror-stage,.hi-glass) {border-color:#806348;outline-color:#171a15;box-shadow:inset 0 0 0 3px #d1b687,8px 10px #171a1580}
-.house-ui.house-ui .hi-file {background:var(--house-panel);color:var(--house-ink);border:2px solid #171a15;border-radius:0;box-shadow:8px 10px #171a1580}
-.house-ui.house-ui .hi-file .hi-title {color:var(--house-ink)}
-.house-ui.house-ui :is(.hi-skill-card,.hi-award-detail) {border-radius:0}
-.house-ui.house-ui .hi-tv {background:#192720;border:10px solid #5d4d39;outline:2px solid #171a15;border-radius:0}
-.house-ui.house-ui .hi-tv-top,.house-ui.house-ui .hi-tv-footer {background:#29392e;color:var(--house-light)}
-.house-ui.house-ui .hi-tv-screen {background:linear-gradient(115deg,#25372f,#536c52 75%,#a29571)}
-.house-ui.house-ui .hi-tv-controls button {background:#ded2bb;color:#24372d;border:1px solid #171a15}
-.house-ui.house-ui .pc-environment {background:#26372d;color:var(--house-light)}
-.house-ui.house-ui .pc-workspace {background:linear-gradient(145deg,#7d8a6f,#526951 55%,#354b3b)}
-.house-ui.house-ui .pc-window {border:2px solid #171a15;border-radius:0;background:var(--house-panel);box-shadow:7px 7px #171a1580}
-.house-ui.house-ui .pc-titlebar,.house-ui.house-ui .pc-taskbar {background:#29392e;color:var(--house-light);border-color:#b57643}
-.house-ui.house-ui .pc-titlebar button {color:var(--house-light)}
-.house-ui.house-ui .pc-titlebar button:hover {background:#566d55}
-.house-ui.house-ui .pc-library {background:#304237;color:var(--house-light)}
-.house-ui.house-ui .pc-library .pc-toolbar {background:#3c5140;border-color:#9b8b6c}
-.house-ui.house-ui :is(.pc-game,.pc-repo,.pc-library .pc-card) {background:#405442;border-color:#938568}
-.house-ui.house-ui .pc-library .pc-kicker {color:#e0ae79}
-.house-ui.house-ui .phone-status,.house-ui.house-ui .phone-bar {background:#29392e;color:var(--house-light);border-color:#b57643}
-.house-ui.house-ui .phone-bar button {background:#405442;color:var(--house-light);border-color:#c5b18c}
-.house-ui.house-ui .phone-body {background:linear-gradient(155deg,#81947b,#536e58 55%,#344d3d)}
-.house-ui.house-ui .phone-app i {background:#f1eadb;color:#405442;border-color:#d1b88d}
-.house-ui.house-ui .phone-incoming {background:linear-gradient(#526b52,#29392e)}
-.house-ui.house-ui :is(.phone-link,.phone-item,.phone-message) {background:#faf6eb;color:#24372d;border-color:#c8bca7}
-
-/* Dossier text sits on a light paper surface. */
-.house-ui.house-ui .hi-file .hi-kicker { color: #8c4b2d; }
-.house-ui.house-ui .hi-file .hi-dossier-id { color: #665a48; }
-
-/* The settings chooser is on a light surface, unlike the welcome chooser. */
-.house-ui.house-ui .scene-choice-compact a { color: #315d43; }
-.house-ui.house-ui .scene-choice-compact [role="status"] { color: #46564a; }
-
-/* One material palette for every in-house interaction: plaster, oak and ink.
-   Individual screens keep their familiar layout and controls. */
-.house-ui.house-ui {
-  --studio-ink: #263d36;
-  --studio-forest: #243d36;
-  --studio-paper: #f8f2e5;
-  --studio-line: #cbbba0;
-  --studio-oak: #b88453;
-  --studio-cream: #fff4dc;
-  --studio-shadow: 0 20px 55px #14292155;
-}
-.house-ui.house-ui :is(.game-settings,.game-help,.game-map-dialog) {
-  background: var(--studio-paper); color: var(--studio-ink);
-  border: 1px solid var(--studio-line); border-radius: 16px; box-shadow: var(--studio-shadow);
-}
-.house-ui.house-ui :is(.gs-head,.gh-head,.gm-head,.hi-header,.pc-top) {
-  background: #263e37; color: var(--studio-cream); border-color: #b89a74;
-}
-.house-ui.house-ui :is(.gs-head h2,.gh-head h2,.gm-head h2,.hi-title,.pc-content h2) {
-  font-family: ui-sans-serif,system-ui,sans-serif; font-weight: 750;
-  letter-spacing: -.035em; text-transform: none;
-}
-.house-ui.house-ui :is(.gs-head h2,.gh-head h2,.gm-head h2) { line-height: 1.15; }
-.house-ui.house-ui :is(.gs-kicker,.gh-kicker,.gm-kicker,.hi-label,.hi-kicker,.pc-kicker) {
-  font-family: ui-sans-serif,system-ui,sans-serif; letter-spacing: .1em;
-}
-.house-ui.house-ui :is(.gs-row,.gh-section,.gm-room,.scene-choice-compact) {
-  background: #fffaf0; border: 1px solid #d7cab4; border-radius: 10px;
-}
-.house-ui.house-ui :is(.gs-row select,.scene-choice-compact select) {
-  background: #f8f1e4; color: var(--studio-ink); border: 1px solid #b9a98e; border-radius: 7px;
-}
-.house-ui.house-ui :is(.gs-close,.gs-reset,.gh-close,.gm-close,.gm-shortcuts button,.gm-shortcuts a,.hi-exit,.hi-btn,.pc-exit) {
-  background: #f3e5cb; color: #243d36; border: 1px solid #c6b18d;
-  border-radius: 8px; box-shadow: none; font-weight: 700;
-}
-.house-ui.house-ui :is(.gs-close,.gs-reset,.gh-close,.gm-close,.gm-shortcuts button,.gm-shortcuts a,.hi-exit,.hi-btn,.pc-exit):hover {
-  background: #fff7e8; border-color: #907b5f;
-}
-.house-ui.house-ui :is(.gs-status,.gh-tip) { background:#ebe2d1; color:#304a3c; border-color:#b88453; border-radius:8px; }
-.house-ui.house-ui .gm-plan { border:1px solid #b9aa90; border-radius:12px; overflow:hidden; }
-
-/* House panels use the same deep green backdrop and gentle oak accents. */
-.house-ui.house-ui .house-interaction .hi-shell {
-  background: radial-gradient(ellipse at 18% 0%,#526c5c 0%,#304b40 48%,#243c37 100%);
-}
-.house-ui.house-ui .hi-title { color: #fff1d7; }
-.house-ui.house-ui :is(.hi-mirror-stage,.hi-glass) {
-  border-color: #b48a60; border-radius: 12px;
-  box-shadow: inset 0 0 0 2px #ebd6b2, 0 16px 35px #162d2a55;
-}
-.house-ui.house-ui .hi-copy { color:#f7ead4; }
-.house-ui.house-ui .hi-mirror-controls button,
-.house-ui.house-ui .hi-award-nav button,
-.house-ui.house-ui .hi-tv-controls button {
-  background:#f2e3c8; color:#263d36; border:1px solid #c7b08b; border-radius:8px;
-  box-shadow:none; font-weight:700;
-}
-.house-ui.house-ui :is(.hi-mirror-controls button,.hi-award-nav button,.hi-tv-controls button):hover { background:#fff7e8; }
-.house-ui.house-ui .hi-file {
-  background:#f8f2e5; color:#263d36; border:1px solid #d1c2a9;
-  border-radius:14px; box-shadow:var(--studio-shadow);
-}
-.house-ui.house-ui .hi-file .hi-title { color:#263d36; }
-.house-ui.house-ui .hi-tabs button { border-radius:8px 8px 0 0; }
-.house-ui.house-ui .hi-skill-card { background:#fffaf0; border:1px solid #d5c8b2; border-radius:10px; }
-.house-ui.house-ui .hi-award-art {
-  border:1px solid #b69b75; border-radius:14px;
-  background:radial-gradient(ellipse at 50% 40%,#8d8261,#4a5140 58%,#293e36);
-  box-shadow:inset 0 0 40px #162b2755, 0 14px 30px #14292145;
-}
-.house-ui.house-ui .hi-tv {
-  background:#263d36; border:8px solid #967856; outline:1px solid #c1a27c;
-  border-radius:14px; box-shadow:var(--studio-shadow); overflow:hidden;
-}
-.house-ui.house-ui .hi-tv-screen { background:linear-gradient(125deg,#2a4740,#537164 70%,#a6a184); }
-.house-ui.house-ui .hi-tv-top,.house-ui.house-ui .hi-tv-footer { background:#243d36; color:#fff1d7; }
-
-/* The computer and phone retain their device affordances with studio materials. */
-.house-ui.house-ui .pc-environment { background:#263e37; color:#f8efdc; }
-.house-ui.house-ui .pc-workspace { background:radial-gradient(ellipse at 25% 20%,#a2ae96,#668475 48%,#304e49 100%); }
-.house-ui.house-ui .pc-window {
-  background:#f8f2e5; border:1px solid #c8b89e; border-radius:12px;
-  box-shadow:0 22px 60px #172d2b70;
-}
-.house-ui.house-ui .pc-titlebar,.house-ui.house-ui .pc-taskbar { background:#263e37; color:#fff1d7; border-color:#b69a75; }
-.house-ui.house-ui .pc-titlebar button { color:#fff1d7; }
-.house-ui.house-ui .pc-library { background:#30483e; color:#fff1d7; }
-.house-ui.house-ui .pc-library .pc-toolbar { background:#3b584a; border-color:#9aab91; }
-.house-ui.house-ui :is(.pc-game,.pc-repo,.pc-library .pc-card) { background:#40594a; border:1px solid #839480; border-radius:10px; }
-.house-ui.house-ui .pc-game-art { border-radius:9px 9px 0 0; }
-.house-ui.house-ui :is(.pc-link,.pc-file,.pc-card) { border-radius:8px; }
-.house-ui.house-ui .phone-shell { border-color:#1e302a; box-shadow:0 15px 35px #132a285c,0 0 0 2px #8d9b88; }
-.house-ui.house-ui .phone-status,.house-ui.house-ui .phone-bar { background:#263e37; color:#fff1d7; border-color:#b69a75; }
-.house-ui.house-ui .phone-body { background:linear-gradient(155deg,#8da38d,#5d7c69 56%,#344f43); }
-.house-ui.house-ui .phone-incoming { background:linear-gradient(155deg,#66826e,#304a3e); }
-.house-ui.house-ui .phone-app i { background:#f8f2e5; color:#365547; border-color:#d6c4a3; }
-.house-ui.house-ui :is(.phone-link,.phone-item,.phone-message) { background:#fffaf0; color:#263d36; border-color:#d5c8b2; border-radius:8px; }
-
-@media (prefers-reduced-motion: reduce) {
-  .house-ui.house-ui :is(.pc-game,.phone-shell) { transition:none; }
-}
-
-.house-ui.house-ui :is(.hi-award-copy h3,.hi-tv-screen h3,.hi-screen h3) {
-  font-family:ui-sans-serif,system-ui,sans-serif; font-weight:750;
-  letter-spacing:-.035em; line-height:1.12; text-transform:none;
-}
-.house-ui.house-ui .pc-icon .icon svg { display:block; width:32px; height:32px; margin:auto; color:#f5e8ca; }
-/* Keep the illustrated classic/recovery mirror aligned with the accepted outfit. */
-.house-ui.house-ui .hi-body { background:#455b68; box-shadow:inset -10px 0 #344752; }
-.house-ui.house-ui .hi-body:before { content:''; position:absolute; left:23px; top:0; width:30px; height:12px; background:#d4ddd9; clip-path:polygon(0 0,50% 55%,100% 0,85% 100%,50% 65%,15% 100%); }
-.house-ui.house-ui .hi-arm { background:linear-gradient(#455b68 0 37%,#b38367 37%); }
-
-/* The direct portfolio uses the same studio surfaces as in-house panels. */
-.house-ui.house-ui .portfolio-quick dialog {
-  border:1px solid #cbbba0; border-radius:16px; background:#f8f2e5;
-  box-shadow:0 24px 80px #14292170;
-}
-.house-ui.house-ui .portfolio-quick .pq-top { background:#263e37; border-color:#b89a74; }
-.house-ui.house-ui .portfolio-quick .pq-top h2 {
-  font-family:ui-sans-serif,system-ui,sans-serif; font-weight:750;
-  letter-spacing:-.04em; text-transform:none;
-}
-.house-ui.house-ui .portfolio-quick nav { background:#ebe2d1; border-color:#cbbba0; }
-.house-ui.house-ui .portfolio-quick nav button { border-radius:7px; }
-.house-ui.house-ui .portfolio-quick nav .pq-close { border-radius:7px; }
-.house-ui.house-ui .portfolio-quick section h2 {
-  font-family:ui-sans-serif,system-ui,sans-serif; font-weight:750;
-  letter-spacing:-.035em; text-transform:none;
-}
-.house-ui.house-ui .portfolio-quick .pq-item { background:#fffaf0; border-color:#d7cab4; border-radius:10px; }
-.house-ui.house-ui .pc-game-meta { color:#f0d3a4; }
-.house-ui.house-ui :is(.gm-chip,.gm-footer kbd,.gh-key) {
-  background:#ebe2d1; color:#263d36; border:1px solid #c6b18d;
-  border-radius:5px; box-shadow:none;
-}
-.house-ui.house-ui .phone-incoming button {
-  background:#f3e5cb; color:#243d36; border:1px solid #c6b18d; border-radius:7px;
-}
-.house-ui.house-ui .phone-incoming button:last-child {
-  background:transparent; color:#fff4dc; border-color:#d6c4a3;
-}
+.house-ui.house-ui :is(.game-settings::backdrop,.game-help::backdrop,.game-map-dialog::backdrop,.house-interaction::backdrop) {background:#090908d9}
+.house-ui.house-ui :is(.gs-head,.gh-head,.gm-head,.hi-header,.pc-top) {background:#191916;color:#eee1c6;border-color:#8b633b}
+.house-ui.house-ui :is(.gs-head h2,.gh-head h2,.gm-head h2,.hi-title,.pc-content h2,.pq-top h2) {font-family:Impact,'Arial Narrow',sans-serif;font-weight:900;letter-spacing:.02em;text-transform:uppercase}
+.house-ui.house-ui :is(.gs-kicker,.gh-kicker,.gm-kicker,.hi-label,.hi-kicker,.pc-kicker) {color:#d79a5d}
+.house-ui.house-ui :is(.gs-content>p,.gs-row p,.gs-note,.gh-content>p,.gm-content>p,.hi-muted,.gm-footer) {color:#c9bea7}
+.house-ui.house-ui :is(.gs-row,.gh-section,.gm-room,.hi-skill-card,.hi-award-detail) {background:#39362d;color:#e8dcc3;border:1px solid #71634e;border-radius:2px}
+.house-ui.house-ui :is(.gh-row,.gh-touch,.gm-room p) {color:#ddd1b8}
+.house-ui.house-ui :is(.gh-section h3,.gm-room h3) {color:#dda15f}
+.house-ui.house-ui :is(.gs-row select,.scene-choice-compact) {background:#c7b89b;color:#26231d;border:2px solid #181714;border-radius:1px}
+.house-ui.house-ui .gs-audio-toggle {display:flex;align-items:center;gap:9px;margin-top:9px;color:#e4d6ba;font-size:13px;font-weight:700}
+.house-ui.house-ui .gs-audio-toggle input {width:18px;height:18px;accent-color:#a76d37}
+.house-ui.house-ui :is(.gs-close,.gs-reset,.gh-close,.gm-close,.gm-shortcuts button,.gm-shortcuts a,.hi-exit,.hi-btn,.pc-exit) {background:#bba987;color:#211f1a;border:2px solid #161512;border-radius:1px;box-shadow:2px 2px #111;font-weight:800;text-transform:uppercase}
+.house-ui.house-ui :is(.gs-status,.gh-tip) {background:#40382d;color:#e8dcc3;border-left:3px solid #c6813d;border-radius:0}
+.house-ui.house-ui .house-interaction .hi-shell {background:#27251f}
+.house-ui.house-ui .house-interaction .hi-content {background:linear-gradient(180deg,#37332a 0%,#25231e 100%)}
+.house-ui.house-ui .hi-title {color:#f0e3c8;text-shadow:2px 2px #171511}
+.house-ui.house-ui :is(.hi-mirror-stage,.hi-glass) {border-color:#805d3d;outline-color:#181714;box-shadow:inset 0 0 0 3px #c6a16d,7px 8px #10100f99}
+.house-ui.house-ui .hi-file {background:#d9c9a9;color:#2a241c;border:2px solid #191713;border-radius:1px;box-shadow:7px 8px #1119}
+.house-ui.house-ui .hi-file .hi-title {color:#29241d}
+.house-ui.house-ui .hi-file .hi-kicker {color:#765131}.house-ui.house-ui .hi-file .hi-dossier-id {color:#554b3b}
+.house-ui.house-ui .hi-glass {background:linear-gradient(155deg,#8c7a60,#6c5944 60%,#46392c)}
+.house-ui.house-ui .hi-tabs button {background:#b9a47d;color:#2b241a}
+.house-ui.house-ui .hi-tabs button[aria-selected="true"] {background:#815b35;color:#fff0d2}
+.house-ui.house-ui .hi-file a {color:#704820}
+.house-ui.house-ui .hi-award-list button {background:#40382d;color:#eadcc0;border-color:#806343}
+.house-ui.house-ui .hi-award-list button[aria-pressed="true"] {background:#624a30;border-color:#daa761}
+.house-ui.house-ui .hi-award-detail {background:#373128}
+.house-ui.house-ui .hi-award-art {border:3px solid #805b37;border-radius:1px;background:radial-gradient(ellipse at 50% 40%,#8b795e,#4d4638 65%,#211f1b);box-shadow:inset 0 0 22px #111a}
+.house-ui.house-ui .hi-tv {position:relative;background:#181816;border:18px solid #5a4834;outline:3px solid #161511;border-radius:12px;box-shadow:inset 0 0 0 3px #94734a,8px 10px #111a;overflow:hidden}
+.house-ui.house-ui .hi-tv:after {content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,#12100d0c 0 1px,transparent 1px 4px);z-index:2}
+.house-ui.house-ui .hi-tv-top,.house-ui.house-ui .hi-tv-footer {background:#211e19;color:#ead8b5}
+.house-ui.house-ui .hi-tv-screen {background:linear-gradient(145deg,#353a3c,#777260 65%,#8d785b);box-shadow:inset 0 0 26px #09090966}
+.house-ui.house-ui .hi-tv-screen {background:linear-gradient(145deg,#413a30,#75624a 65%,#a18a65)}
+.house-ui.house-ui .hi-timeline:before {background:#987a52}
+.house-ui.house-ui .hi-timeline-node {background:#74634b;border-color:#cdbb97;box-shadow:0 0 0 2px #322a20}
+.house-ui.house-ui .hi-timeline-entry[aria-current=step] .hi-timeline-node {background:#e7b96f;border-color:#f5dba7;box-shadow:0 0 0 3px #825c35}
+.house-ui.house-ui .hi-timeline-card {background:#29251f;border-color:#75634b}
+.house-ui.house-ui .hi-timeline-entry[aria-current=step] .hi-timeline-card {background:#59442f;border-color:#d1a162}
+.house-ui.house-ui .hi-timeline-heading {border-color:#b49b7047}
+.house-ui.house-ui .hi-timeline-heading span {color:#d4bd97}
+.house-ui.house-ui .hi-tv-apps span {background:#40362a;color:#e6d6b7}
+.house-ui.house-ui .hi-tv-apps span:first-child {background:#c39a5f;color:#271f16}
+.house-ui.house-ui .hi-tv-controls button {background:#b9a681;color:#201d18;border:2px solid #151411;border-radius:1px}
+.house-ui.house-ui .pc-environment {background:#292720;color:#efe2c5}
+.house-ui.house-ui .pc-workspace {background:repeating-linear-gradient(0deg,#59412c 0 20px,#6b4d32 20px 21px,#513a29 21px 24px)}
+.house-ui.house-ui .pc-window {background:#d7c8a9;border:3px solid #181714;border-radius:1px;box-shadow:7px 7px #1119}
+.house-ui.house-ui .pc-titlebar,.house-ui.house-ui .pc-taskbar {background:#25231e;color:#eddfc1;border-color:#956c43}
+.house-ui.house-ui .pc-titlebar button {color:#eddfc1}.house-ui.house-ui .pc-titlebar button:hover {background:#554733}
+.house-ui.house-ui .pc-library {background:#39342b;color:#eee0c2}
+.house-ui.house-ui .pc-library .pc-toolbar {background:#292720;border-color:#8d6741}
+.house-ui.house-ui :is(.pc-game,.pc-repo,.pc-library .pc-card) {background:#4b4234;border:1px solid #93734b;border-radius:1px}
+.house-ui.house-ui .pc-library .pc-kicker {color:#dfaa70}.house-ui.house-ui .pc-game-meta {color:#e7be88}
+.house-ui.house-ui .phone-shell {background:linear-gradient(100deg,#3c3b37,#171716 53%,#4d4a43);border:5px solid #171614;border-radius:20px;box-shadow:0 10px 24px #000b,0 0 0 2px #807965,inset 0 0 0 2px #68645b}
+.house-ui.house-ui .phone-screen {background:#c6c1ac;border-color:#111}
+.house-ui.house-ui .phone-status,.house-ui.house-ui .phone-bar {background:#282720;color:#f0e2c2;border-color:#8b6740}
+.house-ui.house-ui .phone-bar button {background:#494235;color:#f0e2c2;border:1px solid #89734f}
+.house-ui.house-ui .phone-body {background:linear-gradient(160deg,#aaa58f,#8b8878 55%,#6d6c60)}
+.house-ui.house-ui .phone-kicker {color:#4b4435}.house-ui.house-ui .phone-body h2 {color:#fff1d1;text-shadow:1px 1px #29251d}
+.house-ui.house-ui .phone-app i {background:#b5a27d;color:#33281a;border:2px solid #50432f;border-radius:4px;box-shadow:inset 0 0 0 2px #d1bd94}
+.house-ui.house-ui .phone-incoming {background:linear-gradient(#514533,#282720)}
+.house-ui.house-ui :is(.phone-link,.phone-item,.phone-message) {background:#dacfaf;color:#29241d;border-color:#807257;border-radius:1px}
+.house-ui.house-ui .phone-home button {border-radius:50%;background:linear-gradient(#625c4f,#211f1b);border-color:#8d846f}
+.house-ui.house-ui .phone-keypad {display:grid;grid-template-columns:repeat(3,1fr);gap:3px 7px;justify-items:center;align-content:center;padding:7px 28px 4px;color:#e4d4b1;font:700 8px/1 Arial,sans-serif;text-shadow:1px 1px #111}
+.house-ui.house-ui .phone-keypad span {width:100%;padding:4px 0;background:linear-gradient(#514e46,#292824);border:1px solid #171614;border-radius:4px;text-align:center;box-shadow:inset 0 1px #777064}
+.house-ui.house-ui .phone-home {height:30px}.house-ui.house-ui .phone-home button {width:26px;height:26px;min-height:26px}
+.house-ui.house-ui .portfolio-quick dialog {background:#292720;color:#eee2c7;border:3px solid #171612;border-radius:1px;box-shadow:7px 7px #0b0b0baa}
+.house-ui.house-ui .portfolio-quick .pq-top {background:#191916;color:#efe1c5;border-color:#8b633b}
+.house-ui.house-ui .portfolio-quick .pq-top h2,.house-ui.house-ui .portfolio-quick section h2 {font-family:Impact,'Arial Narrow',sans-serif;font-weight:900;letter-spacing:.02em;text-transform:uppercase}
+.house-ui.house-ui .portfolio-quick nav {background:#c8b998;border-color:#79664b}
+.house-ui.house-ui .portfolio-quick nav button {border-radius:1px;color:#28231c}
+.house-ui.house-ui .portfolio-quick nav .pq-close {border-radius:1px}
+.house-ui.house-ui .portfolio-quick .pq-item {background:#3d382e;border-color:#796344;border-radius:1px;color:#eee1c6}
+.house-ui.house-ui :is(.gm-chip,.gm-footer kbd,.gh-key) {background:#c5b18b;color:#29241b;border:1px solid #171613;border-radius:1px;box-shadow:2px 2px #141310}
+.house-ui.house-ui .phone-incoming button {background:#c9b890;color:#29241c;border:1px solid #161512;border-radius:1px}
+.house-ui.house-ui .phone-incoming button:last-child {background:transparent;color:#efe2c6;border-color:#c3ad82}
+.house-ui.house-ui :is(button,a,select):focus-visible {outline:3px solid #edb66f;outline-offset:2px}
+.house-ui.house-ui :is(.game-hud .menu-toggle,.game-menu button,.touch button) {background:#28251f;color:#eddfc2;border:2px solid #171613;border-radius:1px;box-shadow:2px 2px #9a7144;text-transform:uppercase;font-family:Impact,'Arial Narrow',sans-serif;letter-spacing:.04em}
+.house-ui.house-ui .game-menu {background:#25231e;border:2px solid #171613;box-shadow:5px 5px #111b}
+.house-ui.house-ui .game-prompt {background:#292720;color:#f0e3c8;border:2px solid #bf884c;box-shadow:3px 3px #141310;text-transform:uppercase;font-weight:800}
+.house-ui.house-ui .hi-body {background:#455b68;box-shadow:inset -10px 0 #344752}
+.house-ui.house-ui .hi-body:before {content:'';position:absolute;left:23px;top:0;width:30px;height:12px;background:#d4ddd9;clip-path:polygon(0 0,50% 55%,100% 0,85% 100%,50% 65%,15% 100%)}
+.house-ui.house-ui .hi-arm {background:linear-gradient(#455b68 0 37%,#b38367 37%)}
+@media(prefers-reduced-motion:reduce){.house-ui.house-ui :is(.pc-game,.phone-shell){transition:none}}

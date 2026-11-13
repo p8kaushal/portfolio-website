@@ -27,20 +27,34 @@ export function buildLivingRoom(THREE,context,tools) {
     box(x,.53,-6.59,.28,.035,.025,'brass',false,.008);
   }
   box(0,1.06,-7.05,.85,.1,.45,'ink');box(0,1.22,-7.12,.14,.26,.12,'ink');
-  box(0,2.06,-7.1,3.65,2.05,.16,'ink',false,.065);
-  const canvas=document.createElement('canvas');canvas.width=640;canvas.height=360;
+  // A deep 4:3 CRT cabinet with a separate glass, speaker grille and tactile
+  // channel/volume controls. The existing cabinet footprint and TV approach stay put.
+  box(0,2.06,-7.13,3.65,2.25,.58,'ink',false,.12);
+  box(0,2.06,-6.825,3.47,2.08,.045,'oak',false,.08);
+  box(-.47,2.06,-6.795,2.54,1.82,.055,'ink',false,.14);
+  const canvas=document.createElement('canvas');canvas.width=480;canvas.height=360;
   const c=canvas.getContext('2d');if(!c)throw new Error('TV canvas unavailable');
-  const gradient=c.createLinearGradient(0,0,640,360);gradient.addColorStop(0,'#213e54');gradient.addColorStop(1,'#5c7d76');c.fillStyle=gradient;c.fillRect(0,0,640,360);
-  c.fillStyle='#d4ad69';c.font='15px monospace';c.fillText('PARTH / EXPERIENCE',48,78);
-  c.fillStyle='#f1e6d0';c.font='bold 43px sans-serif';c.fillText('The story so far.',46,152);
-  c.font='16px sans-serif';c.fillText('Every experience adds a new perspective.',48,192);
-  c.strokeStyle='#d4ad69';c.lineWidth=2;c.beginPath();c.moveTo(50,265);c.lineTo(580,265);c.stroke();
-  for(let i=0;i<5;i++){c.beginPath();c.arc(50+i*132.5,265,6,0,Math.PI*2);c.fillStyle=i===0?'#e7c285':'#91aca3';c.fill();}
+  const gradient=c.createLinearGradient(0,0,480,360);gradient.addColorStop(0,'#263d4b');gradient.addColorStop(1,'#746c55');c.fillStyle=gradient;c.fillRect(0,0,480,360);
+  c.fillStyle='#d6a15f';c.font='bold 16px monospace';c.fillText('PARTH / EXPERIENCE',28,68);
+  c.fillStyle='#f1e6d0';c.font='bold 34px sans-serif';c.fillText('The story so far.',26,145);
+  c.font='14px sans-serif';c.fillText('Every experience adds a new perspective.',28,180);
+  c.strokeStyle='#c9a56e';c.lineWidth=2;c.beginPath();c.moveTo(30,260);c.lineTo(450,260);c.stroke();
+  for(let i=0;i<5;i++){c.beginPath();c.arc(30+i*105,260,6,0,Math.PI*2);c.fillStyle=i===0?'#e7c285':'#91aca3';c.fill();}
   const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;
-  mesh(new THREE.PlaneGeometry(3.41,1.81),new THREE.MeshBasicMaterial({map:texture}),0,2.08,-7.005);
+  mesh(new THREE.PlaneGeometry(2.38,1.66),new THREE.MeshBasicMaterial({map:texture}),-.47,2.06,-6.762);
+  // Recessed speaker slots and two old-fashioned rotary controls.
+  for(let i=0;i<11;i++)box(1.28,1.72+i*.065,-6.77,.36,.018,.012,'brass',false,.004);
+  for(const y of [2.38,2.02]){cylinder(1.28,y,-6.755,.075,.075,.045,'brass',16);cylinder(1.28,y,-6.727,.026,.026,.018,'ink',12);}
+  for(const x of [-1.23,1.17]){const foot=box(x,.91,-7.12,.36,.18,.48,'oak',false,.035);foot.rotation.x=-.12;}
+  for(let i=0;i<2;i++)box(-1.45+i*.08,2.06,-6.77,.025,1.88,.012,'brass',false,.006);
   // Trophies use lathed cup profiles and metal handles, with no downloaded assets.
   box(-3.13,1.37,-7.46,1.35,2.72,.55,'oak',true);
   box(-3.13,1.4,-7.15,1.15,2.47,.03,'ink',false,0);
+  const cabinetGlass=new THREE.MeshStandardMaterial({color:'#d2d2bf',transparent:true,opacity:.13,roughness:.22,metalness:.08,depthWrite:false});
+  mesh(new THREE.PlaneGeometry(1.08,2.38),cabinetGlass,-3.13,1.4,-6.91);
+  for(const x of [-3.68,-2.58])box(x,1.4,-6.89,.026,2.42,.03,'brass',false,.006);
+  for(const y of [.25,2.56])box(-3.13,y,-6.89,1.13,.026,.03,'brass',false,.006);
+  cylinder(-3.17,1.4,-6.86,.022,.022,.025,'brass',8);
   for(const y of [.75,1.51,2.27])box(-3.13,y,-7.13,1.23,.07,.56,'oak');
   for(const x of [-3.79,-2.47])box(x,1.4,-7.1,.08,2.7,.08,'brass');
   for(const [x,y]of[[-3.43,.98],[-2.85,.98],[-3.13,1.74]]) {

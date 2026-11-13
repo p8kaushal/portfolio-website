@@ -18,16 +18,20 @@ export function buildStudio(THREE, {scene,colliders},sharedTools) {
   for(const x of [5.5,10.5])for(const z of [-5.9,-4.6])cylinder(x,.35,z,.045,.045,.7,'brass');
   box(10.12,.48,-5.4,.94,.53,1.15,'oak');
   for(const y of [.35,.6])box(10.12,y,-4.81,.72,.016,.018,'brass',false,.005);
-  // Monitor, original locally drawn desktop wallpaper and keyboard.
-  box(7.55,1.72,-5.55,1.9,1.12,.16,'ink',false,.055);
+  // Chunky late-90s CRT monitor; the deep rounded back is visible in profile.
+  box(7.55,1.75,-5.56,1.9,1.34,.62,'paper',false,.14);
+  box(7.55,1.75,-5.235,1.64,1.1,.06,'oak',false,.11);
   const screenCanvas=document.createElement('canvas');screenCanvas.width=384;screenCanvas.height=216;
   const c=screenCanvas.getContext('2d');if(!c)throw new Error('Screen canvas unavailable');
-  const gradient=c.createLinearGradient(0,0,384,216);gradient.addColorStop(0,'#243c54');gradient.addColorStop(1,'#758e8c');
+  const gradient=c.createLinearGradient(0,0,384,216);gradient.addColorStop(0,'#263e4c');gradient.addColorStop(1,'#766b51');
   c.fillStyle=gradient;c.fillRect(0,0,384,216);c.fillStyle='#e9dfcf';c.font='bold 27px sans-serif';c.fillText('Hello, I’m Parth.',28,97);c.font='12px sans-serif';c.fillText('BUILDING SOFTWARE / EXPLORING IDEAS',29,122);
   c.fillStyle='#d4ad69';c.fillRect(29,145,65,4);
   const screenMap=new THREE.CanvasTexture(screenCanvas);screenMap.colorSpace=THREE.SRGBColorSpace;
-  mesh(new THREE.PlaneGeometry(1.75,.96),new THREE.MeshBasicMaterial({map:screenMap}),7.55,1.73,-5.46);
-  box(7.55,1.04,-5.53,.1,.34,.12,'brass');box(7.55,.91,-5.5,.65,.06,.35,'ink');
+  mesh(new THREE.PlaneGeometry(1.49,.84),new THREE.MeshBasicMaterial({map:screenMap}),7.55,1.75,-5.199);
+  box(7.55,1.04,-5.53,.2,.34,.36,'paper');box(7.55,.91,-5.5,.78,.08,.48,'oak');
+  // Bezel buttons, status LED and warm, molded side casing.
+  for(let i=0;i<3;i++)cylinder(8.22+i*.055,1.2,-5.198,.018,.018,.012,'brass',10);
+  cylinder(8.22,1.12,-5.198,.023,.023,.012,'clay',10);
   box(7.55,.9,-4.92,1.2,.07,.37,'paper',false,.025);
   for(let row=0;row<3;row++)for(let i=0;i<12;i++)box(7.03+i*.092,.945,-5.03+row*.095,.067,.014,.06,'ink',false,.008);
   box(8.45,.89,-4.91,.14,.07,.24,'ink');
@@ -35,7 +39,11 @@ export function buildStudio(THREE, {scene,colliders},sharedTools) {
   box(9.5,.969,-5.13,.48,.009,.035,'brass',false,0);
   cylinder(6.1,1.03,-5.2,.12,.11,.3,'clay');
   cylinder(6.1,1.19,-5.2,.094,.094,.008,'ink');
-  box(10.6,1.25,-5.32,.65,.78,.72,'ink');box(10.6,1.4,-4.95,.3,.04,.016,'brass');
+  box(10.6,1.25,-5.32,.65,.78,.72,'ink',false,.055);
+  box(10.6,1.56,-4.95,.28,.055,.018,'brass',false,.008);
+  box(10.6,1.46,-4.95,.28,.035,.018,'oak',false,.006);
+  for(let i=0;i<6;i++)box(10.6,1.29-i*.028,-4.95,.24,.009,.012,'brass',false,.003);
+  cylinder(10.72,1.09,-4.94,.025,.025,.016,'clay',10);
   // Generous upholstered chair with a curved-looking segmented back.
   contact(7.6,-3.45,2.1,2.1,.3,.115);
   box(7.6,.58,-3.45,1,.16,1,'indigo',true,.07);
